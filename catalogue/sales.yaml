@@ -1,0 +1,661 @@
+department: sales
+title: Sales
+prefix: sales
+role: a senior B2B sales leader and sales operations specialist
+overview: >-
+  Skills for the whole B2B sales cycle: targeting, prospecting, discovery, qualification,
+  proposals, negotiation, forecasting, account growth and public tenders. Built for
+  founder-led sales and small sales teams who need structure without heavy tooling.
+workflows:
+  - name: Find and open
+    skills: [ideal-customer-profile, account-research, prospecting-sequence, social-selling]
+    purpose: From target market to booked first meetings.
+  - name: Qualify and win
+    skills: [discovery-call-prep, call-notes-to-crm, deal-qualification, demo-script, proposal-writer, objection-handling, negotiation-prep]
+    purpose: From first meeting to signed deal.
+  - name: Run the number
+    skills: [pipeline-review, sales-forecast, win-loss-analysis, territory-quota-planning]
+    purpose: Manage the pipeline and forecast with discipline.
+common_guardrails:
+  - Never invent facts about a prospect, customer, competitor or market. Use what the user provides or clearly label assumptions and suggest where to verify.
+  - Respect data protection and marketing rules in outreach. B2B prospecting to named individuals involves personal data; respect opt-outs, rules on unsolicited electronic marketing and the legitimate interest balance.
+  - Do not promise prices, discounts, delivery dates or contract terms on the user's behalf. Prepare drafts for the user to approve.
+common_eu:
+  - "Unsolicited electronic marketing is restricted under the ePrivacy Directive and national law; in Denmark the Marketing Practices Act (markedsføringsloven, section 10) restricts unsolicited email and SMS marketing, including to many business recipients. Check before cold emailing."
+  - "AI-generated outreach and chatbots must not mislead; under the AI Act people must be told when they interact with an AI system (Article 50), with limited exceptions."
+skills:
+  - id: ideal-customer-profile
+    title: Ideal Customer Profile
+    summary: Defines the ideal customer profile and buyer personas from existing customer data, wins and losses, and turns them into targeting criteria.
+    triggers: the user wants to define an ICP, target market, buyer personas or who to sell to
+    use:
+      - "New product or market"
+      - "Sales effort is too spread out"
+    avoid:
+      - "Marketing personas for content (use mkt-persona-builder)"
+    inputs:
+      - "Best and worst customers with firmographics"
+      - "Win and loss reasons"
+      - "Product value proposition"
+    steps:
+      - Find common traits of the best customers (industry, size, region, tech, trigger events).
+      - Define firmographic and situational criteria, plus disqualifiers.
+      - Describe buying centre roles, their goals and objections.
+      - Turn criteria into a scoring model and list queries for prospect databases.
+    output:
+      - "ICP definition"
+      - "Disqualifiers"
+      - "Buying centre map"
+      - "Account scoring model"
+      - "Search criteria"
+    checks:
+      - "Criteria are observable from data"
+      - "Disqualifiers included"
+    eu: []
+    examples:
+      - "Define our ICP from these 30 customers. We sell AI governance services to Danish companies."
+
+  - id: account-research
+    title: Account Research Brief
+    summary: Builds a one-page research brief on a target account with business priorities, triggers, stakeholders and tailored conversation angles.
+    triggers: the user is preparing to approach or meet a company and wants research, an account brief or talking points
+    use:
+      - "Before outreach or a first meeting"
+      - "Before a strategic account plan"
+    avoid: []
+    inputs:
+      - "Company name and website"
+      - "Annual report or news the user has"
+      - "Our offering and relevant references"
+    steps:
+      - Summarise the company (business model, size, financial trend, strategy).
+      - Identify trigger events and priorities from the material provided.
+      - Map likely stakeholders and their concerns.
+      - Suggest three conversation angles linked to our value proposition.
+    output:
+      - "Company snapshot"
+      - "Priorities and triggers"
+      - "Stakeholder map"
+      - "Conversation angles"
+      - "Questions to ask"
+    checks:
+      - "Every claim traceable to provided material or labelled as assumption"
+      - "No personal data beyond professional role"
+    eu: []
+    examples:
+      - "Research Novo Holdings' portfolio company X before my meeting on Thursday using this annual report."
+
+  - id: prospecting-sequence
+    title: Prospecting Sequence
+    summary: Writes a short, personalised multi-touch prospecting sequence across email, phone and LinkedIn that sounds human and respects marketing rules.
+    triggers: the user needs cold outreach, a prospecting email, follow-ups, a sequence or cadence
+    use:
+      - "Outbound campaigns"
+      - "Re-engaging old leads"
+    avoid:
+      - "Mass email campaigns to people without a lawful basis"
+    inputs:
+      - "Target persona and account"
+      - "Relevant trigger or insight"
+      - "Offer and proof points"
+      - "Channels allowed"
+    steps:
+      - Write a first message under 100 words focused on the prospect's problem.
+      - Add 3 to 5 follow-ups that each add new value.
+      - Add a call script opener and a LinkedIn note.
+      - Check compliance with rules on unsolicited electronic marketing and include an easy opt-out.
+    output:
+      - "Sequence plan (day, channel, purpose)"
+      - "Message drafts"
+      - "Call opener"
+      - "Compliance note"
+    checks:
+      - "No exaggerated claims"
+      - "Personalisation is genuine, not fake familiarity"
+    eu: []
+    examples:
+      - "Write a 4-step outreach sequence to CFOs at Danish mid-sized manufacturers."
+
+  - id: discovery-call-prep
+    title: Discovery Call Preparation
+    summary: Prepares a discovery call with goals, hypotheses, open questions, a call structure and next-step proposals.
+    triggers: the user has a discovery call, first meeting or needs-analysis meeting with a prospect
+    use:
+      - "First sales meetings"
+    avoid:
+      - "Product demos (use sales-demo-script)"
+    inputs:
+      - "Account research"
+      - "Who is attending"
+      - "What we want to learn"
+    steps:
+      - Set the meeting goal and the next step we want.
+      - Form hypotheses about the prospect's pain.
+      - Write open questions on situation, problem, impact and decision process.
+      - Plan a short agenda and how to propose next steps.
+    output:
+      - "Goal and desired next step"
+      - "Hypotheses"
+      - "Question bank"
+      - "Agenda"
+      - "Next step options"
+    checks:
+      - "More questions than pitch"
+      - "Budget, authority and timeline are covered tactfully"
+    eu: []
+    examples:
+      - "Prepare me for a 30-minute discovery call with the COO of a logistics company."
+
+  - id: call-notes-to-crm
+    title: Call Notes to CRM Update
+    summary: Turns rough call notes or a transcript into a structured CRM update, follow-up email and next actions.
+    triggers: the user pastes meeting notes or a transcript and wants a summary, CRM update or follow-up email
+    use:
+      - "After every customer conversation"
+    avoid:
+      - "Recording calls without informing participants"
+    inputs:
+      - "Notes or transcript"
+      - "Deal stage"
+      - "CRM fields used"
+    steps:
+      - Extract pains, impact, stakeholders, decision process, timeline and budget signals.
+      - Map to CRM fields and qualification framework.
+      - List agreed next steps with owners and dates.
+      - Draft a short follow-up email to the customer.
+    output:
+      - "CRM update"
+      - "Qualification gaps"
+      - "Next steps"
+      - "Follow-up email"
+    checks:
+      - "Only facts stated in the call are recorded"
+      - "Sensitive personal remarks are left out"
+    eu: ["Recording or transcribing calls requires informing participants and a lawful basis under GDPR."]
+    examples:
+      - "Here is the transcript of my call with Maersk procurement. Update the CRM and write the follow-up."
+
+  - id: deal-qualification
+    title: Deal Qualification (MEDDICC)
+    summary: Scores a deal against a qualification framework such as MEDDICC or BANT, identifies gaps and suggests actions to close them.
+    triggers: the user wants to qualify a deal, check if an opportunity is real, use MEDDIC, MEDDICC or BANT
+    use:
+      - "Pipeline reviews"
+      - "Before investing in a proposal"
+    avoid: []
+    inputs:
+      - "What is known about the opportunity"
+      - "Stage and value"
+    steps:
+      - Score each framework element with the evidence.
+      - Highlight the biggest gaps and risks.
+      - Suggest specific actions and questions for each gap.
+      - Recommend whether to pursue, qualify further or disqualify.
+    output:
+      - "Qualification scorecard"
+      - "Gaps and risks"
+      - "Action plan"
+      - "Recommendation"
+    checks:
+      - "Scores are based on evidence, not optimism"
+      - "Economic buyer is identified or flagged"
+    eu: []
+    examples:
+      - "Qualify this DKK 400k opportunity using MEDDICC."
+
+  - id: demo-script
+    title: Demo Script
+    summary: Builds a tailored product demo storyline that follows the customer's pains, with a tell-show-tell structure, proof points and engagement questions.
+    triggers: the user is preparing a product demo, showcase or presentation of a solution to a prospect
+    use:
+      - "Second meetings"
+      - "Proof of concept kick-offs"
+    avoid: []
+    inputs:
+      - "Customer pains and goals from discovery"
+      - "Product capabilities"
+      - "Attendees and time available"
+    steps:
+      - Pick the three use cases that matter most to this customer.
+      - For each, write tell, show and tell back with the business outcome.
+      - Add questions to check relevance during the demo.
+      - Prepare answers for likely tricky questions and a close.
+    output:
+      - "Demo storyline"
+      - "Talk track per use case"
+      - "Engagement questions"
+      - "Tricky questions and answers"
+      - "Close and next step"
+    checks:
+      - "Demo is under the time available"
+      - "No features shown that are not relevant"
+    eu: []
+    examples:
+      - "Write a 20-minute demo script for our AI use case register for a CIO and a DPO."
+
+  - id: proposal-writer
+    title: Sales Proposal Writer
+    summary: Writes a customer-centred sales proposal with the problem, solution, outcomes, pricing options, plan and terms.
+    triggers: the user needs a proposal, offer, tilbud, quote document or statement of work for a customer
+    use:
+      - "After qualification and discovery"
+    avoid:
+      - "Public tenders with strict formats (use sales-tender-response)"
+    inputs:
+      - "Customer situation and goals"
+      - "Proposed solution and scope"
+      - "Pricing and options"
+      - "References"
+    steps:
+      - Open with the customer's situation and goals in their words.
+      - Describe the solution and how it creates the outcomes.
+      - Offer two or three priced options.
+      - Add plan, team, references and terms.
+      - Write a one-paragraph executive summary.
+    output:
+      - "Executive summary"
+      - "Situation and goals"
+      - "Solution"
+      - "Outcomes and value"
+      - "Options and pricing"
+      - "Plan and team"
+      - "References"
+      - "Terms and next steps"
+    checks:
+      - "Scope and exclusions are explicit"
+      - "Prices and dates are consistent"
+    eu: []
+    examples:
+      - "Write a proposal for a 3-month AI governance implementation for a 200-person insurer."
+
+  - id: objection-handling
+    title: Objection Handling
+    summary: Prepares responses to sales objections such as price, timing, competitor, status quo or risk, using acknowledge, explore and respond.
+    triggers: the user faces objections like too expensive, not now, we use a competitor or we do it ourselves
+    use:
+      - "Preparing for negotiations"
+      - "Coaching the team"
+    avoid: []
+    inputs:
+      - "The objection and context"
+      - "Our value and proof points"
+      - "Competitor information"
+    steps:
+      - Identify the real concern behind the objection.
+      - Write a response that acknowledges, explores with a question and answers with evidence.
+      - Offer an alternative or trade-off where suitable.
+    output:
+      - "Underlying concern"
+      - "Response script"
+      - "Questions to ask"
+      - "Proof points"
+      - "Fallback options"
+    checks:
+      - "Responses are honest"
+      - "Claims about competitors are factual"
+    eu: []
+    examples:
+      - "The customer says we are 30 percent more expensive than the competitor. How do I respond?"
+
+  - id: pricing-quote-approval
+    title: Quote and Discount Approval
+    summary: Builds a quote with pricing logic and checks discounts against the pricing policy and margin floors, preparing an approval request if needed.
+    triggers: the user is pricing a deal, building a quote, asking for discount approval or checking deal margin
+    use:
+      - "Non-standard pricing"
+      - "Large deals"
+    avoid:
+      - "Agreeing prices with competitors"
+    inputs:
+      - "Products and quantities"
+      - "List prices and cost"
+      - "Discount policy"
+      - "Deal context"
+    steps:
+      - Calculate the quote with list price, discount and net price per line.
+      - Calculate deal margin and compare with floors.
+      - Propose give-gets for any discount (term, volume, payment terms, references).
+      - Draft an approval request with justification.
+    output:
+      - "Quote table"
+      - "Margin analysis"
+      - "Give-get proposal"
+      - "Approval request"
+    checks:
+      - "Totals are correct"
+      - "Discount reasoning is documented"
+    eu: []
+    examples:
+      - "Customer wants 25 percent off a 3-year deal. Build the quote and approval case."
+
+  - id: pipeline-review
+    title: Pipeline Review
+    summary: Reviews the sales pipeline for health, stuck and risky deals, coverage against target and the actions for each rep or deal.
+    triggers: the user wants to review the pipeline, prepare a pipeline meeting or check pipeline coverage
+    use:
+      - "Weekly or monthly sales meetings"
+    avoid: []
+    inputs:
+      - "Pipeline export with stage, value, close date, last activity and owner"
+      - "Target for the period"
+    steps:
+      - Calculate coverage, stage conversion and average age by stage.
+      - Flag stale deals, pushed close dates and missing next steps.
+      - Identify the deals that decide the quarter.
+      - Propose actions and questions per flagged deal.
+    output:
+      - "Pipeline health summary"
+      - "Coverage"
+      - "Flagged deals"
+      - "Key deals"
+      - "Actions"
+    checks:
+      - "Closed deals are excluded from open pipeline"
+      - "Dates compared to today"
+    eu: []
+    examples:
+      - "Review our pipeline export and tell me which deals need attention this week."
+
+  - id: sales-forecast
+    title: Sales Forecast
+    summary: Produces a sales forecast for the period combining rep commit, weighted pipeline and historical conversion, with a range and risks.
+    triggers: the user needs a sales forecast, commit, best case or revenue projection for the quarter or year
+    use:
+      - "Weekly or monthly forecast calls"
+      - "Board reporting"
+    avoid:
+      - "Accounting revenue recognition"
+    inputs:
+      - "Pipeline with stages and probabilities"
+      - "Historical win rates and cycle times"
+      - "Rep commit"
+    steps:
+      - Calculate a weighted pipeline forecast.
+      - Calculate a historical conversion forecast.
+      - Compare with rep commit and explain gaps.
+      - Give commit, most likely and best case with key risks.
+    output:
+      - "Forecast range"
+      - "Method comparison"
+      - "Key deals and risks"
+      - "Assumptions"
+    checks:
+      - "Methods are shown"
+      - "Range is not a single point"
+    eu: []
+    examples:
+      - "What will we close this quarter? Here is the pipeline and last year's win rates."
+
+  - id: win-loss-analysis
+    title: Win-Loss Analysis
+    summary: Analyses won and lost deals to find patterns in reasons, competitors, segments and sales process, and recommends changes.
+    triggers: the user wants to know why deals are won or lost, run win-loss interviews or improve win rates
+    use:
+      - "Quarterly sales retrospectives"
+      - "After losing a key deal"
+    avoid: []
+    inputs:
+      - "Closed deal data with reasons"
+      - "Interview notes or survey answers"
+    steps:
+      - Calculate win rates by segment, source, size and competitor.
+      - Code qualitative reasons into themes.
+      - Identify the strongest patterns.
+      - Recommend changes to targeting, messaging, product and process.
+      - Provide a win-loss interview guide for future deals.
+    output:
+      - "Win rate analysis"
+      - "Reason themes"
+      - "Key patterns"
+      - "Recommendations"
+      - "Interview guide"
+    checks:
+      - "Small samples are flagged"
+      - "Reasons are not taken only from the rep's view"
+    eu: []
+    examples:
+      - "Analyse our last 40 won and lost deals."
+
+  - id: competitive-battlecard
+    title: Competitive Battlecard
+    summary: Creates a one-page battlecard for a competitor with positioning, strengths, weaknesses, landmines, objection responses and proof points.
+    triggers: the user is competing against a named competitor or needs a battlecard or competitor comparison for sales
+    use:
+      - "Competitive deals"
+      - "Sales enablement"
+    avoid:
+      - "Disparaging or false statements about competitors"
+    inputs:
+      - "Competitor information the user has (website, pricing, reviews, lost deals)"
+      - "Our differentiators"
+    steps:
+      - Summarise the competitor's positioning and target customers.
+      - Compare strengths and weaknesses honestly.
+      - Write landmine questions that highlight our strengths.
+      - Prepare responses to their common claims.
+    output:
+      - "Competitor overview"
+      - "Comparison table"
+      - "Where we win and lose"
+      - "Landmine questions"
+      - "Objection responses"
+      - "Proof points"
+    checks:
+      - "Statements are verifiable"
+      - "Date of information is noted"
+    eu: ["Comparative advertising must be objective and not misleading (Directive 2006/114/EC; markedsføringsloven)."]
+    examples:
+      - "Make a battlecard against Competitor X for our sales team."
+
+  - id: negotiation-prep
+    title: Sales Negotiation Preparation
+    summary: Prepares a sales negotiation with goals, walk-away, trade-offs, the buyer's likely tactics and a concession plan.
+    triggers: the user is negotiating price, terms or a contract with a customer or procurement department
+    use:
+      - "Late-stage deals"
+      - "Renewals with price increases"
+    avoid: []
+    inputs:
+      - "Deal terms and value"
+      - "Buyer's position and alternatives"
+      - "Our limits"
+    steps:
+      - Define target, acceptable and walk-away positions for each variable.
+      - Map tradeable variables and their value to each side.
+      - Anticipate procurement tactics and prepare responses.
+      - Plan concessions in small, conditional steps.
+    output:
+      - "Positions table"
+      - "Tradeables"
+      - "Tactics and responses"
+      - "Concession plan"
+      - "Opening statement"
+    checks:
+      - "Every concession has a get"
+      - "Walk-away is defined"
+    eu: []
+    examples:
+      - "Procurement wants 15 percent off and 60-day payment terms. Prepare me."
+
+  - id: account-plan
+    title: Strategic Account Plan
+    summary: Builds a strategic account plan with relationship map, whitespace, goals, initiatives and a governance rhythm for a key customer.
+    triggers: the user manages a key account and needs an account plan, QBR, whitespace analysis or growth plan
+    use:
+      - "Top customers"
+      - "Annual planning"
+    avoid: []
+    inputs:
+      - "Customer history and revenue"
+      - "Stakeholders and relationships"
+      - "Customer strategy"
+      - "Our portfolio"
+    steps:
+      - Summarise the customer's strategy and our current footprint.
+      - Map relationships and their strength.
+      - Identify whitespace and growth opportunities.
+      - Set goals and initiatives with owners.
+      - Plan reviews and executive sponsor meetings.
+    output:
+      - "Account overview"
+      - "Relationship map"
+      - "Whitespace"
+      - "Goals and initiatives"
+      - "Governance plan"
+      - "Risks"
+    checks:
+      - "Goals are measurable"
+      - "Risks to the relationship are included"
+    eu: []
+    examples:
+      - "Build an account plan for our biggest customer for next year."
+
+  - id: territory-quota-planning
+    title: Territory and Quota Planning
+    summary: Designs sales territories and quotas based on account potential, capacity and history, so targets are fair and achievable.
+    triggers: the user is planning sales territories, quotas, coverage or sales capacity for next year
+    use:
+      - "Annual sales planning"
+      - "Hiring new reps"
+    avoid:
+      - "Individual compensation contracts (involve HR)"
+    inputs:
+      - "Account list with potential"
+      - "Rep capacity and ramp time"
+      - "Company revenue target"
+    steps:
+      - Estimate account potential and segment accounts.
+      - Allocate accounts to balance potential and workload.
+      - Set quotas from the top-down target and bottom-up potential.
+      - Check capacity and the hiring plan.
+    output:
+      - "Territory map"
+      - "Quota table"
+      - "Capacity check"
+      - "Assumptions"
+    checks:
+      - "Sum of quotas covers the target with buffer"
+      - "Ramp time is included for new hires"
+    eu: []
+    examples:
+      - "Split our 600 accounts between 4 reps and set quotas for a DKK 40m target."
+
+  - id: renewal-expansion-playbook
+    title: Renewal and Expansion Playbook
+    summary: Plans renewals and upsell for existing customers, scoring renewal risk and expansion potential and drafting outreach.
+    triggers: the user is handling renewals, contract renewals, upsell, cross-sell or price increases for existing customers
+    use:
+      - "Quarterly renewal planning"
+      - "Price increase communication"
+    avoid:
+      - "Churn rescue conversations in support (use cs-churn-save)"
+    inputs:
+      - "Customers with renewal dates and value"
+      - "Usage and health data"
+      - "Products they do not yet use"
+    steps:
+      - Score renewal risk and expansion potential.
+      - Plan timing (start 90 to 120 days before renewal).
+      - Prepare value recap and expansion proposals.
+      - Draft outreach and a price increase message if relevant.
+    output:
+      - "Renewal calendar"
+      - "Risk and potential matrix"
+      - "Account actions"
+      - "Message drafts"
+    checks:
+      - "Notice periods in contracts respected"
+      - "Price increases follow contract terms"
+    eu: []
+    examples:
+      - "Plan Q1 renewals and suggest who to upsell."
+
+  - id: tender-response
+    title: Public Tender Response
+    summary: Plans and drafts a response to a public or private tender, including requirement matrix, compliance checks and win themes.
+    triggers: the user is responding to a tender, udbud, RFP from a public body, framework agreement or ESPD
+    use:
+      - "Public sector bids"
+      - "Large private RFPs"
+    avoid: []
+    inputs:
+      - "Tender documents"
+      - "Our capabilities and references"
+      - "Deadline and submission rules"
+    steps:
+      - Build a requirement and compliance matrix from the documents.
+      - Check exclusion grounds, suitability criteria and mandatory documents.
+      - Define win themes linked to award criteria.
+      - Draft answers per award criterion.
+      - Plan questions to the contracting authority before the deadline.
+    output:
+      - "Bid or no-bid assessment"
+      - "Compliance matrix"
+      - "Win themes"
+      - "Draft answers"
+      - "Questions for clarification"
+      - "Submission checklist"
+    checks:
+      - "Every minimum requirement is met"
+      - "Answers follow the award criteria structure"
+    eu: ["EU public procurement directives apply above thresholds; in Denmark, udbudsloven applies and tenders are published on udbud.dk and TED. The European Single Procurement Document (ESPD) is used as preliminary evidence."]
+    examples:
+      - "Help us bid on this municipal tender for IT consulting services."
+
+  - id: sales-onboarding
+    title: Sales Onboarding Programme
+    summary: Designs a ramp plan for a new salesperson covering product, customers, process and tools, with milestones and certification.
+    triggers: the user is onboarding a new sales rep or account manager, or wants a sales training plan
+    use:
+      - "New sales hires"
+      - "Launching a new product to the team"
+    avoid: []
+    inputs:
+      - "Role and territory"
+      - "Product and process materials"
+      - "Ramp expectations"
+    steps:
+      - Define what fully ramped looks like.
+      - Plan weeks 1 to 12 with learning, shadowing and live activity.
+      - Add certification checkpoints (pitch, demo, discovery).
+      - Set activity and pipeline milestones.
+    output:
+      - "Ramp plan"
+      - "Learning curriculum"
+      - "Certification checkpoints"
+      - "Milestones"
+    checks:
+      - "Milestones are realistic"
+      - "Each week has practice, not only reading"
+    eu: []
+    examples:
+      - "Build a 90-day onboarding for a new account executive selling SaaS to the Nordic market."
+
+  - id: social-selling
+    title: Social Selling on LinkedIn
+    summary: Builds a social selling routine for LinkedIn with profile improvements, posts, comments and connection messages that sound human.
+    triggers: the user wants to sell through LinkedIn, write sales posts, improve a LinkedIn profile for selling or connect with prospects
+    use:
+      - "Founders and sellers building a pipeline through content"
+    avoid:
+      - "Fake engagement or automation that breaks LinkedIn's terms"
+    inputs:
+      - "Target audience"
+      - "Expertise and stories"
+      - "Time available per week"
+    steps:
+      - Improve the profile headline and about section for the buyer.
+      - Plan a weekly rhythm of posts, comments and connections.
+      - Draft three posts based on real experience and opinions.
+      - Draft connection and follow-up messages that are not salesy.
+    output:
+      - "Profile improvements"
+      - "Weekly routine"
+      - "Post drafts"
+      - "Message templates"
+    checks:
+      - "Posts avoid generic AI-sounding phrases"
+      - "No inflated claims"
+    eu: []
+    examples:
+      - "Help me use LinkedIn to find clients for my consulting business."

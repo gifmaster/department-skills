@@ -1,0 +1,15 @@
+{
+  "name": "legal-skills",
+  "version": "1.0.0",
+  "description": "21 Legal skills. Skills for contracts, data protection, AI regulation, corporate housekeeping, consumer and marketing law, intellectual property, disputes and compliance policies. Built for small legal teams and for managers without a lawyer on staff, to prepare work that a qualified lawyer can then review quickly.",
+  "author": {
+    "name": "Alexander Senderovitz"
+  },
+  "license": "MIT",
+  "keywords": [
+    "legal",
+    "skills",
+    "eu",
+    "denmark"
+  ]
+}

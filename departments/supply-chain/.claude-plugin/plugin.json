@@ -1,0 +1,15 @@
+{
+  "name": "supply-chain-skills",
+  "version": "1.0.0",
+  "description": "21 Supply Chain skills. Skills for planning, inventory, sourcing, suppliers, logistics, customs and supply chain sustainability. Built for operations teams in manufacturing, wholesale and e-commerce who run their supply chain in spreadsheets and an ERP system.",
+  "author": {
+    "name": "Alexander Senderovitz"
+  },
+  "license": "MIT",
+  "keywords": [
+    "supply-chain",
+    "skills",
+    "eu",
+    "denmark"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "customer-service-skills",
+  "version": "1.0.0",
+  "description": "21 Customer Service skills. Skills for answering customers well, handling complaints, building self-service, measuring quality and satisfaction, keeping customers and communicating in a crisis. Built for support teams in B2C and B2B companies, from a single inbox to a contact centre.",
+  "author": {
+    "name": "Alexander Senderovitz"
+  },
+  "license": "MIT",
+  "keywords": [
+    "customer-service",
+    "skills",
+    "eu",
+    "denmark"
+  ]
+}

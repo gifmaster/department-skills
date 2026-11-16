@@ -1,0 +1,15 @@
+{
+  "name": "marketing-skills",
+  "version": "1.0.0",
+  "description": "21 Marketing skills. Skills for brand, positioning, content, campaigns, SEO, email, social, events, launches and performance measurement. Built for small marketing teams who need to produce good work quickly and stay on the right side of EU consumer, privacy and AI transparency rules.",
+  "author": {
+    "name": "Alexander Senderovitz"
+  },
+  "license": "MIT",
+  "keywords": [
+    "marketing",
+    "skills",
+    "eu",
+    "denmark"
+  ]
+}

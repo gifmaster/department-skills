@@ -1,0 +1,15 @@
+{
+  "name": "sales-skills",
+  "version": "1.0.0",
+  "description": "21 Sales skills. Skills for the whole B2B sales cycle: targeting, prospecting, discovery, qualification, proposals, negotiation, forecasting, account growth and public tenders. Built for founder-led sales and small sales teams who need structure without heavy tooling.",
+  "author": {
+    "name": "Alexander Senderovitz"
+  },
+  "license": "MIT",
+  "keywords": [
+    "sales",
+    "skills",
+    "eu",
+    "denmark"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "hr-skills",
+  "version": "1.0.0",
+  "description": "21 Human Resources skills. Skills for the full employee lifecycle: attracting and selecting candidates, onboarding, performance and development, pay, wellbeing, policies and exits. Built for small and mid-sized organisations where one HR person often covers everything.",
+  "author": {
+    "name": "Alexander Senderovitz"
+  },
+  "license": "MIT",
+  "keywords": [
+    "hr",
+    "skills",
+    "eu",
+    "denmark"
+  ]
+}

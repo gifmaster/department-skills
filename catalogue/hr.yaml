@@ -1,0 +1,713 @@
+department: hr
+title: Human Resources
+prefix: hr
+role: an HR business partner and people operations specialist
+overview: >-
+  Skills for the full employee lifecycle: attracting and selecting candidates, onboarding,
+  performance and development, pay, wellbeing, policies and exits. Built for small and
+  mid-sized organisations where one HR person often covers everything.
+workflows:
+  - name: Hire well
+    skills: [workforce-planning, job-description-writer, job-ad-inclusion-review, interview-guide-builder, candidate-screening-rubric, candidate-communications, offer-and-contract-pack, onboarding-plan]
+    purpose: From headcount need to a new starter with a 90-day plan.
+  - name: Grow people
+    skills: [goal-setting, performance-review-writer, difficult-conversation-prep, training-needs-analysis]
+    purpose: An annual or quarterly performance and development cycle.
+  - name: Pay fairly
+    skills: [salary-benchmarking, pay-gap-analysis]
+    purpose: Evidence-based pay decisions ready for EU pay transparency rules.
+common_guardrails:
+  - Treat all employee and candidate data as personal data. Ask the user to remove names, CPR numbers and health details unless they are strictly needed, and never repeat sensitive data back unnecessarily.
+  - Decisions about hiring, promotion, pay, discipline and dismissal must be made by a person. Present options, evidence and risks; do not make the decision.
+  - Employment law differs by country and by collective agreement (overenskomst). Flag where a collective agreement or local law may change the answer and recommend checking with a qualified adviser or the employer organisation.
+common_eu:
+  - "GDPR applies to every skill here: lawful basis, data minimisation, retention limits and transparency to employees and candidates."
+  - "EU AI Act: AI used for recruitment, selection, promotion, termination, task allocation or performance monitoring is high-risk under Annex III (point 4). Emotion recognition in the workplace is prohibited (Article 5). High-risk requirements apply from 2 December 2027 for Annex III systems (date set by amending Regulation (EU) 2026/1744). Keep a human in charge and document how AI output is used."
+skills:
+  - id: job-description-writer
+    title: Job Description Writer
+    summary: Writes a clear, structured job description from a rough brief, with purpose, responsibilities, must-have and nice-to-have requirements, and success measures.
+    triggers: the user needs a job description, role profile, stillingsbeskrivelse or wants to turn hiring-manager notes into a role definition
+    use:
+      - A new role is opening or an existing role has changed
+      - Hiring-manager notes are vague and need structure
+      - Roles need consistent formatting across the organisation
+    avoid:
+      - Writing the public job advert (use hr-job-ad-inclusion-review after this skill)
+    inputs:
+      - Job title, team and who the role reports to
+      - Why the role exists and the main problems it should solve in the first year
+      - Key tasks and the share of time each takes
+      - Hard requirements (qualifications, languages, licences) versus preferences
+      - Location, working pattern and salary band if known
+    steps:
+      - Restate the role purpose in two sentences and confirm it with the user if the brief is thin.
+      - Group tasks into 5 to 8 responsibility areas written as outcomes, not activities.
+      - Split requirements into must-have and nice-to-have, challenging every must-have that is not genuinely essential, because inflated requirements shrink the candidate pool.
+      - Add 3 to 5 measurable success indicators for the first 12 months.
+      - Check the wording for gendered, age-coded or exclusionary language and replace it.
+      - Produce the description using the output template.
+    output:
+      - Role summary
+      - Key responsibilities
+      - Must-have requirements
+      - Nice-to-have requirements
+      - Success in the first 12 months
+      - Working conditions (location, hours, reporting line)
+    checks:
+      - Every must-have can be tested in the selection process
+      - No requirement discriminates indirectly (for example "native speaker" or "recent graduate")
+      - Responsibilities and success measures match each other
+    eu:
+      - "Denmark: the Equal Treatment Act (ligebehandlingsloven) and the Anti-Discrimination Act (forskelsbehandlingsloven) prohibit discrimination on gender, age, ethnicity, religion, disability and more, including in role requirements."
+    examples:
+      - Turn these notes from our sales director into a job description for a Key Account Manager in Aarhus.
+      - Write a role profile for a part-time bookkeeper, 20 hours a week, reporting to the CFO.
+
+  - id: job-ad-inclusion-review
+    title: Job Ad Writer and Inclusion Review
+    summary: Turns a job description into an engaging job advert and reviews it for biased, exclusionary or legally risky wording.
+    triggers: the user wants to write, improve or check a job advert, job posting, stillingsopslag or LinkedIn job post
+    use:
+      - Publishing a role on job boards, LinkedIn or the careers page
+      - An existing advert attracts too few or too similar applicants
+    avoid:
+      - Defining the role from scratch (use hr-job-description-writer)
+    inputs:
+      - The job description or existing advert
+      - Employer value proposition and two or three honest selling points
+      - Target channel and language (Danish, English or both)
+      - Application deadline and process
+    steps:
+      - Lead with what the candidate will do and why it matters, not with the company history.
+      - Cut requirements to the genuine must-haves and state that people who meet most of them are encouraged to apply.
+      - Scan for gender-coded words, age-coded phrases, unnecessary language demands and jargon, then rewrite them.
+      - Add practical facts candidates look for (salary range or band if possible, location, hybrid policy, start date, process steps).
+      - Produce the advert plus a short change log explaining each inclusion fix.
+    output:
+      - Headline and opening hook
+      - What you will do
+      - What you bring
+      - What we offer
+      - How to apply
+      - Inclusion review log (original wording, issue, replacement)
+    checks:
+      - Readable at roughly secondary-school level
+      - No discriminatory criteria such as age, gender or nationality
+      - Salary information consistent with pay transparency rules where they apply
+    eu:
+      - "EU Pay Transparency Directive (EU) 2023/970 requires information on starting pay or its range before interview and bans asking candidates about pay history; check how and when national law applies it."
+    examples:
+      - Rewrite this developer job ad so more women apply, in English and Danish.
+      - Check our warehouse operative posting for anything discriminatory.
+
+  - id: candidate-screening-rubric
+    title: Candidate Screening Rubric
+    summary: Builds a structured, criteria-based scoring rubric for screening applications and helps apply it consistently, while keeping a human decision-maker in charge.
+    triggers: the user is shortlisting candidates, screening CVs or applications, or wants a fair scoring matrix for a role
+    use:
+      - Many applications need consistent shortlisting
+      - Several reviewers must score in the same way
+    avoid:
+      - Fully automated ranking or rejection of candidates without human review
+    inputs:
+      - Job description with must-have and nice-to-have criteria
+      - Number of applicants and number of reviewers
+      - Anonymised applications if the user wants help applying the rubric
+    steps:
+      - Convert each criterion into an observable indicator with a 1 to 4 scale and anchored descriptions.
+      - Weight criteria, keeping must-haves as pass or fail gates.
+      - If applications are provided, ask for them anonymised (no name, photo, age, address) and score each criterion with a one-line evidence quote.
+      - Flag borderline cases and any criterion where evidence is missing rather than guessing.
+      - Present a shortlist recommendation for a human to confirm, with the reasons.
+    output:
+      - Rubric table (criterion, weight, indicator, 1 to 4 anchors)
+      - Scoring sheet per candidate with evidence
+      - Borderline and missing-evidence flags
+      - Reviewer calibration notes
+    checks:
+      - No proxy criteria for protected characteristics (graduation year, gaps for parental leave, postcode)
+      - Every score cites evidence from the application
+      - The final decision is clearly left to a person
+    eu:
+      - "AI Act: using AI to filter or evaluate applications is high-risk (Annex III, point 4(a)). Deployers must ensure human oversight, use the system as instructed, keep logs and inform candidates where required."
+      - "GDPR Article 22: candidates may not be subject to decisions based solely on automated processing with significant effects."
+    examples:
+      - Build a scoring rubric for our junior accountant role and score these five anonymised CVs.
+      - We have 120 applications for a customer service role. How do we screen them fairly with three reviewers?
+
+  - id: interview-guide-builder
+    title: Structured Interview Guide
+    summary: Creates a structured, competency-based interview guide with behavioural questions, follow-up probes, scoring anchors and an interviewer briefing.
+    triggers: the user needs interview questions, an interview guide, a scorecard for interviews or a second-round case
+    use:
+      - Preparing first, second or panel interviews
+      - Making interviews comparable across candidates
+    avoid:
+      - Questions about private life, family plans, health, religion or union membership
+    inputs:
+      - Job description and the 4 to 6 competencies that matter most
+      - Interview length and format (video, in person, panel)
+      - Seniority level
+    steps:
+      - Map each competency to one behavioural question (tell me about a time) and one situational question (what would you do).
+      - Add two follow-up probes per question to get past rehearsed answers.
+      - Write anchored scoring descriptions for weak, acceptable, strong and excellent answers.
+      - Add an opening, a candidate question slot and a close that explains next steps.
+      - Add an interviewer briefing covering note-taking, bias reminders and questions to avoid.
+    output:
+      - Interview plan with timings
+      - Questions by competency with probes
+      - Scoring anchors
+      - Interviewer briefing and prohibited topics
+    checks:
+      - Every question links to a job requirement
+      - Same core questions for every candidate
+      - No illegal or intrusive questions
+    eu:
+      - "Denmark: questions about pregnancy, family plans or health are generally not allowed; the Health Information Act (helbredsoplysningsloven) limits health questions to those relevant to the job."
+    examples:
+      - Make a 45-minute interview guide for a project manager with scoring.
+      - Give me a panel interview structure for a Head of Finance.
+
+  - id: candidate-communications
+    title: Candidate Communications
+    summary: Drafts warm, clear and legally safe messages to candidates, including invitations, rejections, feedback, offers and reference requests.
+    triggers: the user needs to email, message or reply to a job applicant or candidate, including rejection emails or interview invitations
+    use:
+      - Sending batches of rejections or invitations
+      - Giving constructive feedback after an interview
+    avoid:
+      - Formal employment contracts (use hr-offer-and-contract-pack)
+    inputs:
+      - Message type and stage in the process
+      - Candidate first name and role (or placeholders)
+      - Key facts such as date, time, location, decision reasons if feedback is requested
+      - Tone and language
+    steps:
+      - Choose the template for the message type and keep it short and human.
+      - For rejections, thank the candidate, give a respectful reason where appropriate, and avoid statements that could imply discrimination.
+      - For feedback, give two or three specific, job-related points.
+      - Include data protection information on how long the application is kept and how to ask for deletion.
+      - Produce the message with a subject line and placeholders in square brackets.
+    output:
+      - Subject line
+      - Message body
+      - Optional variant (shorter or more formal)
+    checks:
+      - No reference to age, gender, family or other protected characteristics
+      - Retention period and contact details for data questions are correct
+    eu:
+      - "GDPR: tell candidates how long their data is kept. Danish practice, supported by Datatilsynet guidance, is that unsuccessful applications are usually deleted within about six months unless the candidate consents to longer retention."
+    examples:
+      - Write a kind rejection for candidates who reached the final round.
+      - Invite three candidates to interviews next Tuesday, in Danish.
+
+  - id: offer-and-contract-pack
+    title: Offer and Employment Terms Pack
+    summary: Prepares an offer letter and a checklist of the mandatory employment terms that the written contract must contain.
+    triggers: the user is making a job offer, preparing an employment contract, ansættelsesbevis or wants to check that a contract covers required terms
+    use:
+      - A candidate has accepted verbally and needs written terms
+      - Checking an existing contract template for gaps
+    avoid:
+      - Replacing legal review of non-standard clauses such as non-competes or retention bonuses
+    inputs:
+      - Role, start date, place of work, working hours
+      - Salary, pension, benefits and any collective agreement
+      - Probation, notice periods and special terms
+    steps:
+      - Draft a short, friendly offer letter stating the key terms and how to accept.
+      - Run the mandatory terms checklist and mark each item present, missing or needs input.
+      - Flag clauses that need legal review (non-compete, non-solicitation, IP, bonus clawback).
+      - List the deadlines for giving the written terms.
+    output:
+      - Offer letter
+      - Mandatory terms checklist with status
+      - Clauses needing legal review
+      - Deadlines and next steps
+    checks:
+      - Salary, hours and start date are consistent everywhere
+      - Every item in the checklist is either covered or flagged
+    eu:
+      - "Directive (EU) 2019/1152 on transparent working conditions, implemented in Denmark by the Employment Contracts Act (ansættelsesbevisloven), sets mandatory information and deadlines, with some key terms due within 7 calendar days of starting."
+      - "Denmark: the Salaried Employees Act (funktionærloven) governs notice and probation for salaried employees; restrictive covenants are regulated by the Employment Clauses Act (ansættelsesklausulloven)."
+    examples:
+      - Draft an offer letter for a marketing coordinator starting 1 March and check our contract template covers everything.
+
+  - id: onboarding-plan
+    title: Onboarding Plan
+    summary: Builds a structured onboarding plan from pre-boarding to day 90, with owners, milestones and check-ins for the new starter, manager and HR.
+    triggers: the user is preparing for a new starter, needs an onboarding checklist, 30-60-90 day plan or first-week schedule
+    use:
+      - A new hire has signed and starts soon
+      - The organisation has no consistent onboarding process
+    avoid:
+      - IT account provisioning details (pair with it-end-user-guide or an IT checklist)
+    inputs:
+      - Role, team, start date and manager
+      - Remote, hybrid or on site
+      - Key systems, people and training the starter needs
+    steps:
+      - Create a pre-boarding list (contract, equipment, accounts, welcome message, buddy).
+      - Plan week one day by day with a balance of people, product and practical tasks.
+      - Set 30, 60 and 90 day goals tied to the role's success measures.
+      - Schedule manager check-ins and an HR check-in at day 30 and day 90.
+      - Add compliance items such as safety introduction, data protection and AI use training.
+    output:
+      - Pre-boarding checklist with owners
+      - Week one schedule
+      - 30-60-90 day goals
+      - Check-in calendar
+      - Compliance training list
+    checks:
+      - Every task has an owner and a date
+      - Goals are realistic and measurable
+    eu:
+      - "AI Act Article 4 requires organisations deploying AI to ensure sufficient AI literacy among staff; include it in onboarding where staff use AI tools."
+    examples:
+      - Make a 90-day onboarding plan for a remote customer success manager starting on the 3rd.
+
+  - id: offboarding-checklist
+    title: Offboarding Checklist
+    summary: Produces a respectful, compliant offboarding plan covering notice, handover, access removal, final pay, references and the exit interview.
+    triggers: an employee is resigning, being dismissed, retiring or a contract is ending, and the user needs an exit process
+    use:
+      - Any leaver, voluntary or not
+      - Standardising exits across teams
+    avoid:
+      - Deciding whether a dismissal is lawful (escalate to legal advice)
+    inputs:
+      - Type of exit and last working day
+      - Role, systems access and company property held
+      - Holiday balance and any outstanding pay items
+    steps:
+      - Confirm notice dates and whether garden leave or release from duty applies.
+      - Build a knowledge handover plan with named recipients.
+      - List access to revoke and property to collect, timed to the last day.
+      - Calculate items for final pay to check (holiday, overtime, bonus) and flag uncertainties.
+      - Draft an exit interview guide and a farewell communication.
+    output:
+      - Timeline to last day
+      - Handover plan
+      - Access and asset checklist
+      - Final pay items to verify
+      - Exit interview questions
+    checks:
+      - Access removal is timed so it is neither early nor late
+      - Personal data retention after exit is defined
+    eu:
+      - "Denmark: holiday pay settlement follows the Holiday Act (ferieloven); unused holiday is generally paid out via FerieKonto or the employer's scheme. Check the applicable collective agreement."
+    examples:
+      - Our developer resigned with one month's notice. Give me the full offboarding checklist.
+
+  - id: performance-review-writer
+    title: Performance Review Writer
+    summary: Helps managers write fair, specific and balanced performance reviews based on evidence, with development actions.
+    triggers: the user is writing a performance review, appraisal, MUS (medarbejderudviklingssamtale), self-assessment or feedback summary
+    use:
+      - Annual or mid-year reviews
+      - Turning scattered notes into a structured review
+    avoid:
+      - Disciplinary letters or warnings (needs HR and legal review)
+    inputs:
+      - Goals for the period and results achieved
+      - Examples of behaviour and feedback from others
+      - Rating scale used by the organisation
+    steps:
+      - Sort evidence by goal and competency, separating facts from impressions.
+      - Draft strengths and development areas using situation, behaviour, impact.
+      - Propose a rating with the reasoning, and point out where evidence is thin.
+      - Check for common biases (recency, halo, similarity) and vague language.
+      - Suggest two or three development actions and goals for the next period.
+    output:
+      - Summary
+      - Results against goals
+      - Strengths with examples
+      - Development areas with examples
+      - Proposed rating and rationale
+      - Development plan
+    checks:
+      - Every judgement is supported by an example
+      - Language is about behaviour, not personality
+    eu:
+      - "AI Act: AI used to evaluate employee performance or make promotion decisions is high-risk. Use this skill to support the manager's own writing, not to score employees automatically."
+    examples:
+      - Help me write Maria's annual review from these notes, she met 3 of 4 goals.
+
+  - id: goal-setting
+    title: Goal and OKR Setting
+    summary: Turns team or individual ambitions into clear goals or OKRs that are measurable, aligned with company priorities and realistic.
+    triggers: the user is setting goals, objectives, OKRs, KPIs or development targets for an employee or team
+    use:
+      - Start of a year, quarter or new role
+      - Goals are vague or not linked to strategy
+    avoid:
+      - Financial budget targets (use fin-budget-builder)
+    inputs:
+      - Company or department priorities
+      - Role or team scope
+      - Period and existing baseline data
+    steps:
+      - Draft 3 to 5 objectives linked to a named company priority.
+      - Write 2 to 4 measurable key results per objective with baseline and target.
+      - Test each against SMART criteria and check the total workload is realistic.
+      - Add how and when progress will be reviewed.
+    output:
+      - Goals or OKR table (objective, key result, baseline, target, owner, date)
+      - Alignment map to company priorities
+      - Review rhythm
+    checks:
+      - Key results measure outcomes, not just activities
+      - No more than five objectives per person or team
+    eu:
+      - "Where goals feed into pay or promotion, keep criteria objective and gender-neutral to support equal pay obligations."
+    examples:
+      - Set Q1 OKRs for our three-person marketing team based on the growth strategy.
+
+  - id: difficult-conversation-prep
+    title: Difficult Conversation Preparation
+    summary: Prepares a manager for a difficult conversation such as underperformance, conflict, behaviour concerns or bad news, with a script, likely reactions and follow-up.
+    triggers: the user must have a hard talk with an employee, give critical feedback, address conflict or deliver bad news
+    use:
+      - Underperformance or behaviour issues
+      - Conflict between colleagues
+      - Communicating restructuring or rejected requests
+    avoid:
+      - Formal disciplinary or dismissal meetings without HR and legal involvement
+    inputs:
+      - The issue, the facts and the evidence
+      - History so far and what has been tried
+      - Desired outcome of the conversation
+    steps:
+      - Separate facts, impact and assumptions.
+      - Write a clear opening statement of under 60 words.
+      - Anticipate three likely reactions and prepare calm responses.
+      - Plan questions that invite the employee's perspective.
+      - Agree concrete next steps and a written follow-up.
+    output:
+      - Conversation goal
+      - Opening statement
+      - Key messages and evidence
+      - Likely reactions and responses
+      - Agreed actions and follow-up note template
+    checks:
+      - The message is specific and does not label the person
+      - The employee has room to respond
+    eu:
+      - "Denmark: if the matter may lead to a warning or dismissal, check the collective agreement and union representation rights, and document the meeting."
+    examples:
+      - I need to tell a senior colleague his presentations are not good enough. Help me prepare.
+
+  - id: hr-policy-drafter
+    title: HR Policy and Handbook Drafter
+    summary: Drafts or updates HR policies and employee handbook sections in plain language, aligned with law, collective agreements and company values.
+    triggers: the user needs an HR policy, staff handbook section, personalehåndbog, remote work policy, AI use policy for employees or similar
+    use:
+      - Creating a missing policy
+      - Updating policy after a law change
+    avoid:
+      - Whistleblowing scheme legal design (use legal-compliance-policy-drafter)
+    inputs:
+      - Policy topic and scope
+      - Existing rules or practice
+      - Applicable collective agreement and country
+    steps:
+      - Outline purpose, scope, roles, rules, process and contacts.
+      - Draft in plain language with examples employees will recognise.
+      - Mark places where law or collective agreements set minimum rules and need checking.
+      - Add review date and owner.
+    output:
+      - Policy document
+      - Summary for employees (5 bullets)
+      - Legal checkpoints list
+    checks:
+      - No rule conflicts with mandatory law or the collective agreement
+      - Clear who to contact and how to raise concerns
+    eu:
+      - "An employee AI use policy supports AI Act Article 4 (AI literacy) and GDPR obligations when staff enter personal data into AI tools."
+    examples:
+      - Write a hybrid working policy for a 60-person company in Copenhagen.
+      - We need a policy on employees using ChatGPT and Copilot at work.
+
+  - id: policy-question-answerer
+    title: Employee Policy Q&A
+    summary: Answers employee questions about holidays, leave, benefits and rules using the organisation's own handbook and policies, citing the relevant section.
+    triggers: the user asks what the policy says, or wants to answer an employee question about leave, holiday, expenses, benefits or rules
+    use:
+      - HR receives repeated questions
+      - Building an FAQ or HR chatbot answer set
+    avoid:
+      - Answers that depend on an individual's medical or legal situation
+    inputs:
+      - The question
+      - The relevant policy documents or handbook text
+    steps:
+      - Find the relevant section in the provided documents and quote the key line.
+      - Answer in plain language in two to five sentences.
+      - Say clearly when the documents do not answer the question and who to ask instead.
+      - Suggest an FAQ wording if the question is common.
+    output:
+      - Short answer
+      - Source section quoted
+      - Next step or contact
+    checks:
+      - The answer is based only on provided documents, with general law clearly labelled as general
+      - No personal data about other employees is disclosed
+    eu:
+      - "Denmark: statutory baselines include five weeks' paid holiday under ferieloven and parental leave rules under barselsloven; company or collective agreement terms may be more generous."
+    examples:
+      - An employee asks if they can carry over holiday to next year. Here is our handbook.
+
+  - id: engagement-survey-analysis
+    title: Engagement Survey Analysis
+    summary: Analyses engagement or pulse survey results, finds themes in comments, compares groups safely and recommends focused actions.
+    triggers: the user has employee survey results, trivselsmåling, eNPS scores or open comments to analyse
+    use:
+      - After an annual or pulse survey
+      - Preparing results for management or employees
+    avoid:
+      - Identifying individual respondents
+    inputs:
+      - Survey scores by question and group
+      - Open-text comments (anonymised)
+      - Previous results for comparison
+    steps:
+      - Summarise overall results and change since last time.
+      - Compare groups only where group size is at least five, to protect anonymity.
+      - Code comments into themes with counts and representative quotes.
+      - Identify the two or three drivers with the biggest gap and impact.
+      - Recommend a short action plan with owners.
+    output:
+      - Headline results
+      - Group comparison (anonymity-safe)
+      - Comment themes
+      - Priority drivers
+      - Action plan
+    checks:
+      - No group below the anonymity threshold is reported
+      - Quotes cannot identify a person
+    eu:
+      - "Denmark: the workplace assessment (APV) under the Working Environment Act must cover the psychosocial working environment; survey results can feed into it."
+    examples:
+      - Here are our trivsel survey results and 140 comments. What should management focus on?
+
+  - id: wellbeing-workplace-assessment
+    title: Workplace Assessment (APV) Assistant
+    summary: Guides the workplace assessment of physical and psychosocial risks, from mapping to action plan and follow-up.
+    triggers: the user is doing an APV, arbejdspladsvurdering, workplace risk assessment, stress or wellbeing review
+    use:
+      - The periodic APV is due
+      - Stress, workload or safety concerns have been raised
+    avoid:
+      - Individual health assessments
+    inputs:
+      - Workplace type, tasks and number of employees
+      - Survey or inspection findings
+      - Existing safety organisation
+    steps:
+      - Map risks across physical, ergonomic, chemical and psychosocial areas.
+      - Rate each by likelihood and impact.
+      - Propose preventive actions starting with removing the risk at source.
+      - Assign owners and deadlines and plan follow-up.
+    output:
+      - Risk map
+      - Prioritised action plan
+      - Follow-up schedule
+      - Employee involvement notes
+    checks:
+      - Employees or the working environment organisation are involved
+      - Psychosocial risks are included
+    eu:
+      - "Denmark: the Working Environment Act requires a written APV, reviewed at least every three years and when work changes; the Danish Working Environment Authority (Arbejdstilsynet) supervises it."
+    examples:
+      - Help us run our APV for a 25-person office with high workload complaints.
+
+  - id: salary-benchmarking
+    title: Salary Benchmarking
+    summary: Structures a salary benchmark for a role using the user's market data, builds pay ranges and explains positioning options.
+    triggers: the user asks what to pay for a role, wants to benchmark salaries, build salary bands or review pay
+    use:
+      - Setting pay for a new role
+      - Annual pay review
+      - Building a pay structure
+    avoid:
+      - Inventing market data; ask for sources or label estimates clearly
+    inputs:
+      - Role, level, location
+      - Market data sources (salary surveys, union statistics, job ads)
+      - Current internal salaries for comparable roles (anonymised)
+    steps:
+      - Normalise market data to the same basis (monthly, including or excluding pension).
+      - Calculate percentiles and propose a range with midpoint.
+      - Compare internal pay against the range and flag outliers.
+      - Explain trade-offs of positioning at the 25th, 50th or 75th percentile.
+    output:
+      - Benchmark summary with sources
+      - Proposed range (minimum, midpoint, maximum)
+      - Internal comparison and outliers
+      - Positioning recommendation
+    checks:
+      - Pension and benefits are treated consistently
+      - Data sources and dates are listed
+    eu:
+      - "Pay structures should rest on objective, gender-neutral criteria (skills, effort, responsibility, working conditions) as required by the EU Pay Transparency Directive."
+    examples:
+      - What salary band should we set for a senior data analyst in Copenhagen? Here is our survey data.
+
+  - id: pay-gap-analysis
+    title: Pay Gap Analysis
+    summary: Calculates and explains gender pay gaps from anonymised payroll data and prepares a narrative and action plan for reporting.
+    triggers: the user needs a gender pay gap report, equal pay analysis, lønstatistik or pay transparency readiness check
+    use:
+      - Preparing pay gap reporting
+      - Investigating equal pay concerns
+    avoid:
+      - Reporting results for groups so small that individuals can be identified
+    inputs:
+      - Anonymised payroll extract (gender, role, level, pay components, hours)
+      - Job architecture or categories of equal value
+    steps:
+      - Calculate mean and median gaps for basic pay and total pay.
+      - Calculate gaps by category of workers doing equal work or work of equal value.
+      - Flag any category gap of 5 percent or more that objective factors do not explain.
+      - Explain drivers and propose actions.
+    output:
+      - Pay gap metrics table
+      - Category analysis
+      - Unexplained gaps above 5 percent
+      - Narrative and action plan
+    checks:
+      - Calculations shown with formulas
+      - Small groups suppressed
+    eu:
+      - "Directive (EU) 2023/970: reporting duties phase in by company size (from 250 employees first, then 150 to 249, then 100 to 149). A gap of 5 percent or more in a category that is not justified and not fixed within six months triggers a joint pay assessment. Check the national transposition."
+      - "Denmark: the Equal Pay Act (ligelønsloven) already requires gender-segregated pay statistics for larger employers."
+    examples:
+      - Here is an anonymised payroll export for 180 employees. Calculate our gender pay gap as the directive requires.
+
+  - id: training-needs-analysis
+    title: Training Needs Analysis
+    summary: Identifies skill gaps for a team or role and turns them into a prioritised learning plan with formats, budget and measures.
+    triggers: the user wants a training plan, competence development plan, learning needs analysis or upskilling programme
+    use:
+      - Annual development planning
+      - New technology or regulation requires new skills, including AI literacy
+    avoid:
+      - Individual performance judgements
+    inputs:
+      - Roles and required competences
+      - Current skill levels (self-assessment or manager view)
+      - Budget and time available
+    steps:
+      - Build a skills matrix of required against current level.
+      - Rank gaps by business impact and urgency.
+      - Match gaps to learning formats (on the job, mentoring, courses, e-learning).
+      - Estimate cost and time and define how success will be measured.
+    output:
+      - Skills matrix
+      - Prioritised gaps
+      - Learning plan with formats, cost and dates
+      - Success measures
+    checks:
+      - Mandatory training (safety, data protection, AI literacy) is included
+      - Plan fits budget
+    eu:
+      - "Denmark: public adult education funding schemes such as VEU-godtgørelse may co-fund some courses; check eligibility."
+    examples:
+      - Our finance team needs to get better at Excel automation and AI tools. Build a training plan.
+
+  - id: workforce-planning
+    title: Workforce Planning
+    summary: Projects future staffing needs from business plans, turnover and productivity, and compares build, buy, borrow and automate options.
+    triggers: the user is planning headcount, workforce, capacity, hiring plans or restructuring of teams
+    use:
+      - Annual budget and headcount planning
+      - Growth, new markets or automation projects
+    avoid:
+      - Selecting individuals for redundancy
+    inputs:
+      - Business plan and growth assumptions
+      - Current headcount by role, turnover and retirement data
+      - Productivity or workload measures
+    steps:
+      - Model demand for each role family for the next 12 to 36 months.
+      - Model supply including turnover and internal moves.
+      - Calculate the gap and compare build, buy, borrow and automate options with cost and time.
+      - Recommend a hiring and development plan with risks.
+    output:
+      - Demand and supply table
+      - Gap analysis
+      - Options comparison
+      - Recommended plan and risks
+    checks:
+      - Assumptions are listed and adjustable
+      - Totals reconcile with budget
+    eu:
+      - "Collective redundancies in the EU require consultation and notification (Directive 98/59/EC; in Denmark the Collective Redundancies Act, masseafskedigelsesloven)."
+    examples:
+      - We plan 30 percent growth next year. How many people do we need in support and sales?
+
+  - id: leave-and-absence-guide
+    title: Leave and Absence Guide
+    summary: Explains leave entitlements and builds absence plans for holiday, parental leave, sickness and other leave, based on the user's rules and the applicable law.
+    triggers: the user asks about holiday, parental leave, barsel, sick leave, care leave or needs to plan cover for an absence
+    use:
+      - An employee asks about their entitlements
+      - Planning cover for long absence
+    avoid:
+      - Medical advice or judgements about an employee's health
+    inputs:
+      - Type of leave and dates
+      - Employment terms, policy and collective agreement
+      - Country
+    steps:
+      - Identify the rules that apply (law, agreement, contract, policy) and which is most generous.
+      - Explain the entitlement and pay situation in plain language with sources.
+      - Build a cover and handover plan if relevant.
+      - List notifications and deadlines for employee and employer.
+    output:
+      - Entitlement summary
+      - Pay and reimbursement notes
+      - Deadlines and notifications
+      - Cover plan
+    checks:
+      - Rules are labelled as statutory, agreement or company policy
+      - Recommend verification for complex cases
+    eu:
+      - "Denmark: ferieloven gives 2.08 days of holiday per month of employment (25 days a year); barselsloven includes 11 weeks of earmarked leave for each parent; employers may claim sickness benefit reimbursement from the municipality after the employer period."
+    examples:
+      - An employee is going on parental leave in May. What are the entitlements and what must we do?
+
+  - id: workplace-investigation-planner
+    title: Workplace Investigation Planner
+    summary: Plans a fair, documented investigation of a complaint such as harassment, bullying or misconduct, from intake to findings report.
+    triggers: the user received a complaint about harassment, bullying, discrimination or misconduct and needs to investigate
+    use:
+      - A formal or informal complaint has been raised
+      - Need for an impartial process
+    avoid:
+      - Deciding sanctions; potential criminal matters need legal and possibly police involvement
+    inputs:
+      - Nature of the complaint and parties involved (use roles, not names)
+      - Policies that apply
+      - Urgency and any immediate risk
+    steps:
+      - Assess immediate protective measures and whether an external investigator is needed.
+      - Define scope, allegations and the standard of proof.
+      - Plan interviews, evidence collection and confidentiality.
+      - Prepare neutral interview questions for each party.
+      - Outline the findings report structure.
+    output:
+      - Intake summary
+      - Protective measures
+      - Investigation plan and timeline
+      - Interview guides
+      - Report template
+    checks:
+      - Both sides are heard
+      - Data access is limited to those who need it
+    eu:
+      - "Denmark: employers must prevent sexual harassment under the Equal Treatment Act and the Working Environment Act; workers in organisations with 50 or more employees can also use the whistleblower scheme for certain reports."
+    examples:
+      - An employee reported repeated offensive comments from her team lead. How do we investigate properly?
