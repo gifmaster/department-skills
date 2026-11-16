@@ -1,0 +1,7 @@
+- Notice deadline = term end minus notice months (same day number; if missing, last day of that month), or minus notice days. If both are given use the earlier date.
+- If the contract auto-renews and the deadline is before today, it has renewed: new end = end + renewal term (month-end stays month-end). Repeat until the deadline is today or later.
+- Send-by date = deadline minus delivery buffer (default 5 days), moved back to Friday if on a weekend.
+- Status: ACT NOW if send-by has passed but the deadline has not; DUE if the deadline is within 90 days; RENEWED if a deadline was missed; ENDS for contracts without auto-renewal.
+- Note deadlines on a weekend and the required notice form (email, registered letter).
+- Set a reminder on the send-by date with an alarm 14 days earlier.
+- Flag missing notice periods, missing terms, start after end and duplicates.

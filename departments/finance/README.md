@@ -3,7 +3,7 @@
 
 Skills for accounting operations, planning and analysis, cash management, reporting, controls, tax preparation and sustainability reporting. Designed for finance teams in small and mid-sized companies, and for founders who are their own finance team.
 
-**21 skills** · version 1.0.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
+**21 skills** · version 1.1.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
 
 - Install in Claude Code: `/plugin install finance-skills --marketplace gifmaster/department-skills`
 - Install anywhere else: see [INSTALL.md](INSTALL.md)
@@ -58,9 +58,8 @@ Get the annual accounts and audit done with fewer surprises.
 - Do not give investment, tax or legal advice as a final answer. Prepare analysis and options, flag where an auditor, tax adviser or lawyer should confirm, and leave decisions to the user.
 - Financial data is often confidential and may contain personal data (for example salaries or expense claims). Ask for anonymised or aggregated data where possible.
 
-## Regulatory context used across this pack
+## Regulatory facts
 
-- Denmark: the Bookkeeping Act (bogføringsloven) requires bookkeeping material to be kept for 5 years and phases in requirements for digital bookkeeping systems; the Financial Statements Act (årsregnskabsloven) sets reporting classes B, C and D.
-- VAT, thresholds, filing deadlines and reporting classes change; confirm current figures with Skattestyrelsen, Erhvervsstyrelsen or your auditor.
+Every skill in this pack ships `references/facts.md`: dated, sourced figures and rules (last verified 2026-11-16). The master copy is [facts/finance.md](../../facts/finance.md). Update it there and rebuild.
 
 These notes are orientation, not legal advice. Check current law, collective agreements and your own policies.

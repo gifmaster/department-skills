@@ -1,0 +1,22 @@
+entry_id,date,time,user,account,description,amount,manual
+JE1001,2026-03-26,10:14,PBN,2750,Fragt marts Jysk Fragt,18450.00,no
+JE1001,2026-03-26,10:14,PBN,5820,Fragt marts Jysk Fragt,-18450.00,no
+JE1002,2026-03-28,23:41,MKJ,2800,Kørsel ekstra Nordtrans,49800.00,yes
+JE1002,2026-03-28,23:41,MKJ,5820,Kørsel ekstra Nordtrans,-49800.00,yes
+JE1003,2026-03-30,09:30,PBN,1010,Salg faktura 5521,-64210.00,no
+JE1003,2026-03-30,09:30,PBN,5600,Salg faktura 5521,64210.00,no
+JE1004,2026-04-02,14:05,MKJ,2800,Kørsel ekstra Nordtrans,49500.00,yes
+JE1004,2026-04-02,14:05,MKJ,5820,Kørsel ekstra Nordtrans,-49500.00,yes
+JE1005,2026-04-01,11:20,PBN,2750,Fakt 7781 Elektro Syd,125000.00,no
+JE1005,2026-04-01,11:20,PBN,6800,Fakt 7781 Elektro Syd,-125000.00,no
+JE1006,2026-04-01,11:22,PBN,2750,Fakt 7781 Elektro Syd,125000.00,no
+JE1006,2026-04-01,11:22,PBN,6800,Fakt 7781 Elektro Syd,-125000.00,no
+JE1007,2026-04-06,08:55,LHA,1010,Kreditnota korrektion,40000.00,yes
+JE1007,2026-04-06,08:55,LHA,5600,Kreditnota korrektion,-40000.00,yes
+JE1008,2026-04-08,22:10,MKJ,2800,Kørsel ekstra Nordtrans,49900.00,yes
+JE1008,2026-04-08,22:10,MKJ,5820,Kørsel ekstra Nordtrans,-49900.00,yes
+JE1009,2026-04-09,16:45,TMP01,7300,Kassedifference,8750.00,yes
+JE1009,2026-04-09,16:45,TMP01,5820,Kassedifference,-8750.00,yes
+JE1010,2026-04-10,10:30,PBN,2750,Fragt april Jysk Fragt,21310.00,no
+JE1010,2026-04-10,10:30,PBN,5820,Fragt april Jysk Fragt,-21310.00,no
+JE1011,,12:00,PBN,2780,Kontorartikler,3125.00,no

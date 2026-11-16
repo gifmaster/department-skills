@@ -1,0 +1,10 @@
+- Open = not won and not lost. Never count closed deals as pipeline.
+- Period default: current quarter. Won = won deals closing in the period.
+- Remaining target = target - won (minimum 0).
+- Open in period = open deals with close date inside the period.
+- Coverage = open in period / remaining target (shown as 1.7x).
+- Weighted = sum of amount x probability (deal probability if given, else stage default). Won + weighted = forecast on probabilities.
+- Stage ageing: median days since created per stage; true stage time needs history.
+- Flags per open deal: close date before today, no next step, no activity for over 14 days, close date later than previous close date.
+- Deals that decide the period: sort open in-period deals by amount, add until they cover the remaining target (max 5).
+- Show owners exactly as given; flag duplicates and missing amounts.

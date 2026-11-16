@@ -100,6 +100,35 @@ def main():
             if f.name != "validate.py" and f.name not in ALLOW.get(w, []) and re.search(r"\b" + re.escape(w.strip()) + r"\b", low):
                 errors.append(f"{f.relative_to(ROOT)}: American spelling '{w.strip()}'")
 
+    # facts files and automation units
+    for dept in (ROOT / "departments").iterdir():
+        if not (ROOT / "facts" / f"{dept.name}.md").exists():
+            errors.append(f"facts/{dept.name}.md missing")
+    for f in skill_files:
+        if not (f.parent / "references" / "facts.md").exists():
+            errors.append(f"{f.relative_to(ROOT)}: references/facts.md missing")
+    import subprocess
+    for unit in sorted((ROOT / "automation").glob("*/unit.yaml")):
+        u = unit.parent
+        meta = yaml.safe_load(unit.read_text(encoding="utf-8"))
+        if meta.get("skill") != u.name or u.name not in names:
+            errors.append(f"automation/{u.name}: unit does not match a skill")
+        for req in (meta.get("script", ""), meta.get("template", ""), "method.md", "examples/worked-example.md"):
+            if not (u / req).exists():
+                errors.append(f"automation/{u.name}: missing {req}")
+        if (u / "method.md").exists() and len((u / "method.md").read_text(encoding="utf-8")) > 1000:
+            errors.append(f"automation/{u.name}: method.md over 1,000 characters")
+        for py in u.rglob("*.py"):
+            src = py.read_text(encoding="utf-8")
+            for bad in ("import pandas", "import numpy", "import scipy", "import requests"):
+                if bad in src:
+                    errors.append(f"{py.relative_to(ROOT)}: non-stdlib dependency ({bad})")
+        if (u / "tests").exists():
+            r = subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(u / "tests")],
+                               capture_output=True, text=True, cwd=ROOT)
+            if r.returncode != 0:
+                errors.append(f"automation/{u.name}: tests failed\n{r.stderr[-800:]}")
+
     if errors:
         print("\n".join(errors))
         print(f"\nFAILED: {len(errors)} problem(s)")

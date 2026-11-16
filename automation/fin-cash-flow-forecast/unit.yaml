@@ -1,0 +1,5 @@
+skill: fin-cash-flow-forecast
+script: scripts/cash13.py
+template: assets/receivables.csv
+command: python3 scripts/cash13.py assets/receivables.csv --payables assets/payables.csv --recurring assets/recurring.csv --opening 850000 --start 2026-11-23 --min-buffer 250000 --facility 500000
+summary: Builds a weekly 13-week cash forecast from receivables shifted by customer lateness, payables and recurring items on Danish banking days, with A-tax timing for large or small employers, the lowest week-end and banking-day balance, and buffer and facility warnings.

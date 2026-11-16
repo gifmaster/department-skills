@@ -1,0 +1,14 @@
+deal,owner,stage,amount,close_date,probability,rep_commit
+Fynsk Fragt ApS,Mette,Negotiation,850000,2026-12-15,60%,yes
+Aarhus Isolering A/S,Mette,Proposal,420000,2026-12-10,,yes
+Vejle Maskinfabrik,Jonas,Verbal,"310.000,00",2026-11-28,90%,yes
+Køge Bryghus,Jonas,Proposal,275000,2026-12-18,35%,no
+Roskilde Tandklinik,Sara,Discovery,600000,2026-12-20,10%,no
+Silkeborg El-Service,Sara,Negotiation,380000,2026-12-05,60%,no
+Nordsjælland Revision,Sara,Qualification,190000,15-12-2026,20%,no
+Odense Kontormøbler,Jonas,Negotiation,240000,2026-11-10,60%,yes
+Herning Tekstil,Mette,Proposal,,2026-12-12,35%,no
+Fynsk Fragt ApS,Mette,Negotiation,850000,2026-12-15,60%,yes
+Esbjerg Offshore Service,Jonas,Proposal,950000,2027-02-15,35%,no
+Holbæk Auto,Sara,Closed won,150000,2026-10-22,100%,yes
+Randers Regnskab,Mette,Closed lost,200000,2026-11-01,0%,no

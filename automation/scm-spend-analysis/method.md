@@ -1,0 +1,8 @@
+- Supplier key: lower case, drop accents, legal forms (A/S, ApS, IVS, GmbH, Ltd, AB, S.a r.l. and similar), country words (Danmark, DK) and punctuation.
+- Same key = same supplier. Near-identical spelling (difflib ratio 0.85+) = merge. One name inside another (DSV / DSV Road) = ask, do not merge. List every merge.
+- Category: account map first, then keyword in description, then in supplier name, then the supplier's main category, else Uncategorised. List the rules used.
+- Pareto: sort suppliers by spend, add cumulative share; count suppliers for 80 %.
+- Tail: suppliers after the 80 % cumulative point.
+- Fragmented: category with 3+ suppliers.
+- Savings ESTIMATE: fragmented category spend x 5-10 %, plus tail spend outside those categories x 5-15 %. Always a range, state the percentages.
+- Net credit notes; flag same supplier, amount, date and text as possible duplicates.

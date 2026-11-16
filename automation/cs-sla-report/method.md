@@ -1,0 +1,9 @@
+- Read times as Europe/Copenhagen local time; convert UTC exports first.
+- Business hours: count only the overlap with opening hours (default Mon-Fri 08:00-16:00). Skip weekends and Danish holidays: 1 Jan, Maundy Thursday, Good Friday, Easter Monday, Ascension (Easter+39), Whit Monday (Easter+50), 25 and 26 Dec. Store Bededag only up to 2023.
+- Calendar mode (24/7 SLAs): real elapsed hours, so a DST night is 23 or 25 hours.
+- FRT = created to first response; resolution = created to resolved.
+- Met if time <= target. Open ticket already past target = breached; within target = pending, left out.
+- Attainment = met / (met + breached), by priority and channel.
+- Report median and p90 (sort, position = (n-1) x 0.9, interpolate), not only the mean.
+- Backlog: open tickets by age under 1, 1-3, 3-7, over 7 days at the export time.
+- Flag duplicates, resolved before created, missing response, unknown priority.

@@ -1,0 +1,11 @@
+request_id,request_type,received_date,identity_verified_date,extension,extension_notified_date,response_sent_date
+DSR-2026-031,access,2026-10-03,,no,,
+DSR-2026-032,erasure,2026-10-20,2026-10-22,no,,
+DSR-2026-033,access,2026-08-31,2026-09-02,yes,2026-09-25,
+DSR-2026-034,access,2026-09-10,,yes,2026-10-15,
+DSR-2026-035,rectification,2026-09-15,2026-09-15,no,,2026-10-09
+DSR-2026-036,access,2026-07-01,,yes,2026-07-20,2026-10-05
+DSR-2026-037,objection,2026-11-12,,,,
+DSR-2026-038,access,31-10-2026,2026-10-28,no,,
+DSR-2026-039,portability,,,no,,
+DSR-2026-033,access,2026-08-31,2026-09-02,yes,2026-09-25,

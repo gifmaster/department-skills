@@ -2,108 +2,128 @@ department: legal
 title: Legal
 prefix: legal
 role: an in-house legal counsel supporting a growing European business
-overview: >-
-  Skills for contracts, data protection, AI regulation, corporate housekeeping, consumer and
-  marketing law, intellectual property, disputes and compliance policies. Built for small
-  legal teams and for managers without a lawyer on staff, to prepare work that a qualified
-  lawyer can then review quickly.
+overview: Skills for contracts, data protection, AI regulation, corporate housekeeping, consumer and marketing law, intellectual
+  property, disputes and compliance policies. Built for small legal teams and for managers without a lawyer on staff, to prepare
+  work that a qualified lawyer can then review quickly.
 workflows:
   - name: Contract lifecycle
-    skills: [nda-review, contract-review, contract-drafting, contract-obligations-summary]
+    skills:
+      - nda-review
+      - contract-review
+      - contract-drafting
+      - contract-obligations-summary
     purpose: From first draft or incoming paper to signed terms and a tracked obligations list.
   - name: Data protection programme
-    skills: [records-of-processing, dpia-assistant, dpa-review, privacy-notice-drafter, dsar-response, data-breach-response]
+    skills:
+      - records-of-processing
+      - dpia-assistant
+      - dpa-review
+      - privacy-notice-drafter
+      - dsar-response
+      - data-breach-response
     purpose: The core GDPR documentation and incident processes.
   - name: Responsible AI
-    skills: [ai-act-classification, dpia-assistant, compliance-policy-drafter]
+    skills:
+      - ai-act-classification
+      - dpia-assistant
+      - compliance-policy-drafter
     purpose: Classify AI systems, assess privacy impact and set internal rules.
 common_guardrails:
-  - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.
-  - Never invent case law, article numbers or quotations. Name the source you rely on and tell the user to verify it against the official text (for example EUR-Lex, Retsinformation or the regulator's website).
-  - Contracts and legal matters are confidential and may be privileged. Ask the user to remove details that are not needed, and do not share content outside the conversation.
-common_eu:
-  - "The main EU sources used here are the GDPR (Regulation (EU) 2016/679), the AI Act (Regulation (EU) 2024/1689) and consumer protection directives; national rules in Denmark include databeskyttelsesloven, aftaleloven, købeloven, forbrugeraftaleloven and markedsføringsloven."
-  - "Danish regulators and bodies referenced: Datatilsynet (data protection), Forbrugerombudsmanden (consumer and marketing law), Erhvervsstyrelsen (company law), Digitaliseringsstyrelsen (AI Act coordination)."
+  - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified
+    lawyer for decisions with real consequences, disputes, litigation or regulator contact.
+  - Never invent case law, article numbers or quotations. Name the source you rely on and tell the user to verify it against
+    the official text (for example EUR-Lex, Retsinformation or the regulator's website).
+  - Contracts and legal matters are confidential and may be privileged. Ask the user to remove details that are not needed,
+    and do not share content outside the conversation.
 skills:
   - id: nda-review
     title: NDA Review
     summary: Reviews a non-disclosure agreement against a standard playbook, flags risky clauses and proposes fallback wording.
     triggers: the user has an NDA, confidentiality agreement or fortrolighedsaftale to review, sign or send
     use:
-      - "Incoming NDA from a partner"
-      - "Choosing between mutual and one-way NDA"
+      - Incoming NDA from a partner
+      - Choosing between mutual and one-way NDA
     avoid:
-      - "Complex joint venture or M&A confidentiality arrangements without a lawyer"
+      - Complex joint venture or M&A confidentiality arrangements without a lawyer
     inputs:
-      - "The NDA text"
-      - "Which side the user is on"
-      - "Purpose of the disclosure"
+      - The NDA text
+      - Which side the user is on
+      - Purpose of the disclosure
     steps:
       - Identify parties, direction (mutual or one-way), purpose and governing law.
-      - Check key terms against the playbook (definition of confidential information, exclusions, permitted use, term, return or destruction, remedies, non-solicit, liability, jurisdiction).
+      - 'If the user has no playbook, apply this default: mutual where both disclose; standard exclusions; use limited to
+        the purpose; 2 to 5 year term; no non-compete, non-solicit or IP assignment hidden in an NDA; no penalty clauses;
+        Danish or the user''s home law and courts.'
+      - Check key terms against the playbook (definition of confidential information, exclusions, permitted use, term, return
+        or destruction, remedies, non-solicit, liability, jurisdiction).
       - Rate each clause green, amber or red with a short reason.
       - Propose redline wording for amber and red items.
       - Give a sign, negotiate or escalate recommendation.
     output:
-      - "Summary and recommendation"
-      - "Clause review table (clause, rating, issue, proposed wording)"
-      - "Points to negotiate"
-      - "Questions for the user"
+      - Summary and recommendation
+      - Clause review table (clause, rating, issue, proposed wording)
+      - Points to negotiate
+      - Questions for the user
     checks:
-      - "Standard exclusions are present (public, already known, independently developed, legally required)"
-      - "No hidden non-compete or IP assignment"
+      - Standard exclusions are present (public, already known, independently developed, legally required)
+      - No hidden non-compete or IP assignment
     eu: []
     examples:
-      - "Review this NDA from a potential customer before I sign today."
-
+      - Review this NDA from a potential customer before I sign today.
   - id: contract-review
     title: Commercial Contract Review
-    summary: Reviews a commercial agreement such as an MSA, SaaS, supply or service contract, explains risks in plain language and proposes redlines.
-    triggers: the user asks to review, check or explain a contract, agreement, terms from a supplier or customer, or wants red flags
+    summary: Reviews a commercial agreement such as an MSA, SaaS, supply or service contract, explains risks in plain language
+      and proposes redlines.
+    triggers: the user asks to review, check or explain a contract, agreement, terms from a supplier or customer, or wants
+      red flags
     use:
-      - "Before signing customer or supplier contracts"
-      - "Renewals with changed terms"
+      - Before signing customer or supplier contracts
+      - Renewals with changed terms
     avoid:
-      - "Employment contracts (use hr-offer-and-contract-pack)"
-      - "Final sign-off without a lawyer on high-value deals"
+      - Employment contracts (use hr-offer-and-contract-pack)
+      - Final sign-off without a lawyer on high-value deals
     inputs:
-      - "Contract text"
-      - "Which party the user is"
-      - "Deal value and importance"
-      - "Company's negotiation positions if any"
+      - Contract text
+      - Which party the user is
+      - Deal value and importance
+      - Company's negotiation positions if any
     steps:
       - Summarise the deal in five lines (parties, scope, price, term, exit).
-      - Review key risk areas (liability caps and exclusions, indemnities, IP, data protection, warranties, SLAs, termination, auto-renewal, price changes, governing law).
+      - Review key risk areas (liability caps and exclusions, indemnities, IP, data protection, warranties, SLAs, termination,
+        auto-renewal, price changes, governing law).
       - Rate each issue by severity and likelihood.
       - Propose specific redlines with fallback positions.
       - List missing clauses that should be there.
     output:
-      - "Deal summary"
-      - "Risk table"
-      - "Proposed redlines"
-      - "Missing clauses"
-      - "Recommendation"
+      - Deal summary
+      - Risk table
+      - Proposed redlines
+      - Missing clauses
+      - Recommendation
     checks:
-      - "Liability cap and its exclusions are reviewed together"
-      - "Data processing terms are present where personal data is processed"
-    eu: ["If the counterparty processes personal data for the user, a GDPR Article 28 data processing agreement is required (see legal-dpa-review)."]
+      - Liability cap and its exclusions are reviewed together
+      - Data processing terms are present where personal data is processed
+    eu:
+      - If the counterparty processes personal data for the user, a GDPR Article 28 data processing agreement is required
+        (see legal-dpa-review).
     examples:
-      - "Review this SaaS agreement from our new CRM vendor and tell me what to push back on."
-
+      - Review this SaaS agreement from our new CRM vendor and tell me what to push back on.
   - id: contract-drafting
     title: Contract Drafting
-    summary: Drafts a first version of a commercial contract from a term sheet or deal description, with balanced clauses and drafting notes.
-    triggers: the user needs a contract drafted, such as a service agreement, consultancy agreement, supply agreement or simple licence
+    summary: Drafts a first version of a commercial contract from a term sheet or deal description, with balanced clauses
+      and drafting notes.
+    triggers: the user needs a contract drafted, such as a service agreement, consultancy agreement, supply agreement or simple
+      licence
     use:
-      - "Standard commercial deals"
-      - "Turning agreed terms into a document"
+      - Standard commercial deals
+      - Turning agreed terms into a document
     avoid:
-      - "Regulated or high-value transactions without lawyer review"
+      - Regulated or high-value transactions without lawyer review
     inputs:
-      - "Parties and their roles"
-      - "Commercial terms"
-      - "Governing law"
-      - "Template or preferred style"
+      - Parties and their roles
+      - Commercial terms
+      - Governing law
+      - Template or preferred style
     steps:
       - Confirm the agreement type and structure.
       - Draft clauses in plain English or Danish, with defined terms used consistently.
@@ -111,119 +131,122 @@ skills:
       - Add drafting notes explaining choices and options.
       - Provide a schedule list (scope, pricing, SLA, data processing).
     output:
-      - "Draft agreement"
-      - "Drafting notes"
-      - "Open points list"
+      - Draft agreement
+      - Drafting notes
+      - Open points list
     checks:
-      - "Defined terms used consistently"
-      - "Termination and liability clauses included"
+      - Defined terms used consistently
+      - Termination and liability clauses included
     eu: []
     examples:
-      - "Draft a consultancy agreement for a 6-month AI governance project at a fixed monthly fee."
-
+      - Draft a consultancy agreement for a 6-month AI governance project at a fixed monthly fee.
   - id: contract-obligations-summary
     title: Contract Summary and Obligations Tracker
-    summary: Extracts key terms, dates and obligations from a signed contract into a summary and a tracker for renewals and deliverables.
+    summary: Extracts key terms, dates and obligations from a signed contract into a summary and a tracker for renewals and
+      deliverables.
     triggers: the user wants a contract summary, key dates, renewal reminders or an obligations register from signed agreements
     use:
-      - "After signing"
-      - "Building a contract register"
+      - After signing
+      - Building a contract register
     avoid: []
     inputs:
-      - "Signed contract text"
+      - Signed contract text
     steps:
       - Extract parties, dates, term, renewal and notice periods.
       - Extract obligations for each party with deadlines.
       - Extract price, payment and price adjustment terms.
       - Flag notice deadlines that need calendar reminders.
     output:
-      - "One-page summary"
-      - "Key dates table"
-      - "Obligations tracker"
-      - "Reminders to set"
+      - One-page summary
+      - Key dates table
+      - Obligations tracker
+      - Reminders to set
     checks:
-      - "Notice deadline equals expiry minus notice period"
-      - "Clause references included for every item"
+      - Notice deadline = expiry minus notice period, adjusted for how notice must be given and received; if it has passed,
+        compute the renewed term and the next deadline
+      - Clause references included for every item
     eu: []
     examples:
-      - "Summarise these 6 supplier contracts and give me all renewal dates."
-
+      - Summarise these 6 supplier contracts and give me all renewal dates.
   - id: dpa-review
     title: Data Processing Agreement Review
-    summary: Reviews a data processing agreement against GDPR Article 28 and good practice, including sub-processors and international transfers.
+    summary: Reviews a data processing agreement against GDPR Article 28 and good practice, including sub-processors and international
+      transfers.
     triggers: the user has a DPA, databehandleraftale or processor terms from a vendor to review or needs one drafted
     use:
-      - "Onboarding a SaaS or IT vendor"
-      - "Customer asks the user to sign their DPA"
+      - Onboarding a SaaS or IT vendor
+      - Customer asks the user to sign their DPA
     avoid: []
     inputs:
-      - "DPA text"
-      - "Role of each party (controller or processor)"
-      - "Types of personal data and processing"
+      - DPA text
+      - Role of each party (controller or processor)
+      - Types of personal data and processing
     steps:
       - Check every Article 28(3) element is present.
       - Review sub-processor approval and notification mechanics.
-      - Review international transfers and the transfer tool used (adequacy, Data Privacy Framework, SCCs with transfer impact assessment).
+      - Review international transfers and the transfer tool used (adequacy, Data Privacy Framework, SCCs with transfer impact
+        assessment).
       - Review security measures, breach notification timing, audit rights, deletion and liability.
       - Propose changes.
     output:
-      - "Compliance checklist"
-      - "Issues and proposed wording"
-      - "Transfer assessment"
-      - "Recommendation"
+      - Compliance checklist
+      - Issues and proposed wording
+      - Transfer assessment
+      - Recommendation
     checks:
-      - "Processor must notify breaches without undue delay"
-      - "Return or deletion at end is covered"
-    eu: ["Datatilsynet publishes a Danish standard data processing agreement template based on the European Data Protection Board approved standard contractual clauses for Article 28."]
+      - Processor must notify breaches without undue delay
+      - Return or deletion at end is covered
+    eu:
+      - Datatilsynet has adopted standard contractual clauses under Article 28(8) GDPR (following EDPB Opinion 14/2019); the
+        Commission has adopted Article 28(7) clauses in Implementing Decision (EU) 2021/915.
     examples:
-      - "Check this DPA from our email marketing provider against GDPR."
-
+      - Check this DPA from our email marketing provider against GDPR.
   - id: privacy-notice-drafter
     title: Privacy Notice Drafter
-    summary: Drafts or updates a privacy notice that meets GDPR Articles 13 and 14 in clear language, for websites, apps, employees or candidates.
+    summary: Drafts or updates a privacy notice that meets GDPR Articles 13 and 14 in clear language, for websites, apps,
+      employees or candidates.
     triggers: the user needs a privacy policy, privacy notice, privatlivspolitik or wants to check an existing one
     use:
-      - "New website or app"
-      - "New processing activity"
-      - "Employee or candidate notices"
+      - New website or app
+      - New processing activity
+      - Employee or candidate notices
     avoid:
-      - "Cookie consent setup (use mkt-consent-compliance-check)"
+      - Cookie consent setup (use mkt-consent-compliance-check)
     inputs:
-      - "Audience"
-      - "Processing activities with purposes, legal bases and retention"
-      - "Recipients and transfers"
-      - "Controller and contact details"
+      - Audience
+      - Processing activities with purposes, legal bases and retention
+      - Recipients and transfers
+      - Controller and contact details
     steps:
       - Map each processing activity to purpose, legal basis, data categories, recipients and retention.
       - Draft the notice in layered, plain language.
       - Include all mandatory information and data subject rights.
       - Flag gaps where the user must decide (for example retention periods).
     output:
-      - "Privacy notice draft"
-      - "Processing table"
-      - "Gaps to decide"
+      - Privacy notice draft
+      - Processing table
+      - Gaps to decide
     checks:
-      - "Every Article 13 element is included"
-      - "Legal basis is stated per purpose"
+      - Every Article 13 element is included
+      - Legal basis is stated per purpose
     eu: []
     examples:
-      - "Write a privacy notice for our webshop that uses Shopify"
-      - "Klaviyo and Google Analytics."
-
+      - Write a privacy notice for our webshop that uses Shopify, Klaviyo and Google Analytics.
   - id: dpia-assistant
     title: DPIA Assistant
-    summary: Guides a data protection impact assessment from screening to risk assessment, measures and conclusion, including AI and monitoring use cases.
+    summary: Guides a data protection impact assessment from screening to risk assessment, measures and conclusion, including
+      AI and monitoring use cases.
     triggers: the user is starting a DPIA, konsekvensanalyse, privacy risk assessment or asks whether a DPIA is required
     use:
-      - "New systems processing personal data at scale"
-      - "AI tools, employee monitoring"
-      - "New uses of sensitive data"
+      - New systems processing personal data at scale
+      - AI tools, employee monitoring
+      - New uses of sensitive data
     avoid: []
     inputs:
-      - "Description of the processing and systems"
-      - "Data categories and data subjects"
-      - "Purposes and legal basis"
-      - "Existing safeguards"
+      - Description of the processing and systems
+      - Data categories and data subjects
+      - Purposes and legal basis
+      - Existing safeguards
     steps:
       - Screen against Article 35 criteria and the regulator's list of processing that requires a DPIA.
       - Describe the processing and assess necessity and proportionality.
@@ -231,57 +254,62 @@ skills:
       - Propose measures and rate residual risk.
       - Conclude and note whether prior consultation with the regulator is needed.
     output:
-      - "Screening result"
-      - "Processing description"
-      - "Necessity and proportionality"
-      - "Risk register"
-      - "Measures and residual risk"
-      - "Conclusion and sign-off"
+      - Screening result
+      - Processing description
+      - Necessity and proportionality
+      - Risk register
+      - Measures and residual risk
+      - Conclusion and sign-off
     checks:
-      - "Risks are to individuals, not only to the company"
-      - "DPO advice is recorded if there is a DPO"
-    eu: ["Where an AI system is high-risk under the AI Act, the deployer's DPIA can build on the provider's information (AI Act Article 26(9)); certain deployers must also do a fundamental rights impact assessment (Article 27)."]
+      - Risks are to individuals, not only to the company
+      - DPO advice is recorded if there is a DPO
+    eu:
+      - Where an AI system is high-risk under the AI Act, the deployer's DPIA can build on the provider's information (AI
+        Act Article 26(9)); certain deployers must also do a fundamental rights impact assessment (Article 27).
     examples:
-      - "Do we need a DPIA for using an AI note-taker in all Teams meetings? If yes, draft it."
-
+      - Do we need a DPIA for using an AI note-taker in all Teams meetings? If yes, draft it.
   - id: records-of-processing
     title: Records of Processing Activities
-    summary: Builds or updates the Article 30 record of processing activities for a controller or processor in a structured register.
+    summary: Builds or updates the Article 30 record of processing activities for a controller or processor in a structured
+      register.
     triggers: the user needs a ROPA, Article 30 record, fortegnelse or data inventory
     use:
-      - "Starting a GDPR programme"
-      - "Annual update"
+      - Starting a GDPR programme
+      - Annual update
     avoid: []
     inputs:
-      - "Departments and systems"
-      - "Processing activities known"
-      - "Vendors used"
+      - Departments and systems
+      - Processing activities known
+      - Vendors used
     steps:
+      - Establish whether the user is controller, processor or both, and keep separate records for Article 30(1) and Article
+        30(2).
       - Interview-style questions per department to list processing activities.
       - Fill the register columns required by Article 30.
       - Flag missing legal bases, retention periods or transfer tools.
     output:
-      - "Register table"
-      - "Gaps and follow-ups"
-      - "Owners per activity"
+      - Register table with Article 30 columns (name and contact, purpose, data subjects, data categories, recipients, transfers
+        and safeguards, retention, security measures)
+      - Gaps and follow-ups
+      - Owners per activity
     checks:
-      - "All Article 30 fields covered"
-      - "Sensitive data categories flagged"
+      - All Article 30 fields covered
+      - Sensitive data categories flagged
     eu: []
     examples:
-      - "Build our ROPA. We are a 40-person accounting firm using Microsoft 365 and a payroll system."
-
+      - Build our ROPA. We are a 40-person accounting firm using Microsoft 365 and a payroll system.
   - id: dsar-response
     title: Data Subject Request Response
-    summary: Handles a data subject access or other rights request from verification to search, redaction, response and deadline tracking.
+    summary: Handles a data subject access or other rights request from verification to search, redaction, response and deadline
+      tracking.
     triggers: someone has asked for their personal data, deletion, correction or objection, or the user mentions DSAR or indsigtsanmodning
     use:
-      - "Requests from customers, employees or former employees"
+      - Requests from customers, employees or former employees
     avoid: []
     inputs:
-      - "The request and date received"
-      - "Requester identity information"
-      - "Systems that may hold their data"
+      - The request and date received
+      - Requester identity information
+      - Systems that may hold their data
     steps:
       - Log the request, calculate the deadline and confirm identity proportionately.
       - Clarify scope if needed without delaying the clock unnecessarily.
@@ -289,30 +317,34 @@ skills:
       - Apply exemptions and redact third-party data.
       - Draft the response with the Article 15 information.
     output:
-      - "Request log and deadline"
-      - "Search plan"
-      - "Exemptions and redactions"
-      - "Response letter"
+      - Request log and deadline
+      - Search plan
+      - Exemptions and redactions
+      - Response letter
     checks:
-      - "Deadline is one month, extendable by two months with notice and reasons"
-      - "Third-party data protected"
-    eu: []
+      - Deadline is one month from receipt, extendable by two months only if the data subject is told of the extension and
+        reasons within the first month
+      - If the deadline has passed, answer immediately, apologise, document why and assess whether to inform Datatilsynet
+      - Third-party data protected
+    eu:
+      - 'Denmark: exceptions to the right of access in databeskyttelsesloven section 22. For former employees where a dispute
+        is likely, preserve data (litigation hold) while answering.'
     examples:
-      - "A former employee asks for all data we hold on her. What do we do and by when?"
-
+      - A former employee asks for all data we hold on her. What do we do and by when?
   - id: data-breach-response
     title: Personal Data Breach Response
-    summary: Guides the first hours and days of a personal data breach, assesses risk to individuals, and drafts notifications to the regulator and affected people.
+    summary: Guides the first hours and days of a personal data breach, assesses risk to individuals, and drafts notifications
+      to the regulator and affected people.
     triggers: there is a data breach, lost laptop, misdirected email, hacked account or ransomware involving personal data
     use:
-      - "Live incident"
-      - "Breach response planning and exercises"
+      - Live incident
+      - Breach response planning and exercises
     avoid:
-      - "Technical forensics (pair with it-incident-triage)"
+      - Technical forensics (pair with it-incident-triage)
     inputs:
-      - "What happened and when it was discovered"
-      - "Data and people affected"
-      - "Containment actions taken"
+      - What happened and when it was discovered
+      - Data and people affected
+      - Containment actions taken
     steps:
       - Record the time of awareness and start the 72-hour clock.
       - Contain and preserve evidence.
@@ -320,32 +352,35 @@ skills:
       - Decide on notification to the regulator and to individuals with reasons.
       - Draft notifications and log the breach internally regardless of outcome.
     output:
-      - "Incident timeline"
-      - "Risk assessment"
-      - "Notification decisions"
-      - "Draft notifications"
-      - "Breach log entry"
+      - Incident timeline
+      - Risk assessment
+      - Notification decisions
+      - Draft notifications
+      - Breach log entry
     checks:
-      - "72-hour deadline is tracked from awareness"
-      - "High-risk breaches include notice to individuals"
-    eu: ["Danish breaches are reported to Datatilsynet through its online form. NIS2 or DORA may require separate, faster incident reporting for in-scope entities."]
+      - 72-hour deadline is tracked from awareness
+      - High-risk breaches include notice to individuals
+    eu:
+      - Danish breaches are reported to Datatilsynet through its online form. NIS2 or DORA may require separate, faster incident
+        reporting for in-scope entities.
     examples:
-      - "An employee emailed a spreadsheet with 300 customers' details to the wrong recipient an hour ago."
-
+      - An employee emailed a spreadsheet with 300 customers' details to the wrong recipient an hour ago.
   - id: ai-act-classification
     title: EU AI Act Classification
-    summary: Classifies an AI system or use case under the EU AI Act, determines the user's role and lists the resulting obligations and deadlines.
-    triggers: the user asks whether the AI Act applies, what risk category an AI tool is, or what obligations they have as provider or deployer
+    summary: Classifies an AI system or use case under the EU AI Act, determines the user's role and lists the resulting obligations
+      and deadlines.
+    triggers: the user asks whether the AI Act applies, what risk category an AI tool is, or what obligations they have as
+      provider or deployer
     use:
-      - "New AI tool purchase or build"
-      - "Building an AI inventory"
-      - "Customer or board questions"
+      - New AI tool purchase or build
+      - Building an AI inventory
+      - Customer or board questions
     avoid: []
     inputs:
-      - "What the AI system does and its intended purpose"
-      - "Who built it and who uses it"
-      - "Who is affected by its output"
-      - "Sector"
+      - What the AI system does and its intended purpose
+      - Who built it and who uses it
+      - Who is affected by its output
+      - Sector
     steps:
       - Check whether it is an AI system under Article 3(1) and whether exclusions apply.
       - Determine the user's role (provider, deployer, importer, distributor, product manufacturer).
@@ -354,32 +389,36 @@ skills:
       - Check transparency duties (Article 50) and general-purpose AI model rules.
       - List obligations by role with application dates.
     output:
-      - "Classification summary"
-      - "Reasoning by step"
-      - "Role and obligations"
-      - "Deadlines"
-      - "Open questions and evidence needed"
+      - Classification summary
+      - Reasoning by step
+      - Role and obligations
+      - Deadlines
+      - Open questions and evidence needed
     checks:
-      - "Reasoning cites articles and annexes"
-      - "Application dates are checked against the latest amendments"
-    eu: ["Prohibitions and AI literacy have applied since 2 February 2025 and general-purpose AI model rules since 2 August 2025. Regulation (EU) 2026/1744 (OJ L, 24.7.2026) moved the high-risk requirements in Chapter III, Sections 1 to 3, to 2 December 2027 for Annex III systems and 2 August 2028 for Annex I systems. Check for later amendments."]
+      - Reasoning cites articles and annexes
+      - Application dates are checked against the latest amendments
+    eu:
+      - 'See references/facts.md for the AI Act dates as amended by Regulation (EU) 2026/1744: Annex III high-risk from 2
+        December 2027, Annex I from 2 August 2028, Article 50 transparency from 2 August 2026, two new Article 5 bans from
+        2 December 2026, Article 4 AI literacy now a duty to take measures to support literacy.'
     examples:
-      - "We use an AI tool to rank incoming job applications. Which AI Act category is it and what must we do?"
-
+      - We use an AI tool to rank incoming job applications. Which AI Act category is it and what must we do?
+    not_for: For intake and approval of a new AI tool use it-ai-use-case-intake first
   - id: terms-and-conditions
     title: Consumer Terms and Conditions
-    summary: Drafts or reviews webshop and consumer terms and conditions, including withdrawal rights, complaints and delivery, in line with EU consumer law.
+    summary: Drafts or reviews webshop and consumer terms and conditions, including withdrawal rights, complaints and delivery,
+      in line with EU consumer law.
     triggers: the user needs terms of sale, handelsbetingelser, webshop terms, subscription terms or a consumer contract review
     use:
-      - "Launching a webshop or subscription"
-      - "Updating terms after a law change"
+      - Launching a webshop or subscription
+      - Updating terms after a law change
     avoid:
-      - "B2B master agreements (use legal-contract-drafting)"
+      - B2B master agreements (use legal-contract-drafting)
     inputs:
-      - "Products or services sold"
-      - "Sales channels and countries"
-      - "Delivery, payment and return practices"
-      - "Subscription features"
+      - Products or services sold
+      - Sales channels and countries
+      - Delivery, payment and return practices
+      - Subscription features
     steps:
       - Draft the required pre-contractual information.
       - Draft withdrawal right, return and refund rules with the model withdrawal form.
@@ -387,31 +426,35 @@ skills:
       - Check subscription renewal and cancellation rules.
       - Flag unfair terms that would not be binding on consumers.
     output:
-      - "Terms draft"
-      - "Withdrawal form"
-      - "Compliance checklist"
-      - "Unfair term warnings"
+      - Terms draft
+      - Withdrawal form
+      - Compliance checklist
+      - Unfair term warnings
     checks:
-      - "14-day withdrawal period is stated correctly with exceptions"
-      - "Two-year complaint period for goods is not shortened for consumers"
-    eu: ["Denmark: forbrugeraftaleloven covers distance selling and withdrawal; købeloven gives consumers a two-year right to complain about defects. From 2026 EU rules also require a withdrawal function (button) for online contracts; check the current transposition."]
+      - 14-day withdrawal period is stated correctly with exceptions
+      - Two-year complaint period for goods is not shortened for consumers
+    eu:
+      - 'Denmark: forbrugeraftaleloven (14-day withdrawal) and købeloven (two-year complaint period, defects within one year
+        presumed). From 19 June 2026, under Directive (EU) 2023/2673, traders concluding distance contracts through an online
+        interface must provide a withdrawal function.'
     examples:
-      - "Write terms and conditions for our Danish webshop selling coffee subscriptions across the EU."
-
+      - Write terms and conditions for our Danish webshop selling coffee subscriptions across the EU.
   - id: research-memo
     title: Legal Research Memo
-    summary: Structures a legal question into a research memo with issues, applicable rules, analysis, conclusion and sources to verify.
-    triggers: the user has a legal question, needs a legal memo, wants to understand how a law applies or asks what the rules are
+    summary: Structures a legal question into a research memo with issues, applicable rules, analysis, conclusion and sources
+      to verify.
+    triggers: the user has a legal question, needs a legal memo, wants to understand how a law applies or asks what the rules
+      are
     use:
-      - "Internal questions before contacting external counsel"
-      - "Explaining rules to management"
+      - Internal questions before contacting external counsel
+      - Explaining rules to management
     avoid:
-      - "Giving a definitive opinion on a live dispute"
+      - Giving a definitive opinion on a live dispute
     inputs:
-      - "Facts"
-      - "The question"
-      - "Jurisdiction"
-      - "Any documents"
+      - Facts
+      - The question
+      - Jurisdiction
+      - Any documents
     steps:
       - Restate facts and identify the legal issues.
       - Identify the relevant rules and where they are found.
@@ -419,207 +462,222 @@ skills:
       - Conclude with confidence level and what would change the answer.
       - List sources the user must verify.
     output:
-      - "Question presented"
-      - "Short answer"
-      - "Facts"
-      - "Rules"
-      - "Analysis"
-      - "Conclusion and risks"
-      - "Sources to verify"
+      - Question presented
+      - Short answer
+      - Facts
+      - Rules
+      - Analysis
+      - Conclusion and risks
+      - Sources to verify
     checks:
-      - "No fabricated citations"
-      - "Uncertainty is stated honestly"
+      - No fabricated citations
+      - Uncertainty is stated honestly
     eu: []
     examples:
-      - "Can we record customer service calls for training in Denmark? Write a short memo."
-
+      - Can we record customer service calls for training in Denmark? Write a short memo.
+    not_for: Fallback for legal questions no specific legal skill covers
   - id: board-minutes
     title: Board Minutes and Resolutions
-    summary: Drafts board meeting agendas, minutes and written resolutions in a clear format that records decisions, responsibilities and conflicts of interest.
+    summary: Drafts board meeting agendas, minutes and written resolutions in a clear format that records decisions, responsibilities
+      and conflicts of interest.
     triggers: the user needs board minutes, a board agenda, bestyrelsesreferat, general meeting minutes or a written resolution
     use:
-      - "Before and after board meetings"
-      - "Written resolutions between meetings"
+      - Before and after board meetings
+      - Written resolutions between meetings
     avoid: []
     inputs:
-      - "Agenda and attendees"
-      - "Notes or recording summary"
-      - "Decisions taken"
+      - Agenda and attendees
+      - Notes or recording summary
+      - Decisions taken
     steps:
       - Draft or check the agenda with standing items.
       - Record attendance, quorum and conflicts of interest.
       - Record each item with summary of discussion, decision and owner.
       - Prepare signature blocks and action list.
     output:
-      - "Agenda"
-      - "Minutes"
-      - "Action list"
-      - "Resolution text where needed"
+      - Agenda
+      - Minutes
+      - Action list
+      - Resolution text where needed
     checks:
-      - "Decisions are clearly worded"
-      - "Quorum and conflicts recorded"
-    eu: ["Denmark: the Companies Act (selskabsloven) and the company's articles of association set rules on board meetings, minutes and signing."]
+      - Decisions are clearly worded
+      - Quorum and conflicts recorded
+    eu:
+      - 'Denmark: the Companies Act (selskabsloven) and the company''s articles of association set rules on board meetings,
+        minutes and signing.'
     examples:
-      - "Turn these notes into minutes for yesterday's board meeting."
-
+      - Turn these notes into minutes for yesterday's board meeting.
   - id: trademark-check
     title: Trade Mark and Name Clearance
-    summary: Plans a preliminary trade mark and company name check, assesses distinctiveness and conflict risk, and outlines the filing strategy.
+    summary: Plans a preliminary trade mark and company name check, assesses distinctiveness and conflict risk, and outlines
+      the filing strategy.
     triggers: the user wants to check a brand or product name, register a trade mark or avoid infringing others
     use:
-      - "Naming a new company, product or service"
+      - Naming a new company, product or service
     avoid:
-      - "Formal clearance opinions"
+      - Formal clearance opinions
     inputs:
-      - "Proposed name and logo"
-      - "Goods and services"
-      - "Markets"
+      - Proposed name and logo
+      - Goods and services
+      - Markets
     steps:
       - Assess inherent distinctiveness (descriptive, suggestive, invented).
       - List the searches to run (EUIPO, national registers, WIPO, company registers, domains, web).
       - Assess conflict risk from search results the user provides.
       - Suggest Nice classes and a filing route (national, EU, international).
     output:
-      - "Distinctiveness view"
-      - "Search plan"
-      - "Conflict assessment"
-      - "Filing recommendation"
+      - Distinctiveness view
+      - Search plan
+      - Conflict assessment
+      - Filing recommendation
     checks:
-      - "Classes match the actual goods and services"
-      - "Search results are the user's, not invented"
-    eu: ["EU trade marks are filed with EUIPO; Danish trade marks with the Danish Patent and Trademark Office (DKPTO)."]
+      - Classes match the actual goods and services
+      - Search results are the user's, not invented
+    eu:
+      - EU trade marks are filed with EUIPO; Danish trade marks with the Danish Patent and Trademark Office (DKPTO).
     examples:
-      - "Can we use the name Northlight for our new consulting services in the EU?"
-
+      - Can we use the name Northlight for our new consulting services in the EU?
   - id: demand-letter
     title: Demand and Dispute Letter
-    summary: Drafts a firm but measured letter for a dispute, such as a payment demand, breach notice or response to a claim, and outlines next steps.
-    triggers: the user needs to send a demand letter, breach notice, claim, inkassovarsel or reply to a complaint or threat of legal action
+    summary: Drafts a firm but measured letter for a dispute, such as a payment demand, breach notice or response to a claim,
+      and outlines next steps.
+    triggers: the user needs to send a demand letter, breach notice, claim, inkassovarsel or reply to a complaint or threat
+      of legal action
     use:
-      - "Unpaid invoices after reminders"
-      - "Supplier breach"
-      - "Responding to a claim"
+      - Unpaid invoices after reminders
+      - Supplier breach
+      - Responding to a claim
     avoid:
-      - "Court filings"
+      - Court filings
     inputs:
-      - "Facts and documents"
-      - "What the user wants to achieve"
-      - "Deadlines and contract terms"
+      - Facts and documents
+      - What the user wants to achieve
+      - Deadlines and contract terms
     steps:
       - Set out facts and the contractual or legal basis.
       - State the demand clearly with a deadline.
       - State consequences proportionately without threats that are not intended or lawful.
       - Keep the tone professional, since the letter may be read by a judge.
     output:
-      - "Letter draft"
-      - "Evidence list"
-      - "Next steps if no response"
+      - Letter draft
+      - Evidence list
+      - Next steps if no response
     checks:
-      - "Correct legal entity and address"
-      - "Deadline is reasonable"
-    eu: ["Denmark: before handing a consumer debt to collection, a debt collection notice (inkassovarsel) with a deadline of at least 10 days is required under the Debt Collection Act; verify current rules."]
+      - Correct legal entity and address
+      - Deadline is reasonable
+    eu:
+      - 'Denmark: before other collection steps a written payment demand with at least 10 days to pay must have been sent
+        (inkassoloven section 10; check scope for business debtors). For B2B debts renteloven gives interest at the reference
+        rate plus 8 percentage points and DKK 310 fixed compensation (verify).'
     examples:
-      - "Our customer refuses to pay DKK 85,000 claiming late delivery. Draft a response letter."
-
+      - Our customer refuses to pay DKK 85,000 claiming late delivery. Draft a response letter.
+    not_for: For routine reminders on undisputed invoices use fin-credit-collection
   - id: regulatory-change-impact
     title: Regulatory Change Impact Assessment
-    summary: Analyses a new or changed law or regulation, determines whether and how it applies to the business, and produces an impact and action plan.
-    triggers: the user asks how a new regulation affects them, such as NIS2, DORA, AI Act, Data Act, Accessibility Act or pay transparency
+    summary: Analyses a new or changed law or regulation, determines whether and how it applies to the business, and produces
+      an impact and action plan.
+    triggers: the user asks how a new regulation affects them, such as NIS2, DORA, AI Act, Data Act, Accessibility Act or
+      pay transparency
     use:
-      - "New EU or national rules"
-      - "Board or customer questions about readiness"
+      - New EU or national rules
+      - Board or customer questions about readiness
     avoid: []
     inputs:
-      - "The regulation or source text"
-      - "Company profile (sector, size, activities, countries)"
-      - "Current compliance status"
+      - The regulation or source text
+      - Company profile (sector, size, activities, countries)
+      - Current compliance status
     steps:
       - Summarise the regulation's purpose, scope and key dates.
       - Test applicability to the company with reasons.
       - Map requirements to affected processes and owners.
       - Gap-assess and prioritise actions with deadlines.
     output:
-      - "Summary"
-      - "Applicability assessment"
-      - "Requirements map"
-      - "Gap analysis"
-      - "Action plan"
+      - Summary
+      - Applicability assessment
+      - Requirements map
+      - Gap analysis
+      - Action plan
     checks:
-      - "Dates and thresholds checked against official sources"
-      - "National implementation noted for directives"
+      - Dates and thresholds checked against official sources
+      - National implementation noted for directives
     eu: []
     examples:
-      - "Does the EU Data Act affect our connected product business? What must we do?"
-
+      - Does the EU Data Act affect our connected product business? What must we do?
+    not_for: For NIS2 use it-nis2-readiness; for AI Act classification use legal-ai-act-classification
   - id: compliance-policy-drafter
     title: Compliance Policy Drafter
-    summary: Drafts internal compliance policies such as anti-bribery, whistleblowing, AI use, information security and code of conduct, proportionate to company size.
+    summary: Drafts internal compliance policies such as anti-bribery, whistleblowing, AI use, information security and code
+      of conduct, proportionate to company size.
     triggers: the user needs a compliance policy, code of conduct, whistleblower policy, anti-corruption policy or AI policy
     use:
-      - "Building a compliance framework"
-      - "Customer or investor requirements"
+      - Building a compliance framework
+      - Customer or investor requirements
     avoid: []
     inputs:
-      - "Policy topic"
-      - "Company size, sector and countries"
-      - "Existing policies and risks"
+      - Policy topic
+      - Company size, sector and countries
+      - Existing policies and risks
     steps:
       - Define purpose, scope and responsibilities.
       - Set clear rules with examples and grey-zone guidance.
       - Define reporting, approval and escalation routes.
       - Add training, monitoring and review cycle.
     output:
-      - "Policy draft"
-      - "One-page summary for staff"
-      - "Implementation checklist"
+      - Policy draft
+      - One-page summary for staff
+      - Implementation checklist
     checks:
-      - "Rules are practical for the company size"
-      - "Reporting routes are safe and confidential"
-    eu: ["Denmark: the Whistleblower Act (whistleblowerloven) requires an internal whistleblower scheme for employers with 50 or more employees."]
+      - Rules are practical for the company size
+      - Reporting routes are safe and confidential
+    eu:
+      - 'Denmark: whistleblowerloven requires a scheme for employers with 50 or more employees; acknowledge reports within
+        7 days and give feedback within 3 months; Datatilsynet runs the external scheme.'
     examples:
-      - "Write a whistleblowing policy for our 70-person company."
-
+      - Write a whistleblowing policy for our 70-person company.
+    not_for: Owns AI use and compliance policies; for information security policies use it-security-policy-drafter
   - id: matter-intake-chronology
     title: Matter Intake and Chronology
-    summary: Organises a new legal matter or dispute into a structured intake, a fact chronology from documents and a list of issues and evidence.
+    summary: Organises a new legal matter or dispute into a structured intake, a fact chronology from documents and a list
+      of issues and evidence.
     triggers: the user has a dispute, claim, investigation or legal matter and needs to organise facts, documents and a timeline
     use:
-      - "Preparing to brief external counsel"
-      - "Early case assessment"
+      - Preparing to brief external counsel
+      - Early case assessment
     avoid: []
     inputs:
-      - "Documents, emails and notes"
-      - "Parties involved"
-      - "What the user wants to achieve"
+      - Documents, emails and notes
+      - Parties involved
+      - What the user wants to achieve
     steps:
       - Capture matter details, parties, deadlines and limitation periods to check.
       - Build a dated chronology with source references.
       - Identify issues, evidence for each and gaps.
       - Prepare questions for external counsel.
     output:
-      - "Matter summary"
-      - "Chronology table"
-      - "Issues and evidence map"
-      - "Questions for counsel"
+      - Matter summary
+      - Chronology table
+      - Issues and evidence map
+      - Questions for counsel
     checks:
-      - "Every chronology entry cites a source"
-      - "Possible limitation deadlines flagged for verification"
+      - Every chronology entry cites a source
+      - Possible limitation deadlines flagged for verification
     eu: []
     examples:
-      - "Build a timeline of our dispute with the contractor from these 60 emails."
-
+      - Build a timeline of our dispute with the contractor from these 60 emails.
   - id: marketing-claims-review
     title: Marketing Claims Review
-    summary: Reviews advertising and marketing content for misleading claims, green claims, price claims, influencer disclosure and comparative advertising.
-    triggers: the user wants to check an ad, campaign, website copy, sustainability claim, price promotion or influencer post for legal risk
+    summary: Reviews advertising and marketing content for misleading claims, green claims, price claims, influencer disclosure
+      and comparative advertising.
+    triggers: the user wants to check an ad, campaign, website copy, sustainability claim, price promotion or influencer post
+      for legal risk
     use:
-      - "Before campaigns go live"
-      - "Sustainability messaging"
+      - Before campaigns go live
+      - Sustainability messaging
     avoid: []
     inputs:
-      - "The content"
-      - "Evidence behind the claims"
-      - "Channels and target audience"
+      - The content
+      - Evidence behind the claims
+      - Channels and target audience
     steps:
       - List every factual claim and the evidence needed.
       - Check for misleading statements, omissions and unclear conditions.
@@ -627,29 +685,34 @@ skills:
       - Check price reductions, comparative claims and advertising identification.
       - Propose safer wording.
     output:
-      - "Claims table (claim, risk, evidence needed, safer wording)"
-      - "Overall risk rating"
-      - "Required disclaimers"
+      - Claims table (claim, risk, evidence needed, safer wording)
+      - Overall risk rating
+      - Required disclaimers
     checks:
-      - "Generic claims such as green or climate neutral are flagged"
-      - "Price reductions refer to the prior lowest price rule"
-    eu: ["The Empowering Consumers for the Green Transition Directive (EU) 2024/825 bans generic environmental claims and offset-based climate neutral claims from September 2026. Forbrugerombudsmanden has detailed Danish guidance on environmental claims and influencer marketing."]
+      - Generic claims such as green or climate neutral are flagged
+      - Price reductions refer to the prior lowest price rule
+    eu:
+      - From 27 September 2026 Directive (EU) 2024/825 bans generic environmental claims where recognised excellent environmental
+        performance cannot be shown, and claims of neutral, reduced or positive impact based on offsetting. Price reductions
+        must use the lowest price in the prior 30 days (Directive 98/6/EC Article 6a). Paid content must be marked as advertising.
+        Forbrugerombudsmanden has detailed Danish guidance.
     examples:
-      - "Can we say our packaging is 100 percent sustainable and CO2 neutral in this campaign?"
-
+      - Can we say our packaging is 100 percent sustainable and CO2 neutral in this campaign?
   - id: data-transfer-assessment
     title: International Data Transfer Assessment
-    summary: Assesses transfers of personal data outside the EU and EEA, chooses the transfer tool and prepares a transfer impact assessment.
-    triggers: the user sends personal data to a non-EU vendor or group company, asks about US cloud providers, SCCs, the Data Privacy Framework or a transfer impact assessment
+    summary: Assesses transfers of personal data outside the EU and EEA, chooses the transfer tool and prepares a transfer
+      impact assessment.
+    triggers: the user sends personal data to a non-EU vendor or group company, asks about US cloud providers, SCCs, the Data
+      Privacy Framework or a transfer impact assessment
     use:
-      - "Onboarding non-EU vendors"
-      - "Customer questions about where data is stored"
+      - Onboarding non-EU vendors
+      - Customer questions about where data is stored
     avoid: []
     inputs:
-      - "Data exporter and importer"
-      - "Destination country and access by authorities there"
-      - "Data categories and volume"
-      - "Contract and certification status"
+      - Data exporter and importer
+      - Destination country and access by authorities there
+      - Data categories and volume
+      - Contract and certification status
     steps:
       - Map the data flow, including remote access and onward transfers by sub-processors.
       - Check for an adequacy decision, including EU-US Data Privacy Framework certification of the importer.
@@ -657,15 +720,16 @@ skills:
       - Assess laws and practice in the destination country and supplementary measures such as encryption.
       - Conclude and document.
     output:
-      - "Transfer map"
-      - "Transfer tool"
-      - "Transfer impact assessment"
-      - "Supplementary measures"
-      - "Conclusion"
+      - Transfer map
+      - Transfer tool
+      - Transfer impact assessment
+      - Supplementary measures
+      - Conclusion
     checks:
-      - "Remote access from a third country counts as a transfer"
-      - "The SCC module matches the parties' roles"
-    eu: ["Chapter V GDPR governs transfers. The EU-US Data Privacy Framework relies on an adequacy decision that could be challenged; keep a fallback plan."]
+      - Remote access from a third country counts as a transfer
+      - The SCC module matches the parties' roles
+    eu:
+      - Chapter V GDPR governs transfers. The EU-US Data Privacy Framework relies on an adequacy decision that could be challenged;
+        keep a fallback plan.
     examples:
-      - "We want to use a US-based AI transcription service. Can we transfer customer call data to them?"
-
+      - We want to use a US-based AI transcription service. Can we transfer customer call data to them?

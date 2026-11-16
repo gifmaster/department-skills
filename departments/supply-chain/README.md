@@ -3,7 +3,7 @@
 
 Skills for planning, inventory, sourcing, suppliers, logistics, customs and supply chain sustainability. Built for operations teams in manufacturing, wholesale and e-commerce who run their supply chain in spreadsheets and an ERP system.
 
-**21 skills** · version 1.0.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
+**21 skills** · version 1.1.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
 
 - Install in Claude Code: `/plugin install supply-chain-skills --marketplace gifmaster/department-skills`
 - Install anywhere else: see [INSTALL.md](INSTALL.md)
@@ -16,7 +16,7 @@ Skills for planning, inventory, sourcing, suppliers, logistics, customs and supp
 | [`scm-demand-forecast`](skills/scm-demand-forecast/SKILL.md) | Demand Forecast | Builds a statistical demand forecast from sales history, adjusts for seasonality, trends and known events, and measures forecast accuracy. |
 | [`scm-inventory-policy`](skills/scm-inventory-policy/SKILL.md) | Inventory Policy and Reorder Points | Calculates safety stock, reorder points and order quantities per item from demand, lead time and target service level. |
 | [`scm-abc-xyz-segmentation`](skills/scm-abc-xyz-segmentation/SKILL.md) | ABC-XYZ Segmentation | Segments items by value contribution (ABC) and demand variability (XYZ) and recommends planning policies per segment. |
-| [`scm-supplier-selection-scorecard`](skills/scm-supplier-selection-scorecard/SKILL.md) | Supplier Selection Scorecard | Builds a weighted scorecard to compare suppliers on cost, quality, delivery, risk and sustainability, and recommends a choice with reasoning. |
+| [`scm-supplier-selection-scorecard`](skills/scm-supplier-selection-scorecard/SKILL.md) | Supplier Selection Scorecard | Builds a weighted scorecard to compare suppliers on cost, quality, delivery, risk and sustainability, and recommends a choice with reasoning, including a total cost of ownership step. |
 | [`scm-supplier-risk-assessment`](skills/scm-supplier-risk-assessment/SKILL.md) | Supplier Risk Assessment | Assesses supplier risk across financial, operational, geographic, cyber, compliance and ESG dimensions and proposes mitigations. |
 | [`scm-rfq-builder`](skills/scm-rfq-builder/SKILL.md) | RFQ and RFP Builder | Drafts a request for quotation or proposal with specifications, commercial terms, evaluation criteria and a response template for suppliers. |
 | [`scm-purchase-order-drafter`](skills/scm-purchase-order-drafter/SKILL.md) | Purchase Order Drafter | Drafts complete purchase orders from a request, checking specifications, prices, delivery terms, Incoterms and approval limits. |
@@ -26,7 +26,7 @@ Skills for planning, inventory, sourcing, suppliers, logistics, customs and supp
 | [`scm-warehouse-slotting`](skills/scm-warehouse-slotting/SKILL.md) | Warehouse Slotting and Layout | Recommends warehouse slotting and layout improvements based on pick frequency, item size and order profiles to cut travel time. |
 | [`scm-otif-kpi-analysis`](skills/scm-otif-kpi-analysis/SKILL.md) | Supply Chain KPI and OTIF Analysis | Calculates supply chain KPIs such as OTIF, fill rate, inventory turns and lead time, finds root causes of misses and proposes fixes. |
 | [`scm-disruption-response`](skills/scm-disruption-response/SKILL.md) | Disruption Response Playbook | Builds a response plan for a supply disruption such as a supplier failure, port closure or shortage, with impact, options and communications. |
-| [`scm-supplier-negotiation-prep`](skills/scm-supplier-negotiation-prep/SKILL.md) | Supplier Negotiation Preparation | Prepares a supplier negotiation with goals, BATNA, should-cost, concessions, arguments and a negotiation plan. |
+| [`scm-supplier-negotiation-prep`](skills/scm-supplier-negotiation-prep/SKILL.md) | Supplier Negotiation Preparation | Buy-side: prepares a supplier negotiation with goals, BATNA, should-cost, concessions, arguments and a negotiation plan. |
 | [`scm-spend-analysis`](skills/scm-spend-analysis/SKILL.md) | Spend Analysis | Cleans and categorises spend data, finds savings opportunities such as supplier consolidation, maverick spend and price variances. |
 | [`scm-supplier-due-diligence`](skills/scm-supplier-due-diligence/SKILL.md) | Supplier Due Diligence and Code of Conduct | Plans risk-based human rights and environmental due diligence on suppliers, including a supplier code of conduct, questionnaire and follow-up. |
 | [`scm-scope3-emissions`](skills/scm-scope3-emissions/SKILL.md) | Scope 3 Supply Chain Emissions | Estimates scope 3 emissions from purchased goods, transport and other categories using spend or activity data, and identifies reduction levers. |
@@ -58,9 +58,8 @@ Risk, continuity and the EU due diligence and sustainability rules.
 - Do not place orders, sign contracts or share confidential supplier pricing outside the conversation. Prepare drafts and recommendations for a person to approve.
 - Customs, trade compliance and sanctions decisions have legal consequences; recommend confirmation by a customs broker or trade compliance specialist.
 
-## Regulatory context used across this pack
+## Regulatory facts
 
-- EU sanctions and export controls apply to suppliers, customers and goods; screen counterparties against the EU consolidated sanctions list.
-- Sustainability rules affecting supply chains (CSDDD, EUDR, CBAM, the Forced Labour Regulation) have phased and in some cases postponed application dates; confirm the current timeline before acting.
+Every skill in this pack ships `references/facts.md`: dated, sourced figures and rules (last verified 2026-11-16). The master copy is [facts/supply-chain.md](../../facts/supply-chain.md). Update it there and rebuild.
 
 These notes are orientation, not legal advice. Check current law, collective agreements and your own policies.

@@ -1,0 +1,13 @@
+employee_id,name,email,department,job_role,status,end_date,manager
+1001,Mette Kjær,mette.kjaer@fjordvej.dk,Finance,CFO,active,,Lars Winther
+1002,Søren Holm,soren.holm@fjordvej.dk,Finance,Bookkeeper,active,,Mette Kjær
+1003,Anja Lund,anja.lund@fjordvej.dk,Warehouse,Shift lead,active,,Peter Bech
+1004,Peter Bech,peter.bech@fjordvej.dk,Warehouse,Warehouse manager,active,,Lars Winther
+1005,Rasmus Friis,rasmus.friis@fjordvej.dk,Sales,Key account manager,leaver,2026-10-31,Line Dam
+1006,Line Dam,line.dam@fjordvej.dk,Sales,Sales director,active,,Lars Winther
+1007,Jonas Vinther,jonas.vinther@fjordvej.dk,IT,IT supporter,active,,Kim Ravn
+1008,Kim Ravn,kim.ravn@fjordvej.dk,IT,IT manager,active,,Lars Winther
+1009,Camilla Berg,,Sales,Inside sales,active,,Line Dam
+1010,Ida Thomsen,ida.thomsen@fjordvej.dk,Finance,Payroll officer,active,,Mette Kjær
+1011,Lars Winther,lars.winther@fjordvej.dk,Management,CEO,active,,
+1012,Nanna Krog,nanna.krog@fjordvej.dk,Sales,Inside sales,leaver,30-11-2026,Line Dam

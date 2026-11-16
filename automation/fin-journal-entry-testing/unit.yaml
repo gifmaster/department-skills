@@ -1,0 +1,5 @@
+skill: fin-journal-entry-testing
+script: scripts/je_tests.py
+template: assets/journal.csv
+command: python3 scripts/je_tests.py assets/journal.csv --approval-limit 50000
+summary: Runs seven documented red-flag tests on a journal export (weekend or Danish holiday, out of hours, round amounts, just below the approval limit, duplicates, manual postings to revenue or cash, new users), scores and ranks entries, and describes facts only.

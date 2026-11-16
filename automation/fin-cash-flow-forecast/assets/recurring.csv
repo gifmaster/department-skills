@@ -1,0 +1,9 @@
+name,amount,first_date,frequency,day,category
+Salaries (net),-420000,2026-11-30,monthly,last,salary
+A-skat and AM-bidrag,-190000,2026-11-01,monthly,,atax
+Pension,-60000,2026-11-30,monthly,last,pension
+Loan instalment,-40000,2026-12-01,monthly,1,loan
+Rent (quarterly in advance),-85000,2027-01-01,quarterly,1,rent
+VAT (quarterly),-265000,2026-12-01,quarterly,1,vat
+Receipts from new invoicing (estimate),165000,2026-12-21,weekly,5,sales
+Counter sales (MobilePay),18000,2026-11-27,weekly,5,sales

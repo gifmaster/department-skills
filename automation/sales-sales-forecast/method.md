@@ -1,0 +1,9 @@
+- Use only open deals with a close date inside the period; drop lost deals, add won deals to closed won.
+- Weighted (W) = sum of amount x CRM probability (stage default if blank).
+- Historical rate per stage = won deals that reached that stage or later / all closed deals that reached it. Under 5 deals: use the stage default.
+- Historical (H) = sum of amount x historical rate.
+- Rep commit (C) = sum of amounts flagged commit; risk-adjusted commit = commit deals x historical rate.
+- Commit = closed won + risk-adjusted commit. Most likely = closed won + H. Best case = closed won + highest of W, H, C.
+- Explain gaps: W minus H (CRM optimism), C minus risk-adjusted commit (rep optimism), target minus each scenario.
+- Flag commit deals with a historical rate under 50%, close dates already passed, duplicates, missing amounts, and the share of the top 2 deals.
+- If days left in the period are fewer than the median won cycle, say early-stage deals are unlikely to close.

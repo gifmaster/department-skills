@@ -2,42 +2,56 @@ department: supply-chain
 title: Supply Chain
 prefix: scm
 role: a pragmatic supply chain planner and procurement specialist
-overview: >-
-  Skills for planning, inventory, sourcing, suppliers, logistics, customs and supply chain
-  sustainability. Built for operations teams in manufacturing, wholesale and e-commerce who
-  run their supply chain in spreadsheets and an ERP system.
+overview: Skills for planning, inventory, sourcing, suppliers, logistics, customs and supply chain sustainability. Built for
+  operations teams in manufacturing, wholesale and e-commerce who run their supply chain in spreadsheets and an ERP system.
 workflows:
   - name: Plan and stock
-    skills: [demand-forecast, abc-xyz-segmentation, inventory-policy, production-capacity-plan, sop-pack]
+    skills:
+      - demand-forecast
+      - abc-xyz-segmentation
+      - inventory-policy
+      - production-capacity-plan
+      - sop-pack
     purpose: From forecast to stock levels and a monthly S&OP decision.
   - name: Source and contract
-    skills: [spend-analysis, rfq-builder, supplier-selection-scorecard, supplier-negotiation-prep, purchase-order-drafter]
+    skills:
+      - spend-analysis
+      - rfq-builder
+      - supplier-selection-scorecard
+      - supplier-negotiation-prep
+      - purchase-order-drafter
     purpose: From spend insight to a negotiated supplier and a clean purchase order.
   - name: Keep it resilient and responsible
-    skills: [supplier-risk-assessment, disruption-response, supplier-due-diligence, scope3-emissions]
+    skills:
+      - supplier-risk-assessment
+      - disruption-response
+      - supplier-due-diligence
+      - scope3-emissions
     purpose: Risk, continuity and the EU due diligence and sustainability rules.
 common_guardrails:
-  - Base calculations on the user's data and show formulas. Label assumptions such as lead times, service levels and costs clearly so they can be changed.
-  - Do not place orders, sign contracts or share confidential supplier pricing outside the conversation. Prepare drafts and recommendations for a person to approve.
-  - Customs, trade compliance and sanctions decisions have legal consequences; recommend confirmation by a customs broker or trade compliance specialist.
-common_eu:
-  - "EU sanctions and export controls apply to suppliers, customers and goods; screen counterparties against the EU consolidated sanctions list."
-  - "Sustainability rules affecting supply chains (CSDDD, EUDR, CBAM, the Forced Labour Regulation) have phased and in some cases postponed application dates; confirm the current timeline before acting."
+  - Base calculations on the user's data and show formulas. Label assumptions such as lead times, service levels and costs
+    clearly so they can be changed.
+  - Do not place orders, sign contracts or share confidential supplier pricing outside the conversation. Prepare drafts and
+    recommendations for a person to approve.
+  - Customs, trade compliance and sanctions decisions have legal consequences; recommend confirmation by a customs broker
+    or trade compliance specialist.
 skills:
   - id: demand-forecast
     title: Demand Forecast
-    summary: Builds a statistical demand forecast from sales history, adjusts for seasonality, trends and known events, and measures forecast accuracy.
-    triggers: the user needs a sales or demand forecast, wants to predict volumes, plan for seasonality or measure forecast error
+    summary: Builds a statistical demand forecast from sales history, adjusts for seasonality, trends and known events, and
+      measures forecast accuracy.
+    triggers: the user needs a sales or demand forecast, wants to predict volumes, plan for seasonality or measure forecast
+      error
     use:
-      - "Monthly planning cycle"
-      - "New season or product launch"
-      - "Forecasts keep missing"
+      - Monthly planning cycle
+      - New season or product launch
+      - Forecasts keep missing
     avoid:
-      - "Financial budget building (use fin-budget-builder)"
+      - Financial budget building (use fin-budget-builder)
     inputs:
-      - "At least 12 to 24 months of sales history by item and period"
-      - "Known promotions or events"
-      - "Forecast horizon and level (item, family, region)"
+      - At least 12 to 24 months of sales history by item and period
+      - Known promotions or events
+      - Forecast horizon and level (item, family, region)
     steps:
       - Clean history for stock-outs, one-offs and outliers, and explain each adjustment.
       - Pick a method suited to the pattern (moving average, exponential smoothing, seasonal model) and explain why.
@@ -45,91 +59,91 @@ skills:
       - Measure accuracy with MAPE or WAPE and bias on a hold-out period.
       - Highlight items with high uncertainty that need safety stock or review.
     output:
-      - "Method and assumptions"
-      - "Forecast table"
-      - "Accuracy and bias"
-      - "Overlays and events"
-      - "Items to review"
+      - Method and assumptions
+      - Forecast table
+      - Accuracy and bias
+      - Overlays and events
+      - Items to review
     checks:
-      - "Overlays are separate from the statistical baseline"
-      - "Forecast totals are plausible against history"
+      - Overlays are separate from the statistical baseline
+      - Forecast totals are plausible against history
     eu: []
     examples:
-      - "Forecast the next 6 months for our top 50 SKUs from this sales history."
-      - "Why is our forecast always too high?"
-
+      - Forecast the next 6 months for our top 50 SKUs from this sales history.
+      - Why is our forecast always too high?
   - id: inventory-policy
     title: Inventory Policy and Reorder Points
-    summary: Calculates safety stock, reorder points and order quantities per item from demand, lead time and target service level.
+    summary: Calculates safety stock, reorder points and order quantities per item from demand, lead time and target service
+      level.
     triggers: the user asks about safety stock, reorder point, EOQ, min-max levels, stock-outs or excess inventory
     use:
-      - "Setting or resetting ERP parameters"
-      - "Stock-outs alongside excess stock"
+      - Setting or resetting ERP parameters
+      - Stock-outs alongside excess stock
     avoid:
-      - "One-off purchase decisions without demand data"
+      - One-off purchase decisions without demand data
     inputs:
-      - "Average and variability of demand per item"
-      - "Lead time and its variability"
-      - "Target service level by segment"
-      - "Ordering cost and holding cost rate"
+      - Average and variability of demand per item
+      - Lead time and its variability
+      - Target service level by segment
+      - Ordering cost and holding cost rate
     steps:
       - Calculate demand and lead time variability.
       - Calculate safety stock for the target service level and show the formula.
       - Calculate reorder point and economic order quantity, rounded to pack sizes and minimum order quantities.
       - Estimate inventory value impact against current levels.
     output:
-      - "Parameters table per item"
-      - "Formulas used"
-      - "Inventory value impact"
-      - "Items needing manual review"
+      - Parameters table per item
+      - Formulas used
+      - Inventory value impact
+      - Items needing manual review
     checks:
-      - "Units of time are consistent"
-      - "Pack sizes and MOQs are respected"
+      - Units of time are consistent
+      - Pack sizes and MOQs are respected
     eu: []
     examples:
-      - "Set safety stock and reorder points for these 200 items at 95 percent service."
-
+      - Set safety stock and reorder points for these 200 items at 95 percent service.
   - id: abc-xyz-segmentation
     title: ABC-XYZ Segmentation
-    summary: Segments items by value contribution (ABC) and demand variability (XYZ) and recommends planning policies per segment.
+    summary: Segments items by value contribution (ABC) and demand variability (XYZ) and recommends planning policies per
+      segment.
     triggers: the user wants ABC analysis, XYZ analysis, item segmentation or to prioritise inventory management effort
     use:
-      - "Before setting inventory policies"
-      - "Range rationalisation"
+      - Before setting inventory policies
+      - Range rationalisation
     avoid: []
     inputs:
-      - "Sales or consumption by item for 12 months"
-      - "Unit cost or margin"
+      - Sales or consumption by item for 12 months
+      - Unit cost or margin
     steps:
       - Rank items by annual value and assign A, B and C classes using cumulative thresholds.
       - Calculate the coefficient of variation and assign X, Y and Z classes.
       - Build the 9-box matrix with counts and value.
       - Recommend a planning policy per box and flag candidates for delisting.
     output:
-      - "Thresholds used"
-      - "Segmentation table, 9-box matrix"
-      - "Policies per segment"
-      - "Delisting candidates"
+      - Thresholds used
+      - Segmentation table, 9-box matrix
+      - Policies per segment
+      - Delisting candidates
     checks:
-      - "Thresholds stated and adjustable"
-      - "New items without history are handled separately"
+      - Thresholds stated and adjustable
+      - New items without history are handled separately
     eu: []
     examples:
-      - "Do an ABC-XYZ analysis of our spare parts and tell us how to manage each group."
-
+      - Do an ABC-XYZ analysis of our spare parts and tell us how to manage each group.
   - id: supplier-selection-scorecard
     title: Supplier Selection Scorecard
-    summary: Builds a weighted scorecard to compare suppliers on cost, quality, delivery, risk and sustainability, and recommends a choice with reasoning.
+    summary: Builds a weighted scorecard to compare suppliers on cost, quality, delivery, risk and sustainability, and recommends
+      a choice with reasoning, including a total cost of ownership step.
     triggers: the user is choosing between suppliers, comparing quotes or bids, or wants a supplier evaluation matrix
     use:
-      - "New sourcing decision"
-      - "Re-sourcing after problems"
+      - New sourcing decision
+      - Re-sourcing after problems
     avoid:
-      - "Ongoing supplier performance reviews (use scm-supplier-performance-review)"
+      - Ongoing supplier performance reviews (use scm-supplier-performance-review)
     inputs:
-      - "Supplier offers and data"
-      - "Criteria that matter and their weights"
-      - "Must-have requirements"
+      - Supplier offers and data
+      - Criteria that matter and their weights
+      - Must-have requirements
     steps:
       - Confirm must-have gates (certifications, capacity, compliance).
       - Weight criteria with the user and define scoring scales.
@@ -137,91 +151,96 @@ skills:
       - Run a sensitivity check on the weights.
       - Recommend a supplier and list the risks to manage.
     output:
-      - "Criteria and weights"
-      - "Scoring table with evidence"
-      - "Total cost comparison"
-      - "Sensitivity"
-      - "Recommendation and risks"
+      - Criteria and weights
+      - Scoring table with evidence
+      - Total cost comparison
+      - Sensitivity
+      - Recommendation and risks
     checks:
-      - "Scores reference evidence"
-      - "Single-source risk is noted"
+      - Scores reference evidence
+      - Single-source risk is noted
     eu: []
     examples:
-      - "Compare these three packaging suppliers and recommend one."
-
+      - Compare these three packaging suppliers and recommend one.
   - id: supplier-risk-assessment
     title: Supplier Risk Assessment
-    summary: Assesses supplier risk across financial, operational, geographic, cyber, compliance and ESG dimensions and proposes mitigations.
+    summary: Assesses supplier risk across financial, operational, geographic, cyber, compliance and ESG dimensions and proposes
+      mitigations.
     triggers: the user wants to assess supplier risk, map critical suppliers, prepare for disruption or check supplier resilience
     use:
-      - "Annual risk review"
-      - "Onboarding a critical supplier"
-    avoid: []
+      - Annual risk review
+      - Onboarding a critical supplier
+    avoid:
+      - Deep security review of a single IT or SaaS vendor (use it-vendor-security-review)
     inputs:
-      - "Supplier list with spend and what they supply"
-      - "Known risk information"
-      - "Alternative sources"
+      - Supplier list with spend and what they supply
+      - Known risk information
+      - Alternative sources
     steps:
       - Classify suppliers by criticality and substitutability.
       - Score each critical supplier on the risk dimensions with evidence.
       - Build a heat map and identify the top risks.
       - Propose mitigations (dual sourcing, buffer stock, contract clauses, monitoring).
     output:
-      - "Criticality matrix"
-      - "Risk scores"
-      - "Heat map summary"
-      - "Mitigation plan"
+      - Criticality matrix
+      - Risk scores
+      - Heat map summary
+      - Mitigation plan
     checks:
-      - "Single and sole source items are flagged"
-      - "Sanctions screening is included"
-    eu: ["NIS2 requires in-scope entities to manage ICT supply chain security risks from their suppliers."]
+      - Single and sole source items are flagged
+      - Sanctions screening is included
+    eu:
+      - Screen for origin-based import bans (for example Russian and Belarusian wood and steel) as well as sanctions lists.
+        NIS2 supply chain duties apply only to in-scope entities.
     examples:
-      - "Which of our 40 suppliers are most risky and what should we do?"
-
+      - Which of our 40 suppliers are most risky and what should we do?
   - id: rfq-builder
     title: RFQ and RFP Builder
-    summary: Drafts a request for quotation or proposal with specifications, commercial terms, evaluation criteria and a response template for suppliers.
+    summary: Drafts a request for quotation or proposal with specifications, commercial terms, evaluation criteria and a response
+      template for suppliers.
     triggers: the user needs to send an RFQ, RFP, RFI or tender request to suppliers
     use:
-      - "Sourcing new goods or services"
-      - "Re-tendering a contract"
+      - Sourcing new goods or services
+      - Re-tendering a contract
     avoid:
-      - "Public procurement for contracting authorities without procurement law review"
+      - Public procurement for contracting authorities without procurement law review
     inputs:
-      - "What is being bought with specifications and volumes"
-      - "Timeline"
-      - "Commercial and contractual requirements"
-      - "Evaluation criteria"
+      - What is being bought with specifications and volumes
+      - Timeline
+      - Commercial and contractual requirements
+      - Evaluation criteria
     steps:
       - Structure the document (background, scope, specifications, volumes, terms, timeline, instructions).
       - Write clear, measurable requirements and separate must-haves from wishes.
       - Add a pricing template so offers are comparable.
       - State evaluation criteria and weights.
     output:
-      - "RFQ or RFP document"
-      - "Pricing response template"
-      - "Evaluation criteria"
-      - "Supplier question and answer process"
+      - RFQ or RFP document
+      - Pricing response template
+      - Evaluation criteria
+      - Supplier question and answer process
     checks:
-      - "Requirements are neutral and do not favour one supplier"
-      - "Deadlines are realistic"
-    eu: ["Public contracting authorities must follow procurement law (in Denmark, udbudsloven); private companies have more freedom but fair process reduces disputes."]
+      - Requirements are neutral and do not favour one supplier
+      - Deadlines are realistic
+    eu:
+      - Public contracting authorities must follow procurement law (in Denmark, udbudsloven); private companies have more
+        freedom but fair process reduces disputes.
     examples:
-      - "Write an RFQ for 50,000 printed cardboard boxes a year."
-
+      - Write an RFQ for 50,000 printed cardboard boxes a year.
   - id: purchase-order-drafter
     title: Purchase Order Drafter
-    summary: Drafts complete purchase orders from a request, checking specifications, prices, delivery terms, Incoterms and approval limits.
+    summary: Drafts complete purchase orders from a request, checking specifications, prices, delivery terms, Incoterms and
+      approval limits.
     triggers: the user needs to create or check a purchase order or order confirmation
     use:
-      - "Ad hoc purchases"
-      - "Checking supplier order confirmations"
+      - Ad hoc purchases
+      - Checking supplier order confirmations
     avoid:
-      - "Sending orders without approval"
+      - Sending orders without approval
     inputs:
-      - "Item, quantity, price and supplier"
-      - "Delivery address and date"
-      - "Agreed terms and Incoterm"
+      - Item, quantity, price and supplier
+      - Delivery address and date
+      - Agreed terms and Incoterm
     steps:
       - Fill all purchase order fields and reference the frame agreement if one exists.
       - Check price against the agreement and quantity against MOQ and pack size.
@@ -229,31 +248,30 @@ skills:
       - Route to the right approver based on value.
       - Compare the supplier's order confirmation against the purchase order if provided.
     output:
-      - "Purchase order draft"
-      - "Checks performed"
-      - "Approval routing"
-      - "Confirmation discrepancies"
+      - Purchase order draft
+      - Checks performed
+      - Approval routing
+      - Confirmation discrepancies
     checks:
-      - "Incoterm includes a named place"
-      - "Total equals quantity times price"
+      - Incoterm includes a named place
+      - Total equals quantity times price
     eu: []
     examples:
-      - "Draft a PO for 2,000 units of item 4711 from our Polish supplier"
-      - "FCA Poznan."
-
+      - Draft a PO for 2,000 units of item 4711 from our Polish supplier, FCA Poznan.
   - id: sop-pack
     title: S&OP Meeting Pack
-    summary: Prepares a sales and operations planning pack that balances demand, supply, inventory and finance, with decisions for the executive meeting.
+    summary: Prepares a sales and operations planning pack that balances demand, supply, inventory and finance, with decisions
+      for the executive meeting.
     triggers: the user runs S&OP, IBP, monthly planning meetings or needs to align sales and operations plans
     use:
-      - "Monthly S&OP cycle"
-      - "Setting up S&OP"
+      - Monthly S&OP cycle
+      - Setting up S&OP
     avoid: []
     inputs:
-      - "Demand plan"
-      - "Supply and capacity plan"
-      - "Inventory projection"
-      - "Financial targets"
+      - Demand plan
+      - Supply and capacity plan
+      - Inventory projection
+      - Financial targets
     steps:
       - Summarise changes in the demand plan and why.
       - Show supply and capacity gaps.
@@ -261,149 +279,156 @@ skills:
       - Reconcile to the financial plan.
       - Frame decisions with options and impact.
     output:
-      - "Executive summary"
-      - "Demand review"
-      - "Supply review"
-      - "Inventory and service projection"
-      - "Financial reconciliation"
-      - "Decisions needed"
+      - Executive summary
+      - Demand review
+      - Supply review
+      - Inventory and service projection
+      - Financial reconciliation
+      - Decisions needed
     checks:
-      - "Volumes reconcile to revenue"
-      - "Each gap has an option"
+      - Volumes reconcile to revenue
+      - Each gap has an option
     eu: []
     examples:
-      - "Build this month's S&OP pack from these files."
-
+      - Build this month's S&OP pack from these files.
   - id: incoterms-advisor
     title: Incoterms and Delivery Terms Advisor
-    summary: Explains and recommends Incoterms 2020 for a shipment, showing who pays and bears risk at each step, and checks consistency with contracts and insurance.
+    summary: Explains and recommends Incoterms 2020 for a shipment, showing who pays and bears risk at each step, and checks
+      consistency with contracts and insurance.
     triggers: the user asks which Incoterm to use, what EXW, FCA, DAP, DDP or CIF means, or who pays freight and duties
     use:
-      - "Negotiating supplier or customer terms"
-      - "Unclear responsibilities in a dispute"
+      - Negotiating supplier or customer terms
+      - Unclear responsibilities in a dispute
     avoid:
-      - "Legal interpretation of a specific contract dispute"
+      - Legal interpretation of a specific contract dispute
     inputs:
-      - "Seller and buyer locations"
-      - "Transport mode"
-      - "Who handles export and import clearance"
-      - "Insurance needs"
+      - Seller and buyer locations
+      - Transport mode
+      - Who handles export and import clearance
+      - Insurance needs
     steps:
       - Identify suitable rules for the transport mode (sea-only rules versus any-mode rules).
       - Map cost and risk transfer for each candidate rule.
       - Recommend a rule with a named place and the reason.
       - Point out mismatches with payment terms or insurance.
     output:
-      - "Recommendation with named place"
-      - "Responsibility table"
-      - "Risks and mismatches"
+      - Recommendation with named place
+      - Responsibility table
+      - Risks and mismatches
     checks:
-      - "Sea-only rules (FAS, FOB, CFR, CIF) are not recommended for containers handed over inland"
-      - "Version Incoterms 2020 is stated"
-    eu: ["Within the EU there is no customs clearance for goods in free circulation, but VAT rules for intra-EU supplies still apply."]
+      - Sea-only rules (FAS, FOB, CFR, CIF) are not recommended for containers handed over inland
+      - Version Incoterms 2020 is stated
+    eu:
+      - Within the EU there is no customs clearance for goods in free circulation, but VAT rules for intra-EU supplies still
+        apply.
     examples:
-      - "We buy from China by sea container. Should we use FOB or FCA?"
-
+      - We buy from China by sea container. Should we use FOB or FCA?
   - id: customs-classification
     title: Customs Classification Helper
-    summary: Suggests candidate tariff codes (HS and EU CN) for a product with reasoning, and lists the documents and duties to check.
+    summary: Suggests candidate tariff codes (HS and EU CN) for a product with reasoning, and lists the documents and duties
+      to check.
     triggers: the user needs a tariff code, HS code, CN code, duty rate or customs documents for importing or exporting goods
     use:
-      - "New product imports or exports"
-      - "Checking broker classifications"
+      - New product imports or exports
+      - Checking broker classifications
     avoid:
-      - "Final binding classification; use the official TARIC database, a customs broker or a Binding Tariff Information decision"
+      - Final binding classification; use the official TARIC database, a customs broker or a Binding Tariff Information decision
     inputs:
-      - "Product description, material and function"
-      - "Country of origin and destination"
-      - "Use of the product"
+      - Product description, material and function
+      - Country of origin and destination
+      - Use of the product
     steps:
       - Identify the likely chapter and heading using the General Interpretative Rules.
       - Suggest candidate codes with reasons and what would change the answer.
       - List measures to check in TARIC (duty, anti-dumping, licences, CBAM).
       - List documents needed (commercial invoice, origin proof).
     output:
-      - "Candidate codes with reasoning"
-      - "Measures to verify"
-      - "Documents checklist"
-      - "Questions for the broker"
+      - Candidate codes with reasoning
+      - Measures to verify
+      - Documents checklist
+      - Questions for the broker
     checks:
-      - "Codes are presented as candidates, not final"
-      - "Origin rules are mentioned for preferential duty"
-    eu: ["EU customs follows the Union Customs Code; check duties and measures in TARIC. CBAM covers imports of certain goods such as steel, aluminium, cement and fertilisers."]
+      - Codes are presented as candidates, not final
+      - Origin rules are mentioned for preferential duty
+    eu:
+      - CBAM covers specific CN codes (iron and steel, aluminium, cement, fertilisers, hydrogen, electricity, some downstream
+        articles), with a 50-tonne a year de minimis from the 2025 simplification; check by CN code. Use TARIC and, for certainty,
+        a Binding Tariff Information decision from Toldstyrelsen.
     examples:
-      - "What CN code would a stainless steel insulated drinking bottle from Vietnam have?"
-
+      - What CN code would a stainless steel insulated drinking bottle from Vietnam have?
   - id: warehouse-slotting
     title: Warehouse Slotting and Layout
-    summary: Recommends warehouse slotting and layout improvements based on pick frequency, item size and order profiles to cut travel time.
+    summary: Recommends warehouse slotting and layout improvements based on pick frequency, item size and order profiles to
+      cut travel time.
     triggers: the user wants to reorganise a warehouse, improve picking productivity, slotting or storage layout
     use:
-      - "Rising pick times"
-      - "New warehouse or racking"
+      - Rising pick times
+      - New warehouse or racking
     avoid:
-      - "Structural or fire safety design"
+      - Structural or fire safety design
     inputs:
-      - "Order lines by item"
-      - "Item dimensions and weights"
-      - "Current locations and layout"
+      - Order lines by item
+      - Item dimensions and weights
+      - Current locations and layout
     steps:
       - Analyse pick frequency and co-occurrence of items in orders.
       - Assign fast movers to golden-zone locations near dispatch.
       - Group items often picked together.
       - Estimate travel reduction and relocation effort.
     output:
-      - "Pick profile analysis"
-      - "Slotting proposal"
-      - "Expected impact"
-      - "Relocation plan"
+      - Pick profile analysis
+      - Slotting proposal
+      - Expected impact
+      - Relocation plan
     checks:
-      - "Heavy items at low ergonomic heights"
-      - "Hazardous goods segregated"
-    eu: ["Denmark: manual handling and ergonomics are regulated by the Working Environment Act and Arbejdstilsynet guidance."]
+      - Heavy items at low ergonomic heights
+      - Hazardous goods segregated
+    eu:
+      - 'Denmark: manual handling and ergonomics are regulated by the Working Environment Act and Arbejdstilsynet guidance.'
     examples:
-      - "Re-slot our 3,000 SKUs to cut picker walking."
-
+      - Re-slot our 3,000 SKUs to cut picker walking.
   - id: otif-kpi-analysis
     title: Supply Chain KPI and OTIF Analysis
-    summary: Calculates supply chain KPIs such as OTIF, fill rate, inventory turns and lead time, finds root causes of misses and proposes fixes.
+    summary: Calculates supply chain KPIs such as OTIF, fill rate, inventory turns and lead time, finds root causes of misses
+      and proposes fixes.
     triggers: the user wants OTIF, on-time delivery, fill rate, inventory turns or supply chain performance analysis
     use:
-      - "Monthly performance review"
-      - "Customer complaints about delivery"
+      - Monthly performance review
+      - Customer complaints about delivery
     avoid: []
     inputs:
-      - "Order and delivery data with promised and actual dates and quantities"
-      - "Inventory values"
+      - Order and delivery data with promised and actual dates and quantities
+      - Inventory values
     steps:
       - Define each KPI and the formula with the user.
       - Calculate KPIs by customer, product and site.
       - Pareto the misses by root cause (stock, capacity, transport, data).
       - Propose actions for the top causes.
     output:
-      - "KPI definitions"
-      - "KPI results"
-      - "Root cause Pareto"
-      - "Action plan"
+      - KPI definitions
+      - KPI results
+      - Root cause Pareto
+      - Action plan
     checks:
-      - "OTIF uses the promised date, not the requested date, unless stated"
-      - "Partial deliveries handled as defined"
+      - OTIF uses the promised date, not the requested date, unless stated
+      - Partial deliveries handled as defined
     eu: []
     examples:
-      - "Our OTIF dropped to 82 percent. Find out why from this order data."
-
+      - Our OTIF dropped to 82 percent. Find out why from this order data.
   - id: disruption-response
     title: Disruption Response Playbook
-    summary: Builds a response plan for a supply disruption such as a supplier failure, port closure or shortage, with impact, options and communications.
-    triggers: a supplier has failed, a shipment is delayed, a shortage or crisis affects supply, or the user wants a continuity plan
+    summary: Builds a response plan for a supply disruption such as a supplier failure, port closure or shortage, with impact,
+      options and communications.
+    triggers: a supplier has failed, a shipment is delayed, a shortage or crisis affects supply, or the user wants a continuity
+      plan
     use:
-      - "Live disruption"
-      - "Business continuity planning"
+      - Live disruption
+      - Business continuity planning
     avoid: []
     inputs:
-      - "What happened and expected duration"
-      - "Affected items, stock and orders"
-      - "Alternative sources and transport"
+      - What happened and expected duration
+      - Affected items, stock and orders
+      - Alternative sources and transport
     steps:
       - Quantify impact by item and customer with days of cover.
       - List options (alternative supply, substitution, allocation, expediting) with cost and time.
@@ -411,31 +436,31 @@ skills:
       - Draft customer and internal communications.
       - Set a review rhythm and triggers.
     output:
-      - "Impact assessment"
-      - "Options"
-      - "Allocation plan"
-      - "Communications"
-      - "Review plan"
+      - Impact assessment
+      - Options
+      - Allocation plan
+      - Communications
+      - Review plan
     checks:
-      - "Customer commitments and contract penalties are considered"
-      - "Communications are factual"
+      - Customer commitments and contract penalties are considered
+      - Communications are factual
     eu: []
     examples:
-      - "Our main resin supplier has a fire and is out for 6 weeks. What do we do?"
-
+      - Our main resin supplier has a fire and is out for 6 weeks. What do we do?
   - id: supplier-negotiation-prep
     title: Supplier Negotiation Preparation
-    summary: Prepares a supplier negotiation with goals, BATNA, should-cost, concessions, arguments and a negotiation plan.
+    summary: 'Buy-side: prepares a supplier negotiation with goals, BATNA, should-cost, concessions, arguments and a negotiation
+      plan.'
     triggers: the user is preparing to negotiate prices, terms or a contract renewal with a supplier
     use:
-      - "Annual price negotiations"
-      - "Supplier price increase requests"
+      - Annual price negotiations
+      - Supplier price increase requests
     avoid: []
     inputs:
-      - "Current terms and spend"
-      - "Market and cost data"
-      - "Alternatives"
-      - "Goals"
+      - Current terms and spend
+      - Market and cost data
+      - Alternatives
+      - Goals
     steps:
       - Set target, acceptable and walk-away positions.
       - Build should-cost and index arguments for price claims.
@@ -443,220 +468,235 @@ skills:
       - Plan concessions to trade, highest value to us and lowest cost to give.
       - Draft opening statement and responses to likely arguments.
     output:
-      - "Objectives and limits"
-      - "Fact base"
-      - "BATNA analysis"
-      - "Concession plan"
-      - "Script and counters"
+      - Objectives and limits
+      - Fact base
+      - BATNA analysis
+      - Concession plan
+      - Script and counters
     checks:
-      - "Claims are supported by data"
-      - "Walk-away point is clear"
+      - Claims are supported by data
+      - Walk-away point is clear
     eu: []
     examples:
-      - "Our supplier wants 9 percent more. Prepare me for the negotiation."
-
+      - Our supplier wants 9 percent more. Prepare me for the negotiation.
+    not_for: For negotiating with customers use sales-negotiation-prep
   - id: spend-analysis
     title: Spend Analysis
-    summary: Cleans and categorises spend data, finds savings opportunities such as supplier consolidation, maverick spend and price variances.
+    summary: Cleans and categorises spend data, finds savings opportunities such as supplier consolidation, maverick spend
+      and price variances.
     triggers: the user wants spend analysis, procurement savings, spend cube or supplier consolidation insights
     use:
-      - "Starting a procurement programme"
-      - "Annual savings planning"
+      - Starting a procurement programme
+      - Annual savings planning
     avoid: []
     inputs:
-      - "AP or purchase data with supplier, amount, account and description"
+      - AP or purchase data with supplier, amount, account and description
     steps:
       - Normalise supplier names and categorise spend into a taxonomy.
       - Show spend by category, supplier and business unit.
       - Find opportunities (fragmentation, off-contract spend, price variance, tail spend).
       - Estimate savings ranges with assumptions.
     output:
-      - "Spend overview"
-      - "Category breakdown"
-      - "Opportunities with estimated savings"
-      - "Next steps"
+      - Spend overview
+      - Category breakdown
+      - Opportunities with estimated savings
+      - Next steps
     checks:
-      - "Categorisation rules are listed"
-      - "Savings are ranges, not promises"
+      - Categorisation rules are listed
+      - Savings are ranges, not promises
     eu: []
     examples:
-      - "Here is 12 months of AP data. Where can we save money?"
-
+      - Here is 12 months of AP data. Where can we save money?
   - id: supplier-due-diligence
     title: Supplier Due Diligence and Code of Conduct
-    summary: Plans risk-based human rights and environmental due diligence on suppliers, including a supplier code of conduct, questionnaire and follow-up.
+    summary: Plans risk-based human rights and environmental due diligence on suppliers, including a supplier code of conduct,
+      questionnaire and follow-up.
     triggers: the user needs supplier due diligence, a supplier code of conduct, CSDDD readiness, EUDR or forced labour checks
     use:
-      - "Customer or regulator requests"
-      - "Entering high-risk sourcing countries"
+      - Customer or regulator requests
+      - Entering high-risk sourcing countries
     avoid:
-      - "Certifying a supplier as compliant"
+      - Certifying a supplier as compliant
     inputs:
-      - "Supplier list with country and category"
-      - "Products and raw materials"
-      - "Requirements from customers or law"
+      - Supplier list with country and category
+      - Products and raw materials
+      - Requirements from customers or law
     steps:
       - Map suppliers and raw materials to risk by country and sector.
       - Prioritise high-risk suppliers.
       - Draft or update a supplier code of conduct and a questionnaire.
       - Define verification (audits, certificates, documents) and corrective action steps.
     output:
-      - "Risk map"
-      - "Prioritised suppliers"
-      - "Code of conduct draft"
-      - "Questionnaire"
-      - "Verification and remediation plan"
+      - Risk map
+      - Prioritised suppliers
+      - Code of conduct draft
+      - Questionnaire
+      - Verification and remediation plan
     checks:
-      - "Approach follows the OECD Due Diligence Guidance"
-      - "Remediation before termination is considered"
-    eu: ["EUDR requires due diligence for products such as wood, cattle, cocoa, coffee, oil palm, rubber and soy. The Forced Labour Regulation bans products made with forced labour from the EU market. CSDDD applies to large companies on a delayed timeline."]
+      - Approach follows the OECD Due Diligence Guidance
+      - Remediation before termination is considered
+    eu:
+      - 'Dates (see references/facts.md, some to verify): EUDR applies from 30 December 2026 for large and medium operators
+        and 30 June 2027 for micro and small, and covers wood including furniture; the Forced Labour Regulation (EU) 2024/3015
+        applies from 14 December 2027 to companies of all sizes; after Omnibus I the CSDDD applies only to very large companies
+        from 26 July 2029, but SMEs feel it through customer contracts.'
     examples:
-      - "We import furniture from Asia. What do we need for EUDR and how do we check suppliers?"
-
+      - We import furniture from Asia. What do we need for EUDR and how do we check suppliers?
   - id: scope3-emissions
     title: Scope 3 Supply Chain Emissions
-    summary: Estimates scope 3 emissions from purchased goods, transport and other categories using spend or activity data, and identifies reduction levers.
+    summary: Estimates scope 3 emissions from purchased goods, transport and other categories using spend or activity data,
+      and identifies reduction levers.
     triggers: the user needs scope 3, supply chain carbon footprint, product carbon data or supplier emissions engagement
     use:
-      - "CSRD or customer reporting"
-      - "Setting reduction targets"
+      - CSRD or customer reporting
+      - Setting reduction targets
     avoid:
-      - "Marketing claims about carbon neutrality"
+      - Marketing claims about carbon neutrality
     inputs:
-      - "Spend by category or activity data"
-      - "Transport data"
-      - "Supplier-specific emissions data where available"
+      - Spend by category or activity data
+      - Transport data
+      - Supplier-specific emissions data where available
     steps:
       - Screen the 15 GHG Protocol categories for relevance.
       - Estimate using supplier data first, then activity data, then spend-based factors, stating sources.
       - Identify hotspots.
       - Propose reduction levers and supplier engagement.
     output:
-      - "Category screening"
-      - "Emissions estimate with method and factors"
-      - "Hotspots"
-      - "Reduction plan"
+      - Category screening
+      - Emissions estimate with method and factors
+      - Hotspots
+      - Reduction plan
     checks:
-      - "Method and emission factor sources are cited"
-      - "Double counting avoided"
-    eu: []
+      - Method and emission factor sources are cited
+      - Double counting avoided
+    eu:
+      - Name the emission factor source and year (supplier data, Energistyrelsen, DEFRA, ecoinvent). Product claims of neutral
+        or reduced impact based on offsetting are banned from 27 September 2026 (Directive (EU) 2024/825). After Omnibus I,
+        CSRD applies only above 1,000 employees; SMEs mostly report to customers or under VSME.
     examples:
-      - "Estimate our scope 3 from purchased goods and transport using this spend data."
-
+      - Estimate our scope 3 from purchased goods and transport using this spend data.
   - id: supplier-performance-review
     title: Supplier Performance Review
     summary: Prepares a supplier business review with scorecard results, issues, improvement actions and relationship goals.
     triggers: the user is preparing a supplier QBR, supplier scorecard, performance review or escalation
     use:
-      - "Quarterly reviews with key suppliers"
-      - "Escalating poor performance"
+      - Quarterly reviews with key suppliers
+      - Escalating poor performance
     avoid: []
     inputs:
-      - "Delivery, quality and cost data"
-      - "Open issues and claims"
-      - "Upcoming needs"
+      - Delivery, quality and cost data
+      - Open issues and claims
+      - Upcoming needs
     steps:
       - Calculate scorecard KPIs against targets.
       - Summarise issues with root cause and impact.
       - Agree improvement actions with owners.
       - Share forecast and future requirements.
     output:
-      - "Scorecard"
-      - "Issues and impact"
-      - "Improvement plan"
-      - "Outlook and requirements"
+      - Scorecard
+      - Issues and impact
+      - Improvement plan
+      - Outlook and requirements
     checks:
-      - "Data covers the same period for all KPIs"
-      - "Actions have owners and dates"
+      - Data covers the same period for all KPIs
+      - Actions have owners and dates
     eu: []
     examples:
-      - "Prepare the Q4 review with our main logistics provider."
-
+      - Prepare the Q4 review with our main logistics provider.
   - id: returns-reverse-logistics
     title: Returns and Reverse Logistics
-    summary: Designs or improves the returns process with grading, disposition rules, cost analysis and circular options such as refurbishment and resale.
+    summary: Designs or improves the returns process with grading, disposition rules, cost analysis and circular options such
+      as refurbishment and resale.
     triggers: the user wants to improve returns handling, reduce return costs, reverse logistics or circular economy options
     use:
-      - "High return rates"
-      - "Setting up returns for e-commerce"
+      - High return rates
+      - Setting up returns for e-commerce
     avoid:
-      - "Consumer rights advice to individual customers (use cs-refund-returns-decision)"
+      - Consumer rights advice to individual customers (use cs-refund-returns-decision)
     inputs:
-      - "Return volumes, reasons and values"
-      - "Current process and costs"
-      - "Product types"
+      - Return volumes, reasons and values
+      - Current process and costs
+      - Product types
     steps:
       - Map the current returns flow and costs.
       - Analyse return reasons to find preventable returns.
       - Define grading and disposition rules (restock, refurbish, resell, recycle).
       - Estimate savings and environmental benefits.
     output:
-      - "Process map"
-      - "Reason analysis"
-      - "Disposition rules"
-      - "Business case"
+      - Process map
+      - Reason analysis
+      - Disposition rules
+      - Business case
     checks:
-      - "Legal obligations on waste and producer responsibility are noted"
-    eu: ["EU rules on extended producer responsibility for packaging and electronics, and the Ecodesign Regulation ban on destroying unsold apparel and footwear for larger companies, affect disposition options."]
+      - Legal obligations on waste and producer responsibility are noted
+    eu:
+      - ESPR (EU) 2024/1781 Article 25 bans destroying unsold apparel and footwear for large enterprises from 19 July 2026
+        and medium enterprises from 19 July 2030; consumer returns count as unsold. Extended producer responsibility applies
+        to packaging and electronics.
     examples:
-      - "Our webshop has a 22 percent return rate. How do we handle returns better?"
-
+      - Our webshop has a 22 percent return rate. How do we handle returns better?
   - id: production-capacity-plan
     title: Production and Capacity Planning
-    summary: Builds a rough-cut capacity and production plan that balances demand with machine and labour capacity, and finds bottlenecks.
+    summary: Builds a rough-cut capacity and production plan that balances demand with machine and labour capacity, and finds
+      bottlenecks.
     triggers: the user needs a production plan, capacity plan, master production schedule or bottleneck analysis
     use:
-      - "Monthly planning"
-      - "Peak season preparation"
+      - Monthly planning
+      - Peak season preparation
     avoid:
-      - "Detailed shop-floor sequencing in real time"
+      - Detailed shop-floor sequencing in real time
     inputs:
-      - "Demand or forecast by product"
-      - "Routings and cycle times"
-      - "Available hours, shifts and efficiency"
+      - Demand or forecast by product
+      - Routings and cycle times
+      - Available hours, shifts and efficiency
     steps:
       - Convert demand into required hours per resource.
       - Compare with available capacity and identify bottlenecks.
       - Propose options (overtime, shifts, pre-build, outsourcing) with cost.
       - Produce a production plan by period.
     output:
-      - "Load versus capacity table"
-      - "Bottlenecks"
-      - "Options and costs"
-      - "Production plan"
+      - Load versus capacity table
+      - Bottlenecks
+      - Options and costs
+      - Production plan
     checks:
-      - "Efficiency and downtime are included"
-      - "Working time rules are respected"
-    eu: ["The EU Working Time Directive and national rules or collective agreements limit hours and require rest periods."]
+      - Efficiency and downtime are included
+      - Working time rules are respected
+    eu:
+      - 'Denmark: average 48-hour week, 11 hours'' daily rest and one rest day per 7 days, with collective agreement rules
+        on top.'
     examples:
-      - "Can we produce 30 percent more in Q2 with our current two lines?"
-
+      - Can we produce 30 percent more in Q2 with our current two lines?
   - id: total-cost-of-ownership
     title: Total Cost of Ownership and Cost to Serve
-    summary: Calculates total cost of ownership for a purchase or cost to serve for customers, revealing hidden costs beyond price.
-    triggers: the user wants TCO, landed cost, cost to serve, make-or-buy or to compare offers beyond price
+    summary: Calculates total cost of ownership for a purchase or cost to serve for customers, revealing hidden costs beyond
+      price.
+    triggers: the user wants total cost of ownership for physical goods, equipment or materials, landed cost, logistics cost
+      to serve or make-or-buy
     use:
-      - "Capital equipment buying"
-      - "Near-shoring decisions"
-      - "Customer profitability"
+      - Capital equipment buying
+      - Near-shoring decisions
+      - Customer profitability
     avoid: []
     inputs:
-      - "Purchase prices and terms"
-      - "Logistics, quality, inventory and admin costs"
-      - "Lifetime and usage"
+      - Purchase prices and terms
+      - Logistics, quality, inventory and admin costs
+      - Lifetime and usage
     steps:
       - List cost elements across acquisition, operation and end of life.
       - Quantify each with data or stated assumptions.
       - Compare options over the same lifetime.
       - Show sensitivity to the biggest assumptions.
     output:
-      - "Cost element list"
-      - "TCO comparison"
-      - "Sensitivity"
-      - "Conclusion"
+      - Cost element list
+      - TCO comparison
+      - Sensitivity
+      - Conclusion
     checks:
-      - "Same lifetime and scope for all options"
-      - "Currency and inflation assumptions stated"
-    eu: []
+      - Same lifetime and scope for all options
+      - Currency and inflation assumptions stated
+    eu:
+      - Include CBAM costs for in-scope goods and duties from TARIC in landed cost.
     examples:
-      - "Compare buying from China versus Poland on total cost, including inventory and quality costs."
+      - Compare buying from China versus Poland on total cost, including inventory and quality costs.
+    not_for: For choosing a supplier on several criteria use scm-supplier-selection-scorecard; for software use it-solution-evaluation

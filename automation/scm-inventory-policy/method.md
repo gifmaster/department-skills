@@ -1,0 +1,11 @@
+- Put demand and lead time on the same day basis first (weekly demand / 7, weeks x 7).
+- z from cycle service level: 90 % = 1.282, 95 % = 1.645, 97.5 % = 1.960, 99 % = 2.326.
+- sigma LT = sqrt(L x sd_d^2 + d^2 x sd_L^2).
+- Safety stock = z x sigma LT, rounded up.
+- Reorder point = d x L + safety stock, rounded up.
+- EOQ = sqrt(2 x annual demand x order cost / (unit cost x holding rate)).
+- Order qty = max(EOQ, MOQ), rounded up to whole packs.
+- Average stock = safety stock + order qty / 2; value = x unit cost; compare with current stock x unit cost.
+- Holding rate or service level above 1 means a percentage: divide by 100.
+- Review by hand: lead-time SD above lead time, stock cover above 365 days, daily CoV above 2 (lumpy, normal formula weak), MOQ far above EOQ.
+- Cycle service level is not fill rate; say which one you used.

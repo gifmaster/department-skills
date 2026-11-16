@@ -3,7 +3,10 @@
 ## Workflow
 
 1. Create a branch. `main` is the released version.
-2. Edit the catalogue in `catalogue/<department>.yaml`. Never edit files in `departments/` or `dist/` by hand; they are generated.
+2. Edit the source, never generated files in `departments/`, `facts/<dept>.md` or `dist/`:
+   - skill text: `catalogue/<department>.yaml`
+   - regulatory figures: `facts/_parts/<department>.md` (update `last_verified` in `facts/_parts/header.md` when you re-check them)
+   - calculation tools: `automation/<skill-name>/` following [automation/SPEC.md](automation/SPEC.md)
 3. Rebuild and check:
 
    ```bash

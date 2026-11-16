@@ -2,41 +2,54 @@ department: customer-service
 title: Customer Service
 prefix: cs
 role: an experienced customer service and customer success manager
-overview: >-
-  Skills for answering customers well, handling complaints, building self-service, measuring
-  quality and satisfaction, keeping customers and communicating in a crisis. Built for support
-  teams in B2C and B2B companies, from a single inbox to a contact centre.
+overview: Skills for answering customers well, handling complaints, building self-service, measuring quality and satisfaction,
+  keeping customers and communicating in a crisis. Built for support teams in B2C and B2B companies, from a single inbox to
+  a contact centre.
 workflows:
   - name: Answer well
-    skills: [ticket-reply, complaint-handling, multilingual-reply, escalation-summary]
+    skills:
+      - ticket-reply
+      - complaint-handling
+      - multilingual-reply
+      - escalation-summary
     purpose: Fast, kind and correct answers, including the hard ones.
   - name: Scale self-service
-    skills: [ticket-triage-taxonomy, macro-library, knowledge-base-article, chatbot-faq-design]
+    skills:
+      - ticket-triage-taxonomy
+      - macro-library
+      - knowledge-base-article
+      - chatbot-faq-design
     purpose: Find what customers ask most and answer it once, well.
   - name: Listen and improve
-    skills: [csat-nps-analysis, voice-of-customer-report, product-feedback-loop, qa-scorecard]
+    skills:
+      - csat-nps-analysis
+      - voice-of-customer-report
+      - product-feedback-loop
+      - qa-scorecard
     purpose: Turn customer signals into better service and products.
 common_guardrails:
-  - Be warm, clear and honest with customers. Never promise refunds, compensation, delivery dates or exceptions that the user has not approved; offer drafts that state what the company can do.
-  - Customer messages contain personal data. Ask the user to remove details that are not needed, and never request full payment card numbers or passwords.
-  - Do not give legal conclusions to customers about their rights in a dispute. State the company's policy and statutory rights accurately and escalate disputes.
-common_eu:
-  - "EU consumer law gives a 14-day right of withdrawal for most distance and off-premises sales and a minimum two-year legal guarantee for defective goods. In Denmark, købeloven gives a two-year complaint period and presumes defects that appear within one year existed at delivery."
-  - "AI Act Article 50: customers must be informed when they are interacting with an AI system such as a chatbot, unless it is obvious."
+  - Be warm, clear and honest with customers. Never promise refunds, compensation, delivery dates or exceptions that the user
+    has not approved; offer drafts that state what the company can do.
+  - Customer messages contain personal data. Ask the user to remove details that are not needed, and never request full payment
+    card numbers or passwords.
+  - Do not give legal conclusions to customers about their rights in a dispute. State the company's policy and statutory rights
+    accurately and escalate disputes.
 skills:
   - id: ticket-reply
     title: Ticket Reply Drafter
-    summary: Drafts clear, kind and accurate replies to customer emails, chats and tickets that solve the issue in as few contacts as possible.
+    summary: Drafts clear, kind and accurate replies to customer emails, chats and tickets that solve the issue in as few
+      contacts as possible.
     triggers: the user needs to reply to a customer email, ticket, chat or message
     use:
-      - "Everyday support replies"
-      - "Tricky tone situations"
+      - Everyday support replies
+      - Tricky tone situations
     avoid:
-      - "Legal disputes or threats of legal action (escalate)"
+      - Compensation, refunds and defect claims (use cs-refund-returns-decision or cs-complaint-handling)
+      - Legal disputes or threats of legal action (escalate)
     inputs:
-      - "Customer message and history"
-      - "Facts about the order or account"
-      - "Company policy and what we can offer"
+      - Customer message and history
+      - Facts about the order or account
+      - Company policy and what we can offer
     steps:
       - Identify every question and the customer's emotional state.
       - Answer all questions in order, starting with the most important.
@@ -44,27 +57,28 @@ skills:
       - Match tone to the customer and brand, and keep it short.
       - Add a proactive tip that prevents the next contact.
     output:
-      - "Reply draft"
-      - "Internal note (what was promised, follow-ups)"
+      - Reply draft
+      - Internal note (what was promised, follow-ups)
     checks:
-      - "Every question answered"
-      - "No promises beyond policy"
+      - Every question answered
+      - No promises beyond policy
     eu: []
     examples:
-      - "Reply to this customer whose order is 5 days late and who is angry."
-
+      - Reply to this customer whose order is 5 days late and who is angry.
   - id: complaint-handling
     title: Complaint Handling and De-escalation
-    summary: Handles complaints with a structured approach that acknowledges, investigates, resolves and follows up, including de-escalation wording.
+    summary: Handles complaints with a structured approach that acknowledges, investigates, resolves and follows up, including
+      de-escalation wording.
     triggers: a customer is complaining, angry, threatening to leave, posting negative reviews or asking for compensation
     use:
-      - "Formal complaints"
-      - "Repeat contacts about the same issue"
-    avoid: []
+      - Formal complaints
+      - Repeat contacts about the same issue
+    avoid:
+      - Legal decisions on refunds, returns or defect rights (apply cs-refund-returns-decision first)
     inputs:
-      - "Complaint and history"
-      - "Facts from internal systems"
-      - "Compensation guidelines"
+      - Complaint and history
+      - Facts from internal systems
+      - Compensation guidelines
     steps:
       - Acknowledge the issue and the impact without blaming.
       - Separate facts from claims and list what to verify.
@@ -72,264 +86,274 @@ skills:
       - Draft the reply and a follow-up check.
       - Log root cause for improvement.
     output:
-      - "Situation summary"
-      - "Facts to verify"
-      - "Resolution options"
-      - "Reply draft"
-      - "Root cause log"
+      - Situation summary
+      - Facts to verify
+      - Resolution options
+      - Reply draft
+      - Root cause log
     checks:
-      - "Apology is sincere but not an admission beyond facts"
-      - "Compensation is approved"
-    eu: ["Consumer disputes that are not resolved can go to an alternative dispute resolution body; in Denmark, Nævnenes Hus handles consumer complaints. Traders must inform consumers about relevant ADR bodies."]
+      - Apology is sincere but not an admission beyond facts
+      - Compensation is approved
+    eu:
+      - Consumer disputes that are not resolved can go to an alternative dispute resolution body; in Denmark, Nævnenes Hus
+        handles consumer complaints. Traders must inform consumers about relevant ADR bodies.
+      - The EU ODR platform closed on 20 July 2025; remove old ODR links from replies and terms.
     examples:
-      - "A customer received a broken sofa, waited 3 weeks and wants full refund plus compensation."
-
+      - A customer received a broken sofa, waited 3 weeks and wants full refund plus compensation.
   - id: knowledge-base-article
     title: Knowledge Base Article
-    summary: Writes customer-facing help centre articles that are easy to scan, solve one problem each and are optimised for search and chatbots.
+    summary: Writes customer-facing help centre articles that are easy to scan, solve one problem each and are optimised for
+      search and chatbots.
     triggers: the user needs a help article, FAQ, help centre page or self-service content for customers
     use:
-      - "Frequent questions"
-      - "New features"
+      - Frequent questions
+      - New features
     avoid: []
     inputs:
-      - "The question or problem"
-      - "Correct steps and facts"
-      - "Product version"
+      - The question or problem
+      - Correct steps and facts
+      - Product version
     steps:
       - Write a title in the customer's words.
       - Give the short answer first, then steps.
       - Add screenshots to capture and related links.
       - Add search keywords and phrasing variants for chatbots.
     output:
-      - "Article"
-      - "Keywords and variants"
-      - "Related articles"
+      - Article
+      - Keywords and variants
+      - Related articles
     checks:
-      - "One topic per article"
-      - "Accessible formatting (headings, alt text notes)"
+      - One topic per article
+      - Accessible formatting (headings, alt text notes)
     eu: []
     examples:
-      - "Write a help article on how to change your delivery address after ordering."
-
+      - Write a help article on how to change your delivery address after ordering.
   - id: macro-library
     title: Macro and Saved Reply Library
-    summary: Builds a library of saved replies (macros) for common contact reasons, with personalisation fields and usage notes.
+    summary: Builds a library of saved replies (macros) for common contact reasons, with personalisation fields and usage
+      notes.
     triggers: the user wants canned responses, macros, templates or saved replies for support
     use:
-      - "Setting up a helpdesk"
-      - "Improving consistency"
-    avoid: []
+      - Setting up a helpdesk
+      - Improving consistency
+    avoid:
+      - Incident or outage messages (use cs-outage-communication)
     inputs:
-      - "Top contact reasons"
-      - "Policies"
-      - "Brand voice"
+      - Top contact reasons
+      - Policies
+      - Brand voice
     steps:
-      - Group contact reasons and pick the top 20.
+      - Group contact reasons and pick the most frequent ones (about 10 for small teams, up to 30 for large).
       - Write one macro per reason with placeholders.
       - Add notes on when not to use each macro.
       - Plan a review cycle.
     output:
-      - "Macro list with names"
-      - "Macro texts"
-      - "Usage notes"
+      - Macro list with names
+      - Macro texts
+      - Usage notes
     checks:
-      - "Macros sound human and allow personalisation"
-      - "Placeholders are consistent"
+      - Macros sound human and allow personalisation
+      - Placeholders are consistent
+      - Voluntary policies never override the statutory withdrawal or complaint rights
     eu: []
     examples:
-      - "Build 15 macros for our webshop support team in Danish and English."
-
+      - Build 15 macros for our webshop support team in Danish and English.
   - id: ticket-triage-taxonomy
     title: Ticket Categorisation and Triage
-    summary: Designs a ticket category taxonomy and triage rules, and classifies a sample of tickets to find the biggest contact drivers.
-    triggers: the user wants to categorise tickets, design tags, set priorities and routing, or find why customers contact them
+    summary: Designs a ticket category taxonomy and triage rules, and classifies a sample of tickets to find the biggest contact
+      drivers.
+    triggers: the user wants to categorise tickets, design tags, set priorities and routing, or find why customers contact
+      them
     use:
-      - "New helpdesk setup"
-      - "Messy tags"
-      - "Contact reduction projects"
+      - New helpdesk setup
+      - Messy tags
+      - Contact reduction projects
     avoid: []
     inputs:
-      - "Sample of tickets"
-      - "Teams and skills"
-      - "SLA rules"
+      - Sample of tickets
+      - Teams and skills
+      - SLA rules
     steps:
       - Propose a two-level taxonomy (reason and sub-reason).
       - Define priority rules and routing.
       - Classify the sample and count contact drivers.
       - Recommend the top contact-reduction actions.
     output:
-      - "Taxonomy"
-      - "Priority and routing rules"
-      - "Contact driver analysis"
-      - "Reduction actions"
+      - Taxonomy
+      - Priority and routing rules
+      - Contact driver analysis
+      - Reduction actions
     checks:
-      - "Categories are mutually exclusive"
-      - "Rules are simple enough to use"
+      - Categories are mutually exclusive
+      - Rules are simple enough to use
     eu: []
     examples:
-      - "Here are 300 tickets from last month. What are customers contacting us about most?"
-
+      - Here are 300 tickets from last month. What are customers contacting us about most?
   - id: csat-nps-analysis
     title: CSAT and NPS Analysis
     summary: Analyses CSAT, NPS or CES survey results and comments, finds drivers of satisfaction and recommends improvements.
     triggers: the user has customer satisfaction, NPS, CSAT or CES survey data to analyse
     use:
-      - "Monthly or quarterly reviews"
-      - "After process changes"
+      - Monthly or quarterly reviews
+      - After process changes
     avoid: []
     inputs:
-      - "Scores and comments"
-      - "Segments (channel, product, agent team)"
-      - "Previous results"
+      - Scores and comments
+      - Segments (channel, product, agent team)
+      - Previous results
     steps:
       - Calculate scores and trends with sample sizes.
       - Code comments into themes and link themes to scores.
       - Compare segments where sample sizes allow.
       - Recommend actions and close-the-loop steps for detractors.
     output:
-      - "Scores and trends"
-      - "Themes"
-      - "Segment comparison"
-      - "Actions"
-      - "Close-the-loop plan"
+      - Scores and trends
+      - Themes
+      - Segment comparison
+      - Actions
+      - Close-the-loop plan
     checks:
-      - "Formulas stated"
-      - "Small samples flagged"
+      - Formulas stated
+      - Small samples flagged
     eu: []
     examples:
-      - "Analyse 900 NPS responses and tell us why detractors are unhappy."
-
+      - Analyse 900 NPS responses and tell us why detractors are unhappy.
   - id: voice-of-customer-report
     title: Voice of the Customer Report
-    summary: Combines tickets, reviews, surveys and social comments into a voice of the customer report with themes, evidence and owners.
-    triggers: the user wants a customer insights report, voice of customer, review analysis or to share customer feedback with management
+    summary: Combines tickets, reviews, surveys and social comments into a voice of the customer report with themes, evidence
+      and owners.
+    triggers: the user wants a customer insights report, voice of customer, review analysis or to share customer feedback
+      with management
     use:
-      - "Monthly insights for management"
-      - "Product planning input"
+      - Monthly insights for management across functions
     avoid: []
     inputs:
-      - "Feedback sources and exports"
-      - "Period and products"
+      - Feedback sources and exports
+      - Period and products
     steps:
       - Merge sources and remove duplicates and personal data.
       - Identify themes and size them.
       - Pick representative anonymised quotes.
       - Assign owners and recommended actions.
     output:
-      - "Top themes with size and trend"
-      - "Quotes"
-      - "Business impact"
-      - "Recommended owners and actions"
+      - Top themes with size and trend
+      - Quotes
+      - Business impact
+      - Recommended owners and actions
     checks:
-      - "Quotes anonymised"
-      - "Each theme backed by counts"
+      - Quotes anonymised
+      - Each theme backed by counts
     eu: []
     examples:
-      - "Build a VoC report from our Trustpilot reviews and support tickets for Q3."
-
+      - Build a VoC report from our Trustpilot reviews and support tickets for Q3.
   - id: escalation-summary
     title: Escalation Summary
-    summary: Writes a clear escalation summary for a second line, specialist or manager with facts, impact, steps taken and what is needed.
-    triggers: the user needs to escalate a case, hand over to second line, summarise a long thread or brief a manager on a customer issue
+    summary: Writes a clear escalation summary for a second line, specialist or manager with facts, impact, steps taken and
+      what is needed.
+    triggers: the user needs to escalate a case, hand over to second line, summarise a long thread or brief a manager on a
+      customer issue
     use:
-      - "Complex or high-value cases"
-      - "Handovers between shifts"
+      - Complex or high-value cases
+      - Handovers between shifts
     avoid: []
     inputs:
-      - "Case thread"
-      - "Customer and impact"
-      - "Actions taken"
+      - Case thread
+      - Customer and impact
+      - Actions taken
     steps:
       - Summarise the issue in two sentences.
       - List facts, timeline and steps tried.
       - State impact and urgency.
       - State exactly what is needed and by when.
     output:
-      - "Summary"
-      - "Timeline"
-      - "Steps tried"
-      - "Impact"
-      - "Request"
+      - Summary
+      - Timeline
+      - Steps tried
+      - Impact
+      - Request
     checks:
-      - "Readable in one minute"
-      - "No unnecessary personal data"
+      - Readable in one minute
+      - No unnecessary personal data
     eu: []
     examples:
-      - "Summarise this 40-message thread for our tech team."
-
+      - Summarise this 40-message thread for our tech team.
   - id: refund-returns-decision
     title: Refund and Returns Decision Support
     summary: Applies the company's returns policy and statutory consumer rights to a case and drafts the decision and reply.
     triggers: a customer wants a refund, return, exchange, repair or makes a warranty or reklamation claim
     use:
-      - "Return requests"
-      - "Defect claims"
+      - Return requests
+      - Defect claims
     avoid:
-      - "Final decisions on disputed legal claims"
+      - Final decisions on disputed legal claims
     inputs:
-      - "Order details and dates"
-      - "Customer request and reason"
-      - "Returns policy"
-      - "Product condition"
+      - Order details and dates
+      - Customer request and reason
+      - Returns policy
+      - Product condition
     steps:
       - Check whether it is a withdrawal, a defect complaint or a goodwill request.
       - Check deadlines and conditions for that route.
       - Determine the remedy (repair, replacement, price reduction, refund) and costs.
       - Draft the decision and reply with clear next steps.
     output:
-      - "Route and rules applied"
-      - "Decision and reasoning"
-      - "Reply draft"
+      - Route and rules applied
+      - Decision and reasoning
+      - Reply draft
     checks:
-      - "Statutory rights are not reduced by policy"
-      - "Refund timing within 14 days for withdrawals"
-    eu: []
+      - Statutory rights are not reduced by policy
+      - Refund timing within 14 days for withdrawals
+    eu:
+      - 'Denmark: 14-day withdrawal with refund within 14 days; two-year complaint period for defects, with defects within
+        one year presumed present at delivery; complaints within two months of discovery are always timely (see references/facts.md).'
     examples:
-      - "A customer wants to return a jacket after 20 days, worn once, with a broken zip."
-
+      - A customer wants to return a jacket after 20 days, worn once, with a broken zip.
   - id: churn-save
     title: Churn Save Conversation
-    summary: Prepares a conversation or message to save a customer who wants to cancel, understanding the reason and offering suitable options.
+    summary: Prepares a conversation or message to save a customer who wants to cancel, understanding the reason and offering
+      suitable options.
     triggers: a customer wants to cancel, downgrade or leave, or the user wants a retention or win-back message
     use:
-      - "Cancellation requests"
-      - "Accounts at risk"
+      - Cancellation requests
+      - Accounts at risk
     avoid:
-      - "Making cancellation hard; cancellation must stay easy"
+      - Making cancellation hard; cancellation must stay easy
     inputs:
-      - "Customer history and value"
-      - "Cancellation reason"
-      - "Retention offers allowed"
+      - Customer history and value
+      - Cancellation reason
+      - Retention offers allowed
     steps:
       - Identify the real reason and whether it can be solved.
       - Choose an option (fix, pause, downgrade, offer) that fits the reason.
+      - 'Check the offer economics: the retention offer must cost less than the expected value of keeping the customer.'
       - Draft the conversation or message.
       - Respect the decision if they still want to leave and confirm cancellation clearly.
     output:
-      - "Reason analysis"
-      - "Recommended option"
-      - "Script or message"
-      - "Cancellation confirmation text"
+      - Reason analysis
+      - Recommended option
+      - Script or message
+      - Cancellation confirmation text
     checks:
-      - "No dark patterns"
-      - "Offer is approved"
-    eu: ["EU rules make it unlawful to make cancelling harder than signing up in many cases; dark patterns are restricted under the Digital Services Act and consumer law."]
+      - No dark patterns
+      - Offer is approved
+    eu:
+      - Making cancellation harder than sign-up can be an unfair commercial practice under the UCPD; Forbrugerombudsmanden
+        expects cancelling to be as easy as signing up. The DSA dark-pattern ban covers online platforms only. Online distance
+        contracts need a withdrawal function from 19 June 2026 (Directive (EU) 2023/2673).
     examples:
-      - "A 3-year customer wants to cancel because of price. What do I say?"
-
+      - A 3-year customer wants to cancel because of price. What do I say?
   - id: chatbot-faq-design
     title: Chatbot and FAQ Design
     summary: Designs chatbot intents, answers, handover rules and transparency messages based on real contact data.
     triggers: the user is building a support chatbot, virtual agent, AI assistant for customers or FAQ automation
     use:
-      - "Launching or improving a chatbot"
+      - Launching or improving a chatbot
     avoid: []
     inputs:
-      - "Top contact reasons"
-      - "Knowledge base"
-      - "Systems the bot can access"
-      - "Escalation options"
+      - Top contact reasons
+      - Knowledge base
+      - Systems the bot can access
+      - Escalation options
     steps:
       - Select intents suitable for automation.
       - Write answers and clarifying questions per intent.
@@ -337,307 +361,325 @@ skills:
       - Write the AI disclosure and privacy notice text.
       - Define success metrics and testing.
     output:
-      - "Intent list"
-      - "Answers and flows"
-      - "Handover rules"
-      - "Disclosure text"
-      - "Metrics and test plan"
+      - Intent list
+      - Answers and flows
+      - Handover rules
+      - Disclosure text
+      - Metrics and test plan
     checks:
-      - "Customers can always reach a human"
-      - "Bot does not give answers outside its knowledge"
+      - Customers can always reach a human
+      - Bot does not give answers outside its knowledge
     eu: []
     examples:
-      - "Design a chatbot for our webshop's 10 most common questions."
-
+      - Design a chatbot for our webshop's 10 most common questions.
   - id: qa-scorecard
     title: Quality Assurance Scorecard
     summary: Builds a quality scorecard for support interactions and applies it to sample tickets or calls with coaching feedback.
     triggers: the user wants to assess support quality, create a QA form, review tickets or coach agents
     use:
-      - "Regular quality reviews"
-      - "Coaching new agents"
+      - Regular quality reviews
+      - Coaching new agents
     avoid:
-      - "Automated performance scoring of employees without human review"
+      - Automated performance scoring of employees without human review
     inputs:
-      - "Quality standards"
-      - "Sample interactions (anonymised)"
+      - Quality standards
+      - Sample interactions (anonymised)
     steps:
       - Define criteria (accuracy, resolution, tone, process, compliance) with weights.
       - Write anchors for each score level.
       - Score samples with evidence.
       - Write coaching feedback with one strength and one focus area.
     output:
-      - "Scorecard"
-      - "Scored samples"
-      - "Coaching notes"
-      - "Calibration tips"
+      - Scorecard
+      - Scored samples
+      - Coaching notes
+      - Calibration tips
     checks:
-      - "Feedback is specific and kind"
-      - "Agent names removed if shared widely"
-    eu: ["AI Act: using AI to monitor and evaluate employee performance is high-risk; keep QA scoring human-led."]
+      - Feedback is specific and kind
+      - Agent names removed if shared widely
+    eu:
+      - 'AI Act: AI scoring of employee performance is high-risk (Annex III point 4) from 2 December 2027; GDPR Article 22
+        and transparency apply now and a DPIA is likely; Danish collective agreements generally require six weeks'' notice
+        of new control measures.'
     examples:
-      - "Create a QA scorecard and score these 5 chat transcripts."
-
+      - Create a QA scorecard and score these 5 chat transcripts.
   - id: sla-report
     title: Service Level Report
     summary: Produces a service level and operations report with volumes, response and resolution times, backlog and SLA attainment.
     triggers: the user needs a support SLA report, service metrics, backlog analysis or monthly support report
     use:
-      - "Monthly reporting"
-      - "Customer SLA reviews"
+      - Monthly reporting
+      - Customer SLA reviews
     avoid: []
     inputs:
-      - "Ticket export with timestamps, priorities and channels"
-      - "SLA definitions"
+      - Ticket export with timestamps, priorities and channels
+      - SLA definitions
     steps:
       - Calculate volumes, first response time, resolution time and SLA attainment.
       - Analyse trends, backlog age and peaks.
       - Explain breaches and causes.
       - Recommend actions.
     output:
-      - "Headline metrics"
-      - "Trend charts to include"
-      - "Breach analysis"
-      - "Actions"
+      - Headline metrics
+      - Trend charts to include
+      - Breach analysis
+      - Actions
     checks:
-      - "Business hours applied if SLAs use them"
-      - "Median and percentiles, not only averages"
+      - Business hours applied if SLAs use them
+      - Median and percentiles, not only averages
     eu: []
     examples:
-      - "Build the October support report from this Zendesk export."
-
+      - Build the October support report from this Zendesk export.
   - id: customer-onboarding-plan
     title: Customer Onboarding and Success Plan
-    summary: Creates a customer onboarding and success plan with goals, milestones, owners and health checks for a new B2B customer.
+    summary: Creates a customer onboarding and success plan with goals, milestones, owners and health checks for a new B2B
+      customer.
     triggers: the user is onboarding a new customer, needs a success plan, kick-off agenda or time-to-value plan
     use:
-      - "New B2B customers"
-      - "Complex implementations"
+      - New B2B customers
+      - Complex implementations
     avoid: []
     inputs:
-      - "Customer goals"
-      - "Product scope"
-      - "Stakeholders"
-      - "Go-live target"
+      - Customer goals
+      - Product scope
+      - Stakeholders
+      - Go-live target
     steps:
       - Define success criteria with the customer.
       - Plan milestones from kick-off to value.
       - Assign owners on both sides.
       - Plan check-ins and risk signals.
     output:
-      - "Success criteria"
-      - "Milestone plan"
-      - "RACI"
-      - "Kick-off agenda"
-      - "Health checks"
+      - Success criteria
+      - Milestone plan
+      - RACI
+      - Kick-off agenda
+      - Health checks
     checks:
-      - "First value is reached quickly"
-      - "Customer owners are named"
+      - First value is reached quickly
+      - Customer owners are named
     eu: []
     examples:
-      - "Build a 60-day onboarding plan for a new customer of our compliance platform."
-
+      - Build a 60-day onboarding plan for a new customer of our compliance platform.
   - id: customer-health-score
     title: Customer Health Score
-    summary: Designs a customer health score from usage, support, payment and relationship signals and lists at-risk accounts with actions.
+    summary: Designs a customer health score from usage, support, payment and relationship signals and lists at-risk accounts
+      with actions.
     triggers: the user wants a health score, churn prediction signals, at-risk customer list or account prioritisation
     use:
-      - "Customer success teams"
-      - "Renewal planning"
+      - Customer success teams
+      - Renewal planning
     avoid: []
     inputs:
-      - "Usage data"
-      - "Support and NPS data"
-      - "Payment and contract data"
+      - Usage data
+      - Support and NPS data
+      - Payment and contract data
     steps:
       - Choose signals that predict churn or growth in the user's data.
+      - 'Start from default signals unless the user has better ones: product usage trend (35 percent), support tickets and
+        sentiment (20 percent), NPS or CSAT (15 percent), payment behaviour (15 percent), relationship and sponsor (15 percent).
+        Score each 0 to 100, bands: healthy 70+, watch 40 to 69, at risk below 40.'
       - Weight and normalise signals into a score.
       - Validate against past churn if data exists.
       - List at-risk accounts with recommended plays.
     output:
-      - "Signal definitions"
-      - "Scoring model"
-      - "Validation"
-      - "At-risk list and plays"
+      - Signal definitions
+      - Scoring model
+      - Validation
+      - At-risk list and plays
     checks:
-      - "Model is explainable"
-      - "Not used for decisions about individuals without review"
-    eu: []
+      - Model is explainable
+      - Not used for decisions about individuals without review
+      - Silent accounts (no tickets and falling usage) are not scored as healthy
+    eu:
+      - 'GDPR: profiling of named users needs a lawful basis and transparency; Article 22 applies only to solely automated
+        decisions with significant effects.'
     examples:
-      - "Build a health score from this usage and ticket data and tell us who might churn."
-
+      - Build a health score from this usage and ticket data and tell us who might churn.
   - id: multilingual-reply
     title: Multilingual Customer Reply
     summary: Writes or translates customer replies into other languages with the right tone, cultural conventions and terminology.
     triggers: the user needs to reply to a customer in another language or translate support content
     use:
-      - "International customers"
-      - "Translating help articles"
+      - International customers
+      - Translating help articles
     avoid:
-      - "Legally binding translations without review"
+      - Legally binding translations without review
     inputs:
-      - "Original message or content"
-      - "Target language and market"
-      - "Brand terminology"
+      - Original message or content
+      - Target language and market
+      - Brand terminology
     steps:
       - Understand the customer's message and tone.
       - Write the reply natively in the target language, not word for word.
       - Keep product names and legal terms consistent.
       - Provide a back-translation for the user to check.
     output:
-      - "Reply in target language"
-      - "Back-translation"
-      - "Terminology notes"
+      - Reply in target language
+      - Back-translation
+      - Terminology notes
     checks:
-      - "Formality fits the culture (du or De in Danish, du or Sie in German)"
-      - "Numbers, dates and currencies localised"
+      - Formality fits the culture (du in Danish, du in Swedish and Norwegian, Sie or du in German by brand), and consumer
+        bodies are named per country
+      - Numbers, dates and currencies localised
     eu: []
     examples:
-      - "Reply in German to this complaint and give me the English back-translation."
-
+      - Reply in German to this complaint and give me the English back-translation.
   - id: social-media-response
     title: Social Media and Review Response
-    summary: Drafts public responses to reviews and social media comments, balancing transparency, tone and privacy, and moves issues to private channels.
-    triggers: the user needs to respond to a review, Trustpilot, Google review, social media comment or public complaint
+    summary: Drafts public responses to reviews and social media comments, balancing transparency, tone and privacy, and moves
+      issues to private channels.
+    triggers: the user needs to respond to an individual review, Trustpilot or Google review, social media comment or public
+      complaint
     use:
-      - "Negative and positive reviews"
-      - "Viral complaints"
+      - Negative and positive reviews
+      - Viral complaints
     avoid:
-      - "Fake reviews or incentivised reviews without disclosure"
+      - Analysing many reviews (use cs-voice-of-customer-report)
+      - Fake or incentivised reviews without disclosure
     inputs:
-      - "Review or comment"
-      - "Facts of the case"
-      - "Brand voice"
+      - Review or comment
+      - Facts of the case
+      - Brand voice
     steps:
       - Decide whether and where to respond.
       - Write a short public reply that acknowledges and offers a private channel.
       - Avoid disclosing personal or order details publicly.
       - Draft the private follow-up.
     output:
-      - "Public reply"
-      - "Private follow-up"
-      - "Escalation note if needed"
+      - Public reply
+      - Private follow-up
+      - Escalation note if needed
     checks:
-      - "No personal data in public"
-      - "Tone stays calm"
-    eu: ["The Omnibus Directive (EU) 2019/2161 bans fake reviews and requires traders to explain how they verify that reviews come from real customers."]
+      - No personal data in public
+      - Tone stays calm
+    eu:
+      - Omnibus Directive (EU) 2019/2161 bans submitting or commissioning fake reviews, and requires traders that publish
+        reviews to state whether and how they ensure reviews come from real customers.
     examples:
-      - "Reply to this one-star Trustpilot review saying our delivery was late and staff were rude."
-
+      - Reply to this one-star Trustpilot review saying our delivery was late and staff were rude.
   - id: accessible-communication
     title: Accessible Customer Communication
     summary: Reviews and rewrites customer communication, forms and help content for accessibility and plain language.
-    triggers: the user wants accessible content, plain language, easy-to-read text or to check European Accessibility Act readiness for service content
+    triggers: the user wants accessible content, plain language, easy-to-read text or to check European Accessibility Act
+      readiness for service content
     use:
-      - "Customer letters"
-      - "Web content"
-      - "Forms and chat"
+      - Customer letters
+      - Web content
+      - Forms and chat
     avoid:
-      - "Technical web accessibility audits of code"
+      - Technical web accessibility audits of code
     inputs:
-      - "Content to review"
-      - "Audience"
-      - "Channels"
+      - Content to review
+      - Audience
+      - Channels
     steps:
       - Check readability, sentence length and jargon.
       - Check structure, headings, link text, alt text and colour reliance.
       - Rewrite in plain language.
       - List channel-specific accessibility improvements.
     output:
-      - "Findings"
-      - "Rewritten content"
-      - "Improvement list"
+      - Findings
+      - Rewritten content
+      - Improvement list
     checks:
-      - "Meaning preserved"
-      - "Instructions are step-by-step"
-    eu: ["The European Accessibility Act (Directive (EU) 2019/882) applies from 28 June 2025 to many consumer products and services, including e-commerce and customer service channels; microenterprises providing services are exempt. Check the national implementation."]
+      - Meaning preserved
+      - Instructions are step-by-step
+    eu:
+      - The European Accessibility Act (Directive (EU) 2019/882) applies from 28 June 2025 to specific services such as e-commerce,
+        consumer banking, electronic communications and e-books; their support services must provide accessibility information.
+        Microenterprises providing services are exempt. Conformity is usually shown against EN 301 549 (WCAG 2.1 AA).
     examples:
-      - "Make our order confirmation email and returns page accessible and easy to read."
-
+      - Make our order confirmation email and returns page accessible and easy to read.
   - id: product-feedback-loop
     title: Product Feedback Loop
-    summary: Turns support conversations into structured product feedback with frequency, impact and evidence, and closes the loop with customers.
-    triggers: the user wants to share customer feedback with product, collect feature requests or prioritise product issues from support
+    summary: Turns support conversations into structured product feedback with frequency, impact and evidence, and closes
+      the loop with customers.
+    triggers: the user wants to share customer feedback with product, collect feature requests or prioritise product issues
+      from support
     use:
-      - "Regular product syncs"
-      - "Feature request handling"
+      - Regular product syncs
+      - Feature request handling
     avoid: []
     inputs:
-      - "Tickets and feature requests"
-      - "Customer segments and revenue"
+      - Tickets and feature requests
+      - Customer segments and revenue
     steps:
       - Group requests and bugs into problems, not solutions.
       - Size by frequency and customer impact.
       - Provide evidence and example tickets.
       - Plan how to update customers when items ship.
     output:
-      - "Problem list with size and evidence"
-      - "Top 5 for product"
-      - "Close-the-loop plan"
+      - Problem list with size and evidence
+      - Top 5 for product
+      - Close-the-loop plan
     checks:
-      - "Duplicates merged"
-      - "Revenue impact labelled as estimate"
+      - Duplicates merged
+      - Revenue impact labelled as estimate
     eu: []
     examples:
-      - "Summarise feature requests from this quarter's tickets for the product team."
-
+      - Summarise feature requests from this quarter's tickets for the product team.
   - id: staffing-forecast
     title: Support Staffing Forecast
-    summary: Forecasts contact volumes and calculates staffing needs by interval with service level targets, shrinkage and schedules.
+    summary: Forecasts contact volumes and calculates staffing needs by interval with service level targets, shrinkage and
+      schedules.
     triggers: the user needs workforce planning for support, staffing levels, Erlang C calculations or rosters
     use:
-      - "Planning seasons and campaigns"
-      - "Budgeting headcount"
+      - Planning seasons and campaigns
+      - Budgeting headcount
     avoid: []
     inputs:
-      - "Historical contact volumes by interval"
-      - "Handle times"
-      - "Service level target"
-      - "Shrinkage"
+      - Historical contact volumes by interval
+      - Handle times
+      - Service level target
+      - Shrinkage
     steps:
       - Forecast volumes by week, day and interval.
       - Calculate required agents per interval with Erlang C or a workload method, showing assumptions.
       - Add shrinkage and convert to headcount.
       - Suggest shift patterns.
     output:
-      - "Volume forecast"
-      - "Staffing requirement"
-      - "Headcount"
-      - "Shift suggestions"
+      - Volume forecast
+      - Staffing requirement
+      - Headcount
+      - Shift suggestions
     checks:
-      - "Units consistent"
-      - "Working time rules respected"
+      - Units consistent
+      - Working time rules respected
     eu: []
     examples:
-      - "How many agents do we need for Black Friday week with 3x normal volume?"
-
+      - How many agents do we need for Black Friday week with 3x normal volume?
   - id: outage-communication
     title: Outage and Crisis Communication
-    summary: Drafts customer communications for outages, incidents, recalls or crises across status page, email, social and support macros.
+    summary: Drafts customer-facing communications for outages, incidents, recalls or crises across status page, email, social
+      and support macros.
     triggers: there is an outage, service incident, product recall, data incident or crisis and customers must be informed
     use:
-      - "Live incidents"
-      - "Crisis preparation"
+      - Live incidents
+      - Crisis preparation
     avoid:
-      - "Statements on legal liability without legal review"
+      - Statements on legal liability without legal review
     inputs:
-      - "What happened and who is affected"
-      - "What is known and unknown"
-      - "Next update time"
+      - What happened and who is affected
+      - What is known and unknown
+      - Next update time
     steps:
       - Write the first holding message quickly with what we know and when we will update.
       - Prepare updates and the resolution message.
       - Create support macros so agents answer consistently.
       - Draft a post-incident summary for customers.
     output:
-      - "Holding statement"
-      - "Update templates"
-      - "Resolution message"
-      - "Support macros"
-      - "Post-incident summary"
+      - Holding statement
+      - Update templates
+      - Resolution message
+      - Support macros
+      - Post-incident summary
     checks:
-      - "Facts only, no speculation"
-      - "Consistent across channels"
-    eu: ["If personal data is involved, coordinate with the data protection lead because individual notification may be required under GDPR Article 34."]
+      - Facts only, no speculation
+      - Consistent across channels
+    eu:
+      - 'Personal data breach: the controller notifies Datatilsynet within 72 hours (GDPR Article 33(1)) and a processor notifies
+        its controller without undue delay (Article 33(2)); high-risk breaches to individuals (Article 34). Product recalls
+        follow the General Product Safety Regulation (EU) 2023/988, Article 36. Check NIS2 if in scope.'
     examples:
-      - "Our payment system is down. Write the status page update and support macros."
+      - Our payment system is down. Write the status page update and support macros.

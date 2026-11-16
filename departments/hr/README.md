@@ -3,7 +3,7 @@
 
 Skills for the full employee lifecycle: attracting and selecting candidates, onboarding, performance and development, pay, wellbeing, policies and exits. Built for small and mid-sized organisations where one HR person often covers everything.
 
-**21 skills** · version 1.0.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
+**21 skills** · version 1.1.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
 
 - Install in Claude Code: `/plugin install hr-skills --marketplace gifmaster/department-skills`
 - Install anywhere else: see [INSTALL.md](INSTALL.md)
@@ -58,9 +58,8 @@ Evidence-based pay decisions ready for EU pay transparency rules.
 - Decisions about hiring, promotion, pay, discipline and dismissal must be made by a person. Present options, evidence and risks; do not make the decision.
 - Employment law differs by country and by collective agreement (overenskomst). Flag where a collective agreement or local law may change the answer and recommend checking with a qualified adviser or the employer organisation.
 
-## Regulatory context used across this pack
+## Regulatory facts
 
-- GDPR applies to every skill here: lawful basis, data minimisation, retention limits and transparency to employees and candidates.
-- EU AI Act: AI used for recruitment, selection, promotion, termination, task allocation or performance monitoring is high-risk under Annex III (point 4). Emotion recognition in the workplace is prohibited (Article 5). High-risk requirements apply from 2 December 2027 for Annex III systems (date set by amending Regulation (EU) 2026/1744). Keep a human in charge and document how AI output is used.
+Every skill in this pack ships `references/facts.md`: dated, sourced figures and rules (last verified 2026-11-16). The master copy is [facts/hr.md](../../facts/hr.md). Update it there and rebuild.
 
 These notes are orientation, not legal advice. Check current law, collective agreements and your own policies.

@@ -1,0 +1,11 @@
+item,avg_daily_demand,sd_daily_demand,lead_time_days,sd_lead_time_days,unit_cost,order_cost,holding_rate,moq,pack_size,service_level,current_stock
+HX-210 Hose clamp 20-32,60,36,14,3,4.80,350,0.22,1000,100,0.95,5200
+HX-344 Ball valve 1in,9.3,8.3,35,10,118,350,0.22,50,10,0.95,220
+HX-501 Pressure gauge 63mm,4,5.3,21,5,96,350,0.22,20,5,0.95,310
+HX-722 Brass fitting 3/4,30,15,10,2,22,350,0.22,200,50,0.95,600
+HX-901 Pump kit OEM,0.86,1.9,56,14,2400,500,0.22,1,1,0.90,12
+HX-118 PTFE tape,128,57,7,1,3.20,350,0.22,2000,200,0.95,9000
+HX-430 Thermostatic valve,5,3,21,30,185,350,22,10,10,,40
+HX-615 Radiator bracket,2,1.5,14,2,35,350,0.22,25,25,0.95,1200
+HX-260 Pipe insulation 22mm,12,6,10,2,,350,0.22,50,25,0.95,300
+HX-210 Hose clamp 20-32,62,30,14,3,4.80,350,0.22,1000,100,0.95,5200

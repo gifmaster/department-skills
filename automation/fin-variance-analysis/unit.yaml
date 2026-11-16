@@ -1,0 +1,5 @@
+skill: fin-variance-analysis
+script: scripts/variance.py
+template: assets/budget_actual.csv
+command: python3 scripts/variance.py assets/budget_actual.csv --abs-threshold 100000 --pct-threshold 10
+summary: Computes absolute and percentage variances with favourable or adverse labels for revenue and cost lines, filters to material variances, splits them into price and volume where quantities exist, and checks that line variances and control totals reconcile.

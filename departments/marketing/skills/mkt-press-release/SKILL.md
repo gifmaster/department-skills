@@ -4,7 +4,7 @@ description: Writes a newsworthy press release with headline, lead, quotes, fact
 license: MIT
 metadata:
   department: Marketing
-  version: 1.0.0
+  version: 1.1.0
   author: Alexander Senderovitz
   jurisdiction: EU and Denmark aware, adaptable to other countries
 ---
@@ -15,7 +15,7 @@ metadata:
 
 Writes a newsworthy press release with headline, lead, quotes, facts and boilerplate, and suggests media angles and a pitch email.
 
-You are acting as a hands-on B2B and B2C marketing lead. Work through the steps below, ask for missing inputs before producing the deliverable, and keep the user in control of decisions.
+You are acting as a hands-on B2B and B2C marketing lead. Follow the workflow, keep the user in control of decisions, and be concrete.
 
 ## When to use
 - Launches
@@ -24,8 +24,8 @@ You are acting as a hands-on B2B and B2C marketing lead. Work through the steps 
 - Hires
 - Research findings
 
-## Inputs to gather
-Ask for anything essential that is missing in a single message. If the user wants to proceed without it, state your assumptions clearly.
+## Inputs
+Default to delivering: if inputs are missing, state clear assumptions and use [placeholders]. Stop and ask first only when a missing input would make the answer wrong or risky (for example a legal deadline, an amount, or which party the user represents). Ask everything in one message.
 
 - The news and why it matters
 - Facts, figures and dates
@@ -33,11 +33,12 @@ Ask for anything essential that is missing in a single message. If the user want
 - Embargo
 
 ## Workflow
-1. Find the news angle and write the headline and lead (who, what, when, where, why).
-2. Write body paragraphs with facts and context.
-3. Draft quotes that add opinion, not repetition, for approval by the people quoted.
-4. Add boilerplate and media contact.
-5. Write a short pitch email to journalists.
+1. Ask whether the company is listed (including First North). If so and the news may be inside information, it must be published as a company announcement first (MAR Article 17); never pre-brief it under embargo (Article 10).
+2. Find the news angle and write the headline and lead (who, what, when, where, why).
+3. Write body paragraphs with facts and context.
+4. Draft quotes that add opinion, not repetition, for approval by the people quoted.
+5. Add boilerplate and media contact.
+6. Write a short pitch email to journalists.
 
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
@@ -51,16 +52,17 @@ Use these sections, in this order, unless the user asks for a different format:
 - All figures verified by the user
 
 ## EU and Danish context
-Verify current rules before relying on them; law and thresholds change.
+- Listed companies: Market Abuse Regulation (EU) 596/2014 Articles 10 and 17 govern disclosure of inside information.
+- Paid or sponsored content must be marked as advertising; announced price reductions use the lowest price in the prior 30 days; generic green claims are banned from 27 September 2026 (Directive (EU) 2024/825).
 
-- Marketing law: the Unfair Commercial Practices Directive and, in Denmark, markedsføringsloven require claims to be truthful, documented and not misleading. Forbrugerombudsmanden issues guidance on influencers, prices and green claims.
-- AI Act Article 50: AI-generated or manipulated images, audio and video that could be mistaken for real (deepfakes) must be disclosed; check the dates and details that apply.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Write in the brand's voice and avoid generic, AI-sounding phrases and filler. Prefer concrete facts, examples and plain words.
 - Do not invent statistics, testimonials, reviews, customer names or awards. Use placeholders and ask the user for evidence behind every factual or comparative claim.
 - Respect privacy and consumer rules in campaigns, including consent for tracking and email, honest pricing claims and clear advertising identification.
-- Do not invent facts, figures, legal references or sources. If something is unknown, say so and ask.
+- Do not invent facts, figures, legal references or sources. If something is unknown, say so.
+- Answer in the user's language. Draft customer, employee or counterparty texts in the recipient's language (Danish by default for Danish recipients) and keep the user's terminology.
 - End with a short list of assumptions and open questions when any exist.
 
 ## Example requests

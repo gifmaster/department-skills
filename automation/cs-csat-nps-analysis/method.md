@@ -1,0 +1,9 @@
+- Scores 0-10, or any 0 or above 5 = NPS; only 1-5 = CSAT.
+- NPS = %promoters (9-10) - %detractors (0-6).
+- NPS margin (95%) = 1.96 x sqrt((p + d - (p - d)^2) / n) x 100, with p and d as shares.
+- CSAT = share scoring 4 or 5. Wilson 95%: centre (p + 1.92/n) / (1 + 3.84/n), half-width 1.96 x sqrt(p(1-p)/n + 0.96/n^2) / (1 + 3.84/n).
+- Do not score segments with n under 30.
+- Segment vs rest: NPS z = diff / sqrt(var1/n1 + var2/n2); CSAT pooled two-proportion z. |z| < 1.96 = not statistically meaningful, say so.
+- Period change: same test on the last two periods.
+- Themes: count comments (not words) containing a theme keyword, in English and Danish, split by promoter/passive/detractor. A comment can hit several themes; read unmatched comments.
+- Drop duplicate IDs and out-of-range scores, and report them.

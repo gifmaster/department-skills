@@ -1,0 +1,10 @@
+- Traffic A = contacts x AHT seconds / interval seconds.
+- Erlang B: start B = 1; for k = 1..N: B = A x B / (k + A x B).
+- Erlang C (N > A): C = N x B / (N - A x (1 - B)).
+- Service level = 1 - C x exp(-(N - A) x target seconds / AHT).
+- ASA = C x AHT / (N - A). Occupancy = A / N.
+- Start at N = floor(A) + 1 and add agents until service level >= target and occupancy <= max (default 85%).
+- Agent hours = sum of N x interval length. Paid hours = agent hours / (1 - shrinkage). Scheduled per interval = N / (1 - shrinkage), round up.
+- Full-day equivalents = paid hours / 7.4 (37 h week; check agreement).
+- Erlang C ignores abandonment and retries, so it overstates staff when queues are long; not valid for chat concurrency or email backlog.
+- Check missing or duplicate intervals before summing.

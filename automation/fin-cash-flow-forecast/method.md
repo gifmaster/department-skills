@@ -1,0 +1,9 @@
+- Weeks run Monday to Sunday from the start week; opening must tie to the bank.
+- Receipt date = due date + customer's average days late. Already overdue: assume first banking day and say so.
+- Payables on due date. Recurring items on their schedule; "last" = last banking day of the month.
+- Weekend or Danish bank holiday (incl. 5 June, 24 and 31 Dec, Friday after Ascension): move to the next banking day.
+- A-tax + AM: large employer = last banking day of the salary month; small = 10th of the following month. Verify.
+- Closing = opening + receipts - payments. Check opening + total in - total out = final closing.
+- Find the lowest end-of-day balance on a banking day, not only at week end: pay days drive the low point.
+- Warn for every week or day below the minimum buffer and when the low point exceeds the overdraft facility.
+- Receipts are estimates; list assumptions and items outside the horizon.

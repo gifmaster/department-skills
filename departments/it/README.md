@@ -3,7 +3,7 @@
 
 Skills for IT operations, service management, security, risk, compliance, architecture, vendor management and AI governance. Built for small IT teams and managed-service customers who must run reliable systems and meet NIS2, GDPR and AI Act expectations.
 
-**21 skills** · version 1.0.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
+**21 skills** · version 1.1.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
 
 - Install in Claude Code: `/plugin install it-skills --marketplace gifmaster/department-skills`
 - Install anywhere else: see [INSTALL.md](INSTALL.md)
@@ -13,7 +13,7 @@ Skills for IT operations, service management, security, risk, compliance, archit
 
 | Skill | Title | What it does |
 |---|---|---|
-| [`it-incident-triage`](skills/it-incident-triage/SKILL.md) | IT Incident Triage | Triages an IT incident or outage, assesses severity and impact, guides diagnosis and drafts status updates for users and management. |
+| [`it-incident-triage`](skills/it-incident-triage/SKILL.md) | IT Incident Triage | Triages an IT or security incident such as an outage, ransomware, malware or a hacked account, contains it, assesses impact and drafts status updates. |
 | [`it-incident-postmortem`](skills/it-incident-postmortem/SKILL.md) | Blameless Postmortem | Writes a blameless postmortem with timeline, impact, root causes, contributing factors and tracked actions. |
 | [`it-change-request`](skills/it-change-request/SKILL.md) | Change Request | Writes a change request for the change advisory board with description, risk, test plan, rollback, communication and schedule. |
 | [`it-runbook-writer`](skills/it-runbook-writer/SKILL.md) | Runbook Writer | Writes clear operational runbooks and standard operating procedures with prerequisites, steps, checks and escalation. |
@@ -58,9 +58,8 @@ From business need to a controlled change.
 - For live security incidents, recommend involving the responsible incident lead and, where relevant, external incident response support, the police or national CSIRT. Do not advise actions that destroy evidence.
 - Commands and scripts are suggestions to test first in a non-production environment. Explain what each does before the user runs it.
 
-## Regulatory context used across this pack
+## Regulatory facts
 
-- NIS2 (Directive (EU) 2022/2555) sets cybersecurity risk management and incident reporting duties for essential and important entities. Denmark's NIS2 law applies from 1 July 2025, with sector authorities supervising and reports going to the national CSIRT; check your sector's rules.
-- GDPR Article 32 requires appropriate security of processing; the AI Act adds duties for organisations that build or use AI systems; DORA applies to financial entities and their critical ICT providers.
+Every skill in this pack ships `references/facts.md`: dated, sourced figures and rules (last verified 2026-11-16). The master copy is [facts/it.md](../../facts/it.md). Update it there and rebuild.
 
 These notes are orientation, not legal advice. Check current law, collective agreements and your own policies.

@@ -1,0 +1,21 @@
+response_id,date,score,segment,comment
+R001,2026-09-02,10,phone,Venlig medarbejder der løste det med det samme
+R002,2026-09-03,9,phone,Quick and helpful
+R003,2026-09-05,4,email,Ventede 6 dage på svar om min regning
+R004,2026-09-08,7,chat,
+R005,2026-09-10,2,chat,Chatbot sent me in circles. Bot bot bot
+R006,2026-09-12,8,email,Fine but the invoice was confusing
+R007,2026-09-15,10,chat,Super hurtig hjælp i chatten
+R008,2026-09-18,6,email,Had to write again because the reply did not answer my question
+R009,2026-09-22,9,phone,
+R010,2026-09-25,3,email,Aconto steg 40% uden forklaring
+R011,2026-10-01,10,phone,Imødekommende og venlig
+R012,2026-10-03,5,chat,Chat agent was nice but told me to call instead. Still not solved
+R013,2026-10-06,9,chat,
+R014,2026-10-09,0,email,Waited 4 days then a generic answer
+R015,2026-10-13,9,phone,Lang tid i telefonkø men god hjælp
+R016,2026-10-16,6,chat,Appen logger mig ud hele tiden
+R017,2026-10-20,10,email,Very helpful and polite
+R017,2026-10-20,10,email,Very helpful and polite
+R018,2026-10-24,11,phone,Great
+R019,2026-10-28,,chat,Forstår ikke min regning

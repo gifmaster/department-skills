@@ -3,7 +3,7 @@
 
 Skills for brand, positioning, content, campaigns, SEO, email, social, events, launches and performance measurement. Built for small marketing teams who need to produce good work quickly and stay on the right side of EU consumer, privacy and AI transparency rules.
 
-**21 skills** · version 1.0.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
+**21 skills** · version 1.1.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
 
 - Install in Claude Code: `/plugin install marketing-skills --marketplace gifmaster/department-skills`
 - Install anywhere else: see [INSTALL.md](INSTALL.md)
@@ -58,9 +58,8 @@ Search-led content repurposed across channels.
 - Do not invent statistics, testimonials, reviews, customer names or awards. Use placeholders and ask the user for evidence behind every factual or comparative claim.
 - Respect privacy and consumer rules in campaigns, including consent for tracking and email, honest pricing claims and clear advertising identification.
 
-## Regulatory context used across this pack
+## Regulatory facts
 
-- Marketing law: the Unfair Commercial Practices Directive and, in Denmark, markedsføringsloven require claims to be truthful, documented and not misleading. Forbrugerombudsmanden issues guidance on influencers, prices and green claims.
-- AI Act Article 50: AI-generated or manipulated images, audio and video that could be mistaken for real (deepfakes) must be disclosed; check the dates and details that apply.
+Every skill in this pack ships `references/facts.md`: dated, sourced figures and rules (last verified 2026-11-16). The master copy is [facts/marketing.md](../../facts/marketing.md). Update it there and rebuild.
 
 These notes are orientation, not legal advice. Check current law, collective agreements and your own policies.

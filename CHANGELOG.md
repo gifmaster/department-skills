@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.0 (2026-11-16)
+
+Based on simulated-use tests of all 168 skills by eight independent testers (average 4.04 of 5; accuracy the weakest dimension).
+
+- Accuracy: corrected AI Act wording after Regulation (EU) 2026/1744 (Art. 4 AI literacy, new Art. 5 bans, Art. 50 dates), pay transparency reporting dates, Danish spam rules (consent for business recipients and LinkedIn messages), cookie supervisor (Erhvervsstyrelsen), MAR gate for press releases, DSA mis-citation, GDPR Art. 33 in outage communication, CSRD/CSDDD/EUDR/ESPR/CBAM/Forced Labour dates, Danish VAT, A-tax, renteloven and annual report deadlines, and more.
+- New dated facts files per department (`facts/`), shipped in every skill as `references/facts.md`; the repeated EU boilerplate is removed from skills.
+- 20 automated skills with tested calculation scripts, templates and worked examples.
+- Inputs: deliver with stated assumptions by default, ask only when a missing input would make the answer wrong or risky.
+- Language rule: answer in the user's language, Danish drafts for Danish recipients.
+- Sharper descriptions with "not for X, use Y" hand-offs to fix trigger clashes; security incidents now route to it-incident-triage with a containment-first step.
+- Fixed example requests that the build split at commas.
+
 ## 1.0.0 (2026-11-16)
 
 First release.

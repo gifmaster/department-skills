@@ -1,0 +1,10 @@
+- Due date = promised date + tolerance days (default 0). Use the requested date only if the user asks.
+- Combine partial deliveries per order line. Completion date = date the cumulative qty first reaches ordered x (1 - qty tolerance %).
+- On time = completion date on or before the due date (never complete: last delivery date). Early counts as on time unless agreed otherwise.
+- In full = total delivered >= ordered x (1 - qty tolerance %).
+- Line OTIF = on time and in full. Order OTIF = all lines OTIF.
+- Not delivered and already due = miss; not yet due = open, leave out.
+- Fill rate = delivered (capped at ordered) / ordered. On-time fill rate = qty by due date / ordered.
+- Split by customer and item, worst first.
+- Pareto: count missed lines per reason, sort, add cumulative share. Flag misses without a reason code.
+- Small samples: call the Pareto indicative.

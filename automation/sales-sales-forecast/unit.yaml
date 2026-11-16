@@ -1,0 +1,5 @@
+skill: sales-sales-forecast
+script: scripts/sales_forecast.py
+template: assets/pipeline_template.csv
+command: python3 scripts/sales_forecast.py assets/pipeline_template.csv --history assets/history_template.csv
+summary: Calculates commit, most likely and best case for the period from weighted pipeline, historical stage-to-win conversion and rep commit, with gaps and deal risks.

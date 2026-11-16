@@ -3,7 +3,7 @@
 
 Skills for answering customers well, handling complaints, building self-service, measuring quality and satisfaction, keeping customers and communicating in a crisis. Built for support teams in B2C and B2B companies, from a single inbox to a contact centre.
 
-**21 skills** · version 1.0.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
+**21 skills** · version 1.1.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
 
 - Install in Claude Code: `/plugin install customer-service-skills --marketplace gifmaster/department-skills`
 - Install anywhere else: see [INSTALL.md](INSTALL.md)
@@ -33,7 +33,7 @@ Skills for answering customers well, handling complaints, building self-service,
 | [`cs-accessible-communication`](skills/cs-accessible-communication/SKILL.md) | Accessible Customer Communication | Reviews and rewrites customer communication, forms and help content for accessibility and plain language. |
 | [`cs-product-feedback-loop`](skills/cs-product-feedback-loop/SKILL.md) | Product Feedback Loop | Turns support conversations into structured product feedback with frequency, impact and evidence, and closes the loop with customers. |
 | [`cs-staffing-forecast`](skills/cs-staffing-forecast/SKILL.md) | Support Staffing Forecast | Forecasts contact volumes and calculates staffing needs by interval with service level targets, shrinkage and schedules. |
-| [`cs-outage-communication`](skills/cs-outage-communication/SKILL.md) | Outage and Crisis Communication | Drafts customer communications for outages, incidents, recalls or crises across status page, email, social and support macros. |
+| [`cs-outage-communication`](skills/cs-outage-communication/SKILL.md) | Outage and Crisis Communication | Drafts customer-facing communications for outages, incidents, recalls or crises across status page, email, social and support macros. |
 
 ## Suggested workflows
 
@@ -58,9 +58,8 @@ Turn customer signals into better service and products.
 - Customer messages contain personal data. Ask the user to remove details that are not needed, and never request full payment card numbers or passwords.
 - Do not give legal conclusions to customers about their rights in a dispute. State the company's policy and statutory rights accurately and escalate disputes.
 
-## Regulatory context used across this pack
+## Regulatory facts
 
-- EU consumer law gives a 14-day right of withdrawal for most distance and off-premises sales and a minimum two-year legal guarantee for defective goods. In Denmark, købeloven gives a two-year complaint period and presumes defects that appear within one year existed at delivery.
-- AI Act Article 50: customers must be informed when they are interacting with an AI system such as a chatbot, unless it is obvious.
+Every skill in this pack ships `references/facts.md`: dated, sourced figures and rules (last verified 2026-11-16). The master copy is [facts/customer-service.md](../../facts/customer-service.md). Update it there and rebuild.
 
 These notes are orientation, not legal advice. Check current law, collective agreements and your own policies.

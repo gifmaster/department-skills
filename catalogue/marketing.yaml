@@ -2,71 +2,84 @@ department: marketing
 title: Marketing
 prefix: mkt
 role: a hands-on B2B and B2C marketing lead
-overview: >-
-  Skills for brand, positioning, content, campaigns, SEO, email, social, events, launches and
-  performance measurement. Built for small marketing teams who need to produce good work quickly
-  and stay on the right side of EU consumer, privacy and AI transparency rules.
+overview: Skills for brand, positioning, content, campaigns, SEO, email, social, events, launches and performance measurement.
+  Built for small marketing teams who need to produce good work quickly and stay on the right side of EU consumer, privacy
+  and AI transparency rules.
 workflows:
   - name: Foundations
-    skills: [positioning-messaging, persona-builder, brand-voice-guide, customer-journey-map]
+    skills:
+      - positioning-messaging
+      - persona-builder
+      - brand-voice-guide
+      - customer-journey-map
     purpose: Who we serve, what we stand for and how we sound.
   - name: Campaign
-    skills: [campaign-brief, content-calendar, ad-copy-variants, landing-page-copy, email-newsletter, performance-report]
+    skills:
+      - campaign-brief
+      - content-calendar
+      - ad-copy-variants
+      - landing-page-copy
+      - email-newsletter
+      - performance-report
     purpose: From brief to live campaign to results.
   - name: Content engine
-    skills: [seo-keyword-brief, article-writer, social-post-pack, case-study-writer]
+    skills:
+      - seo-keyword-brief
+      - article-writer
+      - social-post-pack
+      - case-study-writer
     purpose: Search-led content repurposed across channels.
 common_guardrails:
-  - Write in the brand's voice and avoid generic, AI-sounding phrases and filler. Prefer concrete facts, examples and plain words.
-  - Do not invent statistics, testimonials, reviews, customer names or awards. Use placeholders and ask the user for evidence behind every factual or comparative claim.
-  - Respect privacy and consumer rules in campaigns, including consent for tracking and email, honest pricing claims and clear advertising identification.
-common_eu:
-  - "Marketing law: the Unfair Commercial Practices Directive and, in Denmark, markedsføringsloven require claims to be truthful, documented and not misleading. Forbrugerombudsmanden issues guidance on influencers, prices and green claims."
-  - "AI Act Article 50: AI-generated or manipulated images, audio and video that could be mistaken for real (deepfakes) must be disclosed; check the dates and details that apply."
+  - Write in the brand's voice and avoid generic, AI-sounding phrases and filler. Prefer concrete facts, examples and plain
+    words.
+  - Do not invent statistics, testimonials, reviews, customer names or awards. Use placeholders and ask the user for evidence
+    behind every factual or comparative claim.
+  - Respect privacy and consumer rules in campaigns, including consent for tracking and email, honest pricing claims and clear
+    advertising identification.
 skills:
   - id: brand-voice-guide
     title: Brand Voice Guide
-    summary: Defines a practical brand voice and tone guide with principles, do and do not examples, vocabulary and channel adaptations.
+    summary: Defines a practical brand voice and tone guide with principles, do and do not examples, vocabulary and channel
+      adaptations.
     triggers: the user wants a tone of voice, brand voice, writing style guide or to make content sound consistent
     use:
-      - "New brand or rebrand"
-      - "Multiple people or AI tools writing content"
+      - New brand or rebrand
+      - Multiple people or AI tools writing content
     avoid:
-      - "Visual identity design"
+      - Visual identity design
     inputs:
-      - "Brand values and audience"
-      - "Examples of content they like and dislike"
-      - "Competitors to differ from"
+      - Brand values and audience
+      - Examples of content they like and dislike
+      - Competitors to differ from
     steps:
       - Define 3 to 4 voice principles with what each means and does not mean.
       - Write before and after rewrites to show each principle.
       - List preferred words, banned words and grammar choices (British or American English, Danish conventions).
       - Describe how tone shifts by channel and situation.
     output:
-      - "Voice principles"
-      - "Examples"
-      - "Vocabulary list"
-      - "Tone by channel"
-      - "Quick checklist"
+      - Voice principles
+      - Examples
+      - Vocabulary list
+      - Tone by channel
+      - Quick checklist
     checks:
-      - "Principles are distinct and testable"
-      - "Examples match principles"
+      - Principles are distinct and testable
+      - Examples match principles
     eu: []
     examples:
-      - "Write a tone of voice guide for our AI governance consultancy, professional but human."
-
+      - Write a tone of voice guide for our AI governance consultancy, professional but human.
   - id: positioning-messaging
     title: Positioning and Messaging Framework
     summary: Builds a positioning statement and messaging house with value propositions, proof points and messages per audience.
     triggers: the user needs positioning, a value proposition, messaging framework, elevator pitch or differentiation
     use:
-      - "New product or company"
-      - "Messaging feels unclear or generic"
+      - New product or company
+      - Messaging feels unclear or generic
     avoid: []
     inputs:
-      - "Target customers and their problems"
-      - "Alternatives they use today"
-      - "Our unique capabilities and proof"
+      - Target customers and their problems
+      - Alternatives they use today
+      - Our unique capabilities and proof
     steps:
       - Define competitive alternatives and our unique attributes.
       - Translate attributes into value for the customer.
@@ -74,57 +87,56 @@ skills:
       - Build the messaging house with pillars and proof points.
       - Write a one-liner, a 30-second pitch and a boilerplate.
     output:
-      - "Positioning statement"
-      - "Messaging house"
-      - "Messages per audience"
-      - "One-liner and boilerplate"
+      - Positioning statement
+      - Messaging house
+      - Messages per audience
+      - One-liner and boilerplate
     checks:
-      - "Every pillar has proof"
-      - "Claims are differentiated, not generic"
+      - Every pillar has proof
+      - Claims are differentiated, not generic
     eu: []
     examples:
-      - "Position our AI governance service against big consultancies and software tools."
-
+      - Position our AI governance service against big consultancies and software tools.
   - id: persona-builder
     title: Persona Builder
     summary: Creates evidence-based buyer or user personas with goals, pains, triggers, information sources and objections.
-    triggers: the user wants buyer personas, customer profiles or audience segments for marketing
+    triggers: the user wants buyer or user personas for messaging and content planning, customer profiles or audience segments
+      for marketing
     use:
-      - "Planning content and campaigns"
+      - Planning content and campaigns
     avoid:
-      - "Stereotyping based on protected characteristics"
+      - Account targeting criteria and lists (use sales-ideal-customer-profile)
     inputs:
-      - "Customer interviews, survey or CRM data"
-      - "Sales team insights"
+      - Customer interviews, survey or CRM data
+      - Sales team insights
     steps:
       - Cluster the evidence into 2 to 4 distinct personas.
       - Describe each persona's job, goals, pains, triggers and buying role.
       - List where they find information and what convinces them.
       - Map content and messages to each persona.
     output:
-      - "Persona profiles"
-      - "Evidence behind each"
-      - "Content and message map"
+      - Persona profiles
+      - Evidence behind each
+      - Content and message map
     checks:
-      - "Personas are based on evidence"
-      - "Avoid demographic stereotypes"
+      - Personas are based on evidence
+      - Avoid demographic stereotypes
     eu: []
     examples:
-      - "Build personas for buyers of compliance software in Nordic mid-sized companies."
-
+      - Build personas for buyers of compliance software in Nordic mid-sized companies.
   - id: campaign-brief
     title: Campaign Brief
     summary: Writes a clear campaign brief with objective, audience, insight, message, channels, budget, KPIs and timeline.
     triggers: the user is planning a campaign, needs a creative brief or marketing brief for an agency or team
     use:
-      - "Every campaign"
-      - "Briefing an agency"
+      - Every campaign
+      - Briefing an agency
     avoid: []
     inputs:
-      - "Business goal"
-      - "Audience"
-      - "Offer"
-      - "Budget and timing"
+      - Business goal
+      - Audience
+      - Offer
+      - Budget and timing
     steps:
       - Turn the business goal into a measurable campaign objective.
       - Define audience and the key insight.
@@ -132,63 +144,62 @@ skills:
       - Choose channels and allocate budget.
       - Set KPIs, timeline and approvals.
     output:
-      - "Objective"
-      - "Audience and insight"
-      - "Key message and proof"
-      - "Channels and budget"
-      - "KPIs"
-      - "Timeline and approvals"
-      - "Mandatories"
+      - Objective
+      - Audience and insight
+      - Key message and proof
+      - Channels and budget
+      - KPIs
+      - Timeline and approvals
+      - Mandatories
     checks:
-      - "One main message only"
-      - "KPIs measurable with available tools"
+      - One main message only
+      - KPIs measurable with available tools
     eu: []
     examples:
-      - "Write a brief for a Q1 lead generation campaign for our new compliance service."
-
+      - Write a brief for a Q1 lead generation campaign for our new compliance service.
   - id: content-calendar
     title: Content Calendar
     summary: Plans a content calendar across channels with themes, formats, owners and dates, tied to goals and key moments.
     triggers: the user needs a content plan, editorial calendar, posting schedule or content strategy for a period
     use:
-      - "Quarterly planning"
-      - "Starting content marketing"
+      - Quarterly planning
+      - Starting content marketing
     avoid: []
     inputs:
-      - "Goals and audiences"
-      - "Channels and capacity"
-      - "Key dates and launches"
+      - Goals and audiences
+      - Channels and capacity
+      - Key dates and launches
     steps:
       - Set monthly themes linked to goals.
       - Plan pillar content and its repurposing into smaller formats.
       - Schedule by channel with owners and deadlines.
       - Add measurement per piece.
     output:
-      - "Themes by month"
-      - "Calendar table"
-      - "Repurposing map"
-      - "Measurement plan"
+      - Themes by month
+      - Calendar table
+      - Repurposing map
+      - Measurement plan
     checks:
-      - "Workload fits capacity"
-      - "Each piece has a purpose and audience"
+      - Workload fits capacity
+      - Each piece has a purpose and audience
     eu: []
     examples:
-      - "Plan a 3-month content calendar for LinkedIn, newsletter and blog with one person writing."
-
+      - Plan a 3-month content calendar for LinkedIn, newsletter and blog with one person writing.
   - id: article-writer
     title: Article and Blog Writer
-    summary: Writes well-researched, readable articles and blog posts from a brief or outline, using the user's sources, with headings, links and a clear argument.
+    summary: Writes well-researched, readable articles and blog posts from a brief or outline, using the user's sources, with
+      headings, links and a clear argument.
     triggers: the user wants a blog post, article, thought leadership piece, Substack post or long-form content written
     use:
-      - "Content marketing"
-      - "Thought leadership"
+      - Content marketing
+      - Thought leadership
     avoid:
-      - "Content on regulated topics published without expert review"
+      - Content on regulated topics published without expert review
     inputs:
-      - "Topic, audience and goal"
-      - "Key points and opinions"
-      - "Sources to cite"
-      - "Length and SEO keyword if any"
+      - Topic, audience and goal
+      - Key points and opinions
+      - Sources to cite
+      - Length and SEO keyword if any
     steps:
       - Propose a working title and outline for approval if the brief is thin.
       - Draft with a strong opening, clear sections and examples.
@@ -196,31 +207,32 @@ skills:
       - Edit for plain language, active voice and the brand voice.
       - Add a meta description and suggested internal links.
     output:
-      - "Title options"
-      - "Article"
-      - "Sources list"
-      - "Meta description"
-      - "Social snippets"
+      - Title options
+      - Article
+      - Sources list
+      - Meta description
+      - Social snippets
     checks:
-      - "No invented sources or statistics"
-      - "Reads naturally without filler"
-    eu: []
+      - No invented sources or statistics
+      - Reads naturally without filler
+    eu:
+      - Paid or sponsored content must be marked as advertising; announced price reductions use the lowest price in the prior
+        30 days; generic green claims are banned from 27 September 2026 (Directive (EU) 2024/825).
     examples:
-      - "Write a 1,500-word article on why SMEs should start AI governance now, using these sources."
-
+      - Write a 1,500-word article on why SMEs should start AI governance now, using these sources.
   - id: seo-keyword-brief
     title: SEO Keyword and Content Brief
     summary: Creates an SEO content brief with search intent, keyword cluster, outline, questions to answer and on-page recommendations.
     triggers: the user wants SEO keywords, an SEO brief, to rank on Google or improve visibility in AI search answers
     use:
-      - "Before writing web content"
-      - "Optimising an existing page"
+      - Before writing web content
+      - Optimising an existing page
     avoid:
-      - "Guaranteeing rankings"
+      - Promising rankings; state that results depend on competition and time
     inputs:
-      - "Topic and target page"
-      - "Keyword data from an SEO tool if available"
-      - "Competitor pages"
+      - Topic and target page
+      - Keyword data from an SEO tool if available
+      - Competitor pages
     steps:
       - Determine the search intent and content type that ranks.
       - Group keywords into primary, secondary and questions.
@@ -228,147 +240,164 @@ skills:
       - Recommend title tag, meta description, internal links and schema.
       - Add tips for being cited in AI answers (clear definitions, facts, structure).
     output:
-      - "Search intent"
-      - "Keyword cluster"
-      - "Outline"
-      - "On-page recommendations"
-      - "AI search tips"
+      - Search intent
+      - Keyword cluster
+      - Outline
+      - On-page recommendations
+      - AI search tips
     checks:
-      - "Keyword volumes are from the user's tool or labelled as unknown"
-      - "Outline matches intent"
-    eu: []
+      - Keyword volumes are from the user's tool or labelled as unknown
+      - Outline matches intent
+    eu:
+      - Paid or sponsored content must be marked as advertising; announced price reductions use the lowest price in the prior
+        30 days; generic green claims are banned from 27 September 2026 (Directive (EU) 2024/825).
     examples:
-      - "Create an SEO brief for a page on EU AI Act compliance for SMEs in English and Danish."
-
+      - Create an SEO brief for a page on EU AI Act compliance for SMEs in English and Danish.
   - id: social-post-pack
     title: Social Media Post Pack
-    summary: Writes a set of platform-specific social media posts from one piece of content or announcement, with hooks, formats and hashtags.
-    triggers: the user wants LinkedIn posts, Instagram captions, social media copy or to repurpose content for social
+    summary: Writes a set of platform-specific social media posts from one piece of content or announcement, with hooks, formats
+      and hashtags.
+    triggers: the user wants posts for the company's brand channels, Instagram captions, social media copy or to repurpose
+      content for social
     use:
-      - "Launches"
-      - "Repurposing articles"
-      - "Regular posting"
-    avoid: []
+      - Launches
+      - Repurposing articles
+      - Regular posting
+    avoid:
+      - Posts from an individual's personal profile to start sales conversations (use sales-social-selling)
     inputs:
-      - "Source content or announcement"
-      - "Platforms"
-      - "Voice and audience"
+      - Source content or announcement
+      - Platforms
+      - Voice and audience
     steps:
       - Pick angles that suit each platform.
       - Write a hook, body and call to action for each post.
       - Suggest visuals and formats (carousel, short video, image).
       - Add relevant hashtags sparingly.
     output:
-      - "Posts by platform"
-      - "Visual suggestions"
-      - "Posting schedule"
+      - Posts by platform
+      - Visual suggestions
+      - Posting schedule
     checks:
-      - "Each post stands alone"
-      - "Paid partnerships are labelled as advertising"
-    eu: []
+      - Each post stands alone
+      - Paid partnerships are labelled as advertising
+      - Price reductions, green claims and superlatives are flagged for legal-marketing-claims-review
+    eu:
+      - Paid or sponsored content must be marked as advertising; announced price reductions use the lowest price in the prior
+        30 days; generic green claims are banned from 27 September 2026 (Directive (EU) 2024/825).
     examples:
-      - "Turn this article into 5 LinkedIn posts and 3 Instagram captions."
-
+      - Turn this article into 5 LinkedIn posts and 3 Instagram captions.
   - id: email-newsletter
     title: Email Newsletter and Nurture
-    summary: Writes email newsletters and nurture sequences with subject lines, preview text, body and calls to action, respecting consent rules.
+    summary: Writes email newsletters and nurture sequences with subject lines, preview text, body and calls to action, respecting
+      consent rules.
     triggers: the user wants a newsletter, email campaign, nurture sequence or welcome flow
     use:
-      - "Regular newsletters"
-      - "Lead nurturing"
-      - "Onboarding emails"
+      - Regular newsletters
+      - Lead nurturing
+      - Onboarding emails
     avoid:
-      - "Sending to lists without valid consent"
+      - One-to-one sales outreach to named prospects (use sales-prospecting-sequence)
     inputs:
-      - "Audience segment and consent basis"
-      - "Goal of the email"
-      - "Content and offers"
+      - Audience segment and consent basis
+      - Goal of the email
+      - Content and offers
     steps:
       - Write 3 subject line options and preview text.
       - Write a scannable body with one main call to action.
       - For sequences, plan triggers, timing and goals per email.
       - Include unsubscribe and sender identification.
     output:
-      - "Subject lines"
-      - "Email copy"
-      - "Sequence plan"
-      - "Test ideas"
+      - Subject lines
+      - Email copy
+      - Sequence plan
+      - Test ideas
     checks:
-      - "One clear call to action"
-      - "Consent and unsubscribe handled"
-    eu: ["Denmark: marketing email generally requires prior consent under markedsføringsloven section 10, with a narrow exception for existing customers and similar products."]
+      - One clear call to action
+      - Consent and unsubscribe handled
+      - Consent basis for the list is stated
+    eu:
+      - 'Denmark: prior consent is required for marketing email to any recipient, businesses included (markedsføringsloven
+        section 10). The existing-customer exception requires the address to come from a sale, the email to cover your own
+        similar products, and a free, easy opt-out at collection and in every message. Emailing to ask for consent is itself
+        marketing.'
+      - Paid or sponsored content must be marked as advertising; announced price reductions use the lowest price in the prior
+        30 days; generic green claims are banned from 27 September 2026 (Directive (EU) 2024/825).
     examples:
-      - "Write a 4-email welcome sequence for new newsletter subscribers."
-
+      - Write a 4-email welcome sequence for new newsletter subscribers.
   - id: landing-page-copy
     title: Landing Page Copy
-    summary: Writes conversion-focused landing page copy with headline, value proposition, proof, objection handling and call to action.
+    summary: Writes conversion-focused landing page copy with headline, value proposition, proof, objection handling and call
+      to action.
     triggers: the user needs a landing page, sales page, website copy or homepage text
     use:
-      - "Campaign landing pages"
-      - "Website refresh"
+      - Campaign landing pages
+      - Website refresh
     avoid: []
     inputs:
-      - "Offer and audience"
-      - "Benefits and proof"
-      - "Primary action"
+      - Offer and audience
+      - Benefits and proof
+      - Primary action
     steps:
       - Write headline and subheadline options focused on the outcome.
       - Structure sections (problem, solution, benefits, proof, how it works, FAQ, call to action).
       - Write microcopy for buttons and forms.
       - Suggest A/B test ideas.
     output:
-      - "Headline options"
-      - "Page copy by section"
-      - "Microcopy"
-      - "Test ideas"
+      - Headline options
+      - Page copy by section
+      - Microcopy
+      - Test ideas
     checks:
-      - "Above-the-fold copy states what, for whom and why"
-      - "Claims are supported"
-    eu: []
+      - Above-the-fold copy states what, for whom and why
+      - Claims are supported
+      - Price reductions, green claims and superlatives are flagged for legal-marketing-claims-review
+    eu:
+      - Paid or sponsored content must be marked as advertising; announced price reductions use the lowest price in the prior
+        30 days; generic green claims are banned from 27 September 2026 (Directive (EU) 2024/825).
     examples:
-      - "Write a landing page for our free AI Act risk check tool."
-
+      - Write a landing page for our free AI Act risk check tool.
   - id: competitor-analysis
     title: Competitor Analysis
-    summary: Analyses competitors' positioning, offers, pricing, channels and messaging from material the user provides, and finds gaps to exploit.
+    summary: Analyses competitors' positioning, offers, pricing, channels and messaging from material the user provides, and
+      finds gaps to exploit.
     triggers: the user wants competitor research, competitive landscape, market map or to compare positioning
     use:
-      - "Strategy and positioning work"
-      - "Before campaigns"
+      - Strategy and positioning work
+      - Before campaigns
     avoid:
-      - "Sales battlecards (use sales-competitive-battlecard)"
+      - Sales battlecards (use sales-competitive-battlecard)
     inputs:
-      - "Competitor list and material (websites, ads, pricing, reviews)"
-      - "Our positioning"
+      - Competitor list and material (websites, ads, pricing, reviews)
+      - Our positioning
     steps:
       - Profile each competitor in a consistent template.
       - Map positioning on two meaningful axes.
       - Compare offers, pricing models and channels.
       - Identify white space and messaging opportunities.
     output:
-      - "Competitor profiles"
-      - "Positioning map"
-      - "Comparison table"
-      - "Opportunities"
+      - Competitor profiles
+      - Positioning map
+      - Comparison table
+      - Opportunities
     checks:
-      - "Sources and dates noted"
-      - "Facts separated from interpretation"
+      - Sources and dates noted
+      - Facts separated from interpretation
     eu: []
     examples:
-      - "Analyse these five AI governance consultancies and platforms and find our gap."
-
+      - Analyse these five AI governance consultancies and platforms and find our gap.
   - id: performance-report
     title: Marketing Performance Report
-    summary: Turns marketing data into a clear performance report with KPIs against targets, channel insights, attribution caveats and next actions.
+    summary: Turns marketing data into a clear performance report with KPIs against targets, channel insights, attribution
+      caveats and next actions.
     triggers: the user needs a marketing report, campaign results, channel performance analysis or ROI calculation
     use:
-      - "Monthly reporting"
-      - "Post-campaign evaluation"
+      - Monthly reporting
+      - Post-campaign evaluation
     avoid: []
     inputs:
-      - "Data from analytics, ad platforms, email and CRM"
-      - "Targets and spend"
+      - Data from analytics, ad platforms, email and CRM
+      - Targets and spend
     steps:
       - Summarise results against targets.
       - Analyse by channel and campaign (reach, engagement, leads, cost per result, pipeline, revenue).
@@ -376,30 +405,30 @@ skills:
       - Note attribution and data limits honestly.
       - Recommend next actions and budget shifts.
     output:
-      - "Headline results"
-      - "KPI table"
-      - "Channel insights"
-      - "Data caveats"
-      - "Recommendations"
+      - Headline results
+      - KPI table
+      - Channel insights
+      - Data caveats
+      - Recommendations
     checks:
-      - "Metrics are defined"
-      - "Totals reconcile across sources where possible"
+      - Metrics are defined
+      - Totals reconcile across sources where possible
     eu: []
     examples:
-      - "Build the October marketing report from these exports."
-
+      - Build the October marketing report from these exports.
   - id: ab-test-design
     title: A/B Test Design
-    summary: Designs A/B and multivariate tests with hypothesis, variants, metric, sample size, duration and how to read the result.
+    summary: Designs A/B and multivariate tests with hypothesis, variants, metric, sample size, duration and how to read the
+      result.
     triggers: the user wants to run an A/B test, split test or experiment on emails, ads or web pages, or interpret test results
     use:
-      - "Optimising conversion"
-      - "Settling copy debates with data"
+      - Optimising conversion
+      - Settling copy debates with data
     avoid: []
     inputs:
-      - "What to test and why"
-      - "Baseline conversion rate and traffic"
-      - "Minimum effect worth detecting"
+      - What to test and why
+      - Baseline conversion rate and traffic
+      - Minimum effect worth detecting
     steps:
       - Write a clear hypothesis.
       - Define the primary metric and guardrail metrics.
@@ -407,62 +436,67 @@ skills:
       - Define stopping rules and analysis method.
       - If results are given, interpret significance and practical impact.
     output:
-      - "Hypothesis"
-      - "Variants"
-      - "Metrics"
-      - "Sample size and duration"
-      - "Analysis plan or result interpretation"
+      - Hypothesis
+      - Variants
+      - Metrics
+      - Sample size and duration
+      - Analysis plan or result interpretation
     checks:
-      - "No peeking-based early stopping"
-      - "Test runs at least one full business cycle"
+      - No peeking-based early stopping
+      - Test runs at least one full business cycle
     eu: []
     examples:
-      - "We get 2,000 visitors a week with 3 percent conversion. How long must a headline test run?"
-
+      - We get 2,000 visitors a week with 3 percent conversion. How long must a headline test run?
   - id: press-release
     title: Press Release
-    summary: Writes a newsworthy press release with headline, lead, quotes, facts and boilerplate, and suggests media angles and a pitch email.
+    summary: Writes a newsworthy press release with headline, lead, quotes, facts and boilerplate, and suggests media angles
+      and a pitch email.
     triggers: the user needs a press release, pressemeddelelse, media announcement or journalist pitch
     use:
-      - "Launches"
-      - "Partnerships"
-      - "Funding"
-      - "Hires"
-      - "Research findings"
+      - Launches
+      - Partnerships
+      - Funding
+      - Hires
+      - Research findings
     avoid: []
     inputs:
-      - "The news and why it matters"
-      - "Facts, figures and dates"
-      - "Spokesperson and quote ideas"
-      - "Embargo"
+      - The news and why it matters
+      - Facts, figures and dates
+      - Spokesperson and quote ideas
+      - Embargo
     steps:
+      - Ask whether the company is listed (including First North). If so and the news may be inside information, it must be
+        published as a company announcement first (MAR Article 17); never pre-brief it under embargo (Article 10).
       - Find the news angle and write the headline and lead (who, what, when, where, why).
       - Write body paragraphs with facts and context.
       - Draft quotes that add opinion, not repetition, for approval by the people quoted.
       - Add boilerplate and media contact.
       - Write a short pitch email to journalists.
     output:
-      - "Press release"
-      - "Pitch email"
-      - "Media list angles"
+      - Press release
+      - Pitch email
+      - Media list angles
     checks:
-      - "Quotes are marked as drafts for approval"
-      - "All figures verified by the user"
-    eu: []
+      - Quotes are marked as drafts for approval
+      - All figures verified by the user
+    eu:
+      - 'Listed companies: Market Abuse Regulation (EU) 596/2014 Articles 10 and 17 govern disclosure of inside information.'
+      - Paid or sponsored content must be marked as advertising; announced price reductions use the lowest price in the prior
+        30 days; generic green claims are banned from 27 September 2026 (Directive (EU) 2024/825).
     examples:
-      - "Write a press release announcing our partnership with a Danish law firm."
-
+      - Write a press release announcing our partnership with a Danish law firm.
   - id: event-plan
     title: Event Plan
-    summary: Plans a marketing event, webinar or conference presence with goals, audience, programme, promotion, logistics and follow-up.
+    summary: Plans a marketing event, webinar or conference presence with goals, audience, programme, promotion, logistics
+      and follow-up.
     triggers: the user is planning an event, webinar, seminar, roundtable, trade show or conference stand
     use:
-      - "Hosting or attending events"
+      - Hosting or attending events
     avoid: []
     inputs:
-      - "Goal and audience"
-      - "Format, budget and date"
-      - "Speakers and content ideas"
+      - Goal and audience
+      - Format, budget and date
+      - Speakers and content ideas
     steps:
       - Set goals and KPIs (registrations, attendance, leads, pipeline).
       - Build the programme and run of show.
@@ -470,192 +504,201 @@ skills:
       - Build a logistics checklist and budget.
       - Plan follow-up sequences.
     output:
-      - "Event goals"
-      - "Programme"
-      - "Promotion plan"
-      - "Logistics checklist"
-      - "Budget"
-      - "Follow-up plan"
+      - Event goals
+      - Programme
+      - Promotion plan
+      - Logistics checklist
+      - Budget
+      - Follow-up plan
     checks:
-      - "Registration form collects only needed data"
-      - "Accessibility is considered"
+      - Registration form collects only needed data
+      - Accessibility is considered
     eu: []
     examples:
-      - "Plan a breakfast seminar for 40 CFOs on AI regulation in Copenhagen."
-
+      - Plan a breakfast seminar for 40 CFOs on AI regulation in Copenhagen.
   - id: case-study-writer
     title: Customer Case Study Writer
-    summary: Turns customer interviews or notes into a credible case study with challenge, solution, results and quotes, ready for customer approval.
+    summary: Turns customer interviews or notes into a credible case study with challenge, solution, results and quotes, ready
+      for customer approval.
     triggers: the user wants a case study, customer story, reference story or testimonial write-up
     use:
-      - "After successful projects"
-      - "Sales enablement"
+      - After successful projects
+      - Sales enablement
     avoid:
-      - "Publishing without the customer's approval"
+      - Publishing without the customer's approval
     inputs:
-      - "Interview notes or transcript"
-      - "Results and metrics"
-      - "Customer approval status"
+      - Interview notes or transcript
+      - Results and metrics
+      - Customer approval status
     steps:
       - Draft interview questions if no interview exists yet.
       - Structure the story (customer, challenge, solution, results, quote).
       - Make results specific and verified.
       - Create short versions for web, sales deck and social.
     output:
-      - "Case study"
-      - "Short versions"
-      - "Approval checklist"
+      - Case study
+      - Short versions
+      - Approval checklist
     checks:
-      - "Quotes come from the customer"
-      - "Customer approval is required before publishing"
-    eu: []
+      - Quotes come from the customer
+      - Customer approval is required before publishing
+    eu:
+      - Paid or sponsored content must be marked as advertising; announced price reductions use the lowest price in the prior
+        30 days; generic green claims are banned from 27 September 2026 (Directive (EU) 2024/825).
     examples:
-      - "Write a case study from this interview with our client in the insurance sector."
-
+      - Write a case study from this interview with our client in the insurance sector.
   - id: product-launch-plan
     title: Product Launch Plan
-    summary: Builds a go-to-market launch plan with tiering, audiences, messages, channels, enablement, timeline and success measures.
+    summary: Builds a go-to-market launch plan with tiering, audiences, messages, channels, enablement, timeline and success
+      measures.
     triggers: the user is launching a product, feature or service and needs a launch or go-to-market plan
     use:
-      - "New product or major feature"
-      - "Entering a new market"
+      - New product or major feature
+      - Entering a new market
     avoid: []
     inputs:
-      - "What is launching and for whom"
-      - "Launch date and tier"
-      - "Teams involved"
+      - What is launching and for whom
+      - Launch date and tier
+      - Teams involved
     steps:
       - Set the launch tier and goals.
       - Define audiences and messages.
       - Plan channels and assets.
       - Plan sales and support enablement.
       - Build the timeline from T-minus to post-launch review.
+      - For AI features, check AI Act classification (legal-ai-act-classification) and data protection (legal-dpia-assistant)
+        before launch.
     output:
-      - "Launch overview"
-      - "Messaging"
-      - "Channel and asset plan"
-      - "Enablement plan"
-      - "Timeline"
-      - "Success measures"
+      - Launch overview
+      - Messaging
+      - Channel and asset plan
+      - Enablement plan
+      - Timeline
+      - Success measures
     checks:
-      - "Support and sales are ready before launch"
-      - "Owners for every task"
+      - Support and sales are ready before launch
+      - Owners for every task
     eu: []
     examples:
-      - "Plan the launch of our AI use case register tool in 6 weeks."
-
+      - Plan the launch of our AI use case register tool in 6 weeks.
   - id: ad-copy-variants
     title: Ad Copy Variants
     summary: Writes ad copy variants for search, social and display platforms within character limits, with angles to test.
     triggers: the user needs ads, Google Ads copy, LinkedIn ads, Meta ads or ad variations
     use:
-      - "New campaigns"
-      - "Refreshing fatigued ads"
+      - New campaigns
+      - Refreshing fatigued ads
     avoid: []
     inputs:
-      - "Offer and audience"
-      - "Platform and format"
-      - "Landing page"
+      - Offer and audience
+      - Platform and format
+      - Landing page
     steps:
       - Choose 3 to 4 angles (pain, gain, proof, urgency).
       - Write variants within the platform character limits the user confirms.
       - Match message to landing page.
       - Suggest a testing plan.
     output:
-      - "Variants by angle"
-      - "Character counts"
-      - "Testing plan"
+      - Variants by angle
+      - Character counts
+      - Testing plan
     checks:
-      - "Character limits respected"
-      - "No misleading urgency or prices"
-    eu: []
+      - Character limits respected
+      - No misleading urgency or prices
+      - Price reductions, green claims and superlatives are flagged for legal-marketing-claims-review
+    eu:
+      - Paid or sponsored content must be marked as advertising; announced price reductions use the lowest price in the prior
+        30 days; generic green claims are banned from 27 September 2026 (Directive (EU) 2024/825).
     examples:
-      - "Write LinkedIn ad variants for our compliance webinar aimed at HR directors."
-
+      - Write LinkedIn ad variants for our compliance webinar aimed at HR directors.
+    not_for: For checking whether existing copy is legal use legal-marketing-claims-review
   - id: consent-compliance-check
     title: Cookie and Consent Compliance Check
-    summary: Reviews website tracking, cookie banners and marketing consent flows against GDPR and ePrivacy rules and proposes fixes.
+    summary: Reviews website tracking, cookie banners and marketing consent flows against GDPR and ePrivacy rules and proposes
+      fixes.
     triggers: the user asks about cookie banners, consent, tracking pixels, Google Analytics compliance or marketing permissions
     use:
-      - "Website launch"
-      - "New tracking tools"
-      - "Complaints or audits"
+      - Website launch
+      - New tracking tools
+      - Complaints or audits
     avoid: []
     inputs:
-      - "List of cookies and tags"
-      - "Screenshots or text of the banner"
-      - "Consent records process"
+      - List of cookies and tags
+      - Screenshots or text of the banner
+      - Consent records process
     steps:
       - Classify cookies and tags as strictly necessary or requiring consent.
       - Check the banner (equal reject option, no pre-ticked boxes, granular choices, withdrawal).
       - Check that tags fire only after consent.
       - Check email and SMS consent capture and records.
     output:
-      - "Cookie and tag classification"
-      - "Banner assessment"
-      - "Technical checks"
-      - "Fixes"
+      - Cookie and tag classification
+      - Banner assessment
+      - Technical checks
+      - Fixes
     checks:
-      - "Rejecting is as easy as accepting"
-      - "Consent is recorded and provable"
-    eu: ["Denmark: the Cookie Order (cookiebekendtgørelsen) implements the ePrivacy rules and Datatilsynet expects consent to meet GDPR standards. Transfers via US-based tools may also need a transfer assessment (legal-data-transfer-assessment)."]
+      - Rejecting is as easy as accepting
+      - Consent is recorded and provable
+    eu:
+      - 'Denmark: the Cookie Order (cookiebekendtgørelsen) is supervised by Erhvervsstyrelsen; consent must meet the GDPR
+        standard, and Datatilsynet supervises the personal data collected. Transfers via US-based tools may need legal-data-transfer-assessment.'
     examples:
-      - "Is our cookie banner compliant? Here is a screenshot and the list of tags."
-
+      - Is our cookie banner compliant? Here is a screenshot and the list of tags.
   - id: customer-journey-map
     title: Customer Journey Map
-    summary: Maps the customer journey across stages and touchpoints, with customer goals, emotions, pain points and improvement opportunities.
+    summary: Maps the customer journey across stages and touchpoints, with customer goals, emotions, pain points and improvement
+      opportunities.
     triggers: the user wants a customer journey, buyer journey, touchpoint map or to find drop-off points
     use:
-      - "Improving conversion and experience"
-      - "Aligning marketing, sales and service"
+      - Improving conversion and experience
+      - Aligning marketing, sales and service
     avoid: []
     inputs:
-      - "Persona"
-      - "Stages and touchpoints known"
-      - "Data on drop-offs and feedback"
+      - Persona
+      - Stages and touchpoints known
+      - Data on drop-offs and feedback
     steps:
       - Define stages from awareness to advocacy.
       - Map touchpoints, customer actions, thoughts and feelings per stage.
       - Mark pain points and moments of truth with evidence.
       - Prioritise improvement opportunities.
     output:
-      - "Journey map table"
-      - "Pain points"
-      - "Opportunities"
-      - "Owners"
+      - Journey map table
+      - Pain points
+      - Opportunities
+      - Owners
     checks:
-      - "Evidence behind pain points"
-      - "Covers handovers between teams"
+      - Evidence behind pain points
+      - Covers handovers between teams
     eu: []
     examples:
-      - "Map the journey for SMEs buying our AI governance service."
-
+      - Map the journey for SMEs buying our AI governance service.
   - id: marketing-budget-allocation
     title: Marketing Budget Allocation
-    summary: Allocates a marketing budget across channels and activities based on goals, funnel maths and past performance, with scenarios.
+    summary: Allocates a marketing budget across channels and activities based on goals, funnel maths and past performance,
+      with scenarios.
     triggers: the user is planning a marketing budget, media plan, channel mix or wants to know how much to spend where
     use:
-      - "Annual or quarterly planning"
-      - "Budget cuts or increases"
+      - Annual or quarterly planning
+      - Budget cuts or increases
     avoid: []
     inputs:
-      - "Total budget and goals"
-      - "Past channel performance"
-      - "Fixed costs (tools, people)"
+      - Total budget and goals
+      - Past channel performance
+      - Fixed costs (tools, people)
     steps:
       - Work backwards from revenue or lead goals through funnel conversion rates.
       - Allocate by channel based on cost per result and capacity.
       - Keep a test budget for new channels.
       - Show scenarios for budget minus and plus 20 percent.
     output:
-      - "Funnel maths"
-      - "Allocation table"
-      - "Test budget"
-      - "Scenarios"
+      - Funnel maths
+      - Allocation table
+      - Test budget
+      - Scenarios
     checks:
-      - "Allocation sums to the budget"
-      - "Assumptions are visible"
+      - Allocation sums to the budget
+      - Assumptions are visible
     eu: []
     examples:
-      - "We have DKK 600k for next year and need 150 SQLs. How should we split the budget?"
+      - We have DKK 600k for next year and need 150 SQLs. How should we split the budget?

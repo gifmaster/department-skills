@@ -1,0 +1,9 @@
+- Value per item = sum of quantity x unit value. If an item has fewer periods than the window, scale: value / its periods x window periods.
+- Rank by value. Cumulative share including the item: A up to 80 %, B up to 95 %, C above. Top item is always A.
+- CoV = population SD / mean of period quantities, zero periods included. X below 0.5, Y below 1.0, Z from 1.0.
+- Zero share = zero periods / periods. 30 % or more = intermittent; lumpy if the non-zero periods also have CoV 0.7 or more. Do not use a normal safety stock for these.
+- Fewer than 6 periods: list separately, do not rank; consider merging with a predecessor item.
+- No demand in the last 6 periods: delisting candidate. CZ: order on demand or delist.
+- 9-box: count items and sum value per box.
+- Negative quantities are returns or sign errors: check before trusting XYZ.
+- State the thresholds; they are adjustable.

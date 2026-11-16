@@ -1,0 +1,5 @@
+skill: scm-spend-analysis
+script: scripts/spend.py
+template: assets/ap_spend.csv
+command: python3 scripts/spend.py assets/ap_spend.csv
+summary: Normalises and groups supplier names, categorises AP spend by keyword or account map, and reports spend by category and supplier, Pareto, tail spend, fragmentation and labelled savings estimate ranges.

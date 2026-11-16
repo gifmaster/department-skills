@@ -1,0 +1,5 @@
+skill: fin-credit-collection
+script: scripts/dunning.py
+template: assets/overdue_invoices.csv
+command: python3 scripts/dunning.py assets/overdue_invoices.csv --reference-rate 2.10 --as-of 2026-11-16
+summary: Ages overdue invoices, scores and ranks them, sets the next action, and computes statutory interest (reference rate + 8 pp), reminder fees within the cap and spacing rule, and B2B compensation, keeping disputed invoices separate.
