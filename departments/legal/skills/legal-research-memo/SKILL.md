@@ -1,6 +1,6 @@
 ---
 name: legal-research-memo
-description: Structures a legal question into a research memo with issues, applicable rules, analysis, conclusion and sources to verify. Use when the user has a legal question, needs a legal memo, wants to understand how a law applies or asks what the rules are. Fallback for legal questions no specific legal skill covers.
+description: Structures a legal question into a research memo with issues, applicable rules, analysis, conclusion and sources to verify. Use when the user has a general legal question no specific legal skill covers, needs a legal memo, or wants to understand how a Danish or EU law applies. Fallback for legal questions no specific legal skill covers.
 license: MIT
 metadata:
   department: Legal
@@ -34,10 +34,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 
 ## Workflow
 1. Restate facts and identify the legal issues.
-2. Identify the relevant rules and where they are found.
-3. Apply the rules to the facts, considering counter-arguments.
-4. Conclude with confidence level and what would change the answer.
-5. List sources the user must verify.
+2. Point to where to verify: Retsinformation (Danish acts and executive orders), Folketingstidende (preparatory works), domstol.dk and published case law, EUR-Lex and CURIA (EU law and case law), regulator decisions (for example Datatilsynet, Forbrugerombudsmanden, Konkurrence- og Forbrugerstyrelsen).
+3. Identify the relevant rules and where they are found.
+4. Apply the rules to the facts, considering counter-arguments.
+5. Conclude with confidence level and what would change the answer.
+6. List sources the user must verify.
 
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:

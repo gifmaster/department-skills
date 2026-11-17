@@ -39,7 +39,7 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 5. Propose escalation steps and dates.
 
 ## Calculation tools
-This skill ships a tested script: `scripts/dunning.py`. Ages overdue invoices, scores and ranks them, sets the next action, and computes statutory interest (reference rate + 8 pp), reminder fees within the cap and spacing rule, and B2B compensation, keeping disputed invoices separate. If you can run code, use it rather than calculating by hand, and show the command and key output. Input template: `assets/overdue_invoices.csv`. Worked example: `examples/worked-example.md`.
+This skill ships a tested script: `scripts/dunning.py`. Ages overdue invoices, scores and ranks them, sets the next action, and computes statutory interest (reference rate + 8 pp), reminder fees within the renteloven limits and spacing rule (flagging settings beyond them), and B2B compensation, keeping disputed invoices separate. If you can run code, use it rather than calculating by hand, and show the command and key output. Input template: `assets/overdue_invoices.csv`. Worked example: `examples/worked-example.md`.
 
 ```
 python3 scripts/dunning.py assets/overdue_invoices.csv --reference-rate 2.10 --as-of 2026-11-16
@@ -51,12 +51,12 @@ If you cannot run code, apply the same method by hand:
 
 - Days overdue = as-of date - due date. Buckets 1-30, 31-60, 61-90, over 90.
 - Disputed: no fee, interest, compensation or reminder; list separately.
-- Interest = amount x (reference rate + 8) / 100 x days / 365, from the due date. Ask for the current Nationalbank reference rate; never assume it.
-- Reminder fee max DKK 100 each, max 3 reminders, at least 10 days apart. Verify current values.
-- B2B only: fixed compensation DKK 310 per invoice. Verify.
-- Priority = 50 x amount / largest amount + 30 x min(days / 90, 1) + 20 x min(reminders / 3, 1). Highest first.
+- Interest = amount x rate / 100 x days / 365 from the due date. Rate = agreed contract rate if the customer accepted it, else Nationalbank reference rate + 8 (ask; never assume).
+- Reminder fees (renteloven 9 b, stk. 2): max DKK 100 each, max 3, at least 10 days apart. Flag any setting beyond these. Verify.
+- B2B only: fixed compensation (renteloven 9 a, stk. 3; executive order, DKK 310). Verify.
+- Priority = 30 x amount / largest + 40 x min(days / 90, 1) + 15 x min(reminders / 3, 1) + 15 x min((customer's open overdue invoices - 1) / 2, 1). Highest first.
 - Next action: 0 sent = friendly 1st; 1 = firm 2nd; 2 = final notice; 3 = phone, then user decides on collection. Inside 10 days of the last reminder: wait.
-- A contractual rate applies only if the customer accepted the terms. Flag duplicates and blank b2b.
+- Flag duplicates and blank b2b.
 
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
@@ -71,7 +71,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Disputed invoices are separated from simple late payments
 
 ## EU and Danish context
-- Denmark (renteloven): reminder fees max DKK 100 per reminder, at most three, at least 10 days apart; B2B statutory interest is the Nationalbanken reference rate plus 8 percentage points and fixed compensation of DKK 310 per claim. Before other collection steps a payment demand with at least 10 days to pay is required (inkassoloven section 10). Verify current amounts.
+- Denmark: reminder fees max DKK 100 per reminder, at most three, at least 10 days apart (renteloven section 9 b, stk. 2); B2B statutory interest is the Nationalbanken reference rate plus 8 percentage points (section 5) and a fixed compensation for recovery costs, currently DKK 310 (section 9 a, stk. 3, amount set by executive order). Before other collection steps a payment demand with at least 10 days to pay is required (inkassoloven section 10). Verify current amounts.
 
 For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
 

@@ -73,6 +73,43 @@ class TestSmallCase(unittest.TestCase):
         self.assertIn("stage default", r["rates"]["Proposal"]["source"])
 
 
+class TestClosedWonAndStageRates(unittest.TestCase):
+    PIPE = (
+        {"deal": "W", "stage": "Closed won", "amount": "150000", "close_date": "2026-10-20"},
+        {"deal": "A", "stage": "Proposal", "amount": "100000", "close_date": "2026-12-01", "rep_commit": "no"},
+    )
+
+    def run_case(self, **kw):
+        stages = sf.parse_stage_defaults("Proposal=0.4,Negotiation=0.6")
+        return sf.forecast(rows(*self.PIPE), None, date(2026, 10, 1), date(2026, 12, 31), date(2026, 11, 16),
+                           stages, **kw)
+
+    def test_double_counting_warned_and_not_summed(self):
+        r = self.run_case(closed_won=200000)
+        self.assertEqual(r["closed_won"], 150000)               # file rows used, not 350,000
+        w = [x for x in r["warnings"] if "double counting" in x]
+        self.assertEqual(len(w), 1)
+        self.assertIn("difference 50,000", w[0])
+        self.assertAlmostEqual(r["scenarios"]["most_likely"], 150000 + 100000 * 0.4)
+        self.assertEqual(self.run_case(closed_won=200000, closed_won_basis="argument")["closed_won"], 200000)
+        self.assertEqual(self.run_case(closed_won=200000, closed_won_basis="sum")["closed_won"], 350000)
+
+    def test_no_warning_when_only_one_source(self):
+        r = self.run_case()
+        self.assertEqual(r["closed_won"], 150000)
+        self.assertFalse(any("double counting" in x for x in r["warnings"]))
+
+    def test_user_supplied_stage_rates(self):
+        r = self.run_case(stage_rates=sf.parse_stage_defaults("Proposal=0.3"))
+        self.assertAlmostEqual(r["rates"]["Proposal"]["rate"], 0.3)
+        self.assertEqual(r["rates"]["Proposal"]["source"], "historical (user supplied)")
+        self.assertEqual(r["rates"]["Negotiation"]["source"], "stage default (no history)")
+        self.assertAlmostEqual(r["methods"]["historical_conversion"], 30000)
+        self.assertIn("historical (user supplied)", sf.render(r))
+        with self.assertRaises(ValueError):
+            self.run_case(stage_rates={"Unknown": 0.5})
+
+
 class TestSampleAsset(unittest.TestCase):
     def test_sample(self):
         _, p = sf.read_csv(os.path.join(ROOT, "assets", "pipeline_template.csv"), ["deal", "stage", "amount", "close_date"])

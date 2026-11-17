@@ -12,6 +12,9 @@ Input columns
   History CSV (optional, --history): deal, stage_reached, won (yes/no), amount, cycle_days
     One row per closed deal with the furthest stage it reached (several rows per
     deal are also accepted; the furthest stage is used).
+  Stage rates (optional, --stage-rates "Proposal=0.4,Negotiation=0.6"): historical
+    win rates per stage from another source, labelled "historical (user supplied)".
+    They replace the computed or default rate for the stages named.
 
 Formulas
   Only deals with close_date inside [period start, period end] are used.
@@ -23,6 +26,10 @@ Formulas
   W (weighted pipeline)   = sum(amount x p)
   H (historical)          = sum(amount x h)
   C (rep commit)          = sum(amount where rep_commit = yes)
+  closed won              = closed-won rows in the file inside the period (default).
+                            If --closed-won is also given, a double-counting warning is
+                            shown with the difference; --closed-won-basis argument uses
+                            only the argument, sum adds both (only if they do not overlap).
   Commit (low)            = closed won + sum(amount x h) over rep commit deals
                             (if no rep_commit data: closed won + min(W, H))
   Most likely             = closed won + H
@@ -152,6 +159,19 @@ def parse_stage_defaults(text):
     return out
 
 
+def apply_stage_rates(rates, stage_rates, warnings):
+    """Override rates with user-supplied historical win rates (dict stage -> rate)."""
+    lower = {k.lower(): k for k in rates}
+    for name, val in (stage_rates or {}).items():
+        if val is None or not 0 <= val <= 1:
+            raise ValueError(f"--stage-rates value for '{name}' must be between 0 and 1 (or 0 to 100%)")
+        key = lower.get(name.strip().lower())
+        if key is None:
+            raise ValueError(f"--stage-rates stage '{name}' is not in the stage list ({', '.join(rates)})")
+        rates[key] = {"rate": val, "n": None, "won": None, "source": "historical (user supplied)"}
+    return rates
+
+
 def quarter_bounds(d):
     q0 = (d.month - 1) // 3 * 3 + 1
     start = date(d.year, q0, 1)
@@ -203,7 +223,7 @@ def historical_rates(history_rows, stage_defaults, min_sample, warnings):
 
 def forecast(pipeline_rows, history_rows=None, period_start=None, period_end=None, today=None,
              stage_defaults=None, min_sample=5, closed_won=0.0, target=None,
-             commit_risk_threshold=0.5, unknown_stage_prob=0.0):
+             commit_risk_threshold=0.5, unknown_stage_prob=0.0, stage_rates=None, closed_won_basis="file"):
     today = today or date.today()
     stage_defaults = stage_defaults or parse_stage_defaults(DEFAULT_STAGES)
     if period_start is None or period_end is None:
@@ -218,12 +238,15 @@ def forecast(pipeline_rows, history_rows=None, period_start=None, period_end=Non
     else:
         rates = {s: {"rate": v, "n": 0, "won": 0, "source": "stage default (no history)"} for s, v in stage_defaults.items()}
         med_cycle, n_hist = None, 0
+    if stage_rates:
+        apply_stage_rates(rates, stage_rates, warnings)
 
     has_commit_col = any("rep_commit" in r for r in pipeline_rows)
     seen = {}
     deals = []
     excluded = {"outside_period": 0, "outside_value": 0.0, "lost": 0, "invalid": 0}
     closed_in_file = 0.0
+    closed_rows = 0
     for r in pipeline_rows:
         line = r["_line"]
         name = r.get("deal", "")
@@ -267,6 +290,7 @@ def forecast(pipeline_rows, history_rows=None, period_start=None, period_end=Non
             continue
         if "won" in st_l:
             closed_in_file += amount
+            closed_rows += 1
             continue
         flags = []
         stage_name, sdef = sd_lower.get(st_l, (stage_raw, None))
@@ -300,7 +324,27 @@ def forecast(pipeline_rows, history_rows=None, period_start=None, period_end=Non
     H = sum(d["historical"] for d in deals)
     C = sum(d["amount"] for d in deals if d["rep_commit"])
     C_adj = sum(d["historical"] for d in deals if d["rep_commit"])
-    closed = closed_won + closed_in_file
+    if closed_won_basis not in ("file", "argument", "sum"):
+        raise ValueError("closed won basis must be file, argument or sum")
+    if closed_rows and closed_won:
+        diff = closed_won - closed_in_file
+        if closed_won_basis == "sum":
+            closed = closed_won + closed_in_file
+            used = f"both added ({fmt(closed)}) as requested with --closed-won-basis sum"
+        elif closed_won_basis == "argument":
+            closed = closed_won
+            used = f"--closed-won used ({fmt(closed_won)}), file rows ignored"
+        else:
+            closed = closed_in_file
+            used = f"file rows used ({fmt(closed_in_file)}), --closed-won not added"
+        warnings.append(
+            f"Possible double counting: the pipeline file has {closed_rows} closed-won row(s) in the period worth "
+            f"{fmt(closed_in_file)} and --closed-won {fmt(closed_won)} was also given (difference {fmt(diff)}). "
+            f"{used[0].upper() + used[1:]}. If --closed-won includes deals missing from the file, add them to the file "
+            f"or use --closed-won-basis argument.")
+    else:
+        closed = closed_won + closed_in_file
+        used = None
     if has_commit_col:
         commit_open = C_adj
         commit_basis = "closed won + rep commit deals at historical conversion"
@@ -323,7 +367,8 @@ def forecast(pipeline_rows, history_rows=None, period_start=None, period_end=Non
         warnings.append("No history file: historical method equals stage defaults; supply --history for a real comparison.")
     result = {
         "period_start": period_start.isoformat(), "period_end": period_end.isoformat(), "today": today.isoformat(),
-        "closed_won": closed, "target": target,
+        "closed_won": closed, "closed_won_file": closed_in_file, "closed_won_file_rows": closed_rows,
+        "closed_won_argument": closed_won, "closed_won_basis": closed_won_basis if used else None, "target": target,
         "methods": {"weighted_pipeline": W, "historical_conversion": H, "rep_commit_face_value": C,
                     "rep_commit_risk_adjusted": C_adj},
         "scenarios": scen, "commit_basis": commit_basis,
@@ -375,7 +420,7 @@ def render(res):
     o.append("| Stage | Rate | Deals in sample | Source |")
     o.append("|---|---:|---:|---|")
     for st, r in res["rates"].items():
-        o.append(f"| {st} | {pct(r['rate'])} | {r['n']} | {r['source']} |")
+        o.append(f"| {st} | {pct(r['rate'])} | {'n/a' if r['n'] is None else r['n']} | {r['source']} |")
     if res["median_won_cycle_days"] is not None:
         o.append(f"\nMedian sales cycle of won deals: {res['median_won_cycle_days']:.0f} days ({res['history_deals']} closed deals in history).")
     o.append("")
@@ -421,7 +466,15 @@ def main(argv=None):
                     help="stage probabilities, also define stage order (default: %(default)s)")
     ap.add_argument("--min-sample", type=int, default=5,
                     help="minimum history deals per stage before the historical rate is trusted (default: 5)")
-    ap.add_argument("--closed-won", default="0", help="amount already closed won in the period (default: 0)")
+    ap.add_argument("--closed-won", default="0",
+                    help="amount already closed won in the period (default: 0). If the pipeline file also has "
+                         "closed-won rows, a double-counting warning is shown and --closed-won-basis decides")
+    ap.add_argument("--closed-won-basis", choices=("file", "argument", "sum"), default="file",
+                    help="when both closed-won rows and --closed-won exist: use the file rows (default), "
+                         "the argument, or the sum (only if they do not overlap)")
+    ap.add_argument("--stage-rates",
+                    help='historical win rates per stage from another source, e.g. "Proposal=0.4,Negotiation=0.6"; '
+                         'replace the computed or default rate and are labelled "historical (user supplied)"')
     ap.add_argument("--target", help="period target, to show the gap per scenario")
     ap.add_argument("--commit-risk-threshold", type=float, default=0.5,
                     help="flag rep commit deals whose historical rate is below this (default: 0.5)")
@@ -440,7 +493,8 @@ def main(argv=None):
         res = forecast(prow, hrows, parse_date(a.period_start) if a.period_start else None,
                        parse_date(a.period_end) if a.period_end else None, today,
                        parse_stage_defaults(a.stage_defaults), a.min_sample, parse_number(a.closed_won) or 0.0,
-                       parse_number(a.target) if a.target else None, a.commit_risk_threshold, a.unknown_stage_prob)
+                       parse_number(a.target) if a.target else None, a.commit_risk_threshold, a.unknown_stage_prob,
+                       parse_stage_defaults(a.stage_rates) if a.stage_rates else None, a.closed_won_basis)
     except (ValueError, OSError) as e:
         print(f"Error: {e}", file=sys.stderr)
         return 2

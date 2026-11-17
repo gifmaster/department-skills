@@ -35,7 +35,7 @@ Structure the deliverable with these sections:
 - Deadline is reasonable
 
 # EU and Danish context
-- Denmark: before other collection steps a written payment demand with at least 10 days to pay must have been sent (inkassoloven section 10; check scope for business debtors). For B2B debts renteloven gives interest at the reference rate plus 8 percentage points and DKK 310 fixed compensation (verify).
+- Denmark: before other collection steps a written payment demand with at least 10 days to pay must have been sent (inkassoloven section 10; check scope for business debtors). For B2B debts renteloven gives interest at the reference rate plus 8 percentage points (section 5) and a fixed compensation for recovery costs, currently DKK 310 (section 9 a, stk. 3; verify).
 Use the attached facts file (last verified 2026-11-16) for dated figures; treat anything else as unverified.
 
 # Rules

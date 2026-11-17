@@ -19,7 +19,7 @@ python3 scripts/dsar_deadline.py assets/dsar_log_template.csv --today 2026-11-16
 
 | Request | Type | Received | Deadline | Extended | Applies | Status | Days | Extension possible |
 |---|---|---|---|---|---|---|---:|---|
-| DSR-2026-034 | access | 2026-09-10 | 2026-10-10 | - | 2026-10-10 | OVERDUE | 37 over | no (first month has passed) |
+| DSR-2026-034 | access | 2026-09-10 | 2026-10-10 | - | 2026-10-10 | OVERDUE | 37 over | no, extension already recorded (notified 2026-10-15, after the first-month deadline: not valid) |
 | DSR-2026-031 | access | 2026-10-03 | 2026-11-03 | - | 2026-11-03 | OVERDUE | 13 over | no (first month has passed) |
 | DSR-2026-032 | erasure | 2026-10-20 | 2026-11-20 | - | 2026-11-20 | due soon | 4 left | yes, notify the data subject with reasons by 2026-11-20 |
 | DSR-2026-033 | access | 2026-08-31 | 2026-09-30 | 2026-11-30 | 2026-11-30 | open | 14 left | already extended |

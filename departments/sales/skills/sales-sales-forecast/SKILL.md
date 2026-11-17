@@ -48,15 +48,14 @@ Run `--help` for all parameters. Every legal or policy figure is a parameter: co
 
 If you cannot run code, apply the same method by hand:
 
-- Use only open deals with a close date inside the period; drop lost deals, add won deals to closed won.
+- Use only deals closing inside the period; drop lost. Closed won = won rows in the file; if the user also gives a closed won figure, warn of double counting, use the file and state the difference.
 - Weighted (W) = sum of amount x CRM probability (stage default if blank).
-- Historical rate per stage = won deals that reached that stage or later / all closed deals that reached it. Under 5 deals: use the stage default.
+- Historical rate per stage = won deals that reached that stage or later / closed deals that reached it. Under 5 deals: stage default. User-given stage rates override, labelled "historical (user supplied)".
 - Historical (H) = sum of amount x historical rate.
-- Rep commit (C) = sum of amounts flagged commit; risk-adjusted commit = commit deals x historical rate.
-- Commit = closed won + risk-adjusted commit. Most likely = closed won + H. Best case = closed won + highest of W, H, C.
-- Explain gaps: W minus H (CRM optimism), C minus risk-adjusted commit (rep optimism), target minus each scenario.
-- Flag commit deals with a historical rate under 50%, close dates already passed, duplicates, missing amounts, and the share of the top 2 deals.
-- If days left in the period are fewer than the median won cycle, say early-stage deals are unlikely to close.
+- Rep commit (C) = commit amounts; risk-adjusted = commit deals x historical rate.
+- Commit = closed won + risk-adjusted commit. Most likely = closed won + H. Best case = closed won + max(W, H, C).
+- Gaps: W - H, C - risk-adjusted, target - each scenario.
+- Flag commits with historical rate under 50%, passed close dates, duplicates, missing amounts, top 2 deal share, and fewer days left than the median won cycle.
 
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:

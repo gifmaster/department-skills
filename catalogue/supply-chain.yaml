@@ -273,18 +273,22 @@ skills:
       - Inventory projection
       - Financial targets
     steps:
-      - Summarise changes in the demand plan and why.
-      - Show supply and capacity gaps.
-      - Project inventory and service levels.
-      - Reconcile to the financial plan.
-      - Frame decisions with options and impact.
+      - Summarise changes in the demand plan versus last month and why (volume, mix, new customers, lost business).
+      - Show supply and capacity gaps by product family and month for the next 3 to 18 months.
+      - Project inventory (days of cover) and service level against targets.
+      - Reconcile volumes to the financial plan in revenue and margin.
+      - Frame each decision with 2 or 3 options, their volume, cost and service impact, and a recommendation.
+      - Record decisions, owners and assumptions in a decision log for next month.
     output:
-      - Executive summary
-      - Demand review
-      - Supply review
+      - 'One-page executive summary: 3 messages, decisions needed, key risks'
+      - 'KPI panel: forecast accuracy (WAPE) and bias, OTIF, fill rate, days of inventory, capacity utilisation, plan versus
+        budget revenue'
+      - Demand review by product family (units and revenue, change versus last plan)
+      - 'Supply review: capacity versus load, constraints, supplier risks'
       - Inventory and service projection
       - Financial reconciliation
-      - Decisions needed
+      - Scenarios (base, upside, downside)
+      - Decision log (decision, option chosen, owner, date)
     checks:
       - Volumes reconcile to revenue
       - Each gap has an option
@@ -558,6 +562,9 @@ skills:
       - Supplier-specific emissions data where available
     steps:
       - Screen the 15 GHG Protocol categories for relevance.
+      - No emission factor values ship with this skill. Use the user's supplier-specific data or a factor dataset the user
+        names (and its year); if none is available, deliver the method, the calculation table and placeholders, never invented
+        numbers.
       - Estimate using supplier data first, then activity data, then spend-based factors, stating sources.
       - Identify hotspots.
       - Propose reduction levers and supplier engagement.

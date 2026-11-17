@@ -212,7 +212,8 @@ skills:
       - Tax and VAT payment dates are included
     eu:
       - 'Denmark: large employers pay A-tax and AM-bidrag on the last banking day of the salary month, small and medium employers
-        by the 10th of the following month; acontoskat on 20 March and 20 November; plus VAT deadlines (see references/facts.md).'
+        by the 10th of the following month (December salaries around 17 January); acontoskat on 20 March and 20 November;
+        plus VAT deadlines (see references/facts.md).'
     examples:
       - Will we have enough cash to pay salaries through February? Here are AR, AP and the bank balance.
   - id: credit-collection
@@ -245,10 +246,10 @@ skills:
       - Fees and interest are within legal limits
       - Disputed invoices are separated from simple late payments
     eu:
-      - 'Denmark (renteloven): reminder fees max DKK 100 per reminder, at most three, at least 10 days apart; B2B statutory
-        interest is the Nationalbanken reference rate plus 8 percentage points and fixed compensation of DKK 310 per claim.
-        Before other collection steps a payment demand with at least 10 days to pay is required (inkassoloven section 10).
-        Verify current amounts.'
+      - 'Denmark: reminder fees max DKK 100 per reminder, at most three, at least 10 days apart (renteloven section 9 b, stk.
+        2); B2B statutory interest is the Nationalbanken reference rate plus 8 percentage points (section 5) and a fixed compensation
+        for recovery costs, currently DKK 310 (section 9 a, stk. 3, amount set by executive order). Before other collection
+        steps a payment demand with at least 10 days to pay is required (inkassoloven section 10). Verify current amounts.'
     examples:
       - Draft reminders for these 14 overdue invoices, firmer for repeat late payers.
     not_for: For disputed claims or formal breach notices use legal-demand-letter
@@ -658,6 +659,9 @@ skills:
     steps:
       - Determine which framework applies (CSRD with ESRS, the voluntary VSME standard or a customer questionnaire).
       - List the data points needed and the source for each.
+      - No emission factor values ship with this skill. Use factors from a dataset the user names (for example Energistyrelsen,
+        DEFRA or the electricity supplier's declaration) with year; otherwise deliver the method and a table with placeholders,
+        never invented numbers.
       - Calculate scope 1 and 2 emissions from activity data and emission factors, stating factors used.
       - Flag data gaps and estimation methods.
       - Draft a data collection plan with owners.
@@ -667,6 +671,7 @@ skills:
       - Emissions calculation
       - Gaps and estimates
       - Collection plan
+      - VSME basic module checklist (the data points to collect, with source and owner)
     checks:
       - Emission factors and sources are stated
       - Estimates are labelled

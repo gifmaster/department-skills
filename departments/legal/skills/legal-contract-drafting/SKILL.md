@@ -34,10 +34,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 
 ## Workflow
 1. Confirm the agreement type and structure.
-2. Draft clauses in plain English or Danish, with defined terms used consistently.
-3. Insert bracketed placeholders for missing information.
-4. Add drafting notes explaining choices and options.
-5. Provide a schedule list (scope, pricing, SLA, data processing).
+2. Use this default clause checklist unless the user has a template: parties and definitions; scope and deliverables (schedule); acceptance; fees, invoicing and payment terms (max 30 days B2B unless agreed); change control; warranties; liability cap and exclusions; IP ownership and licence; confidentiality; data protection (Article 28 DPA if personal data is processed); subcontractors; term, termination and exit assistance; force majeure; assignment; entire agreement; governing law and venue (Danish law, Copenhagen City Court or arbitration).
+3. Draft clauses in plain English or Danish, with defined terms used consistently.
+4. Insert bracketed placeholders for missing information.
+5. Add drafting notes explaining choices and options.
+6. Provide a schedule list (scope, pricing, SLA, data processing).
 
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
@@ -49,6 +50,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## Quality checks before you answer
 - Defined terms used consistently
 - Termination and liability clauses included
+- Liability cap, IP and termination reflect which side the user is on
 
 ## EU and Danish context
 For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.

@@ -48,7 +48,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Supply chain security included
 
 ## EU and Danish context
-- Danish NIS2 law (lov nr. 434 af 6. maj 2025) in force 1 July 2025; size thresholds generally medium (50+ employees or above EUR 10m turnover) and large; linked and partner enterprises count; registration and reporting via virk.dk. Map the Article 21(2)(a) to (j) measures and Article 20 management duties (see references/facts.md).
+- Danish NIS2 law (lov nr. 434 af 6. maj 2025) in force 1 July 2025. Size test: medium or larger means 50+ staff, or turnover and balance sheet both above EUR 10m; linked and partner enterprises count; Denmark applies no size threshold for energy and telecom. Registration and reporting via virk.dk. Map the Article 21(2)(a) to (j) measures and Article 20 management duties (see references/facts.md).
 
 For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
 

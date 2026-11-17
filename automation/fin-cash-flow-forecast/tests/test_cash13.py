@@ -39,8 +39,40 @@ class TestCalendar(unittest.TestCase):
         large, _ = c13.expand_recurring(row, date(2026, 11, 2), date(2027, 1, 31), cal, "large", "following", [])
         small, _ = c13.expand_recurring(row, date(2026, 11, 2), date(2027, 1, 31), cal, "small", "following", [])
         self.assertEqual([d for d, _, _ in large], [date(2026, 11, 30), date(2026, 12, 30), date(2027, 1, 29)])
-        # Nov paid 10 Dec, Dec paid 11 Jan (10 Jan 2027 is a Sunday)
-        self.assertEqual([d for d, _, _ in small], [date(2026, 12, 10), date(2027, 1, 11)])
+        # Nov paid 10 Dec; Dec salary month has the special 17 January deadline (17 Jan 2027 is a Sunday -> 18 Jan)
+        self.assertEqual([d for d, _, _ in small], [date(2026, 12, 10), date(2027, 1, 18)])
+
+    def test_atax_small_december_deadline(self):
+        cal = c13.BankCalendar()
+        row = {"name": "A-skat", "amount": -100.0, "first_date": date(2025, 11, 1), "frequency": "monthly",
+               "day": "", "category": "atax", "end_date": None}
+        small, _ = c13.expand_recurring(row, date(2025, 11, 2), date(2026, 2, 28), cal, "small", "following", [])
+        # Nov 2025 -> 10 Dec 2025; Dec 2025 -> Sat 17 Jan 2026 rolls to Mon 19 Jan; Jan 2026 -> Tue 10 Feb 2026
+        self.assertEqual([d for d, _, _ in small], [date(2025, 12, 10), date(2026, 1, 19), date(2026, 2, 10)])
+        self.assertIn("salary month 2025-12", small[1][2])
+        custom, _ = c13.expand_recurring(row, date(2025, 11, 2), date(2026, 2, 28), cal, "small", "following", [],
+                                         atax_small_day=12, atax_december_day=20)
+        self.assertEqual([d for d, _, _ in custom], [date(2025, 12, 12), date(2026, 1, 20), date(2026, 2, 12)])
+
+    def test_once_frequency(self):
+        cal = c13.BankCalendar()
+        row = {"name": "New van", "amount": -250000.0, "first_date": date(2026, 12, 5), "frequency": "once",
+               "day": "", "category": "", "end_date": None}
+        occ, _ = c13.expand_recurring(row, date(2026, 11, 23), date(2027, 2, 21), cal, "large", "following", [])
+        self.assertEqual(occ, [(date(2026, 12, 7), -250000.0, "New van")])   # Sat 5 Dec rolls to Mon 7 Dec
+        outside, _ = c13.expand_recurring(dict(row, first_date=date(2027, 3, 1)), date(2026, 11, 23),
+                                          date(2027, 2, 21), cal, "large", "following", [])
+        self.assertEqual(outside, [])
+        r = write("customer,amount,due_date\nKunde,0,2026-01-07\n")
+        q = write("name,amount,first_date,frequency,day\nBonus,-300,2026-01-07,once,\n")
+        w = []
+        recs, pays, recur = c13.load_inputs(r, None, q, 0, w)
+        self.assertEqual(len(recur), 1)
+        res = c13.forecast(1000.0, date(2026, 1, 5), recs, pays, recur, weeks=2)
+        self.assertEqual(res["weeks"][0]["closing"], 700.0)
+        self.assertEqual(res["weeks"][1]["closing"], 700.0)
+        os.unlink(r)
+        os.unlink(q)
 
 
 class TestHandBuilt(unittest.TestCase):

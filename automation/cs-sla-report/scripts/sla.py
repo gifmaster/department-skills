@@ -10,6 +10,12 @@ Purpose
 Input columns (CSV, comma or semicolon, header names case-insensitive)
   ticket_id, created_at, first_response_at, resolved_at, priority, channel
   Timestamps: yyyy-mm-dd HH:MM[:SS] or dd-mm-yyyy HH:MM (also "T" separator).
+  Common helpdesk export headers are accepted as aliases (Zendesk, Freshdesk, HubSpot, Danish),
+  e.g. "Ticket ID"/id, "Created at"/created, "First response time"/first_response,
+  "Resolved at"/solved/"Closed at", "Source"/via. Full list in --help (HEADER_ALIASES).
+  Matching ignores case, spaces and punctuation. Where two aliases are present, the first
+  in the list wins (resolved before solved before closed). The first response column must
+  hold a timestamp, not a duration in minutes.
   Blank first_response_at = no response yet; blank resolved_at = ticket still open.
 
 Formulas and rules
@@ -47,6 +53,43 @@ DEFAULT_TARGETS = {
 }
 DAY_NAMES = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
 
+# Accepted header aliases per required column, in order of preference (normalised: lower case,
+# non-alphanumerics turned into "_"). Zendesk, Freshdesk, HubSpot and Danish export names.
+HEADER_ALIASES = {
+    "ticket_id": ["ticket_id", "id", "ticket", "ticket_number", "ticket_no", "ticket_nr", "sagsnr", "sags_id"],
+    "created_at": ["created_at", "created", "created_time", "created_date", "create_date", "created_on",
+                   "creation_date", "opened_at", "oprettet"],
+    "first_response_at": ["first_response_at", "first_response", "first_response_time", "first_responded_at",
+                          "first_responded_time", "first_reply_at", "first_reply_time", "initial_response_time",
+                          "first_agent_reply_date", "first_agent_email_response_date", "foerste_svar", "første_svar"],
+    "resolved_at": ["resolved_at", "resolved", "resolved_time", "resolved_date", "solved_at", "solved",
+                    "solved_time", "closed_at", "closed", "closed_time", "close_date", "closed_date", "loest", "løst"],
+    "priority": ["priority", "ticket_priority", "prioritet"],
+    "channel": ["channel", "via", "source", "ticket_source", "source_type", "kanal"],
+}
+
+
+def norm_header(h):
+    return re.sub(r"[^\w]+", "_", (h or "").strip().lstrip("\ufeff").lower()).strip("_")
+
+
+def alias_help():
+    return "; ".join("%s: %s" % (k, ", ".join(v[1:])) for k, v in HEADER_ALIASES.items())
+
+
+def header_map(raw_headers):
+    """Map raw header -> canonical name. First alias present (in preference order) wins."""
+    normed = {}
+    for h in raw_headers:
+        normed.setdefault(norm_header(h), h)
+    mapping = {}
+    for canon, names in HEADER_ALIASES.items():
+        for n in names:
+            if n in normed and normed[n] not in mapping:
+                mapping[normed[n]] = canon
+                break
+    return mapping
+
 
 # ---------------------------------------------------------------- CSV and parsing helpers
 def read_csv(path):
@@ -55,10 +98,15 @@ def read_csv(path):
     first = text.splitlines()[0] if text.strip() else ""
     delim = ";" if first.count(";") > first.count(",") else ","
     reader = csv.DictReader(io.StringIO(text), delimiter=delim)
-    headers = [(h or "").strip().lower() for h in (reader.fieldnames or [])]
+    mapping = header_map(reader.fieldnames or [])
+
+    def key(h):
+        return mapping.get(h, norm_header(h))
+
+    headers = [key(h) for h in (reader.fieldnames or [])]
     rows = []
     for line_no, raw in enumerate(reader, start=2):
-        row = {(k or "").strip().lower(): (v or "").strip() for k, v in raw.items() if k is not None and not isinstance(v, list)}
+        row = {key(k): (v or "").strip() for k, v in raw.items() if k is not None and not isinstance(v, list)}
         if not any(row.values()):
             continue
         rows.append((line_no, row))
@@ -68,8 +116,8 @@ def read_csv(path):
 def check_columns(headers, required):
     missing = [c for c in required if c not in headers]
     if missing:
-        raise SystemExit("Missing column(s): %s. Expected columns: %s. Found: %s"
-                         % (", ".join(missing), ", ".join(required), ", ".join(headers) or "(none)"))
+        raise SystemExit("Missing column(s): %s. Expected columns: %s. Found: %s. Accepted aliases: %s"
+                         % (", ".join(missing), ", ".join(required), ", ".join(headers) or "(none)", alias_help()))
 
 
 _DATE_FORMATS = ["%Y-%m-%d", "%d-%m-%Y", "%d.%m.%Y", "%d/%m/%Y"]
@@ -586,7 +634,9 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description="Support SLA report from a ticket CSV (business or calendar hours, "
                                              "Danish holidays, Europe/Copenhagen time).",
                                  formatter_class=argparse.RawDescriptionHelpFormatter,
-                                 epilog="Expected columns: " + ", ".join(REQUIRED))
+                                 epilog="Expected columns: " + ", ".join(REQUIRED) + ". Accepted header aliases "
+                                        "(case, spaces and punctuation ignored; first match wins): " + alias_help()
+                                        + ". The first response column must be a timestamp, not a duration.")
     ap.add_argument("csv", help="ticket CSV")
     ap.add_argument("--targets", help="SLA targets as JSON text or a JSON file path, e.g. "
                     "'{\"P1\": {\"first_response_hours\": 1, \"resolution_hours\": 8, \"mode\": \"calendar\"}}'. "

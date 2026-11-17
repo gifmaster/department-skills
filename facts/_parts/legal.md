@@ -27,8 +27,8 @@
 | Rule | Value | Source |
 |---|---|---|
 | Before collection steps | A written payment demand (påkravsskrivelse) with at least 10 days to pay | inkassoloven § 10 (check scope for business debtors) |
-| Reminder fees | Max DKK 100 per reminder, max 3, at least 10 days apart, only if agreed or permitted | renteloven § 9 b (verify current amount) |
-| B2B late payment | Statutory interest = Nationalbanken reference rate + 8 percentage points; fixed compensation DKK 310 per claim | renteloven § 5, § 9 b (verify current amount) |
+| Reminder fees | Max DKK 100 per reminder, max 3, at least 10 days apart, only if agreed or permitted | renteloven § 9 b, stk. 2 |
+| B2B late payment | Statutory interest = Nationalbanken reference rate + 8 percentage points (§ 5); fixed compensation for recovery costs (currently DKK 310 per claim, amount set by executive order) | renteloven § 5, § 9 a, stk. 3 and 4 (verify current amount) |
 | B2B payment terms | Max 30 days unless the creditor expressly agrees and it is not grossly unfair; 30 days for public authorities | renteloven § 3a, § 3b |
 
 ## Company and compliance

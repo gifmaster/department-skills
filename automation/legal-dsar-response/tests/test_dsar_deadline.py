@@ -1,5 +1,7 @@
 import importlib.util
+import io
 import os
+from contextlib import redirect_stdout
 import unittest
 from datetime import date
 
@@ -36,6 +38,27 @@ class TestCalendarMonth(unittest.TestCase):
         self.assertFalse(late["extension_valid"])
         self.assertEqual(late["effective_deadline"], "2026-10-10")
         self.assertEqual(late["days_overdue"], 37)
+
+    def test_notified_without_extension_flag_is_an_extension(self):
+        # received 20 Sep, notified 10 Oct (within the first month), extension flag left at "no"
+        r = dd.assess(date(2026, 9, 20), T, extension=False, extension_notified=date(2026, 10, 10))
+        self.assertTrue(r["extension_valid"])
+        self.assertEqual(r["effective_deadline"], "2026-12-20")
+        self.assertEqual(r["extension_possible"], "already extended")
+        self.assertTrue(any("treated as an extension" in w for w in r["warnings"]))
+
+    def test_never_still_possible_when_notification_exists(self):
+        # notification dated before receipt (data error) while the first month is still running
+        r = dd.assess(date(2026, 11, 10), T, extension_notified=date(2026, 11, 1))
+        self.assertFalse(r["extension_valid"])
+        self.assertFalse(r["extension_possible"].startswith("yes"))
+        self.assertIn("extension already recorded", r["extension_possible"])
+        # CLI single request: --extension-notified without --extension yes
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            dd.main(["--received", "2026-11-10", "--extension-notified", "2026-11-01", "--today", "2026-11-16"])
+        out = buf.getvalue()
+        self.assertNotIn("yes, notify", out)
 
     def test_extension_still_possible_and_due_soon(self):
         r = dd.assess(date(2026, 10, 20), T)

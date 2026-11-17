@@ -23,7 +23,7 @@
 
 | Rule | Value | Source |
 |---|---|---|
-| A-tax and AM-bidrag payment | Large employers (A-tax above DKK 1m or AM-bidrag above DKK 250,000 a year): last banking day of the salary month. Small and medium: by the 10th of the following month | Skattestyrelsen (verify thresholds) |
+| A-tax and AM-bidrag payment | Large employers (A-tax above DKK 1m or AM-bidrag above DKK 250,000 a year): last banking day of the salary month. Small and medium: by the 10th of the following month, except December salaries, due around 17 January (verify) | Skattestyrelsen (verify thresholds) |
 | Provisional corporation tax (acontoskat) | 20 Mar and 20 Nov | Skattestyrelsen |
 | Employer costs to budget | ATP, AES, barsel.dk contribution, finansieringsbidrag, pension, ferietillæg (1% for salaried staff) | |
 | Tax-free mileage 2026 | DKK 3.94/km up to 20,000 km, DKK 2.28/km above; driving log required | Skattestyrelsen via BDO 2026 rates (verify) |
@@ -33,9 +33,9 @@
 
 | Rule | Value | Source |
 |---|---|---|
-| Reminder fees | Max DKK 100 per reminder, max 3, at least 10 days apart | renteloven § 9 b (verify) |
+| Reminder fees | Max DKK 100 per reminder, max 3, at least 10 days apart | renteloven § 9 b, stk. 2 |
 | B2B statutory interest | Nationalbanken reference rate + 8 percentage points | renteloven § 5 |
-| B2B fixed compensation | DKK 310 per claim | renteloven § 9 b (verify) |
+| B2B fixed compensation | DKK 310 per claim (amount set by executive order); whether it can be combined with reminder fees is not stated in the act, check before charging both | renteloven § 9 a, stk. 3 and 4 (verify current amount) |
 | Payment terms | Max 30 days B2B unless the creditor expressly agrees and it is not grossly unfair | renteloven § 3a |
 | EU basis | Late Payment Directive 2011/7/EU | |
 

@@ -4,7 +4,7 @@
 |---|---|---|
 | Incoterms | Incoterms 2020 (ICC); sea-only rules FAS, FOB, CFR, CIF; use FCA, CPT, CIP, DAP, DPU, DDP for containers handed over inland | ICC |
 | EU customs | Union Customs Code; duties and measures in TARIC; Binding Tariff Information via Toldstyrelsen | Regulation (EU) 952/2013 |
-| CBAM | Covers specific CN codes for iron and steel, aluminium, cement, fertilisers, hydrogen and electricity, including some downstream articles; 2025 simplification added a 50-tonne a year de minimis; check by CN code, not material | CBAM Regulation as amended 2025 (verify) |
+| CBAM | Covers specific CN codes for iron and steel, aluminium, cement, fertilisers, hydrogen and electricity, including some downstream articles; 2025 simplification added a 50-tonne a year de minimis (not for electricity or hydrogen); check by CN code, not material | CBAM Regulation as amended 2025 (verify) |
 | Sanctions | Screen counterparties against the EU consolidated list; also origin-based import bans (e.g. Russian and Belarusian wood and steel) that list screening does not catch | EU sanctions regulations |
 
 ## Sustainability and due diligence
@@ -12,7 +12,7 @@
 | Rule | Value | Source |
 |---|---|---|
 | CSDDD after Omnibus I | Applies to EU companies with more than 5,000 employees and EUR 1.5bn turnover; compliance from 26 Jul 2029; SMEs affected through customer contracts | Omnibus I (OJ 26 Feb 2026); Latham & Watkins summary (verify) |
-| EUDR (deforestation) | Applies from 30 Dec 2026 for large and medium operators, 30 Jun 2027 for micro and small; covers cattle, cocoa, coffee, oil palm, natural rubber, soy, wood (incl. furniture) and derived products | Regulation (EU) 2023/1115 as amended Dec 2025 (verify) |
+| EUDR (deforestation) | Applies from 30 Dec 2026 for large and medium operators, 30 Jun 2027 for micro and small (size classes per Directive 2013/34/EU); covers cattle, cocoa, coffee, oil palm, natural rubber, soy, wood (incl. furniture) and derived products | Regulation (EU) 2023/1115 as amended Dec 2025 (verify) |
 | Forced Labour Regulation | Products made with forced labour banned from the EU market from 14 Dec 2027, all company sizes | Regulation (EU) 2024/3015 (verify) |
 | Destruction of unsold apparel and footwear (ESPR Art. 25) | Banned for large enterprises from 19 Jul 2026, medium from 19 Jul 2030; micro and small exempt; consumer returns count as unsold | Regulation (EU) 2024/1781 (verify) |
 | CSRD after Omnibus I | Only above 1,000 employees and EUR 450m turnover; SMEs usually report to customers or under VSME | Omnibus I (verify) |

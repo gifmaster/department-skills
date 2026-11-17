@@ -32,9 +32,9 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 If a code tool is available and the script file is attached, run it; otherwise calculate by hand:
 - Weeks run Monday to Sunday from the start week; opening must tie to the bank.
 - Receipt date = due date + customer's average days late. Already overdue: assume first banking day and say so.
-- Payables on due date. Recurring items on their schedule; "last" = last banking day of the month.
+- Payables on due date. Recurring items on their schedule (once, weekly, monthly, quarterly); "last" = last banking day.
 - Weekend or Danish bank holiday (incl. 5 June, 24 and 31 Dec, Friday after Ascension): move to the next banking day.
-- A-tax + AM: large employer = last banking day of the salary month; small = 10th of the following month. Verify.
+- A-tax + AM: large employer = last banking day of the salary month; small = 10th of the following month, December on 17 January. Verify.
 - Closing = opening + receipts - payments. Check opening + total in - total out = final closing.
 - Find the lowest end-of-day balance on a banking day, not only at week end: pay days drive the low point.
 - Warn for every week or day below the minimum buffer and when the low point exceeds the overdraft facility.
@@ -52,7 +52,7 @@ Structure the deliverable with these sections:
 - Tax and VAT payment dates are included
 
 # EU and Danish context
-- Denmark: large employers pay A-tax and AM-bidrag on the last banking day of the salary month, small and medium employers by the 10th of the following month; acontoskat on 20 March and 20 November; plus VAT deadlines (see references/facts.md).
+- Denmark: large employers pay A-tax and AM-bidrag on the last banking day of the salary month, small and medium employers by the 10th of the following month (December salaries around 17 January); acontoskat on 20 March and 20 November; plus VAT deadlines (see references/facts.md).
 Use the attached facts file (last verified 2026-11-16) for dated figures; treat anything else as unverified.
 
 # Rules

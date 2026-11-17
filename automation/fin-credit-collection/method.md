@@ -1,8 +1,8 @@
 - Days overdue = as-of date - due date. Buckets 1-30, 31-60, 61-90, over 90.
 - Disputed: no fee, interest, compensation or reminder; list separately.
-- Interest = amount x (reference rate + 8) / 100 x days / 365, from the due date. Ask for the current Nationalbank reference rate; never assume it.
-- Reminder fee max DKK 100 each, max 3 reminders, at least 10 days apart. Verify current values.
-- B2B only: fixed compensation DKK 310 per invoice. Verify.
-- Priority = 50 x amount / largest amount + 30 x min(days / 90, 1) + 20 x min(reminders / 3, 1). Highest first.
+- Interest = amount x rate / 100 x days / 365 from the due date. Rate = agreed contract rate if the customer accepted it, else Nationalbank reference rate + 8 (ask; never assume).
+- Reminder fees (renteloven 9 b, stk. 2): max DKK 100 each, max 3, at least 10 days apart. Flag any setting beyond these. Verify.
+- B2B only: fixed compensation (renteloven 9 a, stk. 3; executive order, DKK 310). Verify.
+- Priority = 30 x amount / largest + 40 x min(days / 90, 1) + 15 x min(reminders / 3, 1) + 15 x min((customer's open overdue invoices - 1) / 2, 1). Highest first.
 - Next action: 0 sent = friendly 1st; 1 = firm 2nd; 2 = final notice; 3 = phone, then user decides on collection. Inside 10 days of the last reminder: wait.
-- A contractual rate applies only if the customer accepted the terms. Flag duplicates and blank b2b.
+- Flag duplicates and blank b2b.

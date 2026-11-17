@@ -22,7 +22,7 @@ Dated, sourced figures the skills in this pack rely on. Rule for the assistant: 
 | Rule | Value | Source |
 |---|---|---|
 | B2B payment terms | Max 30 days unless the creditor expressly agrees and it is not grossly unfair; public authorities 30 days | renteloven § 3a, § 3b |
-| Late payment | Reference rate + 8 percentage points; DKK 310 fixed compensation | renteloven (verify current amounts) |
+| Late payment | Reference rate + 8 percentage points; DKK 310 fixed compensation | renteloven § 5, § 9 a (verify current amounts) |
 | Price coordination | Agreeing prices or sharing price intentions with competitors is prohibited | konkurrenceloven § 6; TFEU Art. 101 |
 | Comparative advertising | Must be objective and not misleading | Directive 2006/114/EC; markedsføringsloven § 20 (verify section) |
 

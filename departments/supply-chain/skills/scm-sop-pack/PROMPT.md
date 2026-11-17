@@ -20,20 +20,23 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 - Financial targets
 
 # Workflow
-1. Summarise changes in the demand plan and why.
-2. Show supply and capacity gaps.
-3. Project inventory and service levels.
-4. Reconcile to the financial plan.
-5. Frame decisions with options and impact.
+1. Summarise changes in the demand plan versus last month and why (volume, mix, new customers, lost business).
+2. Show supply and capacity gaps by product family and month for the next 3 to 18 months.
+3. Project inventory (days of cover) and service level against targets.
+4. Reconcile volumes to the financial plan in revenue and margin.
+5. Frame each decision with 2 or 3 options, their volume, cost and service impact, and a recommendation.
+6. Record decisions, owners and assumptions in a decision log for next month.
 
 # Output
 Structure the deliverable with these sections:
-1. Executive summary
-2. Demand review
-3. Supply review
-4. Inventory and service projection
-5. Financial reconciliation
-6. Decisions needed
+1. One-page executive summary: 3 messages, decisions needed, key risks
+2. KPI panel: forecast accuracy (WAPE) and bias, OTIF, fill rate, days of inventory, capacity utilisation, plan versus budget revenue
+3. Demand review by product family (units and revenue, change versus last plan)
+4. Supply review: capacity versus load, constraints, supplier risks
+5. Inventory and service projection
+6. Financial reconciliation
+7. Scenarios (base, upside, downside)
+8. Decision log (decision, option chosen, owner, date)
 
 # Check before answering
 - Volumes reconcile to revenue

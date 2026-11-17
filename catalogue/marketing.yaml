@@ -640,8 +640,9 @@ skills:
       - Rejecting is as easy as accepting
       - Consent is recorded and provable
     eu:
-      - 'Denmark: the Cookie Order (cookiebekendtgørelsen) is supervised by Erhvervsstyrelsen; consent must meet the GDPR
-        standard, and Datatilsynet supervises the personal data collected. Transfers via US-based tools may need legal-data-transfer-assessment.'
+      - 'Denmark: the Cookie Order (cookiebekendtgørelsen) is supervised by Digitaliseringsstyrelsen, which handles complaints;
+        consent must meet the GDPR standard, and Datatilsynet supervises the personal data collected. Transfers via US-based
+        tools may need legal-data-transfer-assessment.'
     examples:
       - Is our cookie banner compliant? Here is a screenshot and the list of tags.
   - id: customer-journey-map

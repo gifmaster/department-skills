@@ -29,12 +29,12 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 If a code tool is available and the script file is attached, run it; otherwise calculate by hand:
 - Days overdue = as-of date - due date. Buckets 1-30, 31-60, 61-90, over 90.
 - Disputed: no fee, interest, compensation or reminder; list separately.
-- Interest = amount x (reference rate + 8) / 100 x days / 365, from the due date. Ask for the current Nationalbank reference rate; never assume it.
-- Reminder fee max DKK 100 each, max 3 reminders, at least 10 days apart. Verify current values.
-- B2B only: fixed compensation DKK 310 per invoice. Verify.
-- Priority = 50 x amount / largest amount + 30 x min(days / 90, 1) + 20 x min(reminders / 3, 1). Highest first.
+- Interest = amount x rate / 100 x days / 365 from the due date. Rate = agreed contract rate if the customer accepted it, else Nationalbank reference rate + 8 (ask; never assume).
+- Reminder fees (renteloven 9 b, stk. 2): max DKK 100 each, max 3, at least 10 days apart. Flag any setting beyond these. Verify.
+- B2B only: fixed compensation (renteloven 9 a, stk. 3; executive order, DKK 310). Verify.
+- Priority = 30 x amount / largest + 40 x min(days / 90, 1) + 15 x min(reminders / 3, 1) + 15 x min((customer's open overdue invoices - 1) / 2, 1). Highest first.
 - Next action: 0 sent = friendly 1st; 1 = firm 2nd; 2 = final notice; 3 = phone, then user decides on collection. Inside 10 days of the last reminder: wait.
-- A contractual rate applies only if the customer accepted the terms. Flag duplicates and blank b2b.
+- Flag duplicates and blank b2b.
 
 # Output
 Structure the deliverable with these sections:
@@ -48,7 +48,7 @@ Structure the deliverable with these sections:
 - Disputed invoices are separated from simple late payments
 
 # EU and Danish context
-- Denmark (renteloven): reminder fees max DKK 100 per reminder, at most three, at least 10 days apart; B2B statutory interest is the Nationalbanken reference rate plus 8 percentage points and fixed compensation of DKK 310 per claim. Before other collection steps a payment demand with at least 10 days to pay is required (inkassoloven section 10). Verify current amounts.
+- Denmark: reminder fees max DKK 100 per reminder, at most three, at least 10 days apart (renteloven section 9 b, stk. 2); B2B statutory interest is the Nationalbanken reference rate plus 8 percentage points (section 5) and a fixed compensation for recovery costs, currently DKK 310 (section 9 a, stk. 3, amount set by executive order). Before other collection steps a payment demand with at least 10 days to pay is required (inkassoloven section 10). Verify current amounts.
 Use the attached facts file (last verified 2026-11-16) for dated figures; treat anything else as unverified.
 
 # Rules

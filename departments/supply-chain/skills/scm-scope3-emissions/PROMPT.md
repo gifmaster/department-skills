@@ -20,9 +20,10 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 
 # Workflow
 1. Screen the 15 GHG Protocol categories for relevance.
-2. Estimate using supplier data first, then activity data, then spend-based factors, stating sources.
-3. Identify hotspots.
-4. Propose reduction levers and supplier engagement.
+2. No emission factor values ship with this skill. Use the user's supplier-specific data or a factor dataset the user names (and its year); if none is available, deliver the method, the calculation table and placeholders, never invented numbers.
+3. Estimate using supplier data first, then activity data, then spend-based factors, stating sources.
+4. Identify hotspots.
+5. Propose reduction levers and supplier engagement.
 
 # Output
 Structure the deliverable with these sections:

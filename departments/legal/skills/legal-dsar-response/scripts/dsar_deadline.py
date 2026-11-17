@@ -14,6 +14,9 @@ Rule implemented (verify current value against the GDPR text and Datatilsynet/ED
     subject is informed of the extension and the reasons within the first month.
   - Extended deadline = the earlier of (start + 3 months) and (one-month deadline + 2 months),
     which is the conservative reading when the month-end rule shortens the first month.
+  - An extension notification date counts as an extension even if extension is not marked
+    yes (a warning is shown). Once a notification date exists the report never says an
+    extension is still possible: it is either valid or flagged as invalid.
   - Clock start: by default the clock runs from receipt. Where identity verification is
     needed, check current EDPB guidance (Guidelines 01/2022 on the right of access) and
     Datatilsynet practice before using --clock-start verification. This is an assumption to verify.
@@ -133,12 +136,19 @@ def assess(received, today, verified=None, extension=False, extension_notified=N
         warnings.append(f"received date {received} is after today")
 
     ext_valid = False
+    ext_problem = None
+    if extension_notified is not None and not extension:
+        extension = True
+        warnings.append(f"extension_notified_date {extension_notified} given but extension not marked yes: "
+                        "treated as an extension (set extension to yes in the log)")
     if extension:
         if extension_notified is None:
             warnings.append("extension marked yes but no extension_notified_date: treated as not extended")
         elif extension_notified > deadline:
+            ext_problem = f"notified {extension_notified.isoformat()}, after the first-month deadline: not valid"
             warnings.append(f"extension notified {extension_notified}, after the first-month deadline {deadline}: extension not valid")
         elif extension_notified < received:
+            ext_problem = f"notified {extension_notified.isoformat()}, before receipt: check the dates"
             warnings.append("extension notified before receipt: check dates")
         else:
             ext_valid = True
@@ -153,6 +163,8 @@ def assess(received, today, verified=None, extension=False, extension_notified=N
     else:
         if ext_valid:
             ext_possible = "already extended"
+        elif ext_problem:
+            ext_possible = f"no, extension already recorded ({ext_problem})"
         elif today <= deadline:
             ext_possible = f"yes, notify the data subject with reasons by {deadline.isoformat()}"
         else:
@@ -277,7 +289,8 @@ def main(argv=None):
     ap.add_argument("--received", help="single request: date received by the organisation")
     ap.add_argument("--verified", help="single request: date identity was verified")
     ap.add_argument("--extension", default="no", help="single request: extension claimed yes/no (default: no)")
-    ap.add_argument("--extension-notified", help="single request: date the data subject was told of the extension and reasons")
+    ap.add_argument("--extension-notified", help="single request: date the data subject was told of the extension and reasons "
+                         "(implies --extension yes; a warning is shown if --extension is not yes)")
     ap.add_argument("--responded", help="single request: date the full response was sent")
     ap.add_argument("--today", help="as-of date (default: system date)")
     ap.add_argument("--clock-start", choices=["receipt", "verification"], default="receipt",

@@ -21,9 +21,10 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 # Workflow
 1. Choose signals that predict churn or growth in the user's data.
 2. Start from default signals unless the user has better ones: product usage trend (35 percent), support tickets and sentiment (20 percent), NPS or CSAT (15 percent), payment behaviour (15 percent), relationship and sponsor (15 percent). Score each 0 to 100, bands: healthy 70+, watch 40 to 69, at risk below 40.
-3. Weight and normalise signals into a score.
-4. Validate against past churn if data exists.
-5. List at-risk accounts with recommended plays.
+3. Normalise each signal to 0 to 100 against the customer's own baseline or segment median; treat missing data as neutral (50) and say so; apply overrides: renewal within 60 days with usage down 30 percent or more, an unresolved critical ticket, or a lost champion makes the account at risk regardless of score.
+4. Weight and normalise signals into a score.
+5. Validate against past churn if data exists.
+6. List at-risk accounts with recommended plays.
 
 # Output
 Structure the deliverable with these sections:

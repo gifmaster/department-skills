@@ -31,7 +31,7 @@ If a code tool is available and the script file is attached, run it; otherwise c
 - Deadline = same day number next month; if that day does not exist, last day of that month (31 Jan gives 28 Feb).
 - Extended deadline = deadline + 2 months (conservative), only if the data subject was told of the extension and reasons on or before the one-month deadline.
 - Extension notified late or never: the one-month deadline applies.
-- Extension still possible only while today is on or before the one-month deadline.
+- A notification date means an extension, even if not marked yes. Extension still possible only while today is on or before the one-month deadline and no notification is recorded.
 - Days left = applicable deadline - today; negative means overdue.
 - Overdue: send a holding reply today with apology and firm date, then the full response; extension no longer available; record the cause.
 - Closed requests: late if response date is after the applicable deadline.

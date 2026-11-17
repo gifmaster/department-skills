@@ -52,6 +52,8 @@ Use these sections, in this order, unless the user asks for a different format:
 - No hidden non-compete or IP assignment
 
 ## EU and Danish context
+- Denmark: no-hire clauses between companies (jobklausuler) are restricted by ansættelsesklausulloven section 8 (verify conditions); penalty clauses and unreasonable terms can be set aside or reduced by the courts under aftaleloven section 36.
+
 For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
 
 ## Guardrails

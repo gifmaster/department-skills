@@ -37,6 +37,7 @@ python3 scripts/paygap.py assets/payroll_template.csv
 ## Category gaps at or above 5%
 
 - Kundeservice: mean base pay gap 5.1%; mean total pay gap 7.5%. Needs an objective, gender-neutral justification (for example documented differences in experience, performance or responsibility) or correction.
+- 2 categories were suppressed (fewer than 5 women or men) and could not be assessed against the 5% threshold: Ledelse, Udvikling. Review them internally on the full data.
 
 ## Pay quartiles (hourly total pay, lowest to highest)
 
@@ -63,6 +64,6 @@ python3 scripts/paygap.py assets/payroll_template.csv
 
 - Across the 19 people, men's mean hourly base pay is 11.4% higher than women's (16.3% on total pay); the median gaps are larger because the two highest-paid job families are mostly men.
 - Kundeservice is the only category large enough to show, and its mean gaps are 5.1% on base and 7.5% on total pay, so it is flagged. Part of the total-pay gap comes from variable pay: 4 of 5 men received some, against 2 of 5 women.
-- Udvikling and Ledelse are suppressed because they have fewer than 5 women and fewer than 5 men; analyse them internally, do not publish them.
+- Udvikling and Ledelse are suppressed because they have fewer than 5 women and fewer than 5 men, so they could not be assessed against the 5% threshold; analyse them internally, do not publish them.
 - The 5.1% does not mean discrimination: check whether experience, performance or responsibility documented on objective, gender-neutral criteria explains it, and correct what it does not.
 - Fix the duplicate S03 row and confirm S10 had no variable pay before the full run.

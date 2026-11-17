@@ -67,7 +67,10 @@ skills:
     checks:
       - Standard exclusions are present (public, already known, independently developed, legally required)
       - No hidden non-compete or IP assignment
-    eu: []
+    eu:
+      - 'Denmark: no-hire clauses between companies (jobklausuler) are restricted by ansættelsesklausulloven section 8 (verify
+        conditions); penalty clauses and unreasonable terms can be set aside or reduced by the courts under aftaleloven section
+        36.'
     examples:
       - Review this NDA from a potential customer before I sign today.
   - id: contract-review
@@ -126,6 +129,11 @@ skills:
       - Template or preferred style
     steps:
       - Confirm the agreement type and structure.
+      - 'Use this default clause checklist unless the user has a template: parties and definitions; scope and deliverables
+        (schedule); acceptance; fees, invoicing and payment terms (max 30 days B2B unless agreed); change control; warranties;
+        liability cap and exclusions; IP ownership and licence; confidentiality; data protection (Article 28 DPA if personal
+        data is processed); subcontractors; term, termination and exit assistance; force majeure; assignment; entire agreement;
+        governing law and venue (Danish law, Copenhagen City Court or arbitration).'
       - Draft clauses in plain English or Danish, with defined terms used consistently.
       - Insert bracketed placeholders for missing information.
       - Add drafting notes explaining choices and options.
@@ -137,6 +145,7 @@ skills:
     checks:
       - Defined terms used consistently
       - Termination and liability clauses included
+      - Liability cap, IP and termination reflect which side the user is on
     eu: []
     examples:
       - Draft a consultancy agreement for a 6-month AI governance project at a fixed monthly fee.
@@ -443,8 +452,8 @@ skills:
     title: Legal Research Memo
     summary: Structures a legal question into a research memo with issues, applicable rules, analysis, conclusion and sources
       to verify.
-    triggers: the user has a legal question, needs a legal memo, wants to understand how a law applies or asks what the rules
-      are
+    triggers: the user has a general legal question no specific legal skill covers, needs a legal memo, or wants to understand
+      how a Danish or EU law applies
     use:
       - Internal questions before contacting external counsel
       - Explaining rules to management
@@ -457,6 +466,9 @@ skills:
       - Any documents
     steps:
       - Restate facts and identify the legal issues.
+      - 'Point to where to verify: Retsinformation (Danish acts and executive orders), Folketingstidende (preparatory works),
+        domstol.dk and published case law, EUR-Lex and CURIA (EU law and case law), regulator decisions (for example Datatilsynet,
+        Forbrugerombudsmanden, Konkurrence- og Forbrugerstyrelsen).'
       - Identify the relevant rules and where they are found.
       - Apply the rules to the facts, considering counter-arguments.
       - Conclude with confidence level and what would change the answer.
@@ -568,7 +580,8 @@ skills:
     eu:
       - 'Denmark: before other collection steps a written payment demand with at least 10 days to pay must have been sent
         (inkassoloven section 10; check scope for business debtors). For B2B debts renteloven gives interest at the reference
-        rate plus 8 percentage points and DKK 310 fixed compensation (verify).'
+        rate plus 8 percentage points (section 5) and a fixed compensation for recovery costs, currently DKK 310 (section
+        9 a, stk. 3; verify).'
     examples:
       - Our customer refuses to pay DKK 85,000 claiming late delivery. Draft a response letter.
     not_for: For routine reminders on undisputed invoices use fin-credit-collection

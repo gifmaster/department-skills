@@ -36,7 +36,7 @@ Structure the deliverable with these sections:
 - Consent is recorded and provable
 
 # EU and Danish context
-- Denmark: the Cookie Order (cookiebekendtgørelsen) is supervised by Erhvervsstyrelsen; consent must meet the GDPR standard, and Datatilsynet supervises the personal data collected. Transfers via US-based tools may need legal-data-transfer-assessment.
+- Denmark: the Cookie Order (cookiebekendtgørelsen) is supervised by Digitaliseringsstyrelsen, which handles complaints; consent must meet the GDPR standard, and Datatilsynet supervises the personal data collected. Transfers via US-based tools may need legal-data-transfer-assessment.
 Use the attached facts file (last verified 2026-11-16) for dated figures; treat anything else as unverified.
 
 # Rules

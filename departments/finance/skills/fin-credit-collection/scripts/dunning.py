@@ -13,17 +13,26 @@ Input columns (header names case-insensitive; comma or semicolon; "1.234,56" or 
 
 Formulas (all policy figures are parameters; verify current values)
   days overdue       = as-of date - due date (only > 0 counts)
-  statutory interest = amount x (reference rate + margin) / 100 x days overdue / day count
-                       reference rate is REQUIRED (--reference-rate, Danmarks Nationalbank,
-                       set each 1 January and 1 July); margin default 8 percentage points;
-                       day count default 365. Simple interest from the due date.
+  interest           = amount x annual rate / 100 x days overdue / day count
+                       annual rate = --contract-rate (agreed contractual rate, user supplied) when
+                       given, otherwise statutory = reference rate + margin. --reference-rate
+                       (Danmarks Nationalbank, set each 1 January and 1 July) is REQUIRED unless
+                       --contract-rate is given; margin default 8 percentage points; day count
+                       default 365. Simple interest from the due date.
   reminder fees      = fee (default DKK 100) per reminder, at most --max-reminders (default 3),
                        only when at least --min-days-between (default 10) days since the last.
-  B2B compensation   = fixed amount per invoice (default DKK 310) when b2b = yes.
+                       Legal limits, renteloven section 9 b, stk. 2: at most DKK 100 per reminder,
+                       at most 3 reminders, at least 10 days apart (verify). User values beyond
+                       these limits are reported as warnings.
+  B2B compensation   = fixed amount per invoice when b2b = yes, renteloven section 9 a, stk. 3
+                       (amount set by executive order, default DKK 310, verify).
   ageing buckets     = 1-30, 31-60, 61-90, over 90 days (configurable with --buckets).
-  priority score     = 50 x amount / largest open amount
-                       + 30 x min(days overdue / 90, 1)
-                       + 20 x min(reminders sent / max reminders, 1)      (0 to 100)
+  priority score     = Wa x amount / largest open amount
+                       + Wd x min(days overdue / 90, 1)
+                       + Wr x min(reminders sent / max reminders, 1)
+                       + Wc x min((open overdue invoices of the same customer - 1) / 2, 1)
+                       default weights Wa=30 (amount), Wd=40 (days overdue), Wr=15 (reminders),
+                       Wc=15 (repeat lateness), total 100; change with --priority-weights.
 
 Example
   python3 scripts/dunning.py assets/overdue_invoices.csv --reference-rate 2.10 --as-of 2026-11-16
@@ -150,6 +159,44 @@ def md_table(headers, rows):
 
 # ----------------------------------------------------------------- dunning logic
 
+# Legal limits used only to warn about user settings (renteloven section 9 b, stk. 2; verify).
+LEGAL_MAX_FEE = 100.0
+LEGAL_MAX_REMINDERS = 3
+LEGAL_MIN_DAYS_BETWEEN = 10
+LIMIT_NOTE = "above the renteloven section 9 b, stk. 2 limit; verify"
+DEFAULT_WEIGHTS = {"amount": 30.0, "days": 40.0, "reminders": 15.0, "repeat": 15.0}
+
+
+def legal_limit_warnings(fee, max_reminders, min_days_between):
+    """Warnings for user settings beyond the statutory reminder-fee limits."""
+    out = []
+    if fee > LEGAL_MAX_FEE:
+        out.append("--fee DKK %s per reminder is %s (max DKK %s per reminder)" % (fmt(fee), LIMIT_NOTE, fmt(LEGAL_MAX_FEE, 0)))
+    if max_reminders > LEGAL_MAX_REMINDERS:
+        out.append("--max-reminders %d is %s (max %d fee-bearing reminders per claim)" % (max_reminders, LIMIT_NOTE, LEGAL_MAX_REMINDERS))
+    if min_days_between < LEGAL_MIN_DAYS_BETWEEN:
+        out.append("--min-days-between %d is %s (at least %d days between fee-bearing reminders)" % (
+            min_days_between, LIMIT_NOTE.replace("above", "below"), LEGAL_MIN_DAYS_BETWEEN))
+    return out
+
+
+def parse_weights(raw):
+    w = dict(DEFAULT_WEIGHTS)
+    for part in (raw or "").split(","):
+        if not part.strip():
+            continue
+        if "=" not in part:
+            raise InputError("--priority-weights must look like amount=30,days=40,reminders=15,repeat=15")
+        k, v = part.split("=", 1)
+        k = k.strip().lower()
+        if k not in w:
+            raise InputError("--priority-weights: unknown key '%s' (use amount, days, reminders, repeat)" % k)
+        try:
+            w[k] = float(v)
+        except ValueError:
+            raise InputError("--priority-weights: '%s' is not a number" % v.strip())
+    return w
+
 REQUIRED = ["customer", "invoice", "amount", "due_date", "disputed", "b2b", "reminders_sent"]
 OPTIONAL = ["last_reminder_date"]
 ALIASES = {"kunde": "customer", "debitor": "customer", "faktura": "invoice", "fakturanr": "invoice",
@@ -213,9 +260,18 @@ def bucket_label(days, edges):
 
 
 def analyse(invs, as_of, reference_rate, margin=8.0, fee=100.0, max_reminders=3, min_days_between=10,
-            b2b_compensation=310.0, day_count=365, edges=(30, 60, 90), warnings=None):
+            b2b_compensation=310.0, day_count=365, edges=(30, 60, 90), warnings=None, contract_rate=None,
+            weights=None):
     warnings = warnings if warnings is not None else []
-    rate = reference_rate + margin
+    weights = dict(DEFAULT_WEIGHTS, **(weights or {}))
+    limit_warnings = legal_limit_warnings(fee, max_reminders, min_days_between)
+    warnings.extend(limit_warnings)
+    if contract_rate is not None:
+        rate, rate_basis = contract_rate, "contract"
+    else:
+        if reference_rate is None:
+            raise InputError("give --reference-rate (statutory interest) or --contract-rate (agreed rate)")
+        rate, rate_basis = reference_rate + margin, "statutory"
     open_items, disputed, not_due = [], [], []
     for inv in invs:
         days = (as_of - inv["due"]).days
@@ -230,7 +286,7 @@ def analyse(invs, as_of, reference_rate, margin=8.0, fee=100.0, max_reminders=3,
             disputed.append(inv)
             continue
         if inv["reminders_sent"] > max_reminders:
-            warnings.append("%s: %d reminders recorded, above the cap of %d; fees counted for %d only" % (
+            warnings.append("%s: %d reminders recorded, more than the --max-reminders setting of %d; fees counted for %d only" % (
                 inv["invoice"], inv["reminders_sent"], max_reminders, max_reminders))
         inv["interest"] = round(inv["amount"] * rate / 100.0 * days / day_count, 2)
         inv["fees_to_date"] = round(min(inv["reminders_sent"], max_reminders) * fee, 2)
@@ -253,9 +309,17 @@ def analyse(invs, as_of, reference_rate, margin=8.0, fee=100.0, max_reminders=3,
         inv["claim_after_next"] = round(inv["amount"] + inv["interest"] + inv["fees_to_date"] + inv["next_fee"] + inv["compensation"], 2)
         open_items.append(inv)
     max_amt = max([i["amount"] for i in open_items], default=0.0)
+    per_customer = {}
     for i in open_items:
-        score = (50.0 * i["amount"] / max_amt if max_amt else 0.0) + 30.0 * min(i["days_overdue"] / 90.0, 1.0) \
-            + 20.0 * min(i["reminders_sent"] / float(max_reminders), 1.0)
+        k = i["customer"].strip().lower()
+        per_customer[k] = per_customer.get(k, 0) + 1
+    for i in open_items:
+        i["customer_open_overdue"] = per_customer[i["customer"].strip().lower()]
+        rem = min(i["reminders_sent"] / float(max_reminders), 1.0) if max_reminders > 0 else 0.0
+        score = (weights["amount"] * i["amount"] / max_amt if max_amt else 0.0) \
+            + weights["days"] * min(i["days_overdue"] / 90.0, 1.0) \
+            + weights["reminders"] * rem \
+            + weights["repeat"] * min((i["customer_open_overdue"] - 1) / 2.0, 1.0)
         i["priority"] = round(score, 1)
     open_items.sort(key=lambda i: (-i["priority"], i["invoice"]))
     for rank, i in enumerate(open_items, start=1):
@@ -276,7 +340,8 @@ def analyse(invs, as_of, reference_rate, margin=8.0, fee=100.0, max_reminders=3,
         "next_fees": round(sum(i["next_fee"] for i in open_items), 2),
         "compensation": round(sum(i["compensation"] for i in open_items), 2),
     }
-    return {"as_of": as_of, "rate": rate, "reference_rate": reference_rate, "margin": margin, "open": open_items,
+    return {"as_of": as_of, "rate": rate, "rate_basis": rate_basis, "reference_rate": reference_rate, "margin": margin,
+            "limit_warnings": limit_warnings, "weights": weights, "open": open_items,
             "disputed": disputed, "not_due": not_due, "ageing": ageing, "totals": totals, "warnings": warnings,
             "params": {"fee": fee, "max_reminders": max_reminders, "min_days_between": min_days_between,
                        "b2b_compensation": b2b_compensation, "day_count": day_count}}
@@ -291,10 +356,15 @@ def render_markdown(res):
     out = ["# Collection list at %s" % res["as_of"].isoformat(), ""]
     out.append("Overdue, undisputed: **%s** (%d invoices). Disputed: %s (%d). Not yet due: %s." % (
         fmt(t["overdue_undisputed"]), len(res["open"]), fmt(t["overdue_disputed"]), len(res["disputed"]), fmt(t["not_yet_due"])))
-    out.append("Statutory interest rate used: %.2f%% = reference rate %.2f%% + %.2f pp. Interest accrued %s; "
-               "fees charged to date %s; fees on next reminders %s; B2B compensation %s." % (
-                   res["rate"], res["reference_rate"], res["margin"], fmt(t["interest"]), fmt(t["fees_to_date"]),
-                   fmt(t["next_fees"]), fmt(t["compensation"])))
+    if res["rate_basis"] == "contract":
+        rate_txt = "Interest rate used: %.2f%% = agreed contractual rate (user supplied), used instead of the statutory rate." % res["rate"]
+    else:
+        rate_txt = "Statutory interest rate used: %.2f%% = reference rate %.2f%% + %.2f pp." % (
+            res["rate"], res["reference_rate"], res["margin"])
+    out.append(rate_txt + " Interest accrued %s; fees charged to date %s; fees on next reminders %s; B2B compensation %s." % (
+        fmt(t["interest"]), fmt(t["fees_to_date"]), fmt(t["next_fees"]), fmt(t["compensation"])))
+    for lw in res.get("limit_warnings", []):
+        out += ["", "**WARNING: %s. Do not claim fees beyond the legal limit.**" % lw]
     out += ["", "## 1. Prioritised collection list", ""]
     rows = [[i["rank"], i["customer"], i["invoice"], fmt(i["amount"]), i["due"].isoformat(), i["days_overdue"], i["bucket"],
              i["reminders_sent"], fmt(i["interest"]), fmt(i["next_fee"]), fmt(i["compensation"]), fmt(i["claim_after_next"]),
@@ -313,10 +383,17 @@ def render_markdown(res):
                         [[a["bucket"], a["count"], fmt(a["amount"]), a["disputed_count"], fmt(a["disputed_amount"])] for a in res["ageing"]]))
     out += ["", "## 4. Data quality and assumptions", ""]
     notes = list(res["warnings"])
-    notes.append("Reference rate %.2f%% supplied by the user: verify the current Danmarks Nationalbank rate for the period (it is fixed each 1 January and 1 July)." % res["reference_rate"])
-    notes.append("Reminder fee cap DKK %s per reminder, max %d, at least %d days apart; B2B compensation DKK %s per invoice. Verify current values (renteloven)." % (
-        fmt(p["fee"], 0), p["max_reminders"], p["min_days_between"], fmt(p["b2b_compensation"], 0)))
-    notes.append("Interest is simple, from the due date, on a %d-day year. An agreed contractual rate replaces the statutory one only if the customer validly accepted it; consumer claims without an agreed due date accrue interest only 30 days after a demand. Check with an adviser." % p["day_count"])
+    if res["rate_basis"] == "contract":
+        notes.append("Contractual rate %.2f%% supplied by the user: it replaces the statutory rate only if the customer validly accepted it (check the terms of sale)." % res["rate"])
+    else:
+        notes.append("Reference rate %.2f%% supplied by the user: verify the current Danmarks Nationalbank rate for the period (it is fixed each 1 January and 1 July)." % res["reference_rate"])
+    notes.append("Settings used: reminder fee DKK %s per reminder, at most %d fee-bearing reminders, at least %d days apart. Legal limits (renteloven section 9 b, stk. 2): at most DKK %s per reminder, at most %d reminders, at least %d days apart; verify current values." % (
+        fmt(p["fee"], 0), p["max_reminders"], p["min_days_between"], fmt(LEGAL_MAX_FEE, 0), LEGAL_MAX_REMINDERS, LEGAL_MIN_DAYS_BETWEEN))
+    notes.append("B2B fixed compensation DKK %s per invoice (renteloven section 9 a, stk. 3; amount set by executive order; verify current value)." % fmt(p["b2b_compensation"], 0))
+    notes.append("Interest is simple, from the due date, on a %d-day year. Consumer claims without an agreed due date accrue interest only 30 days after a demand. Check with an adviser." % p["day_count"])
+    w = res["weights"]
+    notes.append("Priority score = %g x amount / largest + %g x min(days / 90, 1) + %g x min(reminders / max, 1) + %g x min((customer's open overdue invoices - 1) / 2, 1)." % (
+        w["amount"], w["days"], w["reminders"], w["repeat"]))
     notes.append("Fees to date assume each reminder sent carried a fee. Escalation to debt collection or a debtor register is the user's decision.")
     out += ["- " + n for n in notes]
     return "\n".join(out)
@@ -344,17 +421,35 @@ def write_csv(path, res):
             w.writerow([i.get(c, "") if not isinstance(i.get(c), date) else i[c].isoformat() for c in cols])
 
 
+class RateParser(argparse.ArgumentParser):
+    """Requires --reference-rate unless --contract-rate is given."""
+
+    def parse_args(self, args=None, namespace=None):
+        ns = super().parse_args(args, namespace)
+        if ns.reference_rate is None and ns.contract_rate is None:
+            self.error("--reference-rate is required unless --contract-rate is given")
+        return ns
+
+
 def build_parser():
-    p = argparse.ArgumentParser(description="Prioritise overdue invoices with Danish statutory interest, reminder fees and B2B compensation.")
+    p = RateParser(description="Prioritise overdue invoices with Danish statutory interest, reminder fees and B2B compensation.")
     p.add_argument("csv", help="Overdue invoices: " + ", ".join(REQUIRED) + " [, last_reminder_date]")
-    p.add_argument("--reference-rate", type=float, required=True,
-                   help="REQUIRED. Danmarks Nationalbank reference rate in %% (e.g. 2.10). Verify current value; it changes each 1 January and 1 July.")
+    p.add_argument("--reference-rate", type=float,
+                   help="REQUIRED unless --contract-rate is given. Danmarks Nationalbank reference rate in %% (e.g. 2.10). Verify current value; it changes each 1 January and 1 July.")
     p.add_argument("--margin", type=float, default=8.0, help="Percentage points added to the reference rate (default 8.0; verify current value)")
+    p.add_argument("--contract-rate", type=float,
+                   help="Agreed annual interest rate in %% from the terms of sale; used instead of the statutory rate when given (only valid if the customer accepted it)")
     p.add_argument("--as-of", help="Date to age from (default: today)")
-    p.add_argument("--fee", type=float, default=100.0, help="Reminder fee per reminder in DKK (default 100; verify current value)")
-    p.add_argument("--max-reminders", type=int, default=3, help="Max reminders that may carry a fee (default 3; verify current value)")
-    p.add_argument("--min-days-between", type=int, default=10, help="Min days between fee-bearing reminders (default 10; verify current value)")
-    p.add_argument("--b2b-compensation", type=float, default=310.0, help="Fixed B2B compensation per invoice in DKK (default 310; verify current value)")
+    p.add_argument("--fee", type=float, default=100.0,
+                   help="Reminder fee per reminder in DKK (default 100 = renteloven section 9 b, stk. 2 maximum; verify current value; higher values are flagged)")
+    p.add_argument("--max-reminders", type=int, default=3,
+                   help="Max reminders that may carry a fee (default 3 = renteloven section 9 b, stk. 2 maximum; verify; higher values are flagged)")
+    p.add_argument("--min-days-between", "--min-days", dest="min_days_between", type=int, default=10,
+                   help="Min days between fee-bearing reminders (default 10 = renteloven section 9 b, stk. 2 minimum; verify; lower values are flagged)")
+    p.add_argument("--b2b-compensation", type=float, default=310.0,
+                   help="Fixed B2B compensation per invoice in DKK, renteloven section 9 a, stk. 3 (amount set by executive order; default 310; verify current value)")
+    p.add_argument("--priority-weights", default="",
+                   help="Priority weights, e.g. amount=30,days=40,reminders=15,repeat=15 (the defaults). repeat = other open overdue invoices of the same customer")
     p.add_argument("--day-count", type=int, default=365, help="Days per year for interest (default 365)")
     p.add_argument("--buckets", default="30,60,90", help="Ageing bucket upper edges in days (default 30,60,90)")
     p.add_argument("--out", help="Write the detailed list to this CSV")
@@ -375,6 +470,7 @@ def main(argv=None):
             raise InputError("--buckets must be whole numbers, e.g. 30,60,90")
         if not edges:
             raise InputError("--buckets needs at least one number")
+        weights = parse_weights(args.priority_weights)
         invs = load(args.csv, warnings)
     except InputError as e:
         print("Error: %s" % e, file=sys.stderr)
@@ -383,7 +479,8 @@ def main(argv=None):
         warnings.append("no --as-of given; today's date %s used" % as_of.isoformat())
     res = analyse(invs, as_of, args.reference_rate, margin=args.margin, fee=args.fee, max_reminders=args.max_reminders,
                   min_days_between=args.min_days_between, b2b_compensation=args.b2b_compensation,
-                  day_count=args.day_count, edges=edges, warnings=warnings)
+                  day_count=args.day_count, edges=edges, warnings=warnings, contract_rate=args.contract_rate,
+                  weights=weights)
     if args.out:
         write_csv(args.out, res)
     print(json.dumps(to_jsonable(res), indent=2, ensure_ascii=False) if args.json else render_markdown(res))

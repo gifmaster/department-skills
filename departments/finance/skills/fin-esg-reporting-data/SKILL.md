@@ -35,9 +35,10 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 ## Workflow
 1. Determine which framework applies (CSRD with ESRS, the voluntary VSME standard or a customer questionnaire).
 2. List the data points needed and the source for each.
-3. Calculate scope 1 and 2 emissions from activity data and emission factors, stating factors used.
-4. Flag data gaps and estimation methods.
-5. Draft a data collection plan with owners.
+3. No emission factor values ship with this skill. Use factors from a dataset the user names (for example Energistyrelsen, DEFRA or the electricity supplier's declaration) with year; otherwise deliver the method and a table with placeholders, never invented numbers.
+4. Calculate scope 1 and 2 emissions from activity data and emission factors, stating factors used.
+5. Flag data gaps and estimation methods.
+6. Draft a data collection plan with owners.
 
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
@@ -47,6 +48,7 @@ Use these sections, in this order, unless the user asks for a different format:
 3. Emissions calculation
 4. Gaps and estimates
 5. Collection plan
+6. VSME basic module checklist (the data points to collect, with source and owner)
 
 ## Quality checks before you answer
 - Emission factors and sources are stated

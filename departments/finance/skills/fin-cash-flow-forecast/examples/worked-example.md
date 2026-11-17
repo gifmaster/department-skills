@@ -88,7 +88,7 @@ Formula: closing = opening + receipts + other in + (negative) payments. 'Low in 
 - receivables line 7 (Café Kronen ApS): avg_days_late blank, default 0 days used
 - receivables line 9 (Vestergaard Ejendomme): missing or invalid amount or due_date, row skipped
 - receivables of 48,750 are already overdue on expected date; assumed received on 2026-11-23 (optimistic, check)
-- A-tax + AM timing: large employer (last banking day of the salary month). Verify current value and your classification in TastSelv Erhverv; December and other deadlines can differ.
+- A-tax + AM timing: large employer (last banking day of the salary month). Verify current values and your classification in TastSelv Erhverv; other deadlines can differ.
 - Non-banking days follow the Danish calendar (public holidays plus 5 June, 24 and 31 December, Friday after Ascension). Verify.
 - Receipts use due date + average days late; they are estimates, not actuals.
 

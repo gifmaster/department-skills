@@ -12,7 +12,8 @@ Input columns (header names case-insensitive; comma or semicolon; "1.234,56" or 
   receivables CSV (positional): customer, amount, due_date [, avg_days_late]
   payables CSV (--payables):     supplier, amount, due_date
   recurring CSV (--recurring):   name, amount, first_date, frequency, day [, category, end_date]
-    frequency: weekly | monthly | quarterly
+    frequency: once | weekly | monthly | quarterly
+    once: a one-off item paid on first_date (moved to a banking day by --roll); day is ignored.
     day: weekly = weekday 1-7 (1 = Monday) or mon..sun; monthly/quarterly = day of month 1-31
          or "last" (last banking day). Blank = same day as first_date.
     category: optional. "atax" marks A-tax + AM contribution (also detected from names
@@ -27,7 +28,9 @@ Formulas and rules
   A date on a weekend or Danish bank closing day is moved to the next banking day
   (--roll following) or the previous one (--roll preceding). "last" = last banking day.
   --atax-timing large: A-tax and AM for salary month M paid on the last banking day of M.
-  --atax-timing small: paid on the 10th of month M+1 (next banking day if closed).
+  --atax-timing small: paid on the 10th of month M+1 (--atax-small-day), except salary month
+         December, paid on 17 January of the following year (--atax-december-day, special
+         deadline; verify). Next banking day if closed.
   Week w runs Monday to Sunday; closing = opening + receipts - payments.
   Daily low = lowest end-of-day balance over all banking days in the horizon.
 
@@ -231,7 +234,7 @@ def add_months(y, m, k):
     return t // 12, t % 12 + 1
 
 
-def expand_recurring(row, start, end, cal, atax_timing, roll, warnings):
+def expand_recurring(row, start, end, cal, atax_timing, roll, warnings, atax_small_day=10, atax_december_day=17):
     """Return list of (pay_date, amount, label) for one recurring row within [start, end]."""
     name = row["name"]
     amount = row["amount"]
@@ -241,6 +244,13 @@ def expand_recurring(row, start, end, cal, atax_timing, roll, warnings):
     last = row.get("end_date")
     is_atax = row.get("category", "").lower() in ("atax", "a-tax", "a-skat", "askat") or bool(ATAX_RE.search(name))
     out = []
+    if freq == "once":
+        if day:
+            warnings.append("recurring '%s': frequency once is paid on first_date; day '%s' ignored" % (name, day))
+        pd = cal.roll(first, roll)
+        if start <= pd <= end:
+            out.append((pd, amount, name))
+        return out, is_atax
     if freq == "weekly":
         if day:
             wd = int(day) - 1 if day.isdigit() else WEEKDAYS.get(day[:3])
@@ -269,7 +279,8 @@ def expand_recurring(row, start, end, cal, atax_timing, roll, warnings):
                 pd = cal.last_banking_day(y, m)
             else:
                 ny, nm = add_months(y, m, 1)
-                pd = cal.roll(date(ny, nm, 10), "following")
+                # December A-tax for small employers has a special deadline in January (verify)
+                pd = cal.roll(date(ny, nm, atax_december_day if m == 12 else atax_small_day), "following")
             nominal = date(y, m, 1)
         else:
             if day == "last":
@@ -337,8 +348,8 @@ def load_inputs(receivables_path, payables_path, recurring_path, default_days_la
                 amt = None
             first = parse_date(r["first_date"])
             freq = r["frequency"].strip().lower()
-            if amt is None or first is None or freq not in ("weekly", "monthly", "quarterly"):
-                warnings.append("recurring line %d (%s): needs amount, first_date and frequency weekly|monthly|quarterly, row skipped" % (r["_line"], r["name"]))
+            if amt is None or first is None or freq not in ("once", "weekly", "monthly", "quarterly"):
+                warnings.append("recurring line %d (%s): needs amount, first_date and frequency once|weekly|monthly|quarterly, row skipped" % (r["_line"], r["name"]))
                 continue
             recur.append({"name": r["name"], "amount": amt, "first_date": first, "frequency": freq, "day": r["day"],
                           "category": r.get("category", ""), "end_date": parse_date(r.get("end_date", "")), "line": r["_line"]})
@@ -348,7 +359,7 @@ def load_inputs(receivables_path, payables_path, recurring_path, default_days_la
 
 
 def forecast(opening, start, recs, pays, recur, weeks=13, min_buffer=0.0, facility=0.0,
-             atax_timing="large", roll="following", cal=None, warnings=None):
+             atax_timing="large", roll="following", cal=None, warnings=None, atax_small_day=10, atax_december_day=17):
     warnings = warnings if warnings is not None else []
     cal = cal or BankCalendar()
     week0 = start - timedelta(days=start.weekday())
@@ -379,7 +390,8 @@ def forecast(opening, start, recs, pays, recur, weeks=13, min_buffer=0.0, facili
         flows.append((pd, "suppliers", -p["amount"], p["name"]))
     dated_items = []
     for it in recur:
-        occ, is_atax = expand_recurring(it, first_bd, end, cal, atax_timing, roll, warnings)
+        occ, is_atax = expand_recurring(it, first_bd, end, cal, atax_timing, roll, warnings,
+                                        atax_small_day=atax_small_day, atax_december_day=atax_december_day)
         for pd, amt, label in occ:
             kind = "atax" if is_atax else ("other_in" if amt > 0 else "recurring_out")
             flows.append((pd, kind, amt, label))
@@ -439,7 +451,8 @@ def forecast(opening, start, recs, pays, recur, weeks=13, min_buffer=0.0, facili
         "days_below_buffer": days_below, "outside_horizon": outside,
         "total_in": round(sum(f[2] for f in flows if f[2] > 0), 2),
         "total_out": round(sum(f[2] for f in flows if f[2] < 0), 2),
-        "min_buffer": min_buffer, "facility": facility, "atax_timing": atax_timing, "warnings": warnings,
+        "min_buffer": min_buffer, "facility": facility, "atax_timing": atax_timing,
+        "atax_small_day": atax_small_day, "atax_december_day": atax_december_day, "warnings": warnings,
     }
 
 
@@ -484,8 +497,13 @@ def render_markdown(res):
     oh = res["outside_horizon"]
     if oh["receipts"] or oh["payables"]:
         notes.append("Outside the horizon: receipts %s, payables %s." % (fmt(oh["receipts"]), fmt(oh["payables"])))
-    notes.append("A-tax + AM timing: %s employer (%s). Verify current value and your classification in TastSelv Erhverv; December and other deadlines can differ." % (
-        res["atax_timing"], "last banking day of the salary month" if res["atax_timing"] == "large" else "10th of the following month"))
+    if res["atax_timing"] == "large":
+        timing = "last banking day of the salary month"
+    else:
+        timing = "day %d of the following month; December salary month on %d January of the following year (special deadline)" % (
+            res["atax_small_day"], res["atax_december_day"])
+    notes.append("A-tax + AM timing: %s employer (%s). Verify current values and your classification in TastSelv Erhverv; other deadlines can differ." % (
+        res["atax_timing"], timing))
     notes.append("Non-banking days follow the Danish calendar (public holidays plus 5 June, 24 and 31 December, Friday after Ascension). Verify.")
     notes.append("Receipts use due date + average days late; they are estimates, not actuals.")
     out += ["- " + n for n in notes]
@@ -523,7 +541,8 @@ def build_parser():
     p = argparse.ArgumentParser(description="Weekly cash flow forecast (default 13 weeks) with day-level low point.")
     p.add_argument("receivables_csv", help="Receivables: customer, amount, due_date [, avg_days_late]")
     p.add_argument("--payables", help="Payables CSV: supplier, amount, due_date")
-    p.add_argument("--recurring", help="Recurring items CSV: name, amount (negative = out), first_date, frequency, day [, category, end_date]")
+    p.add_argument("--recurring", help="Recurring items CSV: name, amount (negative = out), first_date, "
+                                       "frequency (once|weekly|monthly|quarterly), day [, category, end_date]")
     p.add_argument("--opening", type=float, required=True, help="Opening bank balance at the start date (must tie to the bank)")
     p.add_argument("--start", help="Forecast start date; week 1 starts on that week's Monday (default: today)")
     p.add_argument("--weeks", type=int, default=13, help="Number of weeks (default 13)")
@@ -531,8 +550,14 @@ def build_parser():
     p.add_argument("--facility", type=float, default=0.0, help="Undrawn overdraft facility, positive number (default 0)")
     p.add_argument("--atax-timing", choices=("large", "small"), default="large",
                    help="Danish A-tax + AM payment timing. large = last banking day of the salary month; "
-                        "small = 10th of the following month. Default large. Verify current value and your "
+                        "small = 10th of the following month, December on 17 January (see --atax-small-day and "
+                        "--atax-december-day). Default large. Verify current value and your "
                         "classification with Skattestyrelsen (TastSelv Erhverv).")
+    p.add_argument("--atax-small-day", type=int, default=10,
+                   help="Small employers: day of the following month A-tax + AM is due (default 10; verify current value)")
+    p.add_argument("--atax-december-day", type=int, default=17,
+                   help="Small employers: day in January the December A-tax + AM is due, a special deadline "
+                        "(default 17; verify current value)")
     p.add_argument("--default-days-late", type=int, default=0, help="Days late for customers without avg_days_late (default 0)")
     p.add_argument("--roll", choices=("following", "preceding"), default="following",
                    help="Move payments on non-banking days to the next (default) or previous banking day")
@@ -558,6 +583,9 @@ def main(argv=None):
                 raise InputError("--extra-closed-dates: '%s' is not a valid date" % s)
             extra.append(d)
         cal = BankCalendar(tuple(x for x in args.closing_days.split(",") if x.strip()), extra)
+        for flag, v in (("--atax-small-day", args.atax_small_day), ("--atax-december-day", args.atax_december_day)):
+            if not 1 <= v <= 28:
+                raise InputError("%s must be a day of the month from 1 to 28" % flag)
         recs, pays, recur = load_inputs(args.receivables_csv, args.payables, args.recurring, args.default_days_late, warnings)
     except InputError as e:
         print("Error: %s" % e, file=sys.stderr)
@@ -565,7 +593,8 @@ def main(argv=None):
     if not args.start:
         warnings.append("no --start given; today's date %s used" % start.isoformat())
     res = forecast(args.opening, start, recs, pays, recur, weeks=args.weeks, min_buffer=args.min_buffer,
-                   facility=args.facility, atax_timing=args.atax_timing, roll=args.roll, cal=cal, warnings=warnings)
+                   facility=args.facility, atax_timing=args.atax_timing, roll=args.roll, cal=cal, warnings=warnings,
+                   atax_small_day=args.atax_small_day, atax_december_day=args.atax_december_day)
     if args.out:
         write_csv(args.out, res)
     print(json.dumps(to_jsonable(res), indent=2, ensure_ascii=False) if args.json else render_markdown(res))

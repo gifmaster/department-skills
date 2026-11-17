@@ -47,6 +47,39 @@ class TestFormulas(unittest.TestCase):
         self.assertTrue(rep["categories"][0]["suppressed"])
         self.assertEqual(rep["categories"][0]["flags"], [])
 
+    def test_suppressed_categories_counted_in_threshold_section(self):
+        rows = [person("M%d" % i, "M", "Ops", 400000, 0, 37) for i in range(6)]
+        rows += [person("W%d" % i, "F", "Ops", 300000, 0, 37) for i in range(4)]
+        rows += [person("S%d" % i, "M", "Sales", 400000, 0, 37) for i in range(3)]
+        rows += [person("T%d" % i, "F", "Sales", 400000, 0, 37) for i in range(1)]
+        people, _, _ = paygap.load(rows, ",")
+        rep = paygap.analyse(people, min_group=5)
+        md = paygap.markdown(rep, [])
+        section = md.split("## Category gaps at or above 5%")[1].split("## Pay quartiles")[0]
+        self.assertNotIn("None", section)
+        self.assertIn("2 categories were suppressed (fewer than 5 women or men) and could not be assessed", section)
+        self.assertIn("Ops, Sales", section)
+
+    def test_one_gender_category_not_calculable(self):
+        rows = [person("M%d" % i, "M", "Lager", 400000, 0, 37) for i in range(6)]
+        rows += [person("A%d" % i, "M", "Kontor", 400000, 0, 37) for i in range(5)]
+        rows += [person("B%d" % i, "F", "Kontor", 380000, 0, 37) for i in range(5)]
+        rows += [person("C%d" % i, "F", "Rengøring", 300000, 0, 37) for i in range(2)]
+        people, _, _ = paygap.load(rows, ",")
+        rep = paygap.analyse(people, min_group=5)
+        by = {c["category"]: c for c in rep["categories"]}
+        self.assertEqual(by["Lager"]["status"], "not calculable (no women)")
+        self.assertFalse(by["Lager"]["suppressed"])
+        self.assertEqual(by["Rengøring"]["status"], "not calculable (no men)")
+        self.assertEqual(by["Kontor"]["status"], "shown")
+        # Kontor gap = (400,000 - 380,000) / 400,000 = 5.0% -> flagged
+        self.assertAlmostEqual(by["Kontor"]["gaps"]["hourly_base_mean"], 5.0)
+        md = paygap.markdown(rep, [])
+        self.assertIn("| Lager | 6 / 0 | not calculable (no women) |", md)
+        self.assertIn("| Rengøring | 0 / 2 | not calculable (no men) |", md)
+        self.assertNotIn("suppressed", md.split("## Pay quartiles")[0].split("## Categories")[1])
+        self.assertIn("2 categories are not calculable", md)
+
     def test_quartiles(self):
         rows = [person("P%d" % i, "M" if i % 2 else "K", "X", 100000 * (i + 1), 0, 37) for i in range(8)]
         people, _, _ = paygap.load(rows, ",")

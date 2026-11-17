@@ -46,10 +46,61 @@ class TestHandBuilt(unittest.TestCase):
         items = [inv("Big", 1000.0, date(2026, 2, 19)), inv("Old", 500.0, date(2025, 11, 1), sent=3)]
         res = dn.analyse(items, date(2026, 3, 1), reference_rate=2.0)
         by = {i["invoice"]: i for i in res["open"]}
-        # Big: 50 x 1 + 30 x 10/90 + 0 = 53.3 ; Old: 25 + 30 + 20 = 75.0
-        self.assertEqual(by["Big"]["priority"], 53.3)
-        self.assertEqual(by["Old"]["priority"], 75.0)
+        # weights 30/40/15/15. Big: 30 x 1 + 40 x 10/90 + 0 + 0 = 34.4 ; Old: 15 + 40 + 15 + 0 = 70.0
+        self.assertEqual(by["Big"]["priority"], 34.4)
+        self.assertEqual(by["Old"]["priority"], 70.0)
         self.assertEqual(res["open"][0]["invoice"], "Old")
+
+    def test_priority_days_and_repeat_lateness_beat_amount(self):
+        # Big: 100,000, 5 days, single invoice: 30 + 40 x 5/90 = 32.2
+        # Rep1/Rep2: same customer, 20,000 each, 60 days:
+        #   30 x 0.2 + 40 x 60/90 + 0 + 15 x min((2 - 1) / 2, 1) = 6 + 26.67 + 7.5 = 40.2
+        items = [inv("Big", 100000.0, date(2026, 2, 24)),
+                 inv("Rep1", 20000.0, date(2025, 12, 31)), inv("Rep2", 20000.0, date(2025, 12, 31))]
+        for i in items[1:]:
+            i["customer"] = "Slow Payer ApS"
+        res = dn.analyse(items, date(2026, 3, 1), reference_rate=2.0)
+        by = {i["invoice"]: i for i in res["open"]}
+        self.assertEqual(by["Big"]["priority"], 32.2)
+        self.assertEqual(by["Rep1"]["priority"], 40.2)
+        self.assertEqual(by["Rep1"]["customer_open_overdue"], 2)
+        self.assertEqual(res["open"][-1]["invoice"], "Big")
+        # custom weights: amount only reproduces a pure size ranking
+        res2 = dn.analyse(items, date(2026, 3, 1), reference_rate=2.0,
+                          weights=dn.parse_weights("amount=100,days=0,reminders=0,repeat=0"))
+        self.assertEqual(res2["open"][0]["invoice"], "Big")
+
+    def test_legal_limit_warnings(self):
+        res = dn.analyse([inv("A", 1000.0, date(2026, 1, 1))], date(2026, 3, 1), reference_rate=2.0,
+                         fee=150.0, max_reminders=4, min_days_between=7)
+        lw = res["limit_warnings"]
+        self.assertEqual(len(lw), 3)
+        self.assertTrue(all("renteloven section 9 b, stk. 2 limit; verify" in x for x in lw))
+        self.assertIn("above", lw[0])
+        self.assertIn("below", lw[2])
+        md = dn.render_markdown(res)
+        self.assertIn("**WARNING: --fee DKK 150.00", md)
+        self.assertNotIn("cap", md.lower())
+        ok = dn.analyse([inv("A", 1000.0, date(2026, 1, 1))], date(2026, 3, 1), reference_rate=2.0)
+        self.assertEqual(ok["limit_warnings"], [])
+        md_ok = dn.render_markdown(ok)
+        self.assertNotIn("WARNING", md_ok)
+        self.assertIn("renteloven section 9 a, stk. 3", md_ok)
+        self.assertNotIn("cap", md_ok.lower())
+
+    def test_contract_rate(self):
+        # 10,000 x 12% x 60 / 365 = 197.26
+        res = dn.analyse([inv("A", 10000.0, date(2026, 1, 1))], date(2026, 3, 2), reference_rate=None,
+                         contract_rate=12.0)
+        self.assertEqual(res["rate_basis"], "contract")
+        self.assertEqual(res["open"][0]["interest"], 197.26)
+        self.assertIn("agreed contractual rate (user supplied)", dn.render_markdown(res))
+        # contract rate wins over the statutory rate when both are given
+        both = dn.analyse([inv("A", 10000.0, date(2026, 1, 1))], date(2026, 3, 2), reference_rate=2.0,
+                          contract_rate=12.0)
+        self.assertEqual(both["open"][0]["interest"], 197.26)
+        ns = dn.build_parser().parse_args([os.path.join(ROOT, "assets", "overdue_invoices.csv"), "--contract-rate", "12"])
+        self.assertEqual(ns.contract_rate, 12.0)
 
 
 class TestSample(unittest.TestCase):
@@ -63,10 +114,12 @@ class TestSample(unittest.TestCase):
         self.assertEqual(t["overdue_undisputed"], 426100.00)
         self.assertEqual(t["overdue_disputed"], 126000.00)
         self.assertEqual(t["not_yet_due"], 92300.00)
-        top = res["open"][0]
-        self.assertEqual(top["invoice"], "2026-362")
+        by = {i["invoice"]: i for i in res["open"]}
+        # Holst 2026-311: 30 x 84,500/210,000 + 40 x 62/90 + 15 x 1/3 + 15 x 0.5 = 52.1 (second Holst invoice open)
+        self.assertEqual(res["open"][0]["invoice"], "2026-311")
+        self.assertEqual(by["2026-311"]["priority"], 52.1)
         # 210,000 x 10.10% x 16 / 365
-        self.assertEqual(top["interest"], 929.75)
+        self.assertEqual(by["2026-362"]["interest"], 929.75)
         self.assertEqual(t["compensation"], 6 * 310.0)
 
     def test_reference_rate_required(self):

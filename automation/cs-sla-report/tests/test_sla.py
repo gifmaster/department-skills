@@ -112,5 +112,49 @@ class TestSampleAsset(unittest.TestCase):
             os.remove(bad)
 
 
+class TestHeaderAliases(unittest.TestCase):
+    BODY = ["1,2026-04-07 08:00,2026-04-07 09:00,2026-04-07 12:00,P2,email",
+            "2,2026-04-07 10:00,,,P1,phone"]
+
+    def write(self, header, name):
+        path = os.path.join(HERE, name)
+        with open(path, "w", encoding="utf-8") as fh:
+            fh.write(header + "\n" + "\n".join(self.BODY) + "\n")
+        self.addCleanup(os.remove, path)
+        return path
+
+    def report(self, path):
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            sla.main([path, "--as-of", "2026-04-07 14:00", "--json"])
+        return buf.getvalue()
+
+    def test_helpdesk_exports_match_canonical(self):
+        canon = self.report(self.write(",".join(sla.REQUIRED), "_canon.csv"))
+        variants = {
+            "zendesk": "id,created,first_response,solved,priority,via",
+            "freshdesk": "Ticket ID,Created time,Initial response time,Resolved time,Priority,Source",
+            "hubspot": "Ticket ID,Created at,First response time,Closed at,Ticket priority,Source",
+        }
+        for name, header in variants.items():
+            with self.subTest(name):
+                self.assertEqual(self.report(self.write(header, "_%s.csv" % name)), canon)
+        # hand check on the canonical file: ticket 1 FR 1.00 h, resolution 4.00 h (business hours)
+        self.assertIn('"fr_median": 1.0', canon)
+        self.assertIn('"res_median": 4.0', canon)
+
+    def test_alias_preference_and_help(self):
+        m = sla.header_map(["Ticket ID", "Created at", "First response time", "Solved at", "Closed at",
+                            "Priority", "Channel"])
+        self.assertEqual(m["Solved at"], "resolved_at")
+        self.assertNotIn("Closed at", m)               # solved wins over closed
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            with self.assertRaises(SystemExit):
+                sla.main(["--help"])
+        self.assertIn("first_response_time", buf.getvalue())
+        self.assertIn("solved", buf.getvalue())
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -6,7 +6,7 @@ Purpose
   equal work or work of equal value, flags category gaps at or above a threshold (default 5%,
   the Directive (EU) 2023/970 joint pay assessment trigger), shares of women and men in each pay
   quartile and the share receiving variable pay. Groups with fewer than --min-group people of
-  either gender are suppressed. Standard library only.
+  either gender are suppressed; a group with no women or no men is "not calculable". Standard library only.
   A gap is a statistic, not a finding of discrimination: unexplained gaps need an objective,
   gender-neutral justification or correction.
 
@@ -169,8 +169,25 @@ def stats_for(group):
     return out
 
 
+def not_calculable(s):
+    """Return 'no women' / 'no men' when one gender is absent (no gap exists), else None."""
+    if s["women"]["n"] == 0:
+        return "no women"
+    if s["men"]["n"] == 0:
+        return "no men"
+    return None
+
+
 def suppressed(s, k):
-    return s["men"]["n"] < k or s["women"]["n"] < k
+    """Suppressed = both genders present but fewer than k of either (gap exists, too few to show)."""
+    return not_calculable(s) is None and (s["men"]["n"] < k or s["women"]["n"] < k)
+
+
+def status_of(s):
+    nc = not_calculable(s)
+    if nc:
+        return "not calculable (%s)" % nc
+    return "suppressed" if s["suppressed"] else "shown"
 
 
 def quartiles(people, basis):
@@ -197,13 +214,15 @@ def analyse(people, min_group=5, threshold=5.0, quartile_basis="total"):
     warnings = []
     overall = stats_for(people)
     overall["suppressed"] = suppressed(overall, min_group)
+    overall["status"] = status_of(overall)
     cats = []
     for c in sorted({p["category"] for p in people}):
         s = stats_for([p for p in people if p["category"] == c])
         s["category"] = c
         s["suppressed"] = suppressed(s, min_group)
+        s["status"] = status_of(s)
         s["flags"] = []
-        if not s["suppressed"]:
+        if s["status"] == "shown":
             for key, label in (("hourly_base_mean", "base"), ("hourly_total_mean", "total")):
                 gv = s["gaps"][key]
                 if gv is not None and abs(gv) >= threshold:
@@ -239,7 +258,9 @@ def markdown(rep, load_warnings):
          "%d employees in the binary gap figures (%d men, %d women). Pay normalised to hourly: annual pay / "
          "(hours per week x 52). Gap = (men - women) / men. Positive means men are paid more." %
          (rep["n"], o["men"]["n"], o["women"]["n"]), "", "## Pay gap metrics", ""]
-    if o["suppressed"]:
+    if o["status"].startswith("not calculable"):
+        L.append("Overall gap %s: the binary gap needs both women and men." % o["status"])
+    elif o["suppressed"]:
         L.append("Suppressed: fewer than %d men or women in total." % k)
     else:
         rows = []
@@ -251,7 +272,9 @@ def markdown(rep, load_warnings):
     L += ["", "## Categories of equal work or work of equal value", ""]
     rows = []
     for c in rep["categories"]:
-        if c["suppressed"]:
+        if c["status"].startswith("not calculable"):
+            rows.append([c["category"], "%d / %d" % (c["men"]["n"], c["women"]["n"]), c["status"], "", "", "", ""])
+        elif c["suppressed"]:
             rows.append([c["category"], "%d / %d" % (c["men"]["n"], c["women"]["n"]),
                          "suppressed (< %d of a gender)" % k, "", "", "", ""])
         else:
@@ -263,12 +286,24 @@ def markdown(rep, load_warnings):
                     "Median total gap", "Flag"], rows))
     flagged = [c for c in rep["categories"] if c["flags"]]
     L += ["", "## Category gaps at or above %.0f%%" % rep["threshold"], ""]
-    if flagged:
-        for c in flagged:
-            L.append("- %s: %s. Needs an objective, gender-neutral justification (for example documented "
-                     "differences in experience, performance or responsibility) or correction." % (c["category"], "; ".join(c["flags"])))
-    else:
-        L.append("- None among the categories that could be shown.")
+    shown = [c for c in rep["categories"] if c["status"] == "shown"]
+    supp = [c for c in rep["categories"] if c["status"] == "suppressed"]
+    nocalc = [c for c in rep["categories"] if c["status"].startswith("not calculable")]
+    for c in flagged:
+        L.append("- %s: %s. Needs an objective, gender-neutral justification (for example documented "
+                 "differences in experience, performance or responsibility) or correction." % (c["category"], "; ".join(c["flags"])))
+    if not flagged:
+        L.append("- No category flagged among the %d that could be assessed." % len(shown) if shown
+                 else "- No category could be assessed.")
+    if supp:
+        L.append("- %d %s suppressed (fewer than %d women or men) and could not be assessed against the %.0f%% "
+                 "threshold: %s. Review them internally on the full data." % (
+                     len(supp), "category was" if len(supp) == 1 else "categories were", k, rep["threshold"],
+                     ", ".join(c["category"] for c in supp)))
+    if nocalc:
+        L.append("- %d %s not calculable (only one gender present), so no gap exists to assess: %s." % (
+            len(nocalc), "category is" if len(nocalc) == 1 else "categories are",
+            ", ".join("%s (%s)" % (c["category"], c["status"][len("not calculable ("):-1]) for c in nocalc)))
     L += ["", "## Pay quartiles (hourly %s pay, lowest to highest)" % rep["quartile_basis"], ""]
     L.append(table(["Quartile", "People", "Men", "Women", "Hourly range"],
                    [["Q%d" % q["quartile"], q["n"], "%d (%s)" % (q["men"], pc(q["men_pct"])),
@@ -325,8 +360,19 @@ def main(argv=None):
         out = dict(rep)
         if rep["overall"]["suppressed"]:
             out["overall"] = {"suppressed": True}
-        out["categories"] = [c if not c["suppressed"] else {"category": c["category"], "suppressed": True}
-                             for c in rep["categories"]]
+        elif rep["overall"]["status"] != "shown":
+            out["overall"] = {"suppressed": False, "status": rep["overall"]["status"]}
+
+        def public(c):
+            if c["suppressed"]:
+                return {"category": c["category"], "suppressed": True}
+            if c["status"] != "shown":
+                return {"category": c["category"], "suppressed": False, "status": c["status"],
+                        "men_n": c["men"]["n"], "women_n": c["women"]["n"]}
+            return c
+        out["categories"] = [public(c) for c in rep["categories"]]
+        out["categories_suppressed"] = sum(1 for c in rep["categories"] if c["suppressed"])
+        out["categories_not_calculable"] = sum(1 for c in rep["categories"] if c["status"].startswith("not calculable"))
         out["warnings"] = warnings + rep["warnings"]
         print(json.dumps(out, indent=2, ensure_ascii=False))
     else:
