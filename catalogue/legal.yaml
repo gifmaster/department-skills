@@ -68,9 +68,9 @@ skills:
       - Standard exclusions are present (public, already known, independently developed, legally required)
       - No hidden non-compete or IP assignment
     eu:
-      - 'Denmark: no-hire clauses between companies (jobklausuler) are restricted by ansættelsesklausulloven section 8 (verify
-        conditions); penalty clauses and unreasonable terms can be set aside or reduced by the courts under aftaleloven section
-        36.'
+      - 'Denmark: no-hire agreements between companies (jobklausuler) are invalid under ansættelsesklausulloven section 3,
+        except during negotiations on a business transfer (section 4); penalty clauses and unreasonable terms can be set aside
+        or reduced by the courts under aftaleloven section 36.'
     examples:
       - Review this NDA from a potential customer before I sign today.
   - id: contract-review

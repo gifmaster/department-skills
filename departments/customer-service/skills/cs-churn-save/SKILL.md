@@ -53,7 +53,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Making cancellation harder than sign-up can be an unfair commercial practice under the UCPD; Forbrugerombudsmanden expects cancelling to be as easy as signing up. The DSA dark-pattern ban covers online platforms only. Online distance contracts need a withdrawal function from 19 June 2026 (Directive (EU) 2023/2673).
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Be warm, clear and honest with customers. Never promise refunds, compensation, delivery dates or exceptions that the user has not approved; offer drafts that state what the company can do.

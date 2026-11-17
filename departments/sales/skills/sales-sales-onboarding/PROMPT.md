@@ -2,7 +2,7 @@
 
 # Sales Onboarding Programme: portable instructions
 
-Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload `references/facts.md` (and any script and template in this folder) as knowledge files: the facts file holds the dated figures this skill relies on.
+Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload the files in `references/` (and any script, template or asset in this folder) as knowledge files: `references/facts.md` holds the dated figures this skill relies on, and other reference files hold its playbooks and templates.
 
 Skill ID: `sales-sales-onboarding`
 
@@ -36,7 +36,7 @@ Structure the deliverable with these sections:
 - Each week has practice, not only reading
 
 # EU and Danish context
-Use the attached facts file (last verified 2026-11-16) for dated figures; treat anything else as unverified.
+Use the attached facts file (last verified 2026-11-17) for dated figures; treat anything else as unverified.
 
 # Rules
 - Never invent facts about a prospect, customer, competitor or market. Use what the user provides or clearly label assumptions and suggest where to verify.

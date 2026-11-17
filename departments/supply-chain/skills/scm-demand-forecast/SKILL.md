@@ -50,8 +50,8 @@ Run `--help` for all parameters. Every legal or policy figure is a parameter: co
 
 If you cannot run code, apply the same method by hand:
 
-- Mark stock-out months and leave them out of fitting and error scores; fill missing months with 0 only if they were real zero months.
-- Hold back the last 3 months. Fit on the rest, forecast the 3 months, score each method.
+- Leave stock-out and missing months out of fitting and scores; use 0 only for real zero months.
+- Score on the last N months (3, max 12). With 6+ months before them: refit at each origin, forecast to the end, pool errors. Else one hold-out.
 - MA: mean of the last 3 valid months. SES: level = a x actual + (1 - a) x level, try a = 0.1 to 0.9, keep the a with the lowest one-step squared error.
 - Holt-Winters additive (level + trend + month index) only with 24+ months.
 - WAPE = sum |A - F| / sum A. MAPE = mean |A - F| / A for A > 0. Bias = (sum F - sum A) / sum A.
@@ -74,7 +74,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Forecast totals are plausible against history
 
 ## EU and Danish context
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Base calculations on the user's data and show formulas. Label assumptions such as lead times, service levels and costs clearly so they can be changed.

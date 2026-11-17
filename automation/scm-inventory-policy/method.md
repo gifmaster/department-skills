@@ -1,4 +1,4 @@
-- Put demand and lead time on the same day basis first (weekly demand / 7, weeks x 7).
+- Put demand and lead time on one day basis first. Period of P days (week 7, month 365/12): d = mean / P, sd_d = SD / sqrt(P), as variance scales with P. Lead time in weeks x 7.
 - z from cycle service level: 90 % = 1.282, 95 % = 1.645, 97.5 % = 1.960, 99 % = 2.326.
 - sigma LT = sqrt(L x sd_d^2 + d^2 x sd_L^2).
 - Safety stock = z x sigma LT, rounded up.

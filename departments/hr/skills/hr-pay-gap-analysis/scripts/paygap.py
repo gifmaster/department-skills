@@ -335,7 +335,7 @@ def main(argv=None):
     ap.add_argument("--quartile-basis", choices=["total", "base"], default="total",
                     help="hourly pay used for quartile bands (default total)")
     ap.add_argument("--full-time-hours", type=float, default=37.0,
-                    help="weekly hours of a full-time employee, used only with fte (default 37; verify against "
+                    help="weekly hours of a full-time employee, used only with fte (default 37; verify current value in "
                          "your collective agreement)")
     ap.add_argument("--out", help="write per-employee hourly pay and quartile CSV (internal use, not for publication)")
     ap.add_argument("--json", action="store_true", help="print JSON instead of Markdown")

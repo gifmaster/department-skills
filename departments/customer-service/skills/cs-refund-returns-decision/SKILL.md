@@ -38,6 +38,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 3. Determine the remedy (repair, replacement, price reduction, refund) and costs.
 4. Draft the decision and reply with clear next steps.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/decision-tree.md`: Read for every return, refund, exchange, repair, warranty or reklamation case to pick the route (withdrawal, defect complaint or goodwill) and apply the right deadline, burden of proof, remedy, shipping cost and refund timing.
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -52,7 +57,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark: 14-day withdrawal with refund within 14 days; two-year complaint period for defects, with defects within one year presumed present at delivery; complaints within two months of discovery are always timely (see references/facts.md).
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Be warm, clear and honest with customers. Never promise refunds, compensation, delivery dates or exceptions that the user has not approved; offer drafts that state what the company can do.

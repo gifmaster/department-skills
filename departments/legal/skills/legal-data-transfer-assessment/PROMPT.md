@@ -2,7 +2,7 @@
 
 # International Data Transfer Assessment: portable instructions
 
-Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload `references/facts.md` (and any script and template in this folder) as knowledge files: the facts file holds the dated figures this skill relies on.
+Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload the files in `references/` (and any script, template or asset in this folder) as knowledge files: `references/facts.md` holds the dated figures this skill relies on, and other reference files hold its playbooks and templates.
 
 Skill ID: `legal-data-transfer-assessment`
 
@@ -40,7 +40,7 @@ Structure the deliverable with these sections:
 
 # EU and Danish context
 - Chapter V GDPR governs transfers. The EU-US Data Privacy Framework relies on an adequacy decision that could be challenged; keep a fallback plan.
-Use the attached facts file (last verified 2026-11-16) for dated figures; treat anything else as unverified.
+Use the attached facts file (last verified 2026-11-17) for dated figures; treat anything else as unverified.
 
 # Rules
 - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.

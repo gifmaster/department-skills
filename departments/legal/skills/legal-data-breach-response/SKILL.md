@@ -38,6 +38,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 4. Decide on notification to the regulator and to individuals with reasons.
 5. Draft notifications and log the breach internally regardless of outcome.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/notification-templates.md`: read when drafting the notice to affected individuals (Art. 34), writing the internal breach log entry (Art. 33(5)) or preparing the facts for Datatilsynet's online breach form.
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -54,7 +59,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Danish breaches are reported to Datatilsynet through its online form. NIS2 or DORA may require separate, faster incident reporting for in-scope entities.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.

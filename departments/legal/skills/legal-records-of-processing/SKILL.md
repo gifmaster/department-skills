@@ -34,6 +34,12 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 3. Fill the register columns required by Article 30.
 4. Flag missing legal bases, retention periods or transfer tools.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `assets/ropa-controller-template.csv`
+- `assets/ropa-processor-template.csv`
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -46,7 +52,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Sensitive data categories flagged
 
 ## EU and Danish context
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.

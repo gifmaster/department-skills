@@ -7,6 +7,7 @@
    - skill text: `catalogue/<department>.yaml`
    - regulatory figures: `facts/_parts/<department>.md` (update `last_verified` in `facts/_parts/header.md` when you re-check them)
    - calculation tools: `automation/<skill-name>/` following [automation/SPEC.md](automation/SPEC.md)
+   - reference packs: `content/<skill-name>/` following [content/SPEC.md](content/SPEC.md)
 3. Rebuild and check:
 
    ```bash

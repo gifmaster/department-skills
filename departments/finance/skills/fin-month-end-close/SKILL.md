@@ -55,7 +55,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark VAT deadlines: monthly filers by the 25th of the following month; quarterly by the 1st of the third month after the quarter; half-yearly by 1 September and 1 March. Plan the close around them (see references/facts.md).
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Show calculations and formulas so every number can be traced and checked. Never present an estimate as an actual figure.

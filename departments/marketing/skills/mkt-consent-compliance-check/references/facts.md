@@ -1,5 +1,5 @@
 ---
-last_verified: 2026-11-16
+last_verified: 2026-11-17
 owner: Alexander Senderovitz (update at least quarterly and after any law change)
 ---
 

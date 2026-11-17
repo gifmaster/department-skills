@@ -39,6 +39,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 5. Propose redline wording for amber and red items.
 6. Give a sign, negotiate or escalate recommendation.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/nda-playbook.md`: read when reviewing, negotiating or drafting an NDA or fortrolighedsaftale, to rate each clause green, amber or red and to pick redline wording (English and Danish).
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -52,9 +57,9 @@ Use these sections, in this order, unless the user asks for a different format:
 - No hidden non-compete or IP assignment
 
 ## EU and Danish context
-- Denmark: no-hire clauses between companies (jobklausuler) are restricted by ansættelsesklausulloven section 8 (verify conditions); penalty clauses and unreasonable terms can be set aside or reduced by the courts under aftaleloven section 36.
+- Denmark: no-hire agreements between companies (jobklausuler) are invalid under ansættelsesklausulloven section 3, except during negotiations on a business transfer (section 4); penalty clauses and unreasonable terms can be set aside or reduced by the courts under aftaleloven section 36.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.

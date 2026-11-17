@@ -53,7 +53,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Personal data breach: the controller notifies Datatilsynet within 72 hours (GDPR Article 33(1)) and a processor notifies its controller without undue delay (Article 33(2)); high-risk breaches to individuals (Article 34). Product recalls follow the General Product Safety Regulation (EU) 2023/988, Article 36. Check NIS2 if in scope.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Be warm, clear and honest with customers. Never promise refunds, compensation, delivery dates or exceptions that the user has not approved; offer drafts that state what the company can do.

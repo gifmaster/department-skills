@@ -55,7 +55,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark: standard VAT 25 percent; filing frequency by turnover (half-yearly below DKK 5m, quarterly DKK 5m to 50m, monthly above). EU B2C distance sales above EUR 10,000 a year are taxed in the customer's country; the One-Stop Shop is an optional way to report them. Restaurant representation: 25 percent of the VAT is deductible. Verify against references/facts.md.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Show calculations and formulas so every number can be traced and checked. Never present an estimate as an actual figure.

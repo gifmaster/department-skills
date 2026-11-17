@@ -51,7 +51,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - LinkedIn private messages count as electronic mail under the Danish spam rules: connect and engage without a sales pitch until there is consent or an existing relationship.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Never invent facts about a prospect, customer, competitor or market. Use what the user provides or clearly label assumptions and suggest where to verify.

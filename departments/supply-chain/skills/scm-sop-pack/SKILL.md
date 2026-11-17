@@ -37,6 +37,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 5. Frame each decision with 2 or 3 options, their volume, cost and service impact, and a recommendation.
 6. Record decisions, owners and assumptions in a decision log for next month.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/executive-template.md`: Read when building the executive summary page of an S&OP or IBP pack; follow the layout, use the KPI definitions and formulas exactly, and carry the decision log over from last month.
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -54,7 +59,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Each gap has an option
 
 ## EU and Danish context
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Base calculations on the user's data and show formulas. Label assumptions such as lead times, service levels and costs clearly so they can be changed.

@@ -37,6 +37,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 3. Flag clauses that need legal review (non-compete, non-solicitation, IP, bonus clawback).
 4. List the deadlines for giving the written terms.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/mandatory-terms-checklist.md`: Read when checking a contract or ansættelsesbevis for required information, stating deadlines for written terms, or drafting a Danish offer letter.
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -53,7 +58,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Directive (EU) 2019/1152 on transparent working conditions, implemented in Denmark by the Employment Contracts Act (ansættelsesbevisloven), sets mandatory information and deadlines, with some key terms due within 7 calendar days of starting.
 - Denmark: the Salaried Employees Act (funktionærloven) governs notice and probation for salaried employees; restrictive covenants are regulated by the Employment Clauses Act (ansættelsesklausulloven).
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Treat all employee and candidate data as personal data. Ask the user to remove names, CPR numbers and health details unless they are strictly needed, and never repeat sensitive data back unnecessarily.

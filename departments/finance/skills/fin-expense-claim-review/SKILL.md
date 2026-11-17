@@ -52,7 +52,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark 2026 (verify): tax-free mileage DKK 3.94 per km up to 20,000 km and DKK 2.28 above, with a driving log; travel allowance for meals DKK 625 per day for trips of at least 24 hours with an overnight stay, reduced for meals provided. Representation has limited VAT and tax deductibility.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Show calculations and formulas so every number can be traced and checked. Never present an estimate as an actual figure.

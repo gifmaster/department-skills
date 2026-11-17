@@ -10,11 +10,17 @@ Input columns (CSV, comma or semicolon, header row required)
     unit_cost, order_cost, holding_rate, moq, pack_size
     optional: service_level, current_stock
     Demand and lead time MUST use the same day basis (calendar days by default).
+    With --demand-period week or month, avg_daily_demand and sd_daily_demand hold the
+    mean and SD per week or month and are converted to per day first (see below).
     holding_rate is annual (0.22 or 22 both read as 22 %). service_level is the
     cycle service level (0.95 or 95). Blank order_cost / holding_rate /
     service_level fall back to the CLI defaults.
 
 Formulas
+    period conversion (P = days per demand period: day 1, week 7, month days_per_year / 12,
+    or --period-days), assuming demand is independent from day to day so that
+    variance adds up over days (Var_period = P x Var_day):
+                   d = mean_period / P,   sd_d = sd_period / sqrt(P)
     z            = inverse standard normal of the cycle service level
     sigma_LT     = sqrt(L x sd_d^2 + d^2 x sd_L^2)   (demand and lead-time variability)
     safety stock = ceil(z x sigma_LT)
@@ -189,9 +195,34 @@ def as_rate(value, name, warnings, item):
     return value
 
 
+def period_days_for(demand_period, days_per_year=365, period_days=None):
+    """Days in one demand period: day 1, week 7, month days_per_year / 12, unless overridden."""
+    if period_days is not None:
+        if period_days <= 0:
+            raise InputError("--period-days must be above 0")
+        return float(period_days)
+    if demand_period == "day":
+        return 1.0
+    if demand_period == "week":
+        return 7.0
+    if demand_period == "month":
+        return days_per_year / 12.0
+    raise InputError("--demand-period must be day, week or month")
+
+
+def to_daily(mean_p, sd_p, p_days):
+    """Convert period mean and SD to per day: d = mean / P, sd_d = sd / sqrt(P) (variance scales with P)."""
+    return mean_p / p_days, sd_p / math.sqrt(p_days)
+
+
 def compute(records, service_level=0.95, order_cost=None, holding_rate=None,
-            days_per_year=365, max_cover_days=365, lumpy_cov=2.0, moq_eoq_ratio=3.0):
+            days_per_year=365, max_cover_days=365, lumpy_cov=2.0, moq_eoq_ratio=3.0,
+            demand_period="day", period_days=None):
     items, warnings, seen = [], [], set()
+    p_days = period_days_for(demand_period, days_per_year, period_days)
+    if demand_period == "week" and period_days is None and days_per_year != 365:
+        warnings.append("Weekly demand converted with 7 days per week but --days-per-year is %s; "
+                        "set --period-days (e.g. 5 for working days) to keep one day basis." % fmt(days_per_year))
     for line, r in records:
         name = r.get("item", "")
         if not name:
@@ -238,7 +269,8 @@ def compute(records, service_level=0.95, order_cost=None, holding_rate=None,
             warnings.append("%s: service level %s is not between 0 and 1, row skipped." % (name, sl))
             seen.discard(name)
             continue
-        d, sd_d = vals["avg_daily_demand"], vals["sd_daily_demand"]
+        d_in, sd_in = vals["avg_daily_demand"], vals["sd_daily_demand"]
+        d, sd_d = to_daily(d_in, sd_in, p_days)
         lt, sd_lt = vals["lead_time_days"], vals["sd_lead_time_days"]
         cost, s_cost, h_rate = vals["unit_cost"], vals["order_cost"], vals["holding_rate"]
         moq, pack, cur = vals["moq"], vals["pack_size"], vals["current_stock"]
@@ -288,6 +320,8 @@ def compute(records, service_level=0.95, order_cost=None, holding_rate=None,
             "value_change": (new_val - cur_val) if cur_val is not None else None,
             "flags": flags,
         })
+        if p_days != 1.0:
+            items[-1].update({"avg_demand_per_period": d_in, "sd_demand_per_period": sd_in})
     tot_new = sum(i["value_proposed"] for i in items)
     with_cur = [i for i in items if i["value_current"] is not None]
     tot_cur = sum(i["value_current"] for i in with_cur)
@@ -295,7 +329,8 @@ def compute(records, service_level=0.95, order_cost=None, holding_rate=None,
     return {
         "parameters": {"service_level_default": service_level, "order_cost_default": order_cost,
                        "holding_rate_default": holding_rate, "days_per_year": days_per_year,
-                       "max_cover_days": max_cover_days, "lumpy_cov": lumpy_cov},
+                       "max_cover_days": max_cover_days, "lumpy_cov": lumpy_cov,
+                       "demand_period": demand_period, "period_days": p_days},
         "items": items, "warnings": warnings,
         "totals": {"items": len(items), "value_proposed": tot_new,
                    "value_current_comparable": tot_cur, "value_proposed_comparable": tot_new_cmp,
@@ -309,6 +344,9 @@ def render(res):
     out.append("**%d items.** Proposed average inventory value %s; current value (items with stock data) %s; "
                "change %s." % (t["items"], fmt(t["value_proposed"]), fmt(t["value_current_comparable"]),
                                fmt(t["value_change"]) if t["value_change"] is not None else "n/a"))
+    if p["period_days"] != 1.0:
+        out += ["", "Demand input is per %s (P = %s days), converted to per day: d = mean / P, "
+                "sd_d = SD / sqrt(P), assuming independent daily demand." % (p["demand_period"], fmt(p["period_days"], 2))]
     out += ["", "## 1. Parameters per item", ""]
     rows = []
     for i in res["items"]:
@@ -368,13 +406,20 @@ def build_parser():
                                  "Input columns: " + ", ".join(REQUIRED) + " (optional: " + ", ".join(OPTIONAL) + ").")
     ap.add_argument("csv", help="item CSV file")
     ap.add_argument("--service-level", type=float, default=0.95,
-                    help="cycle service level used when the column is blank (default 0.95)")
+                    help="cycle service level used when the column is blank, a company policy target (default 0.95)")
     ap.add_argument("--order-cost", type=float, default=None,
                     help="order cost per order used when the column is blank (default: none, row skipped)")
     ap.add_argument("--holding-rate", type=float, default=None,
                     help="annual holding rate used when the column is blank, e.g. 0.22 (default: none, row skipped)")
     ap.add_argument("--days-per-year", type=float, default=365,
                     help="days per year to annualise daily demand; use 250 if demand is per working day (default 365)")
+    ap.add_argument("--demand-period", choices=["day", "week", "month"], default="day",
+                    help="period of the avg_daily_demand and sd_daily_demand columns (default day). week or month "
+                         "values are converted to per day: d = mean / P, sd_d = SD / sqrt(P), P = 7 for week, "
+                         "days-per-year / 12 for month (variance scales with period length, independent days assumed)")
+    ap.add_argument("--period-days", type=float, default=None,
+                    help="override P, the days in one demand period, e.g. 5 for a working-day week "
+                         "(default: 7 for week, days-per-year / 12 for month)")
     ap.add_argument("--max-cover-days", type=float, default=365,
                     help="flag items whose current stock covers more days than this (default 365)")
     ap.add_argument("--lumpy-cov", type=float, default=2.0,
@@ -391,7 +436,8 @@ def main(argv=None):
             raise InputError("--service-level must be between 0 and 1, e.g. 0.95")
         recs = read_table(args.csv, REQUIRED, OPTIONAL)
         res = compute(recs, args.service_level, args.order_cost, args.holding_rate,
-                      args.days_per_year, args.max_cover_days, args.lumpy_cov)
+                      args.days_per_year, args.max_cover_days, args.lumpy_cov,
+                      demand_period=args.demand_period, period_days=args.period_days)
     except InputError as exc:
         print("Error: %s" % exc, file=sys.stderr)
         return 2

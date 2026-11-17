@@ -63,6 +63,29 @@ class TestHandCase(unittest.TestCase):
         self.assertTrue(any("percentage" in w for w in res["warnings"]))
         self.assertTrue(any("MOQ is not a multiple" in f for f in i["flags"]))
 
+    def test_weekly_and_monthly_demand_converted(self):
+        # weekly mean 70, SD 3 x sqrt(7) = 7.9373 -> per day d = 70 / 7 = 10, sd_d = 7.9373 / sqrt(7) = 3,
+        # so the result equals test_single_item (SS 37, ROP 127), not SD / 7 = 1.13
+        path = write_tmp(HEADER + "A,70,7.937254,9,2,20,100,0.2,100,50\n")
+        res = ip.compute(ip.read_table(path, ip.REQUIRED, ip.OPTIONAL), demand_period="week")
+        i = res["items"][0]
+        self.assertAlmostEqual(i["avg_daily_demand"], 10.0, places=6)
+        self.assertAlmostEqual(i["sd_daily_demand"], 3.0, places=5)
+        self.assertEqual(i["avg_demand_per_period"], 70.0)
+        self.assertEqual((i["safety_stock"], i["reorder_point"], i["order_qty"]), (37, 127, 450))
+        # monthly: P = 365 / 12 = 30.4167; mean 3650 / 12 = 304.1667, SD 3 x sqrt(30.4167) = 16.5454
+        path = write_tmp(HEADER + "A,304.1666666667,16.545393,9,2,20,100,0.2,100,50\n")
+        res = ip.compute(ip.read_table(path, ip.REQUIRED, ip.OPTIONAL), demand_period="month")
+        i = res["items"][0]
+        self.assertAlmostEqual(res["parameters"]["period_days"], 30.416667, places=5)
+        self.assertAlmostEqual(i["sd_daily_demand"], 3.0, places=4)
+        self.assertEqual((i["safety_stock"], i["reorder_point"]), (37, 127))
+        # working-day week override
+        self.assertEqual(ip.to_daily(50.0, 10.0, ip.period_days_for("week", 250, 5)),
+                         (10.0, 10.0 / 5 ** 0.5))
+        res = ip.compute(ip.read_table(path, ip.REQUIRED, ip.OPTIONAL), demand_period="week", days_per_year=250)
+        self.assertTrue(any("--period-days" in w for w in res["warnings"]))
+
     def test_missing_column_message(self):
         path = write_tmp("item,avg_daily_demand\nA,1\n")
         with self.assertRaises(ip.InputError) as ctx:

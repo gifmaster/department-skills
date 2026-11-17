@@ -2,7 +2,7 @@
 
 # Email Newsletter and Nurture: portable instructions
 
-Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload `references/facts.md` (and any script and template in this folder) as knowledge files: the facts file holds the dated figures this skill relies on.
+Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload the files in `references/` (and any script, template or asset in this folder) as knowledge files: `references/facts.md` holds the dated figures this skill relies on, and other reference files hold its playbooks and templates.
 
 Skill ID: `mkt-email-newsletter`
 
@@ -39,7 +39,7 @@ Structure the deliverable with these sections:
 # EU and Danish context
 - Denmark: prior consent is required for marketing email to any recipient, businesses included (markedsføringsloven section 10). The existing-customer exception requires the address to come from a sale, the email to cover your own similar products, and a free, easy opt-out at collection and in every message. Emailing to ask for consent is itself marketing.
 - Paid or sponsored content must be marked as advertising; announced price reductions use the lowest price in the prior 30 days; generic green claims are banned from 27 September 2026 (Directive (EU) 2024/825).
-Use the attached facts file (last verified 2026-11-16) for dated figures; treat anything else as unverified.
+Use the attached facts file (last verified 2026-11-17) for dated figures; treat anything else as unverified.
 
 # Rules
 - Write in the brand's voice and avoid generic, AI-sounding phrases and filler. Prefer concrete facts, examples and plain words.

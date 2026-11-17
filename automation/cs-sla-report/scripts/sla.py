@@ -648,7 +648,7 @@ def main(argv=None):
                     help="opening hours, '08:00-16:00' (default) or per day 'mon=08:00-16:00,fri=08:00-15:30'")
     ap.add_argument("--workdays", default="mon,tue,wed,thu,fri", help="open weekdays when --open-hours is one range")
     ap.add_argument("--holidays", choices=["dk", "none"], default="dk",
-                    help="exclude Danish public holidays (default dk; Store Bededag only up to 2023). Verify current calendar")
+                    help="exclude Danish public holidays (default dk; Store Bededag only up to 2023; verify current value of the holiday calendar)")
     ap.add_argument("--customary-closed", action="store_true",
                     help="also close on Grundlovsdag (5 Jun), 24 Dec and 31 Dec (customary, not statutory)")
     ap.add_argument("--closed-dates", default="", help="extra closed dates, comma separated yyyy-mm-dd")

@@ -37,6 +37,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 4. Propose measures and rate residual risk.
 5. Conclude and note whether prior consultation with the regulator is needed.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/dpia-template.md`: read when screening whether a DPIA is needed or when writing a DPIA (konsekvensanalyse), to follow the Art. 35(7) structure, rate risks on a fixed scale, record measures and sign-off, and check whether prior consultation under Art. 36 is needed.
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -54,7 +59,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Where an AI system is high-risk under the AI Act, the deployer's DPIA can build on the provider's information (AI Act Article 26(9)); certain deployers must also do a fundamental rights impact assessment (Article 27).
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.

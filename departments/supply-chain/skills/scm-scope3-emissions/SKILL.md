@@ -53,7 +53,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Name the emission factor source and year (supplier data, Energistyrelsen, DEFRA, ecoinvent). Product claims of neutral or reduced impact based on offsetting are banned from 27 September 2026 (Directive (EU) 2024/825). After Omnibus I, CSRD applies only above 1,000 employees; SMEs mostly report to customers or under VSME.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Base calculations on the user's data and show formulas. Label assumptions such as lead times, service levels and costs clearly so they can be changed.

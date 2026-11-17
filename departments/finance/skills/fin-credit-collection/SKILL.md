@@ -58,6 +58,11 @@ If you cannot run code, apply the same method by hand:
 - Next action: 0 sent = friendly 1st; 1 = firm 2nd; 2 = final notice; 3 = phone, then user decides on collection. Inside 10 days of the last reminder: wait.
 - Flag duplicates and blank b2b.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/reminder-templates-da-en.md`: Read before drafting any rykker, final notice (påkrav) or reply to a disputed invoice; pick the B2B or consumer variant and fill the fee and interest lines from the rules in section 1.
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -73,7 +78,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark: reminder fees max DKK 100 per reminder, at most three, at least 10 days apart (renteloven section 9 b, stk. 2); B2B statutory interest is the Nationalbanken reference rate plus 8 percentage points (section 5) and a fixed compensation for recovery costs, currently DKK 310 (section 9 a, stk. 3, amount set by executive order). Before other collection steps a payment demand with at least 10 days to pay is required (inkassoloven section 10). Verify current amounts.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Show calculations and formulas so every number can be traced and checked. Never present an estimate as an actual figure.

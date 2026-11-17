@@ -54,7 +54,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark: employers must prevent sexual harassment under the Equal Treatment Act and the Working Environment Act; workers in organisations with 50 or more employees can also use the whistleblower scheme for certain reports.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Treat all employee and candidate data as personal data. Ask the user to remove names, CPR numbers and health details unless they are strictly needed, and never repeat sensitive data back unnecessarily.

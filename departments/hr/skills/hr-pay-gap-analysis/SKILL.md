@@ -72,7 +72,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Directive (EU) 2023/970 reporting: 250+ workers first report by 7 June 2027 then yearly; 150 to 249 by 7 June 2027 then every three years; 100 to 149 by 7 June 2031. A category gap of 5 percent or more that is not objectively justified and not remedied within six months triggers a joint pay assessment. Check the adopted Danish transposition act.
 - Denmark: ligelønsloven already requires gender-segregated pay statistics for employers with at least 35 employees where at least 10 men and 10 women share a DISCO category.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Treat all employee and candidate data as personal data. Ask the user to remove names, CPR numbers and health details unless they are strictly needed, and never repeat sensitive data back unnecessarily.

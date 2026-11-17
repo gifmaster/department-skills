@@ -294,8 +294,8 @@ def write_csv(path, res):
 def build_parser():
     p = argparse.ArgumentParser(description="Budget vs actual variances with F/A, materiality and price/volume split.")
     p.add_argument("csv", help="CSV with line, type (revenue|cost|total), budget, actual [, budget_qty, actual_qty]")
-    p.add_argument("--abs-threshold", type=float, default=50000.0, help="Material if |variance| >= this amount (default 50,000)")
-    p.add_argument("--pct-threshold", type=float, default=10.0, help="Material if |variance %%| >= this ... (default 10)")
+    p.add_argument("--abs-threshold", type=float, default=50000.0, help="Material if |variance| >= this amount, set to your materiality policy (default 50,000)")
+    p.add_argument("--pct-threshold", type=float, default=10.0, help="Material if |variance %%| >= this, set to your materiality policy ... (default 10)")
     p.add_argument("--pct-floor", type=float, default=10000.0, help="... and |variance| >= this floor (default 10,000)")
     p.add_argument("--cost-sign", choices=("auto", "positive", "negative"), default="auto",
                    help="How cost lines are signed in the file (default auto-detect)")

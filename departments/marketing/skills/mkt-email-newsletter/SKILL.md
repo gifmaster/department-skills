@@ -55,7 +55,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Denmark: prior consent is required for marketing email to any recipient, businesses included (markedsføringsloven section 10). The existing-customer exception requires the address to come from a sale, the email to cover your own similar products, and a free, easy opt-out at collection and in every message. Emailing to ask for consent is itself marketing.
 - Paid or sponsored content must be marked as advertising; announced price reductions use the lowest price in the prior 30 days; generic green claims are banned from 27 September 2026 (Directive (EU) 2024/825).
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Write in the brand's voice and avoid generic, AI-sounding phrases and filler. Prefer concrete facts, examples and plain words.

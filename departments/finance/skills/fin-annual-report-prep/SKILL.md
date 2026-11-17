@@ -53,7 +53,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark: reporting classes A, B, C and D; classes B and C file within five months of year end (31 May for a 31 December year end), class D within four months.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Show calculations and formulas so every number can be traced and checked. Never present an estimate as an actual figure.

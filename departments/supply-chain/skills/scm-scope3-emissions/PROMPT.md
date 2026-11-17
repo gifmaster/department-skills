@@ -2,7 +2,7 @@
 
 # Scope 3 Supply Chain Emissions: portable instructions
 
-Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload `references/facts.md` (and any script and template in this folder) as knowledge files: the facts file holds the dated figures this skill relies on.
+Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload the files in `references/` (and any script, template or asset in this folder) as knowledge files: `references/facts.md` holds the dated figures this skill relies on, and other reference files hold its playbooks and templates.
 
 Skill ID: `scm-scope3-emissions`
 
@@ -38,7 +38,7 @@ Structure the deliverable with these sections:
 
 # EU and Danish context
 - Name the emission factor source and year (supplier data, Energistyrelsen, DEFRA, ecoinvent). Product claims of neutral or reduced impact based on offsetting are banned from 27 September 2026 (Directive (EU) 2024/825). After Omnibus I, CSRD applies only above 1,000 employees; SMEs mostly report to customers or under VSME.
-Use the attached facts file (last verified 2026-11-16) for dated figures; treat anything else as unverified.
+Use the attached facts file (last verified 2026-11-17) for dated figures; treat anything else as unverified.
 
 # Rules
 - Base calculations on the user's data and show formulas. Label assumptions such as lead times, service levels and costs clearly so they can be changed.

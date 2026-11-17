@@ -349,7 +349,7 @@ def main(argv=None):
     ap.add_argument("--hr", required=True, help="HR employee list CSV")
     ap.add_argument("--role-map", help="JSON file mapping job_role to allowed roles")
     ap.add_argument("--today", help="as-of date (default: system date)")
-    ap.add_argument("--dormant-days", type=int, default=90, help="days without login before dormant (default: 90)")
+    ap.add_argument("--dormant-days", type=int, default=90, help="days without login before dormant, per your access control policy (default: 90)")
     ap.add_argument("--name-threshold", type=float, default=0.85, help="fuzzy name match threshold 0-1 (default: 0.85)")
     ap.add_argument("--generic-names", default=DEFAULT_GENERIC, help="comma list of generic account names (default: %(default)s)")
     ap.add_argument("--out", help="write the full attestation list to this CSV")

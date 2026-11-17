@@ -52,7 +52,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - CBAM covers specific CN codes (iron and steel, aluminium, cement, fertilisers, hydrogen, electricity, some downstream articles), with a 50-tonne a year de minimis from the 2025 simplification; check by CN code. Use TARIC and, for certainty, a Binding Tariff Information decision from Toldstyrelsen.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Base calculations on the user's data and show formulas. Label assumptions such as lead times, service levels and costs clearly so they can be changed.

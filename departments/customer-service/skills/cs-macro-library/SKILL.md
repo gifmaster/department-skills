@@ -37,6 +37,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 3. Add notes on when not to use each macro.
 4. Plan a review cycle.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/macros-da-en.md`: Read when building or reviewing saved replies for a webshop; adapt these 15 macros to the shop's policies and helpdesk placeholder syntax instead of writing from scratch.
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -50,7 +55,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Voluntary policies never override the statutory withdrawal or complaint rights
 
 ## EU and Danish context
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Be warm, clear and honest with customers. Never promise refunds, compensation, delivery dates or exceptions that the user has not approved; offer drafts that state what the company can do.

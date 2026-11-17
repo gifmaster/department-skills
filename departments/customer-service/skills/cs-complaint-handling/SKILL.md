@@ -55,7 +55,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Consumer disputes that are not resolved can go to an alternative dispute resolution body; in Denmark, Nævnenes Hus handles consumer complaints. Traders must inform consumers about relevant ADR bodies.
 - The EU ODR platform closed on 20 July 2025; remove old ODR links from replies and terms.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Be warm, clear and honest with customers. Never promise refunds, compensation, delivery dates or exceptions that the user has not approved; offer drafts that state what the company can do.

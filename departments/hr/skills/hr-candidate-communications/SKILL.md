@@ -39,6 +39,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 4. Include data protection information on how long the application is kept and how to ask for deletion.
 5. Produce the message with a subject line and placeholders in square brackets.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/templates-da-en.md`: Read before drafting any invitation, rejection, feedback, reference request or retention consent message to a candidate; adapt the matching template rather than writing from scratch.
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -53,7 +58,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - GDPR: tell candidates how long their data is kept. Danish practice, supported by Datatilsynet guidance, is that unsuccessful applications are usually deleted within about six months unless the candidate consents to longer retention.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Treat all employee and candidate data as personal data. Ask the user to remove names, CPR numbers and health details unless they are strictly needed, and never repeat sensitive data back unnecessarily.

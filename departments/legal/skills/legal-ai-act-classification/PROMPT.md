@@ -2,7 +2,7 @@
 
 # EU AI Act Classification: portable instructions
 
-Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload `references/facts.md` (and any script and template in this folder) as knowledge files: the facts file holds the dated figures this skill relies on.
+Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload the files in `references/` (and any script, template or asset in this folder) as knowledge files: `references/facts.md` holds the dated figures this skill relies on, and other reference files hold its playbooks and templates.
 
 Skill ID: `legal-ai-act-classification`
 
@@ -41,7 +41,7 @@ Structure the deliverable with these sections:
 
 # EU and Danish context
 - See references/facts.md for the AI Act dates as amended by Regulation (EU) 2026/1744: Annex III high-risk from 2 December 2027, Annex I from 2 August 2028, Article 50 transparency from 2 August 2026, two new Article 5 bans from 2 December 2026, Article 4 AI literacy now a duty to take measures to support literacy.
-Use the attached facts file (last verified 2026-11-16) for dated figures; treat anything else as unverified.
+Use the attached facts file (last verified 2026-11-17) for dated figures; treat anything else as unverified.
 
 # Rules
 - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.

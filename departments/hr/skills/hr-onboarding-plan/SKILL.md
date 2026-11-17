@@ -38,6 +38,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 4. Schedule manager check-ins and an HR check-in at day 30 and day 90.
 5. Add compliance items such as safety introduction, data protection and AI use training.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `assets/onboarding-plan-template.csv`
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -54,7 +59,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - AI Act Article 4 (as amended by Regulation (EU) 2026/1744): providers and deployers must take measures to support sufficient AI literacy among staff who use AI; include AI use training in onboarding.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Treat all employee and candidate data as personal data. Ask the user to remove names, CPR numbers and health details unless they are strictly needed, and never repeat sensitive data back unnecessarily.

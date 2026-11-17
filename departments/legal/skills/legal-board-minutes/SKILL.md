@@ -34,6 +34,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 3. Record each item with summary of discussion, decision and owner.
 4. Prepare signature blocks and action list.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/minutes-template-da.md`: read when drafting a Danish bestyrelsesreferat (protokol) or a skriftlig bestyrelsesbeslutning for an ApS or A/S, to record attendance, quorum, inhabilitet, decisions and signatures in line with selskabsloven.
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -49,7 +54,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark: the Companies Act (selskabsloven) and the company's articles of association set rules on board meetings, minutes and signing.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.

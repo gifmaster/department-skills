@@ -49,7 +49,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - From 27 September 2026 Directive (EU) 2024/825 bans generic environmental claims where recognised excellent environmental performance cannot be shown, and claims of neutral, reduced or positive impact based on offsetting. Price reductions must use the lowest price in the prior 30 days (Directive 98/6/EC Article 6a). Paid content must be marked as advertising. Forbrugerombudsmanden has detailed Danish guidance.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.

@@ -55,6 +55,7 @@ If you cannot run code, apply the same method by hand:
 - Agent hours = sum of N x interval length. Paid hours = agent hours / (1 - shrinkage). Scheduled per interval = N / (1 - shrinkage), round up.
 - Full-day equivalents = paid hours / 7.4 (37 h week; check agreement).
 - Erlang C ignores abandonment and retries, so it overstates staff when queues are long; not valid for chat concurrency or email backlog.
+- Available agents: gap = available on queue - required (minus = shortfall); achievable service level = the formula above with N = available (0 if N <= A). Headcount x (1 - shrinkage) first.
 - Check missing or duplicate intervals before summing.
 
 ## Output format
@@ -70,7 +71,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Working time rules respected
 
 ## EU and Danish context
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Be warm, clear and honest with customers. Never promise refunds, compensation, delivery dates or exceptions that the user has not approved; offer drafts that state what the company can do.

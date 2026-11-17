@@ -54,6 +54,11 @@ If you cannot run code, apply the same method by hand:
 - Overdue: send a holding reply today with apology and firm date, then the full response; extension no longer available; record the cause.
 - Closed requests: late if response date is after the applicable deadline.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/response-templates.md`: read when writing to a data subject about an access or other rights request: acknowledgement, identity check, extension notice, full Article 15 response or partial refusal under databeskyttelsesloven § 22.
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -70,7 +75,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark: exceptions to the right of access in databeskyttelsesloven section 22. For former employees where a dispute is likely, preserve data (litigation hold) while answering.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.

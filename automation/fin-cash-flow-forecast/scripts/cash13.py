@@ -562,7 +562,8 @@ def build_parser():
     p.add_argument("--roll", choices=("following", "preceding"), default="following",
                    help="Move payments on non-banking days to the next (default) or previous banking day")
     p.add_argument("--closing-days", default="06-05,12-24,12-31",
-                   help="Extra fixed bank closing days as mm-dd, comma separated (default 06-05,12-24,12-31; verify current value)")
+                   help="Extra fixed bank closing days as mm-dd, comma separated, on top of the built-in Danish public "
+                        "holidays (Store Bededag only up to 2023) (default 06-05,12-24,12-31; verify current value)")
     p.add_argument("--extra-closed-dates", default="", help="Further closed dates yyyy-mm-dd, comma separated")
     p.add_argument("--out", help="Write the weekly table and all dated flows to this CSV")
     p.add_argument("--json", action="store_true", help="Print JSON instead of Markdown")

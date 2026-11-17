@@ -54,7 +54,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark: forbrugeraftaleloven (14-day withdrawal) and købeloven (two-year complaint period, defects within one year presumed). From 19 June 2026, under Directive (EU) 2023/2673, traders concluding distance contracts through an online interface must provide a withdrawal function.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.

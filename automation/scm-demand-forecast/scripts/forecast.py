@@ -4,13 +4,15 @@
 Purpose
     Fit moving average, simple exponential smoothing and (with enough history)
     Holt-Winters additive seasonal models per item, choose the method with the
-    lowest WAPE on a hold-out window, and forecast the horizon. Stock-out periods
-    are excluded from fitting and from the accuracy test.
+    lowest WAPE on a hold-out window, and forecast the horizon. Stock-out periods and
+    missing months are excluded from fitting and from the accuracy test.
 
 Input columns (long CSV, comma or semicolon)
     item, period, quantity        optional: stockout (yes/no, ja/nej, 1/0, x)
-    period: yyyy-mm (dates are bucketed to their month). Missing months inside an
-    item's history are filled with 0 (with a warning); duplicate rows are summed.
+    period: yyyy-mm (dates are bucketed to their month). Duplicate rows are summed.
+    Missing months inside an item's history (no row, or a blank quantity) are treated as
+    MISSING, not zero: they are reported as gaps and left out of fitting and scoring like
+    stock-out months. With --fill-zero they are read as real zero-demand months instead.
 
 Formulas
     MA(w)      forecast = mean of the last w non-stock-out periods (flat)
@@ -24,11 +26,18 @@ Formulas
     WAPE       = sum|A - F| / sum A ; MAPE = mean(|A - F| / A) for A > 0 ;
     Bias       = (sum F - sum A) / sum A  (positive = over-forecast)
     Plausible  = forecast total vs the same months last year; flagged above --review-ly (30 %)
-    Selection  = lowest hold-out WAPE (default last 3 periods); ties go to the simpler method;
+    Evaluation = rolling origin over the last N periods (--holdout, default 3, max 12) when the
+               first origin has at least --min-train periods (default 6): for each origin
+               o = n-N .. n-1 the method is fitted on periods before o and forecasts periods
+               o .. min(o + horizon, n) - 1; all (origin, step) errors are pooled into one WAPE,
+               MAPE and bias. With less history: a single hold-out of the last N periods
+               (fitted on the rest), if at least 3 periods remain for fitting; else no test.
+    Selection  = lowest pooled WAPE; ties go to the simpler method;
                the chosen method is refitted on the full history; negative forecasts set to 0.
 
 Example
     python3 scripts/forecast.py assets/demand_history.csv --horizon 6 --holdout 3
+    python3 scripts/forecast.py assets/demand_history.csv --holdout 6 --fill-zero
 """
 import argparse
 import csv
@@ -280,7 +289,7 @@ def fmt_params(p):
 
 
 # ---------------------------------------------------------------- core logic
-def load_series(records, warnings):
+def load_series(records, warnings, fill_zero=False):
     data = {}
     for line, r in records:
         item = r["item"]
@@ -299,8 +308,13 @@ def load_series(records, warnings):
                             % (line, item, per, so_raw))
         so = so_raw in YES
         if q is None:
-            warnings.append("Line %d (%s %s): missing quantity, read as 0." % (line, item, per))
-            q = 0.0
+            if fill_zero:
+                warnings.append("Line %d (%s %s): missing quantity, read as 0 (--fill-zero)." % (line, item, per))
+                q = 0.0
+            else:
+                warnings.append("Line %d (%s %s): missing quantity, treated as a missing month." % (line, item, per))
+                data.setdefault(item, {})
+                continue
         if q < 0:
             warnings.append("Line %d (%s %s): negative quantity %s (returns or sign error), kept as booked."
                             % (line, item, per, fmt(q)))
@@ -312,25 +326,70 @@ def load_series(records, warnings):
             d[per] = (q, so)
     out = {}
     for item, d in data.items():
+        if not d:
+            warnings.append("%s: no rows with a quantity, item skipped." % item)
+            continue
         start, end = min(d), max(d)
         periods = [add_months(start, k) for k in range(months_between(start, end) + 1)]
         gaps = [p for p in periods if p not in d]
-        if gaps:
-            warnings.append("%s: no row for %s, filled with 0. Check whether these were real zero months."
+        if gaps and fill_zero:
+            warnings.append("%s: no data for %s, filled with 0 (--fill-zero). Check these were real zero months."
                             % (item, ", ".join(gaps)))
+        elif gaps:
+            warnings.append("%s: no data for %s, treated as missing (left out of fitting and scores). "
+                            "Use --fill-zero if these were real zero months." % (item, ", ".join(gaps)))
+        missing = [] if fill_zero else gaps
         out[item] = {"periods": periods, "y": [d.get(p, (0.0, False))[0] for p in periods],
-                     "excl": [d.get(p, (0.0, False))[1] for p in periods]}
+                     "excl": [d.get(p, (0.0, False))[1] or p in missing for p in periods],
+                     "stockout": [d.get(p, (0.0, False))[1] for p in periods],
+                     "missing": missing, "filled_zero": gaps if fill_zero else []}
     return out
 
 
+def evaluate(y, excl, methods, holdout, horizon, cfg, min_train=6):
+    """Score each method. Returns (mode, tests); mode is 'rolling', 'single' or None.
+
+    rolling: origins o = n-N .. n-1, fit on y[:o], forecast y[o:min(o+horizon, n)], errors pooled.
+    single : fit on y[:n-N], forecast the last N periods.
+    tests[m]['forecast'] holds one forecast per hold-out period (the one-step-ahead forecast
+    when rolling) for display.
+    """
+    n = len(y)
+    if holdout <= 0 or n - holdout < 3:
+        return None, {}
+    mode = "rolling" if holdout >= 2 and n - holdout >= min_train else "single"
+    origins = list(range(n - holdout, n)) if mode == "rolling" else [n - holdout]
+    tests = {}
+    for mname in methods:
+        act, fcs, exs, shown, params, ok = [], [], [], [], None, True
+        for o in origins:
+            steps = min(horizon, n - o) if mode == "rolling" else holdout
+            f, p = run_method(mname, y[:o], excl[:o], steps, cfg)
+            if f is None:
+                ok = False
+                break
+            params = p
+            act += y[o:o + steps]
+            fcs += f
+            exs += excl[o:o + steps]
+            shown.append(f[0])
+            if mode == "single":
+                shown = f
+        if not ok:
+            continue
+        acc = accuracy(act, fcs, exs)
+        tests[mname] = {"params": params, "forecast": shown, "origins": len(origins), **acc}
+    return mode, tests
+
+
 def compute(records, horizon=6, holdout=3, ma_window=3, season=12, hw_min_periods=24,
-            alphas=None, review_wape=0.3, review_bias=0.1, review_ly=0.3):
+            alphas=None, review_wape=0.3, review_bias=0.1, review_ly=0.3, fill_zero=False, min_train=6):
     warnings = []
     cfg = {"ma_window": ma_window, "season": season,
            "alphas": alphas or [round(0.1 * k, 1) for k in range(1, 10)],
            "hw_grid": {"alpha": [0.05, 0.1, 0.2, 0.3, 0.5, 0.7], "beta": [0.0, 0.05, 0.1, 0.2],
                        "gamma": [0.05, 0.1, 0.2, 0.3, 0.5]}}
-    series = load_series(records, warnings)
+    series = load_series(records, warnings, fill_zero)
     if not series:
         raise InputError("No usable rows.")
     items = []
@@ -339,20 +398,13 @@ def compute(records, horizon=6, holdout=3, ma_window=3, season=12, hw_min_period
         y, excl, periods = s["y"], s["excl"], s["periods"]
         n = len(y)
         methods = ["MA", "SES"] + (["HW"] if n >= hw_min_periods else [])
-        tests = {}
-        can_test = n - holdout >= 3 and holdout > 0
-        if can_test:
-            tr_y, tr_x = y[:-holdout], excl[:-holdout]
-            for mname in methods:
-                fc, p = run_method(mname, tr_y, tr_x, holdout, cfg)
-                if fc is None:
-                    continue
-                acc = accuracy(y[-holdout:], fc, excl[-holdout:])
-                tests[mname] = {"params": p, "forecast": fc, **acc}
+        mode, tests = evaluate(y, excl, methods, holdout, horizon, cfg, min_train)
+        can_test = mode is not None
         scored = [m for m in METHOD_ORDER if m in tests and tests[m]["wape"] is not None]
         if scored:
             chosen = min(scored, key=lambda m: (round(tests[m]["wape"], 9), METHOD_ORDER.index(m)))
-            basis = "lowest hold-out WAPE"
+            basis = ("lowest rolling-origin WAPE (%d origins)" % holdout if mode == "rolling"
+                     else "lowest hold-out WAPE (single origin)")
         else:
             chosen = "SES" if sum(1 for e in excl if not e) >= 2 else "MA"
             basis = "no usable hold-out, default"
@@ -361,7 +413,8 @@ def compute(records, horizon=6, holdout=3, ma_window=3, season=12, hw_min_period
             warnings.append("%s: no usable (non stock-out) history, no forecast." % item)
             continue
         fperiods = [add_months(periods[-1], k) for k in range(1, horizon + 1)]
-        same_ly = [dict(zip(periods, y)).get(add_months(p, -12)) for p in fperiods]
+        known = {p: v for p, v in zip(periods, y) if p not in s["missing"]}
+        same_ly = [known.get(add_months(p, -12)) for p in fperiods]
         ly_total = sum(v for v in same_ly) if all(v is not None for v in same_ly) else None
         best = tests.get(chosen, {})
         review = []
@@ -376,21 +429,26 @@ def compute(records, horizon=6, holdout=3, ma_window=3, season=12, hw_min_period
         if ly_total and abs(sum(fc) - ly_total) / ly_total > review_ly:
             review.append("forecast total %s vs same periods last year, check plausibility"
                           % pct((sum(fc) - ly_total) / ly_total))
-        if any(excl[-holdout:]) and can_test:
+        if can_test and any(s["stockout"][-holdout:]):
             review.append("stock-out inside hold-out window")
+        if s["missing"]:
+            review.append("%d missing month(s) in history" % len(s["missing"]))
         items.append({
             "item": item, "periods": n, "first_period": periods[0], "last_period": periods[-1],
-            "stockout_periods": [p for p, e in zip(periods, excl) if e],
-            "method": chosen, "params": params, "basis": basis,
+            "stockout_periods": [p for p, e in zip(periods, s["stockout"]) if e],
+            "missing_periods": s["missing"], "zero_filled_periods": s["filled_zero"],
+            "method": chosen, "params": params, "basis": basis, "evaluation": mode,
             "tests": {k: {kk: vv for kk, vv in v.items()} for k, v in tests.items()},
             "holdout_periods": periods[-holdout:] if can_test else [],
             "holdout_actual": y[-holdout:] if can_test else [],
             "wape": best.get("wape"), "mape": best.get("mape"), "bias": best.get("bias"),
             "forecast_periods": fperiods, "forecast": fc, "forecast_total": sum(fc),
-            "same_periods_last_year_total": ly_total, "history": y, "history_periods": periods,
+            "same_periods_last_year_total": ly_total,
+            "history": [None if p in s["missing"] else v for p, v in zip(periods, y)], "history_periods": periods,
             "review": review,
         })
-    return {"parameters": {"horizon": horizon, "holdout": holdout, "ma_window": ma_window, "season": season,
+    return {"parameters": {"horizon": horizon, "holdout": holdout, "min_train": min_train, "fill_zero": fill_zero,
+                           "ma_window": ma_window, "season": season,
                            "hw_min_periods": hw_min_periods, "review_wape": review_wape,
                            "review_bias": review_bias, "review_ly": review_ly},
             "items": items, "warnings": warnings}
@@ -405,14 +463,21 @@ def render(res):
     out += ["", "## 1. Method and assumptions", "",
             "- Candidates: moving average (last %d), simple exponential smoothing, Holt-Winters additive "
             "(season %d) only with %d+ periods" % (p["ma_window"], p["season"], p["hw_min_periods"]),
-            "- Choice per item: lowest WAPE on the last %d periods, then refitted on the full history"
-            % p["holdout"],
-            "- Stock-out periods are excluded from fitting and from accuracy (not treated as true demand)", ""]
+            "- Choice per item: lowest WAPE over the last %d periods, rolling origin (refit at each of the %d "
+            "origins, forecasts up to the horizon pooled) when at least %d periods precede the first origin, "
+            "otherwise one fixed hold-out; then refitted on the full history" % (p["holdout"], p["holdout"], p["min_train"]),
+            "- Stock-out periods are excluded from fitting and from accuracy (not treated as true demand)",
+            "- Months without data are %s" % ("filled with 0 (--fill-zero)" if p["fill_zero"] else
+                                              "treated as missing and excluded like stock-outs, not as zero demand"),
+            ""]
     rows = []
     for i in res["items"]:
         rows.append([i["item"], i["periods"], ", ".join(i["stockout_periods"]) or "-",
+                     ", ".join(i["missing_periods"] or i["zero_filled_periods"]) or "-",
                      "%s (%s)" % (i["method"], fmt_params(i["params"])), i["basis"]])
-    out.append(md_table(["Item", "Periods", "Stock-out periods excluded", "Method chosen", "Basis"], rows))
+    out.append(md_table(["Item", "Periods", "Stock-out periods excluded",
+                         "Months filled with 0" if p["fill_zero"] else "Missing months excluded",
+                         "Method chosen", "Basis"], rows))
     out += ["", "## 2. Forecast table", ""]
     for i in res["items"]:
         out.append("**%s** (%s)" % (i["item"], i["method"]))
@@ -433,15 +498,18 @@ def render(res):
             if not t:
                 continue
             rows.append([i["item"], m + (" (chosen)" if m == i["method"] else ""),
+                         "rolling, %d origins" % t["origins"] if i["evaluation"] == "rolling" else "single origin",
                          " / ".join(fmt(f) for f in t["forecast"]),
                          " / ".join(fmt(a) for a in i["holdout_actual"]),
-                         pct(t["wape"]), pct(t["mape"]), pct(t["bias"])])
+                         t["n"], pct(t["wape"]), pct(t["mape"]), pct(t["bias"])])
     if rows:
-        out.append(md_table(["Item", "Method", "Hold-out forecast", "Actual", "WAPE", "MAPE", "Bias"], rows))
+        out.append(md_table(["Item", "Method", "Evaluation", "Hold-out forecast", "Actual", "Errors scored",
+                             "WAPE", "MAPE", "Bias"], rows))
     else:
         out.append("- No item had enough history for a hold-out test.")
     out += ["", "WAPE = sum|A - F| / sum A. Bias = (sum F - sum A) / sum A, positive means over-forecast. "
-            "Stock-out periods in the hold-out are left out of the scores.", "",
+            "Rolling origin: the forecast shown per period is the one-step-ahead forecast; the scores pool every "
+            "(origin, step) forecast. Stock-out and missing periods are left out of the scores.", "",
             "## 4. Items to review", ""]
     flagged = [i for i in res["items"] if i["review"]]
     out += ["- **%s**: %s" % (i["item"], "; ".join(i["review"])) for i in flagged] or ["- None flagged."]
@@ -459,7 +527,7 @@ def write_csv(res, path):
             hold = dict(zip(i["holdout_periods"], i["tests"].get(i["method"], {}).get("forecast", [])))
             for per, a in zip(i["history_periods"], i["history"]):
                 f = hold.get(per)
-                w.writerow([i["item"], per, "holdout" if per in hold else "history", a,
+                w.writerow([i["item"], per, "holdout" if per in hold else "history", "" if a is None else a,
                             round(f, 2) if f is not None else "", "yes" if per in so else "no", i["method"]])
             for per, f in zip(i["forecast_periods"], i["forecast"]):
                 w.writerow([i["item"], per, "forecast", "", round(f, 2), "", i["method"]])
@@ -470,7 +538,14 @@ def build_parser():
                                  "Input columns: item, period (yyyy-mm), quantity; optional: stockout (yes/no).")
     ap.add_argument("csv", help="long CSV with one row per item and month")
     ap.add_argument("--horizon", type=int, default=6, help="periods to forecast (default 6)")
-    ap.add_argument("--holdout", type=int, default=3, help="hold-out periods for accuracy (default 3)")
+    ap.add_argument("--holdout", type=int, default=3,
+                    help="periods at the end used to score methods, 0 to 12 (default 3). Rolling origin over these "
+                         "periods when history allows (see --min-train), otherwise one fixed hold-out")
+    ap.add_argument("--min-train", type=int, default=6,
+                    help="periods needed before the first origin for a rolling-origin evaluation (default 6)")
+    ap.add_argument("--fill-zero", action="store_true",
+                    help="read months without data (no row or blank quantity) as zero demand; by default they "
+                         "are missing and left out of fitting and scores")
     ap.add_argument("--ma-window", type=int, default=3, help="moving average window (default 3)")
     ap.add_argument("--season", type=int, default=12, help="season length for Holt-Winters (default 12)")
     ap.add_argument("--hw-min-periods", type=int, default=24,
@@ -490,13 +565,15 @@ def build_parser():
 def main(argv=None):
     args = build_parser().parse_args(argv)
     try:
-        if args.horizon < 1 or args.holdout < 0 or args.ma_window < 1 or args.season < 2:
-            raise InputError("horizon and ma-window must be >= 1, holdout >= 0, season >= 2")
+        if args.horizon < 1 or args.ma_window < 1 or args.season < 2 or args.min_train < 3:
+            raise InputError("horizon and ma-window must be >= 1, season >= 2, min-train >= 3")
+        if not 0 <= args.holdout <= 12:
+            raise InputError("--holdout must be between 0 and 12")
         if args.alpha is not None and not 0 < args.alpha <= 1:
             raise InputError("--alpha must be between 0 and 1")
         res = compute(read_table(args.csv, REQUIRED, OPTIONAL), args.horizon, args.holdout, args.ma_window,
                       args.season, args.hw_min_periods, [args.alpha] if args.alpha else None,
-                      args.review_wape, args.review_bias, args.review_ly)
+                      args.review_wape, args.review_bias, args.review_ly, args.fill_zero, args.min_train)
     except InputError as exc:
         print("Error: %s" % exc, file=sys.stderr)
         return 2

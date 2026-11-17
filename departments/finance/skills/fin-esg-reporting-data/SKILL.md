@@ -57,7 +57,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - After the Omnibus I directive (OJ 26 February 2026) CSRD applies only above 1,000 employees and EUR 450m turnover; smaller companies usually answer banks and customers with the voluntary VSME standard and may decline value-chain requests beyond it. Name the emission factor source and year for every calculation; never invent factors.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Show calculations and formulas so every number can be traced and checked. Never present an estimate as an actual figure.

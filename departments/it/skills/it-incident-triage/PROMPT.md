@@ -2,7 +2,7 @@
 
 # IT Incident Triage: portable instructions
 
-Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload `references/facts.md` (and any script and template in this folder) as knowledge files: the facts file holds the dated figures this skill relies on.
+Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload the files in `references/` (and any script, template or asset in this folder) as knowledge files: `references/facts.md` holds the dated figures this skill relies on, and other reference files hold its playbooks and templates.
 
 Skill ID: `it-incident-triage`
 
@@ -42,7 +42,7 @@ Structure the deliverable with these sections:
 
 # EU and Danish context
 - NIS2 (Danish law in force 1 July 2025): early warning within 24 hours, notification within 72 hours, final report one month after the notification, via virk.dk. GDPR Article 33: 72 hours to Datatilsynet.
-Use the attached facts file (last verified 2026-11-16) for dated figures; treat anything else as unverified.
+Use the attached facts file (last verified 2026-11-17) for dated figures; treat anything else as unverified.
 
 # Rules
 - Never ask for or repeat passwords, secret keys, tokens or full configuration secrets. Tell the user to redact them before sharing logs or files.

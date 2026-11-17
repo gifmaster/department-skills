@@ -442,7 +442,8 @@ def build_parser():
     p.add_argument("--known-users", default="", help="T7: comma-separated list of established user IDs (optional)")
     p.add_argument("--rare-user-max", type=int, default=2, help="T7 without a list: users with at most this many entries (default 2)")
     p.add_argument("--extra-holidays", default="06-05,12-24,12-31",
-                   help="T1: extra closing days mm-dd besides public holidays (default 06-05,12-24,12-31; verify current value)")
+                   help="T1: extra closing days mm-dd besides the built-in Danish public holidays "
+                        "(default 06-05,12-24,12-31; verify current value)")
     p.add_argument("--mask-users", action="store_true", help="Replace user IDs with U1, U2, ... in the output")
     p.add_argument("--top", type=int, default=15, help="Number of ranked exceptions to show (default 15)")
     p.add_argument("--out", help="Write all ranked exceptions to this CSV")

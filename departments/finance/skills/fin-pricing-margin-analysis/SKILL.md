@@ -53,7 +53,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Competition law (Article 101 TFEU; Danish Competition Act) prohibits agreeing prices with competitors.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Show calculations and formulas so every number can be traced and checked. Never present an estimate as an actual figure.

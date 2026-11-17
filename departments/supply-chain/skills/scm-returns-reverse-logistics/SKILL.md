@@ -51,7 +51,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - ESPR (EU) 2024/1781 Article 25 bans destroying unsold apparel and footwear for large enterprises from 19 July 2026 and medium enterprises from 19 July 2030; consumer returns count as unsold. Extended producer responsibility applies to packaging and electronics.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Base calculations on the user's data and show formulas. Label assumptions such as lead times, service levels and costs clearly so they can be changed.

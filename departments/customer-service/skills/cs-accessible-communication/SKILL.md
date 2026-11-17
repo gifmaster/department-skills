@@ -52,7 +52,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - The European Accessibility Act (Directive (EU) 2019/882) applies from 28 June 2025 to specific services such as e-commerce, consumer banking, electronic communications and e-books; their support services must provide accessibility information. Microenterprises providing services are exempt. Conformity is usually shown against EN 301 549 (WCAG 2.1 AA).
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Be warm, clear and honest with customers. Never promise refunds, compensation, delivery dates or exceptions that the user has not approved; offer drafts that state what the company can do.

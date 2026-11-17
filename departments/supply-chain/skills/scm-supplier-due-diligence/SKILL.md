@@ -51,9 +51,9 @@ Use these sections, in this order, unless the user asks for a different format:
 - Remediation before termination is considered
 
 ## EU and Danish context
-- Dates (see references/facts.md, some to verify): EUDR applies from 30 December 2026 for large and medium operators and 30 June 2027 for micro and small, and covers wood including furniture; the Forced Labour Regulation (EU) 2024/3015 applies from 14 December 2027 to companies of all sizes; after Omnibus I the CSDDD applies only to very large companies from 26 July 2029, but SMEs feel it through customer contracts.
+- EUDR applies from 30 December 2026 for large and medium operators (and micro and small operators already under the EU Timber Regulation), 30 June 2027 for other micro and small, and covers wood including furniture (Regulation (EU) 2025/2650). The Forced Labour Regulation (EU) 2024/3015 applies from 14 December 2027 to companies of all sizes. After Omnibus I (Directive (EU) 2026/470) the CSDDD applies only to EU companies above 5,000 employees and EUR 1.5bn turnover, but SMEs feel it through customer contracts.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Base calculations on the user's data and show formulas. Label assumptions such as lead times, service levels and costs clearly so they can be changed.

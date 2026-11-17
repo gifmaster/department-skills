@@ -12,6 +12,14 @@ Input columns (both files, header names case-insensitive)
   Dates yyyy-mm-dd or dd-mm-yyyy (also dd.mm.yyyy and dd/mm/yyyy).
   Sign convention for BOTH files: positive = money into the account, negative = money out.
 
+Opening items (optional, --opening-items CSV: date, text, amount, side)
+  Open items carried forward from the previous reconciliation statement, i.e. lines that were
+  already reconciling items last period. side = bank (on the bank statement, not yet in the
+  ledger) or ledger (in the ledger, not yet on the bank statement). They are added to that
+  side before matching (IDs OB1.. and OL1..), so an item that clears this period is matched
+  against the current file, and one still open stays in the reconciliation statement.
+  Danish headers accepted: dato, tekst, beloeb/beløb, side/kilde.
+
 Matching passes (each line is used at most once)
   1. One-to-one: identical amount (to the cent), dates within --window days (default 5).
      Pairs are taken in order of smallest date gap.
@@ -207,8 +215,41 @@ def load_side(path, side):
             "id": "%s%d" % (prefix, len(items) + 1), "side": side, "line": r["_line"], "date": d,
             "text": r["text"], "amount": round(a, 2), "cents": int(round(a * 100)),
             "status": "unmatched", "match_id": "", "match_type": "", "category": "", "flags": [],
+            "origin": "current",
         })
     return items, warnings
+
+
+OPENING_ALIASES = dict(ALIASES, kilde="side", source="side")
+SIDE_WORDS = {"bank": "bank", "b": "bank", "ledger": "ledger", "l": "ledger", "bog": "ledger",
+              "bogfoering": "ledger", "bogføring": "ledger", "finans": "ledger", "gl": "ledger"}
+
+
+def load_opening(path):
+    """Read open items brought forward. Returns (bank_items, ledger_items, warnings)."""
+    rows, warnings = read_table(path, ["date", "text", "amount", "side"], (), OPENING_ALIASES)
+    out = {"bank": [], "ledger": []}
+    for r in rows:
+        side = SIDE_WORDS.get(r["side"].strip().lower())
+        if side is None:
+            warnings.append("opening line %d: side '%s' must be bank or ledger, row skipped" % (r["_line"], r["side"]))
+            continue
+        d = parse_date(r["date"])
+        try:
+            a = parse_number(r["amount"])
+        except ValueError:
+            a = "bad"
+        if d is None or a is None or a == "bad":
+            warnings.append("opening line %d: missing or unreadable date or amount, row skipped" % r["_line"])
+            continue
+        lst = out[side]
+        lst.append({
+            "id": "O%s%d" % ("B" if side == "bank" else "L", len(lst) + 1), "side": side, "line": r["_line"],
+            "date": d, "text": r["text"], "amount": round(a, 2), "cents": int(round(a * 100)),
+            "status": "unmatched", "match_id": "", "match_type": "", "category": "", "flags": [],
+            "origin": "opening",
+        })
+    return out["bank"], out["ledger"], warnings
 
 
 def _words(text):
@@ -356,6 +397,8 @@ def reconcile(bank, ledger, window=5, max_group=3, similarity_min=0.5, fuzzy_win
     # Old items and categories
     for it in all_items:
         it["age_days"] = (as_of - it["date"]).days
+        if it.get("origin") == "opening" and it["status"] == "unmatched":
+            it["flags"].append("brought forward, still open")
         if it["status"] != "unmatched":
             it["category"] = "matched"
             continue
@@ -397,6 +440,16 @@ def reconcile(bank, ledger, window=5, max_group=3, similarity_min=0.5, fuzzy_win
     st["net_reconciling_items"] = net_items
     st["computed_ledger_balance"] = r2(bank_balance + net_items) if bank_balance is not None else None
     st["ledger_balance"] = ledger_balance
+    opening = [x for x in all_items if x.get("origin") == "opening"]
+    if opening:
+        still = [x for x in opening if x["status"] == "unmatched"]
+        st["opening_items"] = {
+            "count": len(opening),
+            "cleared": len(opening) - len(still),
+            "still_open": len(still),
+            "still_open_ledger_net": r2(sum(x["amount"] for x in still if x["side"] == "ledger")),
+            "still_open_bank_net": r2(sum(x["amount"] for x in still if x["side"] == "bank")),
+        }
     if bank_balance is not None and ledger_balance is not None:
         st["unexplained_difference"] = r2(ledger_balance - st["computed_ledger_balance"])
     else:
@@ -452,6 +505,17 @@ def render_markdown(res, warnings, args):
         ["Unexplained difference", fmt(st["unexplained_difference"]) if st["unexplained_difference"] is not None else "n/a"],
     ]
     out.append(md_table(["Item", "DKK"], rows))
+    op = st.get("opening_items")
+    if op:
+        out += ["", "Opening items brought forward: %d, cleared this period %d, still open %d "
+                "(net ledger %s, net bank %s, included in the lines above)."
+                % (op["count"], op["cleared"], op["still_open"], fmt(op["still_open_ledger_net"]),
+                   fmt(op["still_open_bank_net"]))]
+        cleared = [i for i in res["items"] if i.get("origin") == "opening" and i["status"] == "matched"]
+        if cleared:
+            out += ["", md_table(["ID", "Side", "Date", "Text", "Amount", "Cleared by match"],
+                                 [[i["id"], i["side"], i["date"].isoformat(), i["text"], fmt(i["amount"]), i["match_id"]]
+                                  for i in cleared])]
     out += ["", "## 2. Matched summary", ""]
     ms = res["matched_summary"]
     rows = [[k, v["matches"], v["bank_lines"], v["ledger_lines"], fmt(v["bank_total"])] for k, v in sorted(ms.items())]
@@ -520,11 +584,12 @@ def to_jsonable(res, warnings):
 def write_csv(path, res):
     with open(path, "w", encoding="utf-8", newline="") as fh:
         w = csv.writer(fh)
-        w.writerow(["id", "side", "source_line", "date", "text", "amount", "status", "match_id", "match_type",
+        w.writerow(["id", "side", "origin", "source_line", "date", "text", "amount", "status", "match_id", "match_type",
                     "category", "age_days", "flags"])
         for i in res["items"]:
-            w.writerow([i["id"], i["side"], i["line"], i["date"].isoformat(), i["text"], "%.2f" % i["amount"],
-                        i["status"], i["match_id"], i["match_type"], i["category"], i["age_days"], "; ".join(i["flags"])])
+            w.writerow([i["id"], i["side"], i.get("origin", "current"), i["line"], i["date"].isoformat(), i["text"],
+                        "%.2f" % i["amount"], i["status"], i["match_id"], i["match_type"], i["category"], i["age_days"],
+                        "; ".join(i["flags"])])
 
 
 def build_parser():
@@ -532,6 +597,10 @@ def build_parser():
                                             "(columns: date, text, amount; positive = money in).")
     p.add_argument("bank_csv", help="Bank statement export: date, text, amount")
     p.add_argument("ledger_csv", help="Ledger cash account export: date, text, amount")
+    p.add_argument("--opening-items",
+                   help="CSV of open items brought forward from the previous reconciliation: date, text, amount, "
+                        "side (bank = on the statement, not in the ledger; ledger = in the ledger, not yet in bank). "
+                        "Included in matching and in the reconciliation statement")
     p.add_argument("--bank-balance", type=float, help="Closing balance per bank statement")
     p.add_argument("--ledger-balance", type=float, help="Closing balance per ledger account")
     p.add_argument("--as-of", help="Reconciliation date for ageing (default: latest date in the files)")
@@ -553,6 +622,10 @@ def main(argv=None):
     try:
         bank, w1 = load_side(args.bank_csv, "bank")
         ledger, w2 = load_side(args.ledger_csv, "ledger")
+        w3 = []
+        if args.opening_items:
+            ob, ol, w3 = load_opening(args.opening_items)
+            bank, ledger = bank + ob, ledger + ol
         as_of = None
         if args.as_of:
             as_of = parse_date(args.as_of)
@@ -565,7 +638,7 @@ def main(argv=None):
                     fuzzy_window=args.fuzzy_window, dup_days=args.dup_days, old_days=args.old_days,
                     amount_tol_pct=args.amount_tolerance_pct, as_of=as_of,
                     bank_balance=args.bank_balance, ledger_balance=args.ledger_balance)
-    warnings = w1 + w2
+    warnings = w1 + w2 + w3
     if args.out:
         write_csv(args.out, res)
     if args.json:

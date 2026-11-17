@@ -2,7 +2,7 @@
 
 # Bank Reconciliation: portable instructions
 
-Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload `references/facts.md` (and any script and template in this folder) as knowledge files: the facts file holds the dated figures this skill relies on.
+Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload the files in `references/` (and any script, template or asset in this folder) as knowledge files: `references/facts.md` holds the dated figures this skill relies on, and other reference files hold its playbooks and templates.
 
 Skill ID: `fin-bank-reconciliation`
 
@@ -27,14 +27,15 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 
 # Calculation method
 If a code tool is available and the script file is attached, run it; otherwise calculate by hand:
-- Use one sign convention in both files: + money in, - money out. Convert "1.234,56" to 1234.56.
-- Pass 1: match identical amounts with dates within 5 days, closest dates first.
+- One sign convention in both files: + in, - out. "1.234,56" = 1234.56.
+- Add open items brought forward from last period to their side before matching.
+- Pass 1: identical amounts, dates within 5 days, closest dates first.
 - Pass 2: one line equal to the sum of 2 or 3 same-sign lines on the other side within 5 days.
 - Pass 3: identical amount, similar text, dates within 45 days.
 - Flag: bank amount = minus ledger amount (sign error, moves the difference by 2x); same text and amount twice on one side within 3 days (duplicate); similar text with a gap under 2 % (FX or fee); unmatched over 60 days old.
-- Computed ledger balance = bank balance + unmatched ledger lines - unmatched bank lines (all signed).
-- Unexplained difference = given ledger balance - computed ledger balance. It must be 0; if not, look for skipped rows, missing periods or opening open items.
-- Classify unmatched: timing, missing in ledger, fees, interest, error, old item. Propose entries for review only.
+- Computed ledger balance = bank balance + unmatched ledger lines - unmatched bank lines (signed).
+- Unexplained difference = given ledger balance - computed ledger balance. It must be 0; if not, look for skipped rows, missing periods or open items not brought forward.
+- Classify unmatched: timing, missing in ledger, fees, interest, error, old item. Entries are proposals for review.
 
 # Output
 Structure the deliverable with these sections:
@@ -48,7 +49,7 @@ Structure the deliverable with these sections:
 - Old unreconciled items (over 60 days) are flagged
 
 # EU and Danish context
-Use the attached facts file (last verified 2026-11-16) for dated figures; treat anything else as unverified.
+Use the attached facts file (last verified 2026-11-17) for dated figures; treat anything else as unverified.
 
 # Rules
 - Show calculations and formulas so every number can be traced and checked. Never present an estimate as an actual figure.

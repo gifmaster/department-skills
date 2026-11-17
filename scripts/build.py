@@ -29,6 +29,7 @@ CATALOGUE = ROOT / "catalogue"
 DEPTS = ROOT / "departments"
 AUTOMATION = ROOT / "automation"
 FACTS = ROOT / "facts"
+CONTENT = ROOT / "content"
 VERSION = (ROOT / "VERSION").read_text().strip() if (ROOT / "VERSION").exists() else "1.0.0"
 AUTHOR = "Alexander Senderovitz"
 REPO = "gifmaster/department-skills"
@@ -61,6 +62,21 @@ LANGUAGE_RULE = "Answer in the user's language. Draft customer, employee or coun
 INPUT_RULE = ("Default to delivering: if inputs are missing, state clear assumptions and use [placeholders]. "
               "Stop and ask first only when a missing input would make the answer wrong or risky "
               "(for example a legal deadline, an amount, or which party the user represents). Ask everything in one message.")
+
+
+def content_refs(skill_name_):
+    """Reference files shipped from content/<skill>/: list of (relative path, use line)."""
+    d = CONTENT / skill_name_
+    out = []
+    for f in sorted(d.glob("references/*.md")) + sorted(d.glob("assets/*")):
+        use = ""
+        if f.suffix == ".md":
+            for line in f.read_text(encoding="utf-8").splitlines()[:6]:
+                if line.startswith("Use: "):
+                    use = line[5:].strip()
+                    break
+        out.append((f.relative_to(d).as_posix(), use))
+    return out
 
 
 def load_unit(skill_name_):
@@ -115,6 +131,10 @@ def render_skill_md(dept, skill, src):
             f"```\n{unit['command']}\n```\n\n"
             "Run `--help` for all parameters. Every legal or policy figure is a parameter: confirm current values before relying on them.\n\n"
             "If you cannot run code, apply the same method by hand:\n\n" + unit["method"])
+    refs = content_refs(name)
+    if refs:
+        parts.append("## Reference files\nRead the relevant file before drafting; prefer its wording and positions over general knowledge.\n\n"
+                     + bullets([f"`{p}`" + (f": {u}" if u else "") for p, u in refs]))
     parts += [
         "## Output format\nUse these sections, in this order, unless the user asks for a different format:\n\n" + numbered(skill["output"]),
         "## Quality checks before you answer\n" + bullets(skill["checks"]),
@@ -138,7 +158,7 @@ def render_prompt_md(dept, skill, src):
     header = "\n\n".join([
         GENERATED_NOTE.format(src=src),
         f"# {skill['title']}: portable instructions",
-        "Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload `references/facts.md` (and any script and template in this folder) as knowledge files: the facts file holds the dated figures this skill relies on.",
+        "Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload the files in `references/` (and any script, template or asset in this folder) as knowledge files: `references/facts.md` holds the dated figures this skill relies on, and other reference files hold its playbooks and templates.",
         f"Skill ID: `{name}`",
         PASTE_MARKER,
     ])
@@ -253,11 +273,15 @@ def main():
             (sdir / "PROMPT.md").write_text(render_prompt_md(dept, s, f.stem), encoding="utf-8")
             (sdir / "references").mkdir(exist_ok=True)
             shutil.copyfile(FACTS / f"{f.stem}.md", sdir / "references" / "facts.md")
+            if (CONTENT / n).exists():
+                for sub in ("references", "assets"):
+                    if (CONTENT / n / sub).exists():
+                        shutil.copytree(CONTENT / n / sub, sdir / sub, dirs_exist_ok=True)
             unit = load_unit(n)
             if unit:
                 for sub in ("scripts", "assets", "examples"):
                     if (unit["dir"] / sub).exists():
-                        shutil.copytree(unit["dir"] / sub, sdir / sub, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+                        shutil.copytree(unit["dir"] / sub, sdir / sub, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"), dirs_exist_ok=True)
             names.append(n)
         (ddir / "README.md").write_text(render_dept_readme(dept, names), encoding="utf-8")
         (ddir / "INSTALL.md").write_text(render_dept_install(dept), encoding="utf-8")

@@ -57,7 +57,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - NIS2 (Danish law in force 1 July 2025): early warning within 24 hours, notification within 72 hours, final report one month after the notification, via virk.dk. GDPR Article 33: 72 hours to Datatilsynet.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Never ask for or repeat passwords, secret keys, tokens or full configuration secrets. Tell the user to redact them before sharing logs or files.

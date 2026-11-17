@@ -78,7 +78,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark: large employers pay A-tax and AM-bidrag on the last banking day of the salary month, small and medium employers by the 10th of the following month (December salaries around 17 January); acontoskat on 20 March and 20 November; plus VAT deadlines (see references/facts.md).
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Show calculations and formulas so every number can be traced and checked. Never present an estimate as an actual figure.

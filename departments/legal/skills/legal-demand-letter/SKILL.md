@@ -38,6 +38,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 3. State consequences proportionately without threats that are not intended or lawful.
 4. Keep the tone professional, since the letter may be read by a judge.
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/letter-templates.md`: read when drafting a payment demand (påkrav), a consumer payment demand before collection, a breach notice (misligholdelse) or a reply rejecting a claim, to start from vetted Danish or English text with the right legal references.
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -52,7 +57,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark: before other collection steps a written payment demand with at least 10 days to pay must have been sent (inkassoloven section 10; check scope for business debtors). For B2B debts renteloven gives interest at the reference rate plus 8 percentage points (section 5) and a fixed compensation for recovery costs, currently DKK 310 (section 9 a, stk. 3; verify).
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.

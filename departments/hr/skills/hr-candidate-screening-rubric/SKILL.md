@@ -55,7 +55,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - AI Act: using AI to filter or evaluate applications is high-risk (Annex III, point 4(a)). Deployers must ensure human oversight, use the system as instructed, keep logs and inform candidates where required.
 - GDPR Article 22: candidates may not be subject to decisions based solely on automated processing with significant effects.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Treat all employee and candidate data as personal data. Ask the user to remove names, CPR numbers and health details unless they are strictly needed, and never repeat sensitive data back unnecessarily.

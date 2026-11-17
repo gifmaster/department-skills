@@ -60,6 +60,6 @@ Manage the pipeline and forecast with discipline.
 
 ## Regulatory facts
 
-Every skill in this pack ships `references/facts.md`: dated, sourced figures and rules (last verified 2026-11-16). The master copy is [facts/sales.md](../../facts/sales.md). Update it there and rebuild.
+Every skill in this pack ships `references/facts.md`: dated, sourced figures and rules (last verified 2026-11-17). The master copy is [facts/sales.md](../../facts/sales.md). Update it there and rebuild.
 
 These notes are orientation, not legal advice. Check current law, collective agreements and your own policies.

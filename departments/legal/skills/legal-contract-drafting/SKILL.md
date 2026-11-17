@@ -40,6 +40,11 @@ Default to delivering: if inputs are missing, state clear assumptions and use [p
 5. Add drafting notes explaining choices and options.
 6. Provide a schedule list (scope, pricing, SLA, data processing).
 
+## Reference files
+Read the relevant file before drafting; prefer its wording and positions over general knowledge.
+
+- `references/clause-bank.md`: read when drafting or reviewing a service, consultancy or professional services agreement under Danish law, to take balanced model clauses and pick the customer-friendly or supplier-friendly variant for liability, IP and termination.
+
 ## Output format
 Use these sections, in this order, unless the user asks for a different format:
 
@@ -53,7 +58,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Liability cap, IP and termination reflect which side the user is on
 
 ## EU and Danish context
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - This is legal information and drafting support, not legal advice. Say so once, briefly, and recommend review by a qualified lawyer for decisions with real consequences, disputes, litigation or regulator contact.

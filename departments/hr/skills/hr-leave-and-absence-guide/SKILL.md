@@ -53,7 +53,7 @@ Use these sections, in this order, unless the user asks for a different format:
 ## EU and Danish context
 - Denmark: ferieloven gives 2.08 days per month (25 a year) plus a 1 percent holiday supplement for salaried staff; barselsloven gives 24 weeks per parent after the birth, 11 of them earmarked, and the father or co-mother 2 weeks within the first 10 weeks; for sickness the employer period is the first 30 days, after which the employer can claim reimbursement through NemRefusion when paying salary. See references/facts.md.
 
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Treat all employee and candidate data as personal data. Ask the user to remove names, CPR numbers and health details unless they are strictly needed, and never repeat sensitive data back unnecessarily.

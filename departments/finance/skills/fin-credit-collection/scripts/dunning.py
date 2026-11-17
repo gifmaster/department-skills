@@ -443,9 +443,9 @@ def build_parser():
     p.add_argument("--fee", type=float, default=100.0,
                    help="Reminder fee per reminder in DKK (default 100 = renteloven section 9 b, stk. 2 maximum; verify current value; higher values are flagged)")
     p.add_argument("--max-reminders", type=int, default=3,
-                   help="Max reminders that may carry a fee (default 3 = renteloven section 9 b, stk. 2 maximum; verify; higher values are flagged)")
+                   help="Max reminders that may carry a fee (default 3 = renteloven section 9 b, stk. 2 maximum; verify current value; higher values are flagged)")
     p.add_argument("--min-days-between", "--min-days", dest="min_days_between", type=int, default=10,
-                   help="Min days between fee-bearing reminders (default 10 = renteloven section 9 b, stk. 2 minimum; verify; lower values are flagged)")
+                   help="Min days between fee-bearing reminders (default 10 = renteloven section 9 b, stk. 2 minimum; verify current value; lower values are flagged)")
     p.add_argument("--b2b-compensation", type=float, default=310.0,
                    help="Fixed B2B compensation per invoice in DKK, renteloven section 9 a, stk. 3 (amount set by executive order; default 310; verify current value)")
     p.add_argument("--priority-weights", default="",

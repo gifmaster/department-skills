@@ -22,6 +22,7 @@ Full list: [CATALOG.md](CATALOG.md).
 Every skill folder contains:
 
 - **`references/facts.md`**: the dated, sourced Danish and EU figures the skill relies on (rates, deadlines, thresholds), with a "last verified" date.
+- **Reference packs** in 15 skills: playbooks, clause banks, checklists and Danish and English templates in `references/` and `assets/`, so drafting starts from vetted text.
 - **Calculation tools** in 20 skills that are easy to automate: a tested Python script (standard library only), an input template and a worked example, so the AI calculates instead of guessing. See [Automated skills](#automated-skills).
 
 Every skill also ships in two formats, generated from the same source:
@@ -97,6 +98,7 @@ These 20 skills ship a tested calculation script, an input template (`assets/`) 
 catalogue/                 source of truth: one YAML file per department
 facts/_parts/              source of the dated regulatory facts (assembled into facts/<dept>.md)
 automation/<skill>/        calculation scripts, templates, tests and worked examples
+content/<skill>/           reference packs (playbooks, clause banks, templates)
 departments/<dept>/
   README.md                pack overview, skill list, suggested workflows
   INSTALL.md               quick install routes for the pack

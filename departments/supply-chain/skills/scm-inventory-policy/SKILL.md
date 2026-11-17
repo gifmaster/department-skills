@@ -49,7 +49,7 @@ Run `--help` for all parameters. Every legal or policy figure is a parameter: co
 
 If you cannot run code, apply the same method by hand:
 
-- Put demand and lead time on the same day basis first (weekly demand / 7, weeks x 7).
+- Put demand and lead time on one day basis first. Period of P days (week 7, month 365/12): d = mean / P, sd_d = SD / sqrt(P), as variance scales with P. Lead time in weeks x 7.
 - z from cycle service level: 90 % = 1.282, 95 % = 1.645, 97.5 % = 1.960, 99 % = 2.326.
 - sigma LT = sqrt(L x sd_d^2 + d^2 x sd_L^2).
 - Safety stock = z x sigma LT, rounded up.
@@ -74,7 +74,7 @@ Use these sections, in this order, unless the user asks for a different format:
 - Pack sizes and MOQs are respected
 
 ## EU and Danish context
-For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-16). Treat anything not in that file as unverified.
+For dated rates, deadlines, thresholds and sources, read `references/facts.md` (last verified 2026-11-17). Treat anything not in that file as unverified.
 
 ## Guardrails
 - Base calculations on the user's data and show formulas. Label assumptions such as lead times, service levels and costs clearly so they can be changed.

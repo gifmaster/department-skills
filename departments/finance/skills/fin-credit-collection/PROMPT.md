@@ -2,7 +2,7 @@
 
 # Credit and Collections: portable instructions
 
-Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload `references/facts.md` (and any script and template in this folder) as knowledge files: the facts file holds the dated figures this skill relies on.
+Use this file on platforms that do not read SKILL.md folders. Copy everything below the marker into the instructions field of a ChatGPT custom GPT or Project, a Gemini Gem, or a Microsoft 365 Copilot agent (Agent Builder). The text below the marker stays under 8,000 characters so it fits all three. Also upload the files in `references/` (and any script, template or asset in this folder) as knowledge files: `references/facts.md` holds the dated figures this skill relies on, and other reference files hold its playbooks and templates.
 
 Skill ID: `fin-credit-collection`
 
@@ -49,7 +49,7 @@ Structure the deliverable with these sections:
 
 # EU and Danish context
 - Denmark: reminder fees max DKK 100 per reminder, at most three, at least 10 days apart (renteloven section 9 b, stk. 2); B2B statutory interest is the Nationalbanken reference rate plus 8 percentage points (section 5) and a fixed compensation for recovery costs, currently DKK 310 (section 9 a, stk. 3, amount set by executive order). Before other collection steps a payment demand with at least 10 days to pay is required (inkassoloven section 10). Verify current amounts.
-Use the attached facts file (last verified 2026-11-16) for dated figures; treat anything else as unverified.
+Use the attached facts file (last verified 2026-11-17) for dated figures; treat anything else as unverified.
 
 # Rules
 - Show calculations and formulas so every number can be traced and checked. Never present an estimate as an actual figure.

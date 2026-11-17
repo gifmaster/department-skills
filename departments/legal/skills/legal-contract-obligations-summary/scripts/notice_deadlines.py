@@ -316,7 +316,8 @@ def main(argv=None):
     ap.add_argument("--today", help="as-of date (default: system date)")
     ap.add_argument("--window-days", type=int, default=90, help="flag notice deadlines within this many days (default: 90)")
     ap.add_argument("--buffer-days", type=int, default=5,
-                    help="calendar days before the deadline to send notice, for delivery and receipt (default: 5)")
+                    help="calendar days before the deadline to send notice, for delivery and receipt; check the contract's notice "
+                         "clause for how notice is given and when it counts as received (default: 5)")
     ap.add_argument("--default-term-months", type=int, default=12,
                     help="renewal term assumed when auto_renew is yes and the term is missing (default: 12)")
     ap.add_argument("--ics", help="write calendar reminders to this .ics file")

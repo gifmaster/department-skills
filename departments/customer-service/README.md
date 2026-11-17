@@ -60,6 +60,6 @@ Turn customer signals into better service and products.
 
 ## Regulatory facts
 
-Every skill in this pack ships `references/facts.md`: dated, sourced figures and rules (last verified 2026-11-16). The master copy is [facts/customer-service.md](../../facts/customer-service.md). Update it there and rebuild.
+Every skill in this pack ships `references/facts.md`: dated, sourced figures and rules (last verified 2026-11-17). The master copy is [facts/customer-service.md](../../facts/customer-service.md). Update it there and rebuild.
 
 These notes are orientation, not legal advice. Check current law, collective agreements and your own policies.
