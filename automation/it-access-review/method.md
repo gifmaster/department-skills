@@ -1,0 +1,9 @@
+- Match each account to HR by email; else by name (fold ae, oe, aa to plain letters, drop "admin" tokens). List name-only matches for checking.
+- No match and a generic name (info, admin, test, service, lager...): shared account, needs a named owner.
+- No match otherwise: orphaned, disable or document.
+- HR leaver with an enabled account: days since end date = today - end date. A login after the end date is a possible security event.
+- Admin rights on a normal personal account: admin used for daily work; require a separate admin account.
+- Last login older than 90 days, or never: dormant.
+- With a role map, any role not allowed for the person's job role is excess access.
+- Group every account by department with the person's manager as attester and a KEEP or REMOVE column.
+- Report duplicates, missing emails and bad dates as data quality issues.

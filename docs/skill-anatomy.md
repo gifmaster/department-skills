@@ -16,25 +16,36 @@ Every skill is generated from one entry in `catalogue/<department>.yaml`.
   output: [sections of the deliverable, in order]
   checks: [what to verify before answering]
   eu: [EU and Danish rules specific to this skill]
+  not_for: optional hand-off sentence added to the description, e.g. "For X use other-skill"
   examples: [realistic requests]
 ```
 
-Department-level fields add shared context: `role` (who the AI acts as), `common_guardrails`, `common_eu` and `workflows` (suggested chains of skills).
+Department-level fields add shared context: `role` (who the AI acts as), `common_guardrails` and `workflows` (suggested chains of skills).
+
+## Facts files
+
+Dated figures (rates, deadlines, thresholds) do not live in the skills. They live in one file per department, assembled from `facts/_parts/` into `facts/<department>.md` and copied into every skill as `references/facts.md`. Each line has a source; lines checked only against secondary sources are marked (verify). The header carries `last_verified`, which the skills quote.
+
+## Automation units
+
+`automation/<skill-name>/` adds a tested calculation script (Python standard library only), an input template, a worked example and `method.md` (the formulas in under 1,000 characters for assistants without code execution). The build copies `scripts/`, `assets/` and `examples/` into the skill folder and writes a "Calculation tools" section into SKILL.md and a "Calculation method" section into PROMPT.md. See [automation/SPEC.md](../automation/SPEC.md).
 
 ## Generated SKILL.md
 
 ```
 ---
 name: legal-nda-review
-description: <summary> Use when <triggers>.
+description: <summary> Use when <triggers>. <not_for>
 license: MIT
 metadata: {department, version, author, jurisdiction}
 ---
 # Title
 Summary and role
-## When to use / When not to use
-## Inputs to gather
+## When to use
+## Hand-offs and limits
+## Inputs
 ## Workflow
+## Calculation tools (automated skills only)
 ## Output format
 ## Quality checks before you answer
 ## EU and Danish context
@@ -57,6 +68,7 @@ The same content written as direct instructions for a custom assistant, below a 
 - `PROMPT.md` paste section is at most 8,000 characters
 - `SKILL.md` is under 500 lines
 - every referenced skill (for example `use fin-budget-builder`) exists
+- every skill has `references/facts.md`, and every automation unit is complete, dependency-free and passes its tests
 - each department has exactly 21 skills
 - house style: British English spellings and no long dashes
 

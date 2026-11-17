@@ -1,0 +1,5 @@
+skill: scm-inventory-policy
+script: scripts/inventory_params.py
+template: assets/inventory_items.csv
+command: python3 scripts/inventory_params.py assets/inventory_items.csv
+summary: Calculates safety stock with demand and lead-time variability, reorder point and pack-rounded EOQ per item, the inventory value impact against current stock, and flags inconsistent units.

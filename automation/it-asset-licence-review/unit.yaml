@@ -1,0 +1,5 @@
+skill: it-asset-licence-review
+script: scripts/licences.py
+template: assets/subscriptions_template.csv
+command: python3 scripts/licences.py assets/subscriptions_template.csv --usage assets/usage_template.csv
+summary: Calculates licence utilisation, unused licences, waste, duplicate tools and savings timed against renewal and notice deadlines.

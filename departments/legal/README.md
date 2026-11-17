@@ -3,7 +3,7 @@
 
 Skills for contracts, data protection, AI regulation, corporate housekeeping, consumer and marketing law, intellectual property, disputes and compliance policies. Built for small legal teams and for managers without a lawyer on staff, to prepare work that a qualified lawyer can then review quickly.
 
-**21 skills** · version 1.0.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
+**21 skills** · version 1.1.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
 
 - Install in Claude Code: `/plugin install legal-skills --marketplace gifmaster/department-skills`
 - Install anywhere else: see [INSTALL.md](INSTALL.md)
@@ -58,9 +58,8 @@ Classify AI systems, assess privacy impact and set internal rules.
 - Never invent case law, article numbers or quotations. Name the source you rely on and tell the user to verify it against the official text (for example EUR-Lex, Retsinformation or the regulator's website).
 - Contracts and legal matters are confidential and may be privileged. Ask the user to remove details that are not needed, and do not share content outside the conversation.
 
-## Regulatory context used across this pack
+## Regulatory facts
 
-- The main EU sources used here are the GDPR (Regulation (EU) 2016/679), the AI Act (Regulation (EU) 2024/1689) and consumer protection directives; national rules in Denmark include databeskyttelsesloven, aftaleloven, købeloven, forbrugeraftaleloven and markedsføringsloven.
-- Danish regulators and bodies referenced: Datatilsynet (data protection), Forbrugerombudsmanden (consumer and marketing law), Erhvervsstyrelsen (company law), Digitaliseringsstyrelsen (AI Act coordination).
+Every skill in this pack ships `references/facts.md`: dated, sourced figures and rules (last verified 2026-11-17). The master copy is [facts/legal.md](../../facts/legal.md). Update it there and rebuild.
 
 These notes are orientation, not legal advice. Check current law, collective agreements and your own policies.

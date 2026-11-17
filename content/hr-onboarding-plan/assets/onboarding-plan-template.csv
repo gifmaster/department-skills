@@ -1,0 +1,34 @@
+task,owner,due_relative_to_start,phase,status
+Signed contract received and filed; written terms complete (ansættelsesbevisloven items due within 7 days and 1 month),HR,Day -14,pre-boarding,Not started
+"Payroll, tax card, bank and pension details set up",HR,Day -10,pre-boarding,Not started
+Privacy notice to employee sent (GDPR Art. 13),HR,Day -10,pre-boarding,Not started
+"Laptop, phone and accessories ordered and configured",IT,Day -7,pre-boarding,Not started
+"User accounts created for email, chat, file storage and role systems [list]",IT,Day -5,pre-boarding,Not started
+Approved AI tools enabled with correct licence and data settings,IT,Day -5,pre-boarding,Not started
+Buddy appointed and briefed,Manager,Day -7,pre-boarding,Not started
+"Welcome email with day 1 time, address, contact person and lunch plan",Manager,Day -5,pre-boarding,Not started
+Week 1 calendar invites sent,HR,Day -5,pre-boarding,Not started
+"Desk, access card and welcome pack ready",Office manager,Day -1,pre-boarding,Not started
+Welcome by manager; tour; equipment and log-in check,Manager,Day 1,week 1,Not started
+"HR introduction: handbook, policies, holiday, sickness reporting",HR,Day 1,week 1,Not started
+Lunch with buddy and team,Buddy,Day 1,week 1,Not started
+Fire and evacuation instruction; workstation set-up in office and at home,Office manager,Day 2,week 1,Not started
+"Information security basics: phishing, passwords, MFA, device rules",IT,Day 2,week 1,Not started
+"Data protection training: GDPR basics, handling customer and employee data, reporting a breach within the internal deadline",HR / DPO,Day 3,week 1,Not started
+"AI literacy and AI use policy training: approved tools, what data may be entered, checking output, transparency duties (AI Act Art. 4 as amended by Reg. (EU) 2026/1744)",HR / AI lead,Day 3,week 1,Not started
+Role expectations and 30-60-90 goals agreed in 1:1,Manager,Day 3,week 1,Not started
+Product or service overview session,Product lead,Day 4,week 1,Not started
+"Meet key colleagues in [departments] (15-minute intros)",Starter,Day 5,week 1,Not started
+Week 1 check-in: questions and blockers,Manager,Day 5,week 1,Not started
+"Code of conduct, whistleblower scheme and harassment policy read and confirmed",Starter,Day 10,30 days,Not started
+Role-specific system training completed [systems],Buddy,Day 15,30 days,Not started
+Shadowing of [core task] at least 3 times,Buddy,Day 20,30 days,Not started
+Weekly 1:1s held (weeks 1 to 12),Manager,Weekly,30 days,Not started
+HR check-in at day 30: onboarding experience and gaps,HR,Day 30,30 days,Not started
+First independent delivery of [core task] reviewed,Manager,Day 45,60 days,Not started
+AI use refresher: share one real use case and check it against the AI use policy,Starter / AI lead,Day 50,60 days,Not started
+Day 60 review against goals; adjust plan,Manager,Day 60,60 days,Not started
+"Probation review held before the probation end date [date], decision made by manager",Manager / HR,Day 80,90 days,Not started
+Day 90 review: goals met and goals for next 6 months agreed,Manager,Day 90,90 days,Not started
+HR check-in at day 90 and onboarding feedback survey,HR,Day 90,90 days,Not started
+Training record updated (data protection and AI literacy completion dates),HR,Day 90,90 days,Not started

@@ -1,0 +1,5 @@
+skill: hr-pay-gap-analysis
+script: scripts/paygap.py
+template: assets/payroll_template.csv
+command: python3 scripts/paygap.py assets/payroll_template.csv
+summary: Calculates hourly-normalised mean and median gender pay gaps for base and total pay, per category with small-group suppression and a 5% flag, plus pay quartile shares and variable pay take-up.

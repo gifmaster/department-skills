@@ -1,0 +1,5 @@
+skill: scm-abc-xyz-segmentation
+script: scripts/abcxyz.py
+template: assets/abcxyz_consumption.csv
+command: python3 scripts/abcxyz.py assets/abcxyz_consumption.csv
+summary: Segments items by cumulative value share (ABC) and coefficient of variation (XYZ), flags intermittent and lumpy demand, separates items with too little history, and builds the 9-box with a suggested policy per box.

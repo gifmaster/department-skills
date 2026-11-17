@@ -1,0 +1,15 @@
+deal,owner,stage,amount,close_date,created_date,last_activity_date,next_step,probability,previous_close_date
+Hedegaard Byg - ny serviceaftale,Anders,Proposal,420000,2026-12-15,2026-09-01,2026-11-10,Opfølgningsmøde 20/11,,2026-12-15
+Sønderborg Plast - ERP integration,Anders,Negotiation,780000,2026-11-28,2026-06-12,2026-10-21,Kontraktudkast sendt,,2026-10-31
+Nordvind Energi - drift,Mette,Discovery,1200000,2026-12-20,2026-10-15,2026-11-12,,,
+Kvist Møbler - licenser,Mette,Closed Won,350000,2026-10-30,2026-07-01,2026-10-30,,,
+Aalborg Akustik - support,Jonas,Qualification,260000,2026-12-31,2026-08-20,2026-09-02,,,
+Fyn Fødevarer - BI projekt,Jonas,Proposal,540000,2026-11-05,2026-07-15,2026-10-28,Ring til CFO,,2026-09-30
+Brandt Logistik - WMS,Anders,Negotiation,910000,2026-12-12,2026-05-10,2026-11-14,Juridisk gennemgang,60,2026-12-12
+Ribe Tekstil - webshop,Mette,Closed Lost,300000,2026-11-01,2026-06-01,2026-11-01,,,
+Lolland Agro - sensorer,Jonas,Proposal,190000,2026-12-18,2026-09-10,2026-10-05,nej,,
+Holm Medico - kvalitetssystem,Mette,Negotiation,640000,2026-12-19,2026-08-01,2026-11-13,Pris godkendes,,
+Gudenå Vand - målerdata,Anders,Discovery,880000,2026-12-30,2026-10-20,2026-11-03,,,
+Skagen Fisk - lagerstyring,Jonas,Closed Won,410000,2026-11-11,2026-08-15,2026-11-11,,,
+Vejle Varme - fjernaflæsning,Mette,Proposal,,2027-01-20,2026-11-02,2026-11-12,Demo 25/11,,
+Holm Medico - kvalitetssystem,Mette,Negotiation,640000,2026-12-19,2026-08-01,2026-11-13,Pris godkendes,,

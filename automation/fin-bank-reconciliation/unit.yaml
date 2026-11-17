@@ -1,0 +1,5 @@
+skill: fin-bank-reconciliation
+script: scripts/reconcile.py
+template: assets/bank_statement.csv
+command: python3 scripts/reconcile.py assets/bank_statement.csv assets/ledger.csv --bank-balance 150371.58 --ledger-balance 350073.00
+summary: Matches bank and ledger lines (1:1 within a date window, then 1:many sums, then fuzzy text), flags duplicates, sign errors, amount differences and items over 60 days, and builds the reconciliation statement from bank balance to ledger balance.

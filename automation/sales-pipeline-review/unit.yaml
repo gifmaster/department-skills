@@ -1,0 +1,5 @@
+skill: sales-pipeline-review
+script: scripts/pipeline.py
+template: assets/pipeline_template.csv
+command: python3 scripts/pipeline.py assets/pipeline_template.csv --today 2026-11-16 --target 4200000
+summary: Calculates won to date, open and weighted pipeline in the period, coverage of the remaining target, stage ageing and per-deal flags, and lists the deals that decide the period.

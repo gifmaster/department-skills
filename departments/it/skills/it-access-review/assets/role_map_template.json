@@ -1,0 +1,13 @@
+{
+  "CFO": {"M365": ["User"], "ERP": ["Accountant", "Finance manager", "Approver"]},
+  "Bookkeeper": {"M365": ["User"], "ERP": ["Accountant", "Vendor payments"]},
+  "Payroll officer": {"M365": ["User"], "ERP": ["Payroll"]},
+  "Shift lead": {"*": ["User", "Warehouse"]},
+  "Warehouse manager": {"*": ["User", "Warehouse", "Item edit"]},
+  "Key account manager": {"*": ["User", "Sales"]},
+  "Inside sales": {"*": ["User", "Sales"]},
+  "Sales director": {"*": ["User", "Sales"]},
+  "IT supporter": {"M365": ["User", "Helpdesk Administrator"]},
+  "IT manager": {"M365": ["User", "Global Administrator"], "ERP": ["*"]},
+  "CEO": {"*": ["User"]}
+}

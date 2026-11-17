@@ -1,0 +1,5 @@
+skill: legal-dsar-response
+script: scripts/dsar_deadline.py
+template: assets/dsar_log_template.csv
+command: python3 scripts/dsar_deadline.py assets/dsar_log_template.csv
+summary: Calculates GDPR Art. 12(3) response deadlines, extension validity and overdue status for one request or a request log.

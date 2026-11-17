@@ -1,0 +1,12 @@
+customer;invoice;amount;due_date;disputed;b2b;reminders_sent;last_reminder_date
+Byggefirma Holst ApS;2026-311;84.500,00;15-09-2026;no;yes;1;01-10-2026
+Byggefirma Holst ApS;2026-347;41.250,00;10-10-2026;no;yes;0;
+Ribe Boligselskab;2026-298;126.000,00;30-08-2026;yes;yes;0;
+Café Kronen ApS;2026-355;6.800,00;25-10-2026;no;yes;0;
+Aarhus Kommune;2026-362;210.000,00;31-10-2026;no;yes;0;
+Midtjysk Tag A/S;2026-301;18.900,00;05-09-2026;no;yes;2;03-10-2026
+Peters VVS;2026-366;3.400,00;05-11-2026;no;;0;
+Nordisk Facility A/S;2026-330;57.000,00;01-10-2026;no;yes;1;10-11-2026
+Hansen privat;2026-370;4.250,00;20-09-2026;no;no;3;28-10-2026
+Fjord Byg ApS;2026-381;92.300,00;30-11-2026;no;yes;0;
+Café Kronen ApS;2026-355;6.800,00;25-10-2026;no;yes;0;

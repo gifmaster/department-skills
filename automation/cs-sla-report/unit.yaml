@@ -1,0 +1,5 @@
+skill: cs-sla-report
+script: scripts/sla.py
+template: assets/tickets_template.csv
+command: python3 scripts/sla.py assets/tickets_template.csv --as-of "2026-04-15 00:00"
+summary: Calculates first response and resolution times in Danish business hours or calendar hours, with median, p90, SLA attainment by priority and channel, backlog age and a breach list.

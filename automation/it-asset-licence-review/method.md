@@ -1,0 +1,10 @@
+- Monthly cost = licences x price per licence per month; annual = x 12.
+- Active users = distinct users active within the last 90 days. Utilisation = active / licences.
+- Unused = licences - active (not below 0); waste = unused x price.
+- More active users than licences = compliance risk.
+- Keep = active + 5% buffer, rounded up, capped at current licences. Saving = (licences - keep) x price x 12.
+- Next renewal = renewal date rolled forward by the term until it is in the future. Notice deadline = next renewal - notice days.
+- If the notice deadline has passed, the cut only takes effect at the following renewal; give its deadline instead.
+- Saving in next 12 months = annual saving x days from effective date to one year from today / 365.
+- Duplicate tools = two or more products in the same category (chat, video, remote support...).
+- Flag usage for products with no subscription (shadow IT), missing prices and duplicate rows.

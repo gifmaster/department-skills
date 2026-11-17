@@ -1,0 +1,5 @@
+skill: cs-csat-nps-analysis
+script: scripts/nps.py
+template: assets/responses_template.csv
+command: python3 scripts/nps.py assets/responses_template.csv --min-n 5
+summary: Detects NPS or CSAT, calculates the score with a 95% interval, compares periods and segments only where samples allow, and counts English and Danish comment themes.

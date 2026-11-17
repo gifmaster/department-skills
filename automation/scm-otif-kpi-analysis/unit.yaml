@@ -1,0 +1,5 @@
+skill: scm-otif-kpi-analysis
+script: scripts/otif.py
+template: assets/order_lines.csv
+command: python3 scripts/otif.py assets/order_lines.csv
+summary: Calculates line and order OTIF against the promised date with day and quantity tolerances, fill rates, results by customer and item, and a Pareto of miss reasons, combining partial deliveries per line.

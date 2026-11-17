@@ -1,0 +1,10 @@
+- Test per entry; each test counts once. Weights in brackets.
+- T1 [2] Saturday, Sunday or Danish holiday: 1 Jan, Maundy Thu, Good Fri, Easter Sun and Mon, Ascension (Easter + 39), Whit Sun and Mon (+49, +50), 25-26 Dec; also 5 June, 24 and 31 Dec.
+- T2 [2] posted before 07:00 or after 19:00.
+- T3 [1] amount a multiple of 1,000 and at least 5,000.
+- T4 [3] 90 % to just under the approval limit.
+- T5 [3] same account, amount and text in another entry within 3 days.
+- T6 [2] manual entry to a revenue or cash account (set prefixes to the chart).
+- T7 [2] user not on the known list, or with at most 2 entries.
+- Score = sum of weights; rank by score, then amount.
+- Report user IDs as facts only. Never name or rank a person as a suspect; ignore personal details; keep the circle small (GDPR).

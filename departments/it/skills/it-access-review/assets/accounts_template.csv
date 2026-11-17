@@ -1,0 +1,18 @@
+system,account,display_name,email,role,last_login,is_admin
+M365,mette.kjaer,Mette Kjær,mette.kjaer@fjordvej.dk,User,2026-11-14,no
+M365,kim.ravn,Kim Ravn,kim.ravn@fjordvej.dk,Global Administrator,2026-11-16,yes
+M365,adm-jonas,Jonas Vinther (admin),adm-jonas@fjordvej.onmicrosoft.com,Global Administrator,2026-11-03,yes
+M365,jonas.vinther,Jonas Vinther,jonas.vinther@fjordvej.dk,User,2026-11-16,no
+M365,rasmus.friis,Rasmus Friis,rasmus.friis@fjordvej.dk,User,2026-11-03,no
+M365,info,Info Fjordvej,info@fjordvej.dk,Shared mailbox,2026-11-15,no
+M365,camilla.berg,Camilla Berg,camilla.berg@fjordvej.dk,User,2026-11-14,no
+M365,test.user,Test User,test.user@fjordvej.dk,User,,no
+M365,nanna.krog,Nanna Krog,nanna.krog@fjordvej.dk,User,2026-11-13,no
+ERP,MKJAER,Mette Kjaer,mette.kjaer@fjordvej.dk,SUPER,2026-11-13,yes
+ERP,SHOLM,Soren Holm,,Accountant|Vendor payments,2026-11-14,no
+ERP,ITHOMSEN,Ida Thomsen,ida.thomsen@fjordvej.dk,Sales|Payroll,2026-11-14,no
+ERP,PBECH,Peter Bech,peter.bech@fjordvej.dk,Warehouse,2026-07-02,no
+ERP,LAGER,Lager terminal,,Warehouse|Item edit,2026-11-14,no
+ERP,NAVCONSULT,Erp Partner,consult@erp-partner.dk,SUPER,2026-09-18,yes
+ERP,ALUND,Anja Lund,anja.lund@fjordvej.dk,Warehouse,31-13-2026,no
+ERP,SHOLM,Soren Holm,,Accountant|Vendor payments,2026-11-14,no

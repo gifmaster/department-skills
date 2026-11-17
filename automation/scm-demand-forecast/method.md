@@ -1,0 +1,9 @@
+- Leave stock-out and missing months out of fitting and scores; use 0 only for real zero months.
+- Score on the last N months (3, max 12). With 6+ months before them: refit at each origin, forecast to the end, pool errors. Else one hold-out.
+- MA: mean of the last 3 valid months. SES: level = a x actual + (1 - a) x level, try a = 0.1 to 0.9, keep the a with the lowest one-step squared error.
+- Holt-Winters additive (level + trend + month index) only with 24+ months.
+- WAPE = sum |A - F| / sum A. MAPE = mean |A - F| / A for A > 0. Bias = (sum F - sum A) / sum A.
+- Pick the lowest WAPE, ties to the simpler method; refit on all months and forecast the horizon. No negative forecasts.
+- Compare the forecast total with the same months last year; over 30 % apart, review.
+- Review if WAPE over 30 %, |bias| over 10 % or under 12 months of history.
+- Keep campaign or event overlays in a separate column from the baseline.

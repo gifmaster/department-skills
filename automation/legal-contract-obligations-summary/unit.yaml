@@ -1,0 +1,5 @@
+skill: legal-contract-obligations-summary
+script: scripts/notice_deadlines.py
+template: assets/contracts_template.csv
+command: python3 scripts/notice_deadlines.py assets/contracts_template.csv
+summary: Calculates contract notice deadlines, rolls auto-renewals forward when a deadline was missed, flags upcoming deadlines and writes calendar reminders.

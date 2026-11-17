@@ -5,56 +5,56 @@
   },
   "metadata": {
     "description": "Department skill packs for HR, Finance, Supply Chain, Legal, Sales, Marketing, IT and Customer Service.",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "hr-skills",
       "source": "./departments/hr",
       "description": "21 Human Resources skills",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     {
       "name": "finance-skills",
       "source": "./departments/finance",
       "description": "21 Finance skills",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     {
       "name": "supply-chain-skills",
       "source": "./departments/supply-chain",
       "description": "21 Supply Chain skills",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     {
       "name": "legal-skills",
       "source": "./departments/legal",
       "description": "21 Legal skills",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     {
       "name": "sales-skills",
       "source": "./departments/sales",
       "description": "21 Sales skills",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     {
       "name": "marketing-skills",
       "source": "./departments/marketing",
       "description": "21 Marketing skills",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     {
       "name": "it-skills",
       "source": "./departments/it",
       "description": "21 IT skills",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     {
       "name": "customer-service-skills",
       "source": "./departments/customer-service",
       "description": "21 Customer Service skills",
-      "version": "1.0.0"
+      "version": "1.1.0"
     }
   ]
 }

@@ -3,7 +3,7 @@
 
 Skills for the whole B2B sales cycle: targeting, prospecting, discovery, qualification, proposals, negotiation, forecasting, account growth and public tenders. Built for founder-led sales and small sales teams who need structure without heavy tooling.
 
-**21 skills** · version 1.0.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
+**21 skills** · version 1.1.0 · EU and Denmark aware · works with Claude, ChatGPT, Gemini and Copilot (chat and code).
 
 - Install in Claude Code: `/plugin install sales-skills --marketplace gifmaster/department-skills`
 - Install anywhere else: see [INSTALL.md](INSTALL.md)
@@ -58,9 +58,8 @@ Manage the pipeline and forecast with discipline.
 - Respect data protection and marketing rules in outreach. B2B prospecting to named individuals involves personal data; respect opt-outs, rules on unsolicited electronic marketing and the legitimate interest balance.
 - Do not promise prices, discounts, delivery dates or contract terms on the user's behalf. Prepare drafts for the user to approve.
 
-## Regulatory context used across this pack
+## Regulatory facts
 
-- Unsolicited electronic marketing is restricted under the ePrivacy Directive and national law; in Denmark the Marketing Practices Act (markedsføringsloven, section 10) restricts unsolicited email and SMS marketing, including to many business recipients. Check before cold emailing.
-- AI-generated outreach and chatbots must not mislead; under the AI Act people must be told when they interact with an AI system (Article 50), with limited exceptions.
+Every skill in this pack ships `references/facts.md`: dated, sourced figures and rules (last verified 2026-11-17). The master copy is [facts/sales.md](../../facts/sales.md). Update it there and rebuild.
 
 These notes are orientation, not legal advice. Check current law, collective agreements and your own policies.

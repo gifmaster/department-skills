@@ -1,0 +1,8 @@
+- Variance = actual - budget. Variance % = variance / |budget| x 100.
+- Revenue: actual above budget is favourable (F). Cost: actual above budget is adverse (A).
+- Material if |variance| >= absolute threshold, or |%| >= % threshold and |variance| >= a small floor (default 50,000; 10 %; 10,000).
+- Price/volume (quantities on both sides): budget price p0 = budget / budget qty; actual price p1 = actual / actual qty.
+- Volume = (actual qty - budget qty) x p0. Price = (p1 - p0) x actual qty. Volume + price must equal the variance.
+- Do not add quantities with different units across lines; mix is not split.
+- Checks: sum of profit effects = result variance; reported result total = revenue - cost. A gap points to a missing, duplicated or wrongly signed line.
+- Explain only material lines; turn unknown causes into questions for the budget owner.

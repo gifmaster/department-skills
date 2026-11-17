@@ -1,0 +1,5 @@
+skill: cs-staffing-forecast
+script: scripts/erlang.py
+template: assets/intervals_template.csv
+command: python3 scripts/erlang.py assets/intervals_template.csv --aht 330 --answer-time 30
+summary: Calculates required agents per interval with Erlang C (service level, ASA, occupancy cap) and converts agent hours to scheduled hours after shrinkage.

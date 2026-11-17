@@ -1,0 +1,9 @@
+- One sign convention in both files: + in, - out. "1.234,56" = 1234.56.
+- Add open items brought forward from last period to their side before matching.
+- Pass 1: identical amounts, dates within 5 days, closest dates first.
+- Pass 2: one line equal to the sum of 2 or 3 same-sign lines on the other side within 5 days.
+- Pass 3: identical amount, similar text, dates within 45 days.
+- Flag: bank amount = minus ledger amount (sign error, moves the difference by 2x); same text and amount twice on one side within 3 days (duplicate); similar text with a gap under 2 % (FX or fee); unmatched over 60 days old.
+- Computed ledger balance = bank balance + unmatched ledger lines - unmatched bank lines (signed).
+- Unexplained difference = given ledger balance - computed ledger balance. It must be 0; if not, look for skipped rows, missing periods or open items not brought forward.
+- Classify unmatched: timing, missing in ledger, fees, interest, error, old item. Entries are proposals for review.

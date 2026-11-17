@@ -2,75 +2,93 @@ department: finance
 title: Finance
 prefix: fin
 role: an experienced finance business partner and controller
-overview: >-
-  Skills for accounting operations, planning and analysis, cash management, reporting,
-  controls, tax preparation and sustainability reporting. Designed for finance teams in
-  small and mid-sized companies, and for founders who are their own finance team.
+overview: Skills for accounting operations, planning and analysis, cash management, reporting, controls, tax preparation and
+  sustainability reporting. Designed for finance teams in small and mid-sized companies, and for founders who are their own
+  finance team.
 workflows:
   - name: Close the month
-    skills: [month-end-close, bank-reconciliation, ap-invoice-coding, expense-claim-review, variance-analysis, management-report-commentary]
+    skills:
+      - month-end-close
+      - bank-reconciliation
+      - ap-invoice-coding
+      - expense-claim-review
+      - variance-analysis
+      - management-report-commentary
     purpose: From raw transactions to a management report with commentary.
   - name: Plan and fund
-    skills: [budget-builder, cash-flow-forecast, business-case, unit-economics]
+    skills:
+      - budget-builder
+      - cash-flow-forecast
+      - business-case
+      - unit-economics
     purpose: Build the budget, test the cash runway and judge investments.
   - name: Year end and audit
-    skills: [annual-report-prep, audit-prep, internal-controls-review, accounting-policy-memo]
+    skills:
+      - annual-report-prep
+      - audit-prep
+      - internal-controls-review
+      - accounting-policy-memo
     purpose: Get the annual accounts and audit done with fewer surprises.
 common_guardrails:
   - Show calculations and formulas so every number can be traced and checked. Never present an estimate as an actual figure.
-  - Do not give investment, tax or legal advice as a final answer. Prepare analysis and options, flag where an auditor, tax adviser or lawyer should confirm, and leave decisions to the user.
-  - Financial data is often confidential and may contain personal data (for example salaries or expense claims). Ask for anonymised or aggregated data where possible.
-common_eu:
-  - "Denmark: the Bookkeeping Act (bogføringsloven) requires bookkeeping material to be kept for 5 years and phases in requirements for digital bookkeeping systems; the Financial Statements Act (årsregnskabsloven) sets reporting classes B, C and D."
-  - "VAT, thresholds, filing deadlines and reporting classes change; confirm current figures with Skattestyrelsen, Erhvervsstyrelsen or your auditor."
+  - Do not give investment, tax or legal advice as a final answer. Prepare analysis and options, flag where an auditor, tax
+    adviser or lawyer should confirm, and leave decisions to the user.
+  - Financial data is often confidential and may contain personal data (for example salaries or expense claims). Ask for anonymised
+    or aggregated data where possible.
 skills:
   - id: month-end-close
     title: Month-End Close Checklist
-    summary: Builds and runs a month-end close checklist with tasks, owners, deadlines and status, and highlights blockers to a faster close.
-    triggers: the user is closing the books for a month or quarter, wants a close checklist, close calendar or to shorten the close
+    summary: Builds and runs a month-end close checklist with tasks, owners, deadlines and status, and highlights blockers
+      to a faster close.
+    triggers: the user is closing the books for a month or quarter, wants a close checklist, close calendar or to shorten
+      the close
     use:
-      - "Every month or quarter end"
-      - "Setting up a close process for the first time"
-      - "The close takes too long"
+      - Every month or quarter end
+      - Setting up a close process for the first time
+      - The close takes too long
     avoid:
-      - "Year-end statutory accounts (use fin-annual-report-prep)"
+      - Year-end statutory accounts (use fin-annual-report-prep)
     inputs:
-      - "Accounting system and entities"
-      - "Team members and roles"
-      - "Current close timeline and pain points"
-      - "Reporting deadline"
+      - Accounting system and entities
+      - Team members and roles
+      - Current close timeline and pain points
+      - Reporting deadline
     steps:
-      - List close tasks by area (cash, receivables, payables, payroll, accruals, fixed assets, inventory, intercompany, VAT, reporting).
+      - List close tasks by area (cash, receivables, payables, payroll, accruals, fixed assets, inventory, intercompany, VAT,
+        reporting).
       - Assign an owner, a working day (WD1, WD2) and dependencies to each task.
       - Mark reconciliations that need a reviewer sign-off.
       - Identify the critical path and suggest tasks that can move before month end.
       - Produce a tracker the user can copy into a spreadsheet.
     output:
-      - "Close calendar by working day"
-      - "Task tracker (task, owner, day, dependency, reviewer, status)"
-      - "Critical path and blockers"
-      - "Ideas to close faster"
+      - Close calendar by working day
+      - Task tracker (task, owner, day, dependency, reviewer, status)
+      - Critical path and blockers
+      - Ideas to close faster
     checks:
-      - "Every balance sheet account is covered by a reconciliation task"
-      - "Preparer and reviewer are different people where possible"
-    eu: ["Denmark: VAT returns are due by period end deadlines set by Skattestyrelsen; align the close calendar with them."]
+      - Every balance sheet account is covered by a reconciliation task
+      - Preparer and reviewer are different people where possible
+    eu:
+      - 'Denmark VAT deadlines: monthly filers by the 25th of the following month; quarterly by the 1st of the third month
+        after the quarter; half-yearly by 1 September and 1 March. Plan the close around them (see references/facts.md).'
     examples:
-      - "Build a 5-day close checklist for our two Danish entities on e-conomic."
-      - "Our close takes 12 days. Where can we cut time?"
-
+      - Build a 5-day close checklist for our two Danish entities on e-conomic.
+      - Our close takes 12 days. Where can we cut time?
   - id: bank-reconciliation
     title: Bank Reconciliation
-    summary: Reconciles bank statements against the ledger, matches transactions, explains differences and proposes correcting entries.
-    triggers: the user needs to reconcile a bank account, match bank and ledger transactions or explain a difference between bank and books
+    summary: Reconciles bank statements against the ledger, matches transactions, explains differences and proposes correcting
+      entries.
+    triggers: the user needs to reconcile a bank account, match bank and ledger transactions or explain a difference between
+      bank and books
     use:
-      - "Monthly bank reconciliation"
-      - "Unexplained cash differences"
+      - Monthly bank reconciliation
+      - Unexplained cash differences
     avoid:
-      - "Making payments or changing bank details"
+      - Making payments or changing bank details
     inputs:
-      - "Bank statement export (date, text, amount)"
-      - "Ledger cash account export"
-      - "Opening reconciled balance"
+      - Bank statement export (date, text, amount)
+      - Ledger cash account export
+      - Opening reconciled balance
     steps:
       - Normalise both files (dates, signs, currency).
       - Match one-to-one on amount and date window, then one-to-many and fuzzy text matches.
@@ -78,30 +96,31 @@ skills:
       - Propose journal entries for genuine missing items, clearly marked for review.
       - Produce the reconciliation statement from bank balance to ledger balance.
     output:
-      - "Reconciliation statement"
-      - "Matched summary"
-      - "Unmatched items by category"
-      - "Proposed adjustments for review"
+      - Reconciliation statement
+      - Matched summary
+      - Unmatched items by category
+      - Proposed adjustments for review
     checks:
-      - "Reconciliation difference is zero or fully explained"
-      - "Old unreconciled items (over 60 days) are flagged"
+      - Reconciliation difference is zero or fully explained
+      - Old unreconciled items (over 60 days) are flagged
     eu: []
     examples:
-      - "Here is our Danske Bank export and the 5820 ledger account for October. Reconcile them."
-
+      - Here is our Danske Bank export and the 5820 ledger account for October. Reconcile them.
   - id: variance-analysis
     title: Budget versus Actual Variance Analysis
-    summary: Compares actuals with budget or forecast, quantifies variances by driver such as price, volume and mix, and writes clear explanations.
-    triggers: the user wants to explain budget variances, compare actual to budget or forecast, or analyse why results differ from plan
+    summary: Compares actuals with budget or forecast, quantifies variances by driver such as price, volume and mix, and writes
+      clear explanations.
+    triggers: the user wants to explain budget variances, compare actual to budget or forecast, or analyse why results differ
+      from plan
     use:
-      - "Monthly or quarterly reporting"
-      - "Investigating a missed target"
+      - Monthly or quarterly reporting
+      - Investigating a missed target
     avoid:
-      - "Building the budget itself (use fin-budget-builder)"
+      - Building the budget itself (use fin-budget-builder)
     inputs:
-      - "Actuals and budget by account or cost centre"
-      - "Volume or activity data if available"
-      - "Materiality threshold"
+      - Actuals and budget by account or cost centre
+      - Volume or activity data if available
+      - Materiality threshold
     steps:
       - Calculate absolute and percentage variances for each line.
       - Filter to variances above materiality.
@@ -109,33 +128,34 @@ skills:
       - Draft a one-line explanation per material variance and list questions for budget owners where the cause is unknown.
       - Summarise the overall picture and the outlook impact.
     output:
-      - "Headline summary"
-      - "Variance table with drivers"
-      - "Explanations"
-      - "Questions for budget owners"
-      - "Full-year outlook impact"
+      - Headline summary
+      - Variance table with drivers
+      - Explanations
+      - Questions for budget owners
+      - Full-year outlook impact
     checks:
-      - "Variances sum to the total difference"
-      - "Favourable and adverse are labelled consistently"
+      - Variances sum to the total difference
+      - Favourable and adverse are labelled consistently
     eu: []
     examples:
-      - "Explain why gross margin was 4 points below budget in Q3. Here is the data."
-
+      - Explain why gross margin was 4 points below budget in Q3. Here is the data.
+    not_for: For the leadership write-up use fin-management-report-commentary
   - id: budget-builder
     title: Budget Builder
-    summary: Builds an annual budget from drivers and assumptions, with revenue, costs, headcount and a profit and loss summary that can be flexed.
+    summary: Builds an annual budget from drivers and assumptions, with revenue, costs, headcount and a profit and loss summary
+      that can be flexed.
     triggers: the user is preparing a budget, annual plan, financial plan or driver-based model
     use:
-      - "Annual budgeting"
-      - "Start-up financial plans"
-      - "Re-forecasting"
+      - Annual budgeting
+      - Start-up financial plans
+      - Re-forecasting
     avoid:
-      - "Short-term cash forecasting (use fin-cash-flow-forecast)"
+      - Short-term cash forecasting (use fin-cash-flow-forecast)
     inputs:
-      - "Last year's actuals"
-      - "Growth and pricing assumptions"
-      - "Headcount plan and salaries"
-      - "Known cost changes"
+      - Last year's actuals
+      - Growth and pricing assumptions
+      - Headcount plan and salaries
+      - Known cost changes
     steps:
       - Agree the budget structure (entities, cost centres, monthly or quarterly).
       - Build revenue from drivers (customers, volume, price, churn).
@@ -143,66 +163,74 @@ skills:
       - Produce the profit and loss summary and key ratios.
       - Run a downside and upside scenario on the two most sensitive drivers.
     output:
-      - "Assumptions table"
-      - "Revenue build"
-      - "Cost build"
-      - "P&L summary by month"
-      - "Scenarios and sensitivities"
+      - Assumptions table
+      - Revenue build
+      - Cost build
+      - P&L summary by month
+      - Scenarios and sensitivities
     checks:
-      - "Every number links to an assumption"
-      - "Headcount costs include pension and social costs"
-    eu: ["Denmark: include employer costs such as ATP, pension contributions and holiday pay obligations when budgeting salaries."]
+      - Every number links to an assumption
+      - Headcount costs include pension and social costs
+    eu:
+      - 'Denmark: include employer costs such as ATP, AES, the barsel.dk contribution, finansieringsbidrag, pension and the
+        1 percent holiday supplement for salaried staff.'
     examples:
-      - "Build a driver-based budget for our SaaS business for next year with three scenarios."
-
+      - Build a driver-based budget for our SaaS business for next year with three scenarios.
   - id: cash-flow-forecast
     title: 13-Week Cash Flow Forecast
-    summary: Creates a rolling 13-week cash flow forecast from receivables, payables, payroll and known items, and flags weeks with cash pressure.
-    triggers: the user asks about cash runway, cash flow forecast, liquidity, whether they can make payroll or a 13-week cash forecast
+    summary: Creates a rolling 13-week cash flow forecast from receivables, payables, payroll and known items, and flags weeks
+      with cash pressure.
+    triggers: the user asks about cash runway, cash flow forecast, liquidity, whether they can make payroll or a 13-week cash
+      forecast
     use:
-      - "Tight liquidity"
-      - "Weekly treasury management"
-      - "Bank or investor requests"
+      - Tight liquidity
+      - Weekly treasury management
+      - Bank or investor requests
     avoid:
-      - "Annual budgeting"
+      - Annual budgeting
     inputs:
-      - "Opening bank balance"
-      - "Receivables ageing and payment patterns"
-      - "Payables and due dates"
-      - "Payroll and tax dates"
-      - "Known one-offs"
+      - Opening bank balance
+      - Receivables ageing and payment patterns
+      - Payables and due dates
+      - Payroll and tax dates
+      - Known one-offs
     steps:
       - Set up weeks 1 to 13 with opening balance.
       - Forecast receipts using actual customer payment behaviour, not invoice terms.
       - Schedule payroll, rent, taxes, VAT and supplier payments.
+      - Check the low point within the week as well as at week end when payroll or tax falls in that week; extend beyond 13
+        weeks if the question needs it.
       - Calculate closing balance per week and the lowest point.
       - Suggest levers (collections, payment timing, credit facility) for any week below the minimum buffer.
     output:
-      - "Weekly forecast table"
-      - "Lowest cash point and date"
-      - "Risks and assumptions"
-      - "Levers to improve cash"
+      - Weekly forecast table
+      - Lowest cash point and date
+      - Risks and assumptions
+      - Levers to improve cash
     checks:
-      - "Opening balance ties to the bank"
-      - "Tax and VAT payment dates are included"
-    eu: ["Denmark: include A-tax and AM-contribution payment dates, VAT deadlines and holiday pay settlements."]
+      - Opening balance ties to the bank
+      - Tax and VAT payment dates are included
+    eu:
+      - 'Denmark: large employers pay A-tax and AM-bidrag on the last banking day of the salary month, small and medium employers
+        by the 10th of the following month (December salaries around 17 January); acontoskat on 20 March and 20 November;
+        plus VAT deadlines (see references/facts.md).'
     examples:
-      - "Will we have enough cash to pay salaries through February? Here are AR"
-      - "AP and the bank balance."
-
+      - Will we have enough cash to pay salaries through February? Here are AR, AP and the bank balance.
   - id: credit-collection
     title: Credit and Collections
-    summary: Prioritises overdue invoices, drafts reminder letters with the right tone and legal fees, and proposes a collection plan.
-    triggers: the user has overdue invoices, wants to chase customers, write a payment reminder (rykker) or improve debtor days
+    summary: Prioritises overdue invoices, drafts reminder letters with the right tone and legal fees, and proposes a collection
+      plan.
+    triggers: the user has overdue invoices, wants to chase customers, write a payment reminder (rykker) or improve debtor
+      days
     use:
-      - "Weekly collection routine"
-      - "Rising DSO"
+      - Weekly collection routine
+      - Rising DSO
     avoid:
-      - "Legal proceedings or debt collection agency decisions without the user"
+      - Legal proceedings or debt collection agency decisions without the user
     inputs:
-      - "Receivables ageing"
-      - "Customer payment history and relationship value"
-      - "Payment terms"
+      - Receivables ageing
+      - Customer payment history and relationship value
+      - Payment terms
     steps:
       - Rank overdue invoices by amount, age and risk.
       - Choose tone per customer (friendly first reminder, firm second, final notice).
@@ -210,32 +238,35 @@ skills:
       - Add lawful reminder fees and interest only where agreed or permitted.
       - Propose escalation steps and dates.
     output:
-      - "Prioritised collection list"
-      - "Reminder drafts"
-      - "Escalation plan"
-      - "DSO impact estimate"
+      - Prioritised collection list
+      - Reminder drafts
+      - Escalation plan
+      - DSO impact estimate
     checks:
-      - "Fees and interest are within legal limits"
-      - "Disputed invoices are separated from simple late payments"
+      - Fees and interest are within legal limits
+      - Disputed invoices are separated from simple late payments
     eu:
-      - "Late Payment Directive 2011/7/EU sets statutory interest and fixed compensation for B2B late payment."
-      - "Denmark: the Interest Act (renteloven) caps reminder fees (currently DKK 100 per reminder, at most three, at least 10 days apart) and allows fixed compensation in B2B cases; verify current amounts."
+      - 'Denmark: reminder fees max DKK 100 per reminder, at most three, at least 10 days apart (renteloven section 9 b, stk.
+        2); B2B statutory interest is the Nationalbanken reference rate plus 8 percentage points (section 5) and a fixed compensation
+        for recovery costs, currently DKK 310 (section 9 a, stk. 3, amount set by executive order). Before other collection
+        steps a payment demand with at least 10 days to pay is required (inkassoloven section 10). Verify current amounts.'
     examples:
-      - "Draft reminders for these 14 overdue invoices, firmer for repeat late payers."
-
+      - Draft reminders for these 14 overdue invoices, firmer for repeat late payers.
+    not_for: For disputed claims or formal breach notices use legal-demand-letter
   - id: ap-invoice-coding
     title: Supplier Invoice Coding
-    summary: Codes supplier invoices to the right accounts, cost centres and VAT codes, checks them against purchase orders and flags duplicates.
+    summary: Codes supplier invoices to the right accounts, cost centres and VAT codes, checks them against purchase orders
+      and flags duplicates.
     triggers: the user needs to code, book or approve supplier invoices, or check invoices against purchase orders
     use:
-      - "Processing the invoice inbox"
-      - "Cleaning up miscoded costs"
+      - Processing the invoice inbox
+      - Cleaning up miscoded costs
     avoid:
-      - "Releasing payments"
+      - Releasing payments
     inputs:
-      - "Invoice details (supplier, date, lines, amounts, VAT)"
-      - "Chart of accounts and cost centres"
-      - "Purchase orders and receipts if used"
+      - Invoice details (supplier, date, lines, amounts, VAT)
+      - Chart of accounts and cost centres
+      - Purchase orders and receipts if used
     steps:
       - Extract supplier, invoice number, dates, net, VAT and gross.
       - Propose account, cost centre and VAT code per line with reasoning.
@@ -243,62 +274,67 @@ skills:
       - Check for duplicates by supplier, amount and invoice number.
       - Flag invoices needing approval or with unusual VAT (reverse charge, foreign VAT).
     output:
-      - "Coding table"
-      - "Match exceptions"
-      - "Duplicate warnings"
-      - "Approval routing"
+      - Coding table
+      - Match exceptions
+      - Duplicate warnings
+      - Approval routing
     checks:
-      - "Net plus VAT equals gross"
-      - "Reverse-charge purchases are coded correctly"
-    eu: ["EU VAT: services bought from other EU businesses are usually reverse charge; the buyer accounts for the VAT."]
+      - Net plus VAT equals gross
+      - Reverse-charge purchases are coded correctly
+    eu:
+      - 'EU VAT: services bought from other EU businesses are usually reverse charge; the buyer accounts for the VAT.'
     examples:
-      - "Code these 20 invoices to our chart of accounts and tell me which look like duplicates."
-
+      - Code these 20 invoices to our chart of accounts and tell me which look like duplicates.
   - id: expense-claim-review
     title: Expense Claim Review
-    summary: Reviews employee expense claims against the expense policy and tax rules, and flags missing receipts, out-of-policy items and taxable benefits.
+    summary: Reviews employee expense claims against the expense policy and tax rules, and flags missing receipts, out-of-policy
+      items and taxable benefits.
     triggers: the user is reviewing expense reports, travel claims, mileage or per diem claims
     use:
-      - "Monthly expense approval"
-      - "Policy compliance audit"
+      - Monthly expense approval
+      - Policy compliance audit
     avoid:
-      - "Judging an individual's honesty; flag facts only"
+      - Judging an individual's honesty; flag facts only
     inputs:
-      - "Expense lines and receipts"
-      - "Expense policy"
-      - "Mileage and per diem records"
+      - Expense lines and receipts
+      - Expense policy
+      - Mileage and per diem records
     steps:
       - Check each line for receipt, business purpose, attendees for hospitality and policy limits.
       - Check mileage and per diem against the official rates in force.
       - Flag items that may be taxable benefits for the employee.
       - Summarise approvable items and items needing clarification.
     output:
-      - "Approval summary"
-      - "Exceptions list with policy reference"
-      - "Possible taxable benefits"
-      - "Questions for the employee"
+      - Approval summary
+      - Exceptions list with policy reference
+      - Possible taxable benefits
+      - Questions for the employee
     checks:
-      - "Representation costs are split correctly for VAT and tax"
-      - "No duplicate claims"
-    eu: ["Denmark: tax-free mileage allowance and travel allowance rates are set yearly by Skattestyrelsen; representation expenses have limited VAT and tax deductibility."]
+      - Representation costs are split correctly for VAT and tax
+      - No duplicate claims
+    eu:
+      - 'Denmark 2026 (verify): tax-free mileage DKK 3.94 per km up to 20,000 km and DKK 2.28 above, with a driving log; travel
+        allowance for meals DKK 625 per day for trips of at least 24 hours with an overnight stay, reduced for meals provided.
+        Representation has limited VAT and tax deductibility.'
     examples:
-      - "Review this travel claim from a sales trip to Hamburg against our policy."
-
+      - Review this travel claim from a sales trip to Hamburg against our policy.
   - id: vat-return-prep
     title: VAT Return Preparation
-    summary: Prepares and checks a VAT return working paper, reconciling output and input VAT to the ledger and flagging cross-border and special items.
-    triggers: the user is preparing a VAT return, momsangivelse, checking VAT codes or handling EU cross-border VAT
+    summary: Prepares and checks a VAT return working paper, reconciling output and input VAT to the ledger and flagging cross-border
+      and special items.
+    triggers: the user is preparing a period VAT return, momsangivelse, VAT account reconciliation or handling EU cross-border
+      VAT for the period
     use:
-      - "Each VAT period"
-      - "Before filing"
-      - "After VAT code errors"
+      - Each VAT period
+      - Before filing
+      - After VAT code errors
     avoid:
-      - "Filing the return on the user's behalf"
+      - Filing the return on the user's behalf
     inputs:
-      - "VAT period"
-      - "Ledger VAT accounts and VAT code report"
-      - "Sales and purchases by VAT code"
-      - "EU sales list data"
+      - VAT period
+      - Ledger VAT accounts and VAT code report
+      - Sales and purchases by VAT code
+      - EU sales list data
     steps:
       - Reconcile VAT accounts in the ledger to the VAT report.
       - Map figures to the return boxes, including EU goods and services boxes.
@@ -306,60 +342,66 @@ skills:
       - Check EU sales list figures match the return.
       - List items to confirm with an adviser.
     output:
-      - "VAT return working paper"
-      - "Reconciliation to ledger"
-      - "Cross-border checks"
-      - "Open questions"
+      - VAT return working paper
+      - Reconciliation to ledger
+      - Cross-border checks
+      - Open questions
     checks:
-      - "Output VAT equals sales by code times rate"
-      - "EU sales list ties to the return"
-    eu: ["Denmark: standard VAT is 25 percent; filing frequency depends on turnover (monthly, quarterly or half-yearly). EU One-Stop Shop (OSS) applies to B2C distance sales above the EU threshold."]
+      - Output VAT equals sales by code times rate
+      - EU sales list ties to the return
+    eu:
+      - 'Denmark: standard VAT 25 percent; filing frequency by turnover (half-yearly below DKK 5m, quarterly DKK 5m to 50m,
+        monthly above). EU B2C distance sales above EUR 10,000 a year are taxed in the customer''s country; the One-Stop Shop
+        is an optional way to report them. Restaurant representation: 25 percent of the VAT is deductible. Verify against
+        references/facts.md.'
     examples:
-      - "Prepare the Q3 VAT working paper from this VAT code report."
-
+      - Prepare the Q3 VAT working paper from this VAT code report.
+    not_for: For coding VAT on individual supplier invoices use fin-ap-invoice-coding
   - id: management-report-commentary
     title: Management Report Commentary
-    summary: Turns financial results into a short management report with key messages, KPIs, charts to include and clear commentary for non-finance readers.
-    triggers: the user needs a monthly management report, finance commentary, KPI summary or results write-up for leaders
+    summary: Turns financial results into a short management report with key messages, KPIs, charts to include and clear commentary
+      for non-finance readers.
+    triggers: the user wants a written monthly management report, finance commentary, KPI summary or results write-up for
+      leaders rather than the variance calculation
     use:
-      - "Monthly or quarterly reporting to management"
+      - Monthly or quarterly reporting to management
     avoid:
-      - "Board packs with governance items (use fin-board-pack)"
+      - Board packs with governance items (use fin-board-pack)
     inputs:
-      - "P&L, balance sheet and cash flow"
-      - "KPIs and targets"
-      - "Variance explanations"
+      - P&L, balance sheet and cash flow
+      - KPIs and targets
+      - Variance explanations
     steps:
       - Identify the three most important messages for the period.
       - Show KPIs against target and trend with traffic-light status.
       - Write commentary that explains why, not just what, in plain language.
       - Recommend actions and decisions needed.
     output:
-      - "Key messages"
-      - "KPI dashboard table"
-      - "Commentary by area"
-      - "Risks and outlook"
-      - "Decisions needed"
+      - Key messages
+      - KPI dashboard table
+      - Commentary by area
+      - Risks and outlook
+      - Decisions needed
     checks:
-      - "Numbers in text match the tables"
-      - "Jargon is explained"
+      - Numbers in text match the tables
+      - Jargon is explained
     eu: []
     examples:
-      - "Write the October management report for the leadership team from these numbers."
-
+      - Write the October management report for the leadership team from these numbers.
   - id: board-pack
     title: Board Pack Finance Section
-    summary: Prepares the finance section of a board pack with results, forecast, cash, risks and the decisions the board is asked to make.
+    summary: Prepares the finance section of a board pack with results, forecast, cash, risks and the decisions the board
+      is asked to make.
     triggers: the user is preparing board materials, a board report, bestyrelsesmøde finance section or investor update
     use:
-      - "Quarterly board meetings"
-      - "Investor updates"
+      - Quarterly board meetings
+      - Investor updates
     avoid:
-      - "Minutes and legal resolutions (use legal-board-minutes)"
+      - Minutes and legal resolutions (use legal-board-minutes)
     inputs:
-      - "Financial results and forecast"
-      - "Cash position and covenants"
-      - "Major risks and proposals"
+      - Financial results and forecast
+      - Cash position and covenants
+      - Major risks and proposals
     steps:
       - Open with a one-page executive summary.
       - Present performance against budget and last year.
@@ -367,33 +409,33 @@ skills:
       - List risks, covenants and compliance items.
       - State clearly the decisions requested with options and recommendation.
     output:
-      - "Executive summary"
-      - "Performance"
-      - "Forecast and cash"
-      - "Risks and compliance"
-      - "Decisions requested"
+      - Executive summary
+      - Performance
+      - Forecast and cash
+      - Risks and compliance
+      - Decisions requested
     checks:
-      - "Each decision has a recommendation and an alternative"
-      - "Pack is readable in 10 minutes"
+      - Each decision has a recommendation and an alternative
+      - Pack is readable in 10 minutes
     eu: []
     examples:
-      - "Prepare the finance section for next week's board meeting, we need approval for a credit facility."
-
+      - Prepare the finance section for next week's board meeting, we need approval for a credit facility.
   - id: business-case
     title: Investment Business Case
-    summary: Builds a business case for an investment with costs, benefits, NPV, IRR, payback and sensitivity, plus the non-financial arguments.
+    summary: Builds a business case for an investment with costs, benefits, NPV, IRR, payback and sensitivity, plus the non-financial
+      arguments.
     triggers: the user must justify an investment, build a business case, calculate NPV, ROI or payback, or compare options
     use:
-      - "Capital investments"
-      - "New systems"
-      - "Expansion decisions"
+      - Capital investments
+      - New systems
+      - Expansion decisions
     avoid:
-      - "Valuing a company for a transaction"
+      - Valuing a company for a transaction
     inputs:
-      - "Investment costs and timing"
-      - "Expected benefits and timing"
-      - "Discount rate or required return"
-      - "Risks"
+      - Investment costs and timing
+      - Expected benefits and timing
+      - Discount rate or required return
+      - Risks
     steps:
       - Lay out options including doing nothing.
       - Build yearly cash flows for each option.
@@ -401,286 +443,303 @@ skills:
       - Run sensitivity on the main assumptions and a break-even.
       - Summarise the recommendation with non-financial factors.
     output:
-      - "Options summary"
-      - "Cash flow table"
-      - "Financial metrics"
-      - "Sensitivity"
-      - "Recommendation and risks"
+      - Options summary
+      - Cash flow table
+      - Financial metrics
+      - Sensitivity
+      - Recommendation and risks
     checks:
-      - "Cash flows exclude sunk costs"
-      - "Discount rate is stated and justified"
+      - Cash flows exclude sunk costs
+      - Discount rate is stated and justified
     eu: []
     examples:
-      - "Should we buy a new packaging machine for DKK 2.4m? Build the business case."
-
+      - Should we buy a new packaging machine for DKK 2.4m? Build the business case.
   - id: pricing-margin-analysis
     title: Pricing and Margin Analysis
-    summary: Analyses product or customer profitability, price realisation and discounting, and models the margin impact of price changes.
-    triggers: the user asks about margins, price increases, discount leakage, product or customer profitability
+    summary: Analyses product or customer profitability, price realisation and discounting, and models the margin impact of
+      price changes.
+    triggers: the user asks about margins, price increases, discount leakage, product or customer profitability, including
+      customer profitability with freight and order costs (cost to serve)
     use:
-      - "Annual price setting"
-      - "Margin erosion"
-      - "Discount policy review"
+      - Annual price setting
+      - Margin erosion
+      - Discount policy review
     avoid:
-      - "Setting prices with competitors; that may breach competition law"
+      - Setting prices with competitors; that may breach competition law
     inputs:
-      - "Sales by product and customer with list and net price"
-      - "Cost of goods or service"
-      - "Discounts and rebates"
+      - Sales by product and customer with list and net price
+      - Cost of goods or service
+      - Discounts and rebates
     steps:
       - Build the price waterfall from list price to pocket price.
       - Calculate margin by product, customer and segment.
       - Identify discount leakage and unprofitable segments.
       - Model a price change scenario including likely volume response.
     output:
-      - "Price waterfall"
-      - "Profitability tables"
-      - "Leakage findings"
-      - "Price change scenarios"
+      - Price waterfall
+      - Profitability tables
+      - Leakage findings
+      - Price change scenarios
     checks:
-      - "Costs are allocated on a stated basis"
-      - "Volume assumptions are explicit"
-    eu: ["Competition law (Article 101 TFEU; Danish Competition Act) prohibits agreeing prices with competitors."]
+      - Costs are allocated on a stated basis
+      - Volume assumptions are explicit
+    eu:
+      - Competition law (Article 101 TFEU; Danish Competition Act) prohibits agreeing prices with competitors.
     examples:
-      - "Which customers are we losing money on? Here is sales and cost data."
-
+      - Which customers are we losing money on? Here is sales and cost data.
   - id: unit-economics
     title: Unit Economics
-    summary: Calculates unit economics such as customer acquisition cost, lifetime value, contribution margin, payback and churn, and explains what drives them.
+    summary: Calculates unit economics such as customer acquisition cost, lifetime value, contribution margin, payback and
+      churn, and explains what drives them.
     triggers: the user asks about CAC, LTV, payback period, contribution margin, churn or SaaS metrics
     use:
-      - "Investor preparation"
-      - "Growth planning"
-    avoid: []
+      - Investor preparation
+      - Growth planning
+    avoid:
+      - Pricing decisions per customer (use fin-pricing-margin-analysis)
     inputs:
-      - "Sales and marketing costs"
-      - "New customers by period"
-      - "Revenue per customer and gross margin"
-      - "Churn data"
+      - Sales and marketing costs
+      - New customers by period
+      - Revenue per customer and gross margin
+      - Churn data
     steps:
       - Define each metric and the formula used.
       - Calculate metrics by cohort or channel where possible.
       - Compare against the user's targets and explain drivers.
       - Recommend levers to improve the weakest metric.
     output:
-      - "Metric definitions"
-      - "Results table"
-      - "Drivers"
-      - "Improvement levers"
+      - Metric definitions
+      - Results table
+      - Drivers
+      - Improvement levers
     checks:
-      - "Gross margin, not revenue, is used for LTV"
-      - "Periods are consistent"
+      - Gross margin, not revenue, is used for LTV
+      - Periods are consistent
     eu: []
     examples:
-      - "Calculate CAC and LTV by channel for the last four quarters."
-
+      - Calculate CAC and LTV by channel for the last four quarters.
   - id: annual-report-prep
     title: Annual Report Preparation
-    summary: Plans and prepares the annual report process, including timeline, year-end entries, notes checklist and management review text.
+    summary: Plans and prepares the annual report process, including timeline, year-end entries, notes checklist and management
+      review text.
     triggers: the user is preparing annual accounts, årsrapport, year-end closing or the management review
     use:
-      - "Financial year end"
-      - "Planning with the auditor"
+      - Financial year end
+      - Planning with the auditor
     avoid:
-      - "Signing off accounts or audit opinions"
+      - Signing off accounts or audit opinions
     inputs:
-      - "Reporting class and framework"
-      - "Trial balance"
-      - "Prior year report"
-      - "Deadlines"
+      - Reporting class and framework
+      - Trial balance
+      - Prior year report
+      - Deadlines
     steps:
       - Build a timeline backwards from the filing deadline.
       - List year-end adjustments to consider (accruals, provisions, impairment, deferred tax, inventory).
       - Produce a notes and disclosure checklist for the reporting class.
       - Draft the management review structure with key developments.
     output:
-      - "Timeline"
-      - "Year-end adjustments list"
-      - "Disclosure checklist"
-      - "Draft management review"
+      - Timeline
+      - Year-end adjustments list
+      - Disclosure checklist
+      - Draft management review
     checks:
-      - "Reporting class is confirmed"
-      - "Filing deadline is correct"
-    eu: ["Denmark: annual reports are filed with the Danish Business Authority (Erhvervsstyrelsen), generally within five months of year end for class B and C companies; verify for your class."]
+      - Reporting class is confirmed
+      - Filing deadline is correct
+    eu:
+      - 'Denmark: reporting classes A, B, C and D; classes B and C file within five months of year end (31 May for a 31 December
+        year end), class D within four months.'
     examples:
-      - "Plan our year-end and annual report for a class B company with a June filing deadline."
-
+      - Plan our year-end and annual report for a class B company with a 31 December year end.
   - id: audit-prep
     title: Audit Preparation
-    summary: Prepares for the external audit with a prepared-by-client list, document index, reconciliations and answers to likely auditor questions.
+    summary: Prepares for the external audit with a prepared-by-client list, document index, reconciliations and answers to
+      likely auditor questions.
     triggers: the user is preparing for an audit, received a PBC list or wants to make the audit smoother
     use:
-      - "Before interim or year-end audit"
+      - Before interim or year-end audit
     avoid:
-      - "Influencing the auditor's independent judgement"
+      - Influencing the auditor's independent judgement
     inputs:
-      - "Auditor's request list"
-      - "Trial balance"
-      - "Prior year audit findings"
+      - Auditor's request list
+      - Trial balance
+      - Prior year audit findings
     steps:
       - Organise requests by area with owner and due date.
       - Map each request to the supporting document or reconciliation.
       - Anticipate questions on significant accounts and estimates.
       - Follow up prior year findings.
     output:
-      - "PBC tracker"
-      - "Document index"
-      - "Expected questions and answers"
-      - "Prior findings status"
+      - PBC tracker
+      - Document index
+      - Expected questions and answers
+      - Prior findings status
     checks:
-      - "Every material balance has a reconciliation"
-      - "Prior findings are addressed"
+      - Every material balance has a reconciliation
+      - Prior findings are addressed
     eu: []
     examples:
-      - "Our auditor sent this list. Build a tracker and tell me what is missing."
-
+      - Our auditor sent this list. Build a tracker and tell me what is missing.
   - id: internal-controls-review
     title: Internal Controls Review
-    summary: Reviews finance processes for control gaps such as segregation of duties, approvals and access, and proposes proportionate controls.
+    summary: Reviews finance processes for control gaps such as segregation of duties, approvals and access, and proposes
+      proportionate controls.
     triggers: the user wants to review internal controls, segregation of duties, approval limits or fraud prevention in finance
     use:
-      - "After a finance team change"
-      - "After an incident"
-      - "Before growth or audit"
+      - After a finance team change
+      - After an incident
+      - Before growth or audit
     avoid:
-      - "Forensic investigation of suspected fraud"
+      - Forensic investigation of suspected fraud (use fin-journal-entry-testing to test the data, and involve the bank, police
+        and advisers)
     inputs:
-      - "Process descriptions"
-      - "Team roles and system access"
-      - "Approval matrix"
+      - Process descriptions
+      - Team roles and system access
+      - Approval matrix
     steps:
       - Map key processes (purchase to pay, order to cash, payroll, treasury, journals).
       - Identify risks and existing controls in each.
       - Build a segregation of duties matrix and flag conflicts.
       - Propose proportionate controls for a small team, including compensating controls.
     output:
-      - "Process risk and control matrix"
-      - "Segregation of duties conflicts"
-      - "Recommended controls"
-      - "Implementation plan"
+      - Process risk and control matrix
+      - Segregation of duties conflicts
+      - Recommended controls
+      - Implementation plan
     checks:
-      - "Bank detail changes require independent verification"
-      - "Recommendations fit the team size"
+      - Bank detail changes require independent verification
+      - Recommendations fit the team size
     eu: []
     examples:
-      - "We are a 3-person finance team. Where are our biggest control risks?"
-
+      - We are a 3-person finance team. Where are our biggest control risks?
   - id: journal-entry-testing
     title: Journal Entry and Fraud Red Flags
-    summary: Analyses a journal or transaction export for unusual entries and fraud red flags, such as weekend postings, round amounts and new suppliers.
-    triggers: the user wants to test journals, look for anomalies, duplicate payments or fraud indicators in ledger data
+    summary: Analyses a journal or transaction export for unusual entries and fraud red flags, such as weekend postings, round
+      amounts and new suppliers.
+    triggers: the user wants to test journals, look for anomalies, duplicate payments or fraud indicators in ledger data,
+      including testing for other cases after a fraud incident
     use:
-      - "Periodic control testing"
-      - "Concern about irregularities"
+      - Periodic control testing
+      - Concern about irregularities
     avoid:
-      - "Accusing individuals; findings are leads for follow-up"
+      - Accusing individuals; findings are leads for follow-up
     inputs:
-      - "Journal or payment export with users and timestamps"
-      - "Supplier master changes"
+      - Journal or payment export with users and timestamps
+      - Supplier master changes
     steps:
-      - Run tests (weekend and night postings, round amounts, just-below-approval amounts, duplicates, manual entries to revenue or cash, new or changed bank details).
+      - Run tests (weekend and night postings, round amounts, just-below-approval amounts, duplicates, manual entries to revenue
+        or cash, new or changed bank details).
       - Score and rank exceptions.
       - Explain each top exception and the follow-up document to request.
     output:
-      - "Tests performed"
-      - "Ranked exceptions"
-      - "Follow-up actions"
+      - Tests performed
+      - Ranked exceptions
+      - Follow-up actions
     checks:
-      - "Tests and thresholds are documented"
-      - "Personal data access is limited"
+      - Tests and thresholds are documented
+      - Personal data access is limited
     eu: []
     examples:
-      - "Run fraud red flag tests on this year's payment export."
-
+      - Run fraud red flag tests on this year's payment export.
   - id: esg-reporting-data
     title: Sustainability Reporting Data
-    summary: Plans and checks sustainability data such as energy, emissions, workforce and governance metrics for CSRD or voluntary VSME reporting.
+    summary: Plans and checks sustainability data such as energy, emissions, workforce and governance metrics for CSRD or
+      voluntary VSME reporting.
     triggers: the user is preparing ESG, CSRD, VSME, ESRS data, carbon accounting or answering customer sustainability questionnaires
     use:
-      - "First sustainability report"
-      - "Customer or bank ESG requests"
+      - First sustainability report
+      - Customer or bank ESG requests
     avoid:
-      - "Making environmental claims in marketing (use legal-marketing-claims-review)"
+      - Making environmental claims in marketing (use legal-marketing-claims-review)
+      - Detailed scope 3 calculations (use scm-scope3-emissions)
     inputs:
-      - "Company size and whether CSRD applies"
-      - "Available data (energy, fuel, travel, purchases, staff)"
-      - "Requests from customers or banks"
+      - Company size and whether CSRD applies
+      - Available data (energy, fuel, travel, purchases, staff)
+      - Requests from customers or banks
     steps:
       - Determine which framework applies (CSRD with ESRS, the voluntary VSME standard or a customer questionnaire).
       - List the data points needed and the source for each.
+      - No emission factor values ship with this skill. Use factors from a dataset the user names (for example Energistyrelsen,
+        DEFRA or the electricity supplier's declaration) with year; otherwise deliver the method and a table with placeholders,
+        never invented numbers.
       - Calculate scope 1 and 2 emissions from activity data and emission factors, stating factors used.
       - Flag data gaps and estimation methods.
       - Draft a data collection plan with owners.
     output:
-      - "Framework and scope"
-      - "Data point list with sources"
-      - "Emissions calculation"
-      - "Gaps and estimates"
-      - "Collection plan"
+      - Framework and scope
+      - Data point list with sources
+      - Emissions calculation
+      - Gaps and estimates
+      - Collection plan
+      - VSME basic module checklist (the data points to collect, with source and owner)
     checks:
-      - "Emission factors and sources are stated"
-      - "Estimates are labelled"
-    eu: ["CSRD scope and timing were changed by the EU Omnibus simplification; check whether and when your company is in scope. Many SMEs use the voluntary VSME standard to answer bank and customer requests."]
+      - Emission factors and sources are stated
+      - Estimates are labelled
+    eu:
+      - After the Omnibus I directive (OJ 26 February 2026) CSRD applies only above 1,000 employees and EUR 450m turnover;
+        smaller companies usually answer banks and customers with the voluntary VSME standard and may decline value-chain
+        requests beyond it. Name the emission factor source and year for every calculation; never invent factors.
     examples:
-      - "A bank wants our CO2 emissions. We are 80 people in Denmark. What do we need?"
-
+      - A bank wants our CO2 emissions. We are 80 people in Denmark. What do we need?
   - id: accounting-policy-memo
     title: Accounting Treatment Memo
-    summary: Writes a memo on how to account for a specific transaction, with the facts, the applicable standard, options, conclusion and journal entries.
+    summary: Writes a memo on how to account for a specific transaction, with the facts, the applicable standard, options,
+      conclusion and journal entries.
     triggers: the user is unsure how to account for something, such as revenue recognition, leases, capitalisation or provisions
     use:
-      - "Unusual transactions"
-      - "Auditor discussions"
+      - Unusual transactions
+      - Auditor discussions
     avoid:
-      - "Final sign-off without auditor or adviser review"
+      - Final sign-off without auditor or adviser review
     inputs:
-      - "Transaction facts and contracts"
-      - "Reporting framework (Danish Financial Statements Act, IFRS)"
+      - Transaction facts and contracts
+      - Reporting framework (Danish Financial Statements Act, IFRS)
     steps:
       - State the facts and the accounting question.
       - Identify the relevant requirements of the framework.
       - Analyse the alternatives.
       - Conclude with journal entries and disclosure needs.
     output:
-      - "Background"
-      - "Question"
-      - "Relevant requirements"
-      - "Analysis"
-      - "Conclusion and entries"
-      - "Disclosures"
+      - Background
+      - Question
+      - Relevant requirements
+      - Analysis
+      - Conclusion and entries
+      - Disclosures
     checks:
-      - "References to standards are named but the user is told to verify the text"
-      - "Conclusion follows the analysis"
+      - References to standards are named but the user is told to verify the text
+      - Conclusion follows the analysis
     eu: []
     examples:
-      - "We sold a 3-year licence paid upfront. How should we recognise revenue under IFRS 15?"
-
+      - We sold a 3-year licence paid upfront. How should we recognise revenue under IFRS 15?
   - id: financial-statement-analysis
     title: Financial Statement Analysis
-    summary: Analyses a company's financial statements with ratios, trends and a credit view, for example to assess a customer, supplier or competitor.
+    summary: Analyses a company's financial statements with ratios, trends and a credit view, for example to assess a customer,
+      supplier or competitor.
     triggers: the user wants to analyse annual accounts, assess a company's financial health, credit risk or compare competitors
     use:
-      - "New customer credit limits"
-      - "Supplier due diligence"
-      - "Competitor benchmarking"
+      - New customer credit limits
+      - Supplier due diligence
+      - Competitor benchmarking
     avoid:
-      - "Investment recommendations"
+      - Investment recommendations
     inputs:
-      - "Annual reports for two or three years"
-      - "Purpose of the analysis"
+      - Annual reports for two or three years
+      - Purpose of the analysis
     steps:
       - Extract key figures into a standard layout.
       - Calculate profitability, liquidity, solvency and efficiency ratios.
       - Describe trends and red flags (losses, negative equity, auditor qualifications).
       - Conclude with a risk view and suggested credit terms if relevant.
     output:
-      - "Key figures"
-      - "Ratios"
-      - "Trends and red flags"
-      - "Conclusion"
+      - Key figures
+      - Ratios
+      - Trends and red flags
+      - Conclusion
     checks:
-      - "Ratios use consistent definitions"
-      - "Auditor's report is checked"
-    eu: ["Denmark: annual reports for Danish companies are publicly available from the Central Business Register (CVR)."]
+      - Ratios use consistent definitions
+      - Auditor's report is checked
+    eu:
+      - 'Denmark: annual reports for Danish companies are publicly available from the Central Business Register (CVR).'
     examples:
-      - "Assess the financial health of this new supplier from their last three annual reports."
+      - Assess the financial health of this new supplier from their last three annual reports.

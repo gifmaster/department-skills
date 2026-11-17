@@ -1,0 +1,5 @@
+skill: scm-demand-forecast
+script: scripts/forecast.py
+template: assets/demand_history.csv
+command: python3 scripts/forecast.py assets/demand_history.csv
+summary: Fits moving average, simple exponential smoothing and (with 24+ months) Holt-Winters per item, picks the method with the lowest hold-out WAPE, reports MAPE, WAPE and bias, and forecasts the horizon with stock-out months excluded.

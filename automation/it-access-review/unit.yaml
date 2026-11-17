@@ -1,0 +1,5 @@
+skill: it-access-review
+script: scripts/access_review.py
+template: assets/accounts_template.csv
+command: python3 scripts/access_review.py assets/accounts_template.csv --hr assets/hr_template.csv --role-map assets/role_map_template.json
+summary: Matches system accounts to HR records and flags leavers, orphaned, shared, dormant, admin-on-daily and role-mismatch accounts, with attestation lists per department.

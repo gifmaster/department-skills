@@ -1,0 +1,7 @@
+- Hourly base = annual base / (weekly hours x 52). Hourly total = (base + variable) / (weekly hours x 52). Always normalise before comparing, so part-time does not distort.
+- Gap = (men - women) / men x 100, for mean and median, base and total. Positive = men paid more.
+- Per category of equal value: same gaps. Flag mean gap of 5% or more (either direction).
+- Suppress any group with fewer than 5 women or 5 men; never show figures that identify people. Say how many categories were suppressed and could not be assessed. No women or no men: label "not calculable", not suppressed.
+- Quartiles: sort everyone by hourly total pay, cut into four equal groups, give % women and men in each.
+- Share receiving variable pay = people with variable pay > 0 / people, per gender.
+- A gap is not proof of discrimination. Unexplained gaps need an objective, gender-neutral justification or correction; an unjustified 5% category gap triggers a joint pay assessment under Directive (EU) 2023/970.
